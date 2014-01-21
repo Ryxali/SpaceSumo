@@ -1,4 +1,11 @@
 #################
+## Project Specific
+#################
+
+# Resource folder
+[Rr]esources/
+
+#################
 ## Eclipse
 #################
 
