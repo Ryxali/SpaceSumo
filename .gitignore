@@ -2,6 +2,8 @@
 ## Project Specific
 #################
 
+*.wav
+
 # Resource folder
 [Rr]esources/
 

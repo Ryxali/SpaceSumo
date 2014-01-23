@@ -1,4 +1,5 @@
 #include "SpaceMan.h"
+#include <iostream>
 #include <SFML\Window\Keyboard.hpp>
 #include <math.h>
 #define PI = 3.14159265
@@ -40,9 +41,19 @@ sf::Vector2f operator*(sf::Vector2f &v0, float v) {
 	return sf::Vector2f(v0.x*v, v0.y*v);
 }
 
+void SpaceMan::initsounds(){
+	
+	if( !buffer.loadFromFile("jetpack.wav")){
+		std::cout << "Failed to load" << std::endl;
+	}
+	sound.setBuffer(buffer);
+	sound.setRelativeToListener(true);
+}
+
+
 SpaceMan::SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey) : forward(fKey), back(bKey), right(rKey), left(lKey) {
 	
-
+	initsounds();
 	pos.x = 100;
 	pos.y = 100;
 	dir.x = 1;
@@ -50,6 +61,7 @@ SpaceMan::SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard:
 	shp.setSize(sf::Vector2f(64, 80));
 	shp.setOrigin(32.f, 40.f);
 	speed = sf::Vector2f(0, 0);
+
 }
 
 
@@ -70,11 +82,28 @@ void SpaceMan::render(sf::RenderWindow &win) {
 	
 	if(sf::Keyboard::isKeyPressed(forward)) {
 		speed =  (dotProduct(speed) <= 10) ? speed + dir : normalize(speed)*9.99;
+		f_time = soundclock.getElapsedTime().asMilliseconds();
+		
+		if( f_time >= 330.0f)
+		{
+		sound.play();
+		soundclock.restart();
+		}
 	}
 	if(sf::Keyboard::isKeyPressed(back)) {
 		speed =  (dotProduct(speed) <= 10) ? speed - dir : normalize(speed)*9.99;
+
+		b_time = soundclock.getElapsedTime().asMilliseconds();
+		if( b_time >= 330.0f)
+		{
+		
+		sound.play();
+		soundclock.restart();
+		}
 	}
 	pos += speed;
+	sound.setPosition(pos.x, pos.y, 0 );
+	sound.setAttenuation(0.001f);
 	//sf::Vector2f shpSize = shp.getSize();
 	shp.setPosition(pos);
 	win.draw(shp);
