@@ -20,9 +20,20 @@ private:
 	sf::Clock soundclock;
 	float f_time;
 	float b_time;
+	float tl_time;
+	float tr_time;
 
-	sf::Sound sound;
-	sf::SoundBuffer buffer;
+	//forward sound
+	sf::Sound f_sound;
+	sf::SoundBuffer f_buffer;
+
+	//back sound
+	sf::Sound b_sound;
+	sf::SoundBuffer b_buffer;
+
+	//turn sound
+	sf::Sound t_sound;
+	sf::SoundBuffer t_buffer;
 
 	SVector pos;
 	SVector speed;
