@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
+#include "SVector.h"
 class SpaceMan {
 public:
 	SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey);
@@ -12,8 +13,8 @@ private:
 	sf::Keyboard::Key right;
 	sf::Keyboard::Key left;
 	sf::RectangleShape shp;
-	sf::Vector2f pos;
-	sf::Vector2f speed;
-	sf::Vector2f dir;
+	SVector pos;
+	SVector speed;
+	SVector dir;
 };
 
