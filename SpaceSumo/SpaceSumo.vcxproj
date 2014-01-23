@@ -86,13 +86,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CollisionCircle.cpp" />
+    <ClCompile Include="Collisions.cpp" />
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SpaceMan.cpp" />
     <ClCompile Include="SVector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionCircle.h" />
+    <ClInclude Include="Collisions.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="SpaceMan.h" />
     <ClInclude Include="SVector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\BasicShapes\BasicShapes.vcxproj">
+      <Project>{98995bf7-2115-4852-94ed-c42a6400c5a0}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

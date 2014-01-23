@@ -5,7 +5,6 @@
 class SVector : public PointProtocol, public sf::Vector2f
 {
 public:
-	
 	SVector(float x = 0, float y = 0);
 	SVector(const PointProtocol &v);
 	SVector(const sf::Vector2f &v);
