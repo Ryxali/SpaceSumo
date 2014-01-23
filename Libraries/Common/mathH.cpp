@@ -8,19 +8,19 @@
 template <>
 float math::sin<float>(float val)
 {
-	return sinf(val);
+	return std::sinf(val);
 }
 
 template <>
 double math::sin<double>(double val)
 {
-	return sin(val);
+	return std::sin(val);
 }
 
 template <>
 long double math::sin<long double>(long double val)
 {
-	return sinl(val);
+	return std::sinl(val);
 }
 
 
@@ -28,37 +28,37 @@ long double math::sin<long double>(long double val)
 template <>
 float math::cos<float>(float val)
 {
-	return cosf(val);
+	return std::cosf(val);
 }
 
 template <>
 double math::cos<double>(double val)
 {
-	return cos(val);
+	return std::cos(val);
 }
 
 template <>
 long double math::cos<long double>(long double val)
 {
-	return cosl(val);
+	return std::cosl(val);
 }
 
 // squareroot
 template <>
 float math::sqrt<float>(float val)
 {
-	return sqrtf(val);
+	return std::sqrtf(val);
 }
 
 template <>
 double math::sqrt<double>(double val)
 {
-	return sqrt(val);
+	return std::sqrt(val);
 }
 
 template <>
 long double math::sqrt<long double>(long double val)
 {
-	return sqrtl(val);
+	return std::sqrtl(val);
 }
 
