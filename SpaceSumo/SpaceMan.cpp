@@ -40,7 +40,10 @@ sf::Vector2f operator*(sf::Vector2f &v0, float v) {
 	return sf::Vector2f(v0.x*v, v0.y*v);
 }
 
-SpaceMan::SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey) : forward(fKey), back(bKey), right(rKey), left(lKey) {
+SpaceMan::SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey) : 
+	forward(fKey), back(bKey), right(rKey), left(lKey), mMiddleCircle(pos, 20, SVector(0,0)), mRightCircle(pos, 15,
+	SVector(1, 1)), mLeftCircle(pos, 15, SVector(1, 1)) 
+{
 	
 
 	pos.x = 100;
@@ -57,6 +60,30 @@ SpaceMan::~SpaceMan() {
 
 }
 
+CollisionCircle SpaceMan::getMCircle()
+{
+	return mMiddleCircle;
+}
+
+CollisionCircle SpaceMan::getRCircle()
+{
+	return mRightCircle;
+}
+
+CollisionCircle SpaceMan::getLCircle()
+{
+	return mLeftCircle;
+}
+
+SVector SpaceMan::getSpeed() const
+{
+	return speed;
+}
+
+void SpaceMan::setSpeed(SVector pSpeed)
+{
+	speed = pSpeed;
+}
 
 void SpaceMan::render(sf::RenderWindow &win) {
 	if(sf::Keyboard::isKeyPressed(right)) {
