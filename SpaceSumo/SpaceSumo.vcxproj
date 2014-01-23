@@ -86,11 +86,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SpaceMan.cpp" />
     <ClCompile Include="SVector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="SpaceMan.h" />
     <ClInclude Include="SVector.h" />
   </ItemGroup>
