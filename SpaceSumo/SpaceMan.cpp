@@ -2,44 +2,9 @@
 #include <iostream>
 #include <SFML\Window\Keyboard.hpp>
 #include <math.h>
+#include "Debug.h"
 #define PI = 3.14159265
-float dotProduct(const sf::Vector2f &p) {
-	return sqrt((float)(p.x * p.x+ p.y* p.y));
-}
 
-sf::Vector2f& normalize(sf::Vector2f &p) {
-	float dP = dotProduct(p);
-	if(dP != 0) {
-		dP = 1/dP;
-	}
-	sf::Sprite s;
-	sf::CircleShape cs;
-	
-	p.x = (p.x * dP);
-	p.y = (p.y * dP);
-	return p;
-}
-
-sf::Vector2f& rotateCounterClockwise(sf::Vector2f &p, float degrees) {
-	float radian = degrees * (3.14159265f/180);
-	float x = p.x;
-	float y = p.y;
-	float cn = cos(radian);
-	float sn = sin(radian);
-	p.x = x*cn - y*sn;
-	p.y = x*sn + y*cn;
-	return p;
-}
-
-sf::Vector2f operator/(sf::Vector2f &v0, float v) {
-	return sf::Vector2f(v0.x/v, v0.y/v);
-}
-sf::Vector2f operator+(sf::Vector2f &v0, float v) {
-	return sf::Vector2f(v0.x+v, v0.y+v);
-}
-sf::Vector2f operator*(sf::Vector2f &v0, float v) {
-	return sf::Vector2f(v0.x*v, v0.y*v);
-}
 
 void SpaceMan::initsounds(){
 	// forward sound
@@ -65,8 +30,8 @@ void SpaceMan::initsounds(){
 }
 
 SpaceMan::SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey) : 
-	forward(fKey), back(bKey), right(rKey), left(lKey), mMiddleCircle(pos, 20, SVector(0,0)), mRightCircle(pos, 15,
-	SVector(1, 1)), mLeftCircle(pos, 15, SVector(1, 1)) 
+	forward(fKey), back(bKey), right(rKey), left(lKey), mMiddleCircle(pos, 20, SVector(0,0)), mRightCircle(pos, 16,
+	SVector(16, 20)), mLeftCircle(pos, 16, SVector(16, -20)) 
 {
 	
 	initsounds();
@@ -116,6 +81,8 @@ void SpaceMan::render(sf::RenderWindow &win) {
 	tr_time = soundclock.getElapsedTime().asMilliseconds();
 	if(sf::Keyboard::isKeyPressed(right)) {
 		rotateCounterClockwise(dir, 5);
+		mRightCircle.rotate(5);
+		mLeftCircle.rotate(5);
 		shp.rotate(5);
 		if( tr_time >= 300.0f)
 		{
@@ -126,6 +93,8 @@ void SpaceMan::render(sf::RenderWindow &win) {
 	tl_time = soundclock.getElapsedTime().asMilliseconds();
 	if(sf::Keyboard::isKeyPressed(left)) {
 		rotateCounterClockwise(dir, -5);
+		mRightCircle.rotate(-5);
+		mLeftCircle.rotate(-5);
 		shp.rotate(-5);
 		if( tl_time >= 300.0f)
 		{
@@ -171,4 +140,6 @@ void SpaceMan::render(sf::RenderWindow &win) {
 	//sf::Vector2f shpSize = shp.getSize();
 	shp.setPosition(pos);
 	win.draw(shp);
+	Debug::getS().drawRect(SVector(mRightCircle.getCenterX()-8, mRightCircle.getCenterY()-8), 16, 16, Debug::RED);
+	Debug::getS().drawRect(SVector(mLeftCircle.getCenterX()-8, mLeftCircle.getCenterY()-8), 16, 16, Debug::GREEN);
 }
