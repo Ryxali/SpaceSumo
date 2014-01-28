@@ -5,7 +5,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window.hpp>
-#include "SpaceMan.h"
 int main() {
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Test", sf::Style::Fullscreen);
@@ -14,8 +13,6 @@ int main() {
 	// A view is a simple camera, a "rectangle" which you see through into the world.
 	sf::View view;
 	view.setSize(1920, 1080);
-	SpaceMan player(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::D, sf::Keyboard::A);
-	SpaceMan player2(sf::Keyboard::Up, sf::Keyboard::Down, sf::Keyboard::Right, sf::Keyboard::Left);
 	// An event can be polled against window. If an event occurs, it will be fille with the event data.
 	sf::Event evt;
 
@@ -35,8 +32,6 @@ int main() {
 			}
 		}
 		window.clear();
-		player.render(window);
-		player2.render(window);
 		// Flip buffers
 		window.display();
 	}
