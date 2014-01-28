@@ -5,8 +5,9 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window.hpp>
 #include "Debug.h"
-#include <ResourceManager\Resources.h>
+#include <ResourceManager\RHandle.h>
 #include <ResourceManager\SSprite.h>
+#include <ResourceManager\SSound.h>
 #include <SFML/Graphics.hpp>
 int main() {
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
@@ -21,10 +22,13 @@ int main() {
 	Debug::getS().setRenderTarget(window);
 	
 	res::addResource("Test.png");
-	
+	res::addResource("TestSound.ogg");
 	
 	SSprite test(res::getTexture("Test.png"));
 	res::loadResource("Test.png");
+	SSound testS(res::getSoundBuffer("TestSound.ogg"));
+	res::loadResource("TestSound.ogg");
+	testS.play();
 	while(window.isOpen())
 	{
 		// Loop runs through all new events

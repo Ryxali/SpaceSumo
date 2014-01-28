@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Resource">
+      <UniqueIdentifier>{f99d2981-3a4f-49b2-9d33-a87c67c50291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Implementation">
+      <UniqueIdentifier>{4026a5d0-c213-426d-ab4e-7c5f43325338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Handler">
+      <UniqueIdentifier>{61844b9c-f86a-47e4-8128-f842699b0679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Store">
+      <UniqueIdentifier>{4c29faa3-f288-4f8f-a04c-65ef79b4b2bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,23 +36,32 @@
     <ClInclude Include="Loadable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="STexture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureStore.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SSprite.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Implementation</Filter>
     </ClInclude>
-    <ClInclude Include="commons.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="STexture.h">
+      <Filter>Header Files\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Resources.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="SSoundBuffer.h">
+      <Filter>Header Files\Resource</Filter>
     </ClInclude>
     <ClInclude Include="ResourceHandler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="RHandle.h">
+      <Filter>Header Files\Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureStore.h">
+      <Filter>Header Files\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundBufferStore.h">
+      <Filter>Header Files\Store</Filter>
+    </ClInclude>
+    <ClInclude Include="SSound.h">
+      <Filter>Header Files\Implementation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +80,19 @@
     <ClCompile Include="ResourceHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Resources.cpp">
+    <ClCompile Include="SSoundBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RHandle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundBufferStore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SSound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

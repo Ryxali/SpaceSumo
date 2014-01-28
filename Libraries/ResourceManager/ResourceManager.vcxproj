@@ -51,7 +51,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
@@ -63,7 +63,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -83,19 +83,26 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="commons.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="LoadableBundle.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceHandler.h" />
-    <ClInclude Include="Resources.h" />
+    <ClInclude Include="RHandle.h" />
+    <ClInclude Include="SoundBufferStore.h" />
+    <ClInclude Include="SSound.h" />
+    <ClInclude Include="SSoundBuffer.h" />
     <ClInclude Include="SSprite.h" />
     <ClInclude Include="STexture.h" />
     <ClInclude Include="TextureStore.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LoadableBundle.cpp" />
+    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceHandler.cpp" />
-    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="RHandle.cpp" />
+    <ClCompile Include="SoundBufferStore.cpp" />
+    <ClCompile Include="SSound.cpp" />
+    <ClCompile Include="SSoundBuffer.cpp" />
     <ClCompile Include="SSprite.cpp" />
     <ClCompile Include="STexture.cpp" />
     <ClCompile Include="TextureStore.cpp" />

@@ -5,6 +5,7 @@
 
 /*
 	A group of loadables
+	TODO - make it do stuff
 */
 class LoadableBundle : public Loadable
 {

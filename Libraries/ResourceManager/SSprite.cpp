@@ -6,6 +6,10 @@ SSprite::SSprite(const STexture &tex) : mSprite(), mSTex(tex), mTexVersion(0)
 	
 }
 
+SSprite::SSprite(const SSprite &sp) : mSprite(), mSTex(sp.mSTex), mTexVersion(0)
+{
+
+}
 
 SSprite::~SSprite()
 {
@@ -27,3 +31,4 @@ void SSprite::draw(sf::RenderWindow &win)
 	}
 	win.draw(mSprite);
 }
+

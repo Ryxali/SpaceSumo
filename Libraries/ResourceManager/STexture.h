@@ -2,32 +2,40 @@
 #define SPACE_SUMO_TEXTURE_INCLUDED
 
 #include <SFML\Graphics\Texture.hpp>
-#include "Loadable.h"
+#include "Resource.h"
 #include <string>
 
-class STexture : public Loadable
+class STexture : public Resource
 {
 public:
-	STexture(std::string ref);
-	~STexture();
-	virtual void load() final;
-	virtual void unload() final;
-	const sf::Texture &getTexture() const;
-	virtual const std::string& getRef() const;
-	bool isLoaded() const;
 	/*
-		Get the current version of this Texture. The version changes each
-		time the texture is loaded.
-		returns: short - the current version of this Texture
+		Constructs the texture (in an unloaded state) with the reference specified
+		param: std::string ref - the file reference to the image file
+		usage: SSoundBuffer("Resources/example.png");
 	*/
-	unsigned short getVersion() const;
+	STexture(std::string ref);
+	// Destructor
+	~STexture();
+	/*
+		Loads the resource
+		returns: bool - the success of the loading of resource
+	*/
+	virtual bool loadResource();
+	/*
+		Unloads the resource
+	*/
+	virtual void unloadResource();
+	/*
+		get the Texture this object contains
+		returns: const sf::Texture& - a const reference to the Texture contained
+		warning; attempting to get an unloaded texture will result in an error
+	*/
+	const sf::Texture &getTexture() const;
 private:
+	// Copy constructor needs to be hidden as we don't want multiple instances of a single texture
 	STexture(const STexture &tex);
+	// The sfml texture
 	sf::Texture *mTexture;
-	std::string mRef;
-	bool mIsLoaded;
-	// Used to keep track to loads/unloads to prevent confusion amongst sprites
-	unsigned short mVersion;
 };
 
 #endif

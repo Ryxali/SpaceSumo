@@ -1,4 +1,5 @@
 #include "TextureStore.h"
+#include <cassert>
 
 TextureStore::TextureStore() : mItems()
 {
@@ -18,5 +19,6 @@ Loadable& TextureStore::add(std::string ref)
 
 const STexture& TextureStore::get(std::string ref) const
 {
+	assert(mItems.count(ref) > 0);
 	return mItems.at(ref);
 }

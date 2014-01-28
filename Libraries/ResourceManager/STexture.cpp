@@ -1,9 +1,7 @@
 #include "STexture.h"
 #include <cassert>
 
-STexture::STexture(std::string ref) : mRef(ref), mVersion(0), mI
-	
-	sLoaded(false)
+STexture::STexture(std::string ref) : Resource(ref)
 {
 }
 
@@ -13,43 +11,21 @@ STexture::~STexture()
 	unload();
 }
 
-void STexture::load()
+bool STexture::loadResource()
 {
-	mVersion++;
-	if(isLoaded())
-		delete mTexture;
 	mTexture = new sf::Texture();
-	mIsLoaded = mTexture->loadFromFile(mRef);
-	// If there's a problem here then the file failed to load for whatever reason
-	assert(isLoaded());
+	bool success = mTexture->loadFromFile(getRef());
+	assert(success);
+	return success;
 }
 
-void STexture::unload()
+void STexture::unloadResource()
 {
-	if(isLoaded())
-	{
-		delete mTexture;
-	}
-	mIsLoaded = false;
+	delete mTexture;
 }
 
 const sf::Texture &STexture::getTexture() const
 {
 	assert(isLoaded());
 	return *mTexture;
-}
-
-const std::string &STexture::getRef() const
-{
-	return mRef;
-}
-
-bool STexture::isLoaded() const
-{
-	return mIsLoaded;
-}
-
-unsigned short STexture::getVersion() const
-{
-	return mVersion;
 }
