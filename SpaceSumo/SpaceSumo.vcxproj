@@ -88,13 +88,16 @@
   <ItemGroup>
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SpaceMan.cpp" />
     <ClCompile Include="SVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
-    <ClInclude Include="SpaceMan.h" />
     <ClInclude Include="SVector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\ResourceManager\ResourceManager.vcxproj">
+      <Project>{b0fd0ebb-de0c-4151-b9b5-7e99c1dd5521}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

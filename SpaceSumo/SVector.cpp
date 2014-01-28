@@ -1,5 +1,5 @@
 #include "SVector.h"
-
+#include <math.h>
 
 SVector::SVector(float x, float y) : sf::Vector2f(x, y)
 {
@@ -33,4 +33,29 @@ void SVector::setX(float x)
 void SVector::setY(float Y) 
 {
 	this -> x = x;
+}
+
+float SVector::length() const {
+	return sqrt((float)(getX() * getX() + getY() * getY()));
+}
+
+SVector &SVector::normalize() {
+	float dP = length();
+	if(dP != 0) {
+		dP = 1/dP;
+	}
+	setX(getX() * dP);
+	setY(getY() * dP);
+	return *this;
+}
+
+SVector &SVector::rotate(float degrees) {
+	float radian = degrees * (3.14159265f/180);
+	float x = getX();
+	float y = getY();
+	float cn = cos(radian);
+	float sn = sin(radian);
+	setX(getX() * cn - getY() * sn);
+	setY(getX() * sn + getY() * cn);
+	return *this;
 }
