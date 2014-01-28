@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Error.h" />
     <ClInclude Include="GeneralShape.h" />
     <ClInclude Include="PointProtocol.h" />
     <ClInclude Include="putils.h" />

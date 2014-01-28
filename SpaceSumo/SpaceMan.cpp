@@ -133,13 +133,13 @@ void SpaceMan::render(sf::RenderWindow &win, sf::Event& e) {
 
 	// sets the positions and attenuation for the sounds
 	f_sound.setPosition(pos.x, pos.y, 0 );
-	f_sound.setAttenuation(0.001f);
+	f_sound.setAttenuation(0.01f);
 
 	st_sound.setPosition(pos.x, pos.y, 0 );
-	st_sound.setAttenuation(0.001f);
+	st_sound.setAttenuation(0.01f);
 
 	s_sound.setPosition(pos.x, pos.y, 0 );
-	s_sound.setAttenuation(0.001f);
+	s_sound.setAttenuation(0.01f);
 
 	//sf::Vector2f shpSize = shp.getSize();
 	shp.setPosition(pos);

@@ -45,6 +45,9 @@
     <ClInclude Include="Rectangle.h">
       <Filter>Header Files\Shape</Filter>
     </ClInclude>
+    <ClInclude Include="Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Point.cpp">
