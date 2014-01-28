@@ -8,7 +8,7 @@ class SpaceMan {
 public:
 	SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey);
 	~SpaceMan();
-	void render(sf::RenderWindow &win);
+	void render(sf::RenderWindow &win, sf::Event& e);
 	void initsounds();
 
 	CollisionCircle getMCircle();
@@ -27,21 +27,20 @@ private:
 	sf::Time soundtime;
 	sf::Clock soundclock;
 	float f_time;
-	float b_time;
-	float tl_time;
-	float tr_time;
 
 	//forward sound
 	sf::Sound f_sound;
 	sf::SoundBuffer f_buffer;
 
-	//back sound
-	sf::Sound b_sound;
-	sf::SoundBuffer b_buffer;
-
-	//turn sound
-	sf::Sound t_sound;
-	sf::SoundBuffer t_buffer;
+	//start sound
+	sf::Sound st_sound;
+	sf::SoundBuffer st_buffer;
+	bool start_press;
+	
+	//stop sound
+	sf::Sound s_sound;
+	sf:: SoundBuffer s_buffer;
+	bool stop_press;
 
 	SVector pos;
 	SVector speed;

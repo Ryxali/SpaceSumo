@@ -3,6 +3,7 @@
 #################
 
 *.wav
+*.ogg
 
 # Resource folder
 [Rr]esources/

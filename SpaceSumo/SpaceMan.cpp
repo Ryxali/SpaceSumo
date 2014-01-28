@@ -8,25 +8,28 @@
 
 void SpaceMan::initsounds(){
 	// forward sound
-	if( !f_buffer.loadFromFile("jetpack.wav")){
+	if( !f_buffer.loadFromFile("Main.ogg")){
 		std::cout << "Failed to load" << std::endl;
 	}
 	f_sound.setBuffer(f_buffer);
+	f_sound.setLoop(true);
 	f_sound.setRelativeToListener(true);
 
-	// back sound
-	if( !b_buffer.loadFromFile("back.wav")){
+	//start sound
+	if( !st_buffer.loadFromFile("Start.ogg"))
+	{
 		std::cout << "Failed to load" << std::endl;
 	}
-	b_sound.setBuffer(b_buffer);
-	b_sound.setRelativeToListener(true);
+	st_sound.setBuffer(st_buffer);
+	st_sound.setRelativeToListener(true);
 
-	//turn sound
-	if( !t_buffer.loadFromFile("turn.wav")){
+	//stop sound
+	if(!s_buffer.loadFromFile("End.ogg"))
+	{
 		std::cout << "Failed to load" << std::endl;
 	}
-	t_sound.setBuffer(t_buffer);
-	t_sound.setRelativeToListener(true);
+	s_sound.setBuffer(s_buffer);
+	s_sound.setRelativeToListener(true);
 }
 
 SpaceMan::SpaceMan(sf::Keyboard::Key fKey, sf::Keyboard::Key bKey, sf::Keyboard::Key rKey, sf::Keyboard::Key lKey) : 
@@ -75,67 +78,68 @@ void SpaceMan::setSpeed(SVector pSpeed)
 	speed = pSpeed;
 }
 
-void SpaceMan::render(sf::RenderWindow &win) {
-	
-	// shitty sound time code
-	tr_time = soundclock.getElapsedTime().asMilliseconds();
-	if(sf::Keyboard::isKeyPressed(right)) {
+void SpaceMan::render(sf::RenderWindow &win, sf::Event& e) {
+
+
+	if(sf::Keyboard::isKeyPressed(right)) 
+	{
 		rotateCounterClockwise(dir, 5);
 		mRightCircle.rotate(5);
 		mLeftCircle.rotate(5);
 		shp.rotate(5);
-		if( tr_time >= 300.0f)
-		{
-			t_sound.play();
-			soundclock.restart();
-		}
+
+
 	}
-	tl_time = soundclock.getElapsedTime().asMilliseconds();
 	if(sf::Keyboard::isKeyPressed(left)) {
 		rotateCounterClockwise(dir, -5);
 		mRightCircle.rotate(-5);
 		mLeftCircle.rotate(-5);
 		shp.rotate(-5);
-		if( tl_time >= 300.0f)
-		{
-			t_sound.play();
-			soundclock.restart();
-		}
 	}
 	
-	if(sf::Keyboard::isKeyPressed(forward)) {
-		speed =  (dotProduct(speed) <= 10) ? speed + dir : normalize(speed)*9.99;
-		f_time = soundclock.getElapsedTime().asMilliseconds();
+	if(sf::Keyboard::isKeyPressed(forward)) 
+	{
 
-		if( f_time >= 330.0f)
+		speed =  (dotProduct(speed) <= 10) ? speed + dir : normalize(speed)*9.99;
+
+		if(start_press == true)
 		{
-		f_sound.play();
-		soundclock.restart();
+			st_sound.play();
+			f_sound.play();
+
+			start_press = false;
+			stop_press = true;
 		}
 	}
-	if(sf::Keyboard::isKeyPressed(back)) {
+
+	if(!sf::Keyboard::isKeyPressed(forward))
+	{
+		if(stop_press == true)
+		{
+			s_sound.play();
+			f_sound.pause();
+		}
+
+		start_press = true;
+		stop_press = false;
+	}
+
+	if(sf::Keyboard::isKeyPressed(back)) 
+	{
 		speed =  (dotProduct(speed) <= 10) ? speed - dir : normalize(speed)*9.99;
-		b_time = soundclock.getElapsedTime().asMilliseconds();
-		
-		if( b_time >= 330.0f)
-		{
-		
-		b_sound.play();
-		soundclock.restart();
-		}
 	}
+
 	pos += speed;
 
 	// sets the positions and attenuation for the sounds
 	f_sound.setPosition(pos.x, pos.y, 0 );
 	f_sound.setAttenuation(0.001f);
 
-	b_sound.setPosition(pos.x, pos.y, 0 );
-	b_sound.setAttenuation(0.001f);
+	st_sound.setPosition(pos.x, pos.y, 0 );
+	st_sound.setAttenuation(0.001f);
 
-	t_sound.setPosition(pos.x, pos.y, 0 );
-	t_sound.setAttenuation(0.001f);
-
+	s_sound.setPosition(pos.x, pos.y, 0 );
+	s_sound.setAttenuation(0.001f);
 
 	//sf::Vector2f shpSize = shp.getSize();
 	shp.setPosition(pos);

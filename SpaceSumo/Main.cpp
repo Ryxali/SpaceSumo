@@ -23,9 +23,13 @@ int main() {
 	Collisions collisions(player, player2);
 	// An event can be polled against window. If an event occurs, it will be fille with the event data.
 	sf::Event evt;
-	sf::Listener::setPosition(sf::Vector3f(1000, 500, 0));
+	sf::Listener::setPosition(sf::Vector3f(1460, 540, 0));
 	Debug::getS().setRenderTarget(window);
-	
+
+	// fixar så att inte ljuden repeteras när man håller inne en knapp
+	window.setKeyRepeatEnabled(false);
+
+
 	while(window.isOpen())
 	{
 		// Loop runs through all new events
@@ -35,15 +39,16 @@ int main() {
 			if(evt.type == sf::Event::Closed)
 			{
 				window.close();
-			}else if(evt.type = sf::Event::KeyPressed) {
+			}if(evt.type == sf::Event::KeyPressed) 
+			{
 				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 					window.close();
 				}
 			}
 		}
 		window.clear();
-		player.render(window);
-		player2.render(window);
+		player.render(window, evt);
+		player2.render(window, evt);
 		collisions.testPlayerCollisions();
 		// Flip buffers
 		window.display();
