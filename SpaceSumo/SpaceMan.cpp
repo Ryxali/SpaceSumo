@@ -34,26 +34,8 @@ void SpaceMan::movement()
 	}
 }
 
+
 void SpaceMan::draw()
 {
 }
 
-bool SpaceMan::getIsAffected()
-{
-	return mIsAffected;
-}
-
-void SpaceMan::setIsAffected(bool isAffected)
-{
-	mIsAffected = isAffected;
-}
-
-Entity* SpaceMan::getEffect()
-{
-	return mEffect;
-}
-
-void SpaceMan::setEffect(Entity* effect)
-{
-	mEffect = effect;
-}

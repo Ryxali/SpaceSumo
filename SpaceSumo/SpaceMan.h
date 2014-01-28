@@ -13,12 +13,6 @@ public:
 	virtual void movement();
 	virtual void draw();
 
-	// get & set
-	virtual bool getIsAffected();
-	virtual void setIsAffected(bool);
-
-	virtual Entity* getEffect();
-	virtual void setEffect(Entity* effect);
 
 private:
 	sf::Keyboard::Key mUp;

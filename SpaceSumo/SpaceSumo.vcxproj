@@ -87,14 +87,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EffectEntity.cpp" />
+    <ClCompile Include="EmpEffect.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="GeneralEntity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SpaceMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectEntity.h" />
+    <ClInclude Include="EmpEffect.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Frozen.h" />
     <ClInclude Include="GeneralEntity.h" />
     <ClInclude Include="SpaceMan.h" />
   </ItemGroup>

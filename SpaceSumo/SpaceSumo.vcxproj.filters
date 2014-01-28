@@ -30,6 +30,12 @@
     <ClCompile Include="EffectEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Frozen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EmpEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -42,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EffectEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Frozen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EmpEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
