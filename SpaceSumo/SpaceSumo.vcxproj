@@ -86,13 +86,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EffectEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GeneralEntity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SpaceMan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EffectEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GeneralEntity.h" />
+    <ClInclude Include="SpaceMan.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

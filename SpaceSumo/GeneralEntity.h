@@ -18,7 +18,7 @@ public:
 	virtual Entity* getEffect() = 0;
 	virtual void setEffect(Entity* effect) = 0;
 
-private:
+protected:
 	// position and box2D magic
 };
 

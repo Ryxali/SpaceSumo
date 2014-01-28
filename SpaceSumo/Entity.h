@@ -14,11 +14,11 @@ public:
 	virtual void setIsAffected(bool) = 0;
 
 	virtual Entity* getEffect() = 0;
-	virtual void setEffect(Entity* effect) = 0;
+	virtual void setEffect(Entity*) = 0;
 
-private:
-	bool isAffected;
-	Entity* effect;
+protected:
+	bool mIsAffected;
+	Entity* mEffect;
 
 
 };
