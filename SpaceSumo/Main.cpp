@@ -9,7 +9,9 @@
 #include <ResourceManager\SSprite.h>
 #include <ResourceManager\SSound.h>
 #include <SFML/Graphics.hpp>
+#include <Common/mathH.h>
 int main() {
+	math::min(1, 1);
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Test", sf::Style::Fullscreen);
 	window.setFramerateLimit(160);
