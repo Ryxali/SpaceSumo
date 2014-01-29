@@ -13,7 +13,7 @@ namespace math
 
 
 	
-	template <typename Tval>
+	template <typename Tval0, typename Tval1>
 	/*
 		Get the smallest of two values.
 		param: Tval v0 - the first value
@@ -24,12 +24,12 @@ namespace math
 		note; this class will throw an error should Tval and Tval_other not be the
 		same type!
 	*/
-	Tval min(Tval v0, Tval v1)
+	auto min(Tval0 v0, Tval1 v1) -> decltype((v0 < v1) ? v0 : v1)
 	{
 		return (v0 < v1) ? v0 : v1;
 	}
 
-	template <typename Tval>
+	template <typename Tval0, typename Tval1>
 	/*
 		Get the largest of two values.
 		param: Tval v0 - the first value
@@ -37,7 +37,7 @@ namespace math
 		returns: Tval - the largest value of the two
 		template: Tval - a value type that permits use of the '<' operator
 	*/
-	Tval max(Tval v0, Tval v1)
+	auto max(Tval0 v0, Tval1 v1) -> decltype((v0 < v1) ? v0 : v1)
 	{
 		return (v1 < v0) ? v0 : v1;
 	}
