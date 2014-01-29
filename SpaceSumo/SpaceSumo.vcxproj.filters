@@ -27,18 +27,40 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="SVector.h" />
-    <ClInclude Include="EffectEntity.h" />
-    <ClInclude Include="EmpEffect.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Frozen.h" />
-    <ClInclude Include="GeneralEntity.h" />
-    <ClInclude Include="SpaceMan.h" />
+    <ClInclude Include="Debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EmpEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Frozen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpaceMan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{6a781104-9ba0-4313-8a61-b1c110bb7e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5ae7b91a-0f61-44d9-bb29-be5c39e70e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c3183946-b2ef-42b7-b9af-8daa5515f795}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
