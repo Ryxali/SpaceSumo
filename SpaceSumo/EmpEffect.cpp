@@ -10,7 +10,7 @@ void EmpEffect::update()
 {
 	mChild->update();
 	
-	if(mClock.getElapsedTime().asMilliseconds > mDuration.asMilliseconds)
+	if(mClock.getElapsedTime().asMilliseconds() > mDuration.asMilliseconds())
 	{
 		delete this;
 	}

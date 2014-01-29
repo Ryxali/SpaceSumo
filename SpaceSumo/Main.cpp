@@ -42,7 +42,7 @@ int main() {
 			}
 			else if(evt.type == sf::Event::KeyPressed) 
 			{
-				if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) 
+				if(evt.key.code == sf::Keyboard::Escape) 
 				{
 					
 					window.close();
