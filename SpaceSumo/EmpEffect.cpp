@@ -1,7 +1,7 @@
 #include "EmpEffect.h"
 
 
-EmpEffect::EmpEffect(Entity ** e, sf::Time duration) : mDuration(duration)
+EmpEffect::EmpEffect(Entity ** e, sf::Time &duration) : mDuration(duration)
 {
 	initiate(e);
 }

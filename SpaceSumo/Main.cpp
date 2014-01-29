@@ -21,7 +21,8 @@ int main() {
 	// An event can be polled against window. If an event occurs, it will be fille with the event data.
 	sf::Event evt;
 	Debug::getS().setRenderTarget(window);
-	
+
+	/* Don't have test files, OBS! More commented out at the bottom
 	res::addResource("Test.png");
 	res::addResource("TestSound.ogg");
 	
@@ -29,7 +30,7 @@ int main() {
 	res::loadResource("Test.png");
 	SSound testS(res::getSoundBuffer("TestSound.ogg"));
 	res::loadResource("TestSound.ogg");
-	testS.play();
+	testS.play();*/
 	while(window.isOpen())
 	{
 		// Loop runs through all new events
@@ -51,7 +52,7 @@ int main() {
 		}
 		window.clear();
 		// Flip buffers
-		test.draw(window);
+		//test.draw(window);		*Don't have test files*
 		window.display();
 	}
 	return 0;

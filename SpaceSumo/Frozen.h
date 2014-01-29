@@ -6,7 +6,7 @@ class Frozen :
 	public EffectEntity
 {
 public:
-	Frozen(Entity ** e, int freezeCharges, sf::Keyboard::Key unFreezeKey);
+	Frozen(Entity ** e, int &freezeCharges, sf::Keyboard::Key &unFreezeKey);
 
 	virtual void update();
 	virtual void movement();
