@@ -1,0 +1,32 @@
+Coding code:
+
+#pragma once
+
+// Some short description
+class C : public B
+{
+public:
+  // Some short description
+  Type mVar0;
+  // Some short description
+  void do0(Type aVar);
+protected:
+  Type mVar1;
+  // Some short description
+  void do1(Type aVar);
+private:
+  Type mVar2;
+  // Some short description
+  void do2(Type aVar);
+};
+
+struct S 
+{
+  Type a, b, c;
+};
+
+void doSomething(Type param)
+{
+  
+}
+
