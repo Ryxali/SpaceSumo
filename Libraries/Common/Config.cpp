@@ -26,16 +26,18 @@ void Config::loadToMemory()
 	std::string line = "";
 	while(std::getline(mFile, line))
 	{
-		std::size_t space = line.find(' ');
-		while (space != line.back())
-		{
-			line.erase(space);
-			space = line.find(' ');
-		}
+		
 		
 		std::size_t comment = line.find('#', 0);
 		if(comment == std::string::npos)
 		{
+			std::string::size_type space = line.find(' ');
+			while (std::string::npos != space)
+			{
+				line.erase(space, 1);
+				space = line.find(' ');
+			}
+
 			std::istringstream is_line(line);
 			std::string key;
 			if( std::getline(is_line, key, '=') )
