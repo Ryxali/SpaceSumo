@@ -100,6 +100,9 @@
     <ClInclude Include="SVector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\Common\Common.vcxproj">
+      <Project>{596120ad-f023-498e-ac08-54d74f6fb17f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\ResourceManager\ResourceManager.vcxproj">
       <Project>{b0fd0ebb-de0c-4151-b9b5-7e99c1dd5521}</Project>
     </ProjectReference>
