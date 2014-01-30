@@ -5,7 +5,7 @@
 
 namespace str
 {
-
+	std::string& purge(std::string &str, char token);
 	std::string& replace(std::string &str, char oldChar, char newChar);
 	/*
 		Counts the number of occurances of a given char.

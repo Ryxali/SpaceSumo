@@ -12,6 +12,22 @@ struct charCount
 	int count;
 };
 
+std::string& str::purge(std::string &str, char token)
+{
+	for(std::string::iterator it = str.begin(); it != str.end(); ++it)
+	{
+
+		while((*it) == token)
+		{
+			it = str.erase(it);
+			if(it == str.end())
+				return str;
+		}
+
+	}
+	return str;
+}
+
 std::string& str::replace(std::string &str, char oldChar, char newChar)
 {
 	for(std::string::iterator it = str.begin(); it != str.end(); it++)
