@@ -4,6 +4,7 @@
 #include <cassert>
 #include "stringH.h"
 #include <iostream>
+#include <sstream>
 Config::Config(std::string filePath, bool implicitLoad) : mConfData(), mFilePath(filePath), mFile()
 {
 	assert(str::contains(filePath, ".cfg"));
@@ -25,11 +26,29 @@ void Config::loadToMemory()
 	std::string line = "";
 	while(std::getline(mFile, line))
 	{
+		std::size_t comment = line.find('#', 0);
+		if(comment == std::string::npos)
+		{
+			std::istringstream is_line(line);
+			std::string key;
+			if( std::getline(is_line, key, '=') )
+			{
+				std::string value;
+				if( std::getline(is_line, value) ) 
+				{
+					mConfData.emplace(key, value);
+				}
+			}
+		}
+
+
+		/*
 		std::cout << line << std::endl;
 		std::string cName = line.substr(0, line.find_first_of(":"));
 		std::cout << "cName: " << cName << std::endl;
 		std::string cOption = line.substr(line.find_first_of(":")+2);
 		std::cout << "cOption: " << cOption << std::endl;
+		*/
 	}
 }
 
@@ -40,5 +59,8 @@ void Config::close()
 
 std::string Config::getValue(std::string option)
 {
-	return "";
+	std::map<std::string, std::string>::iterator it = mConfData.find(option);
+	assert( it != mConfData.end());
+	 
+	return it->second;
 }

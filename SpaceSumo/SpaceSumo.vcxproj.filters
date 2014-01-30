@@ -66,4 +66,9 @@
       <UniqueIdentifier>{c3183946-b2ef-42b7-b9af-8daa5515f795}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.cfg">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
