@@ -6,6 +6,10 @@
 [Rr]esources/
 
 # User-specific files
+<<<<<<< HEAD
+
+=======
+>>>>>>> dev
 *.suo
 *.user
 *.sln.docstates

@@ -7,7 +7,7 @@ class EmpEffect :
 	public EffectEntity
 {
 public:
-	EmpEffect(Entity ** e, sf::Time duration);
+	EmpEffect(Entity ** e, sf::Time &duration);
 
 	virtual void update();
 	virtual void movement();

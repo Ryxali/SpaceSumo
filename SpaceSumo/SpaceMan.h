@@ -6,7 +6,7 @@ class SpaceMan :
 	public GeneralEntity
 {
 public:
-	SpaceMan(sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key down, sf::Keyboard::Key right, sf::Keyboard::Key mFire);
+	SpaceMan(sf::Keyboard::Key &up, sf::Keyboard::Key &left, sf::Keyboard::Key &right, sf::Keyboard::Key &mFire);
 	~SpaceMan();
 
 	virtual void update();
@@ -17,7 +17,6 @@ public:
 private:
 	sf::Keyboard::Key mUp;
 	sf::Keyboard::Key mLeft;
-	sf::Keyboard::Key mDown;
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mFire;
 };

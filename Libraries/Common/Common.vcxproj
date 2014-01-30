@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B0FD0EBB-DE0C-4151-B9B5-7E99C1DD5521}</ProjectGuid>
+    <ProjectGuid>{596120AD-F023-498E-AC08-54D74F6FB17F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ResourceManager</RootNamespace>
+    <RootNamespace>Common</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -39,23 +39,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)SFML-2.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SFML-2.1\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)SFML-2.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SFML-2.1\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -64,15 +55,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libraries\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -85,34 +74,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Loadable.h" />
-    <ClInclude Include="LoadableBundle.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceHandler.h" />
-    <ClInclude Include="RHandle.h" />
-    <ClInclude Include="SoundBufferStore.h" />
-    <ClInclude Include="SSound.h" />
-    <ClInclude Include="SSoundBuffer.h" />
-    <ClInclude Include="SSprite.h" />
-    <ClInclude Include="STexture.h" />
-    <ClInclude Include="TextureStore.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="error.h" />
+    <ClInclude Include="mathH.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="stringH.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LoadableBundle.cpp" />
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="ResourceHandler.cpp" />
-    <ClCompile Include="RHandle.cpp" />
-    <ClCompile Include="SoundBufferStore.cpp" />
-    <ClCompile Include="SSound.cpp" />
-    <ClCompile Include="SSoundBuffer.cpp" />
-    <ClCompile Include="SSprite.cpp" />
-    <ClCompile Include="STexture.cpp" />
-    <ClCompile Include="TextureStore.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.vcxproj">
-      <Project>{596120ad-f023-498e-ac08-54d74f6fb17f}</Project>
-    </ProjectReference>
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="error.cpp" />
+    <ClCompile Include="mathH.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="stringH.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

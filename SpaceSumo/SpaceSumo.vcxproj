@@ -93,6 +93,7 @@
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="GeneralEntity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SpaceMan.cpp" />
     <ClCompile Include="SVector.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +101,9 @@
     <ClInclude Include="SVector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\Common\Common.vcxproj">
+      <Project>{596120ad-f023-498e-ac08-54d74f6fb17f}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\ResourceManager\ResourceManager.vcxproj">
       <Project>{b0fd0ebb-de0c-4151-b9b5-7e99c1dd5521}</Project>
     </ProjectReference>
@@ -109,6 +113,9 @@
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="GeneralEntity.h" />
     <ClInclude Include="SpaceMan.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
