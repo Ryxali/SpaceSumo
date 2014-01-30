@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "mathH.h"
+#include "SVector.h"
 #include <cmath>
+
 
 //sinus
 template <>
 float math::sin<float>(float val)
 {
-	return sin(val);
+	return sinf(val);
 }
 
 template <>
@@ -18,7 +20,7 @@ double math::sin<double>(double val)
 template <>
 long double math::sin<long double>(long double val)
 {
-	return sin(val);
+	return sinl(val);
 }
 
 
