@@ -29,7 +29,7 @@ private:
 	void close();
 	// std::map<OptionName, OptionValue>
 	std::map<std::string, std::string> mConfData;
-	std::ifstream mFile;
+	std::fstream mFile;
 	std::string mFilePath;
 };
 
