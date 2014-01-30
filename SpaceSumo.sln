@@ -10,6 +10,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicShapes", "Libraries\BasicShapes\BasicShapes.vcxproj", "{98995BF7-2115-4852-94ED-C42A6400C5A0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ResourceManager", "Libraries\ResourceManager\ResourceManager.vcxproj", "{B0FD0EBB-DE0C-4151-B9B5-7E99C1DD5521}"
+	ProjectSection(ProjectDependencies) = postProject
+		{596120AD-F023-498E-AC08-54D74F6FB17F} = {596120AD-F023-498E-AC08-54D74F6FB17F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Common", "Libraries\Common\Common.vcxproj", "{596120AD-F023-498E-AC08-54D74F6FB17F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +34,10 @@ Global
 		{B0FD0EBB-DE0C-4151-B9B5-7E99C1DD5521}.Debug|Win32.Build.0 = Debug|Win32
 		{B0FD0EBB-DE0C-4151-B9B5-7E99C1DD5521}.Release|Win32.ActiveCfg = Release|Win32
 		{B0FD0EBB-DE0C-4151-B9B5-7E99C1DD5521}.Release|Win32.Build.0 = Release|Win32
+		{596120AD-F023-498E-AC08-54D74F6FB17F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{596120AD-F023-498E-AC08-54D74F6FB17F}.Debug|Win32.Build.0 = Debug|Win32
+		{596120AD-F023-498E-AC08-54D74F6FB17F}.Release|Win32.ActiveCfg = Release|Win32
+		{596120AD-F023-498E-AC08-54D74F6FB17F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
