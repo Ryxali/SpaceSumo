@@ -50,7 +50,7 @@ int main() {
 			{
 				if(evt.key.code == sf::Keyboard::Escape) 
 				{
-					
+					config.saveConfigChange();
 					window.close();
 				}
 			}
