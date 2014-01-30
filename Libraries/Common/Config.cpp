@@ -49,16 +49,12 @@ void Config::loadToMemory()
 				}
 			}
 		}
-
-
-		/*
-		std::cout << line << std::endl;
-		std::string cName = line.substr(0, line.find_first_of(":"));
-		std::cout << "cName: " << cName << std::endl;
-		std::string cOption = line.substr(line.find_first_of(":")+2);
-		std::cout << "cOption: " << cOption << std::endl;
-		*/
 	}
+}
+
+void Config::saveConfigChange()
+{
+
 }
 
 void Config::close()

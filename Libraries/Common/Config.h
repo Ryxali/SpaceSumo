@@ -18,6 +18,7 @@ public:
 		Opens up the stream to the config file, then loads its' content into memory.
 	*/
 	void loadToMemory();
+	void saveConfigChange();
 	
 	template <typename Tval>
 	Tval getValue(std::string option);
