@@ -12,6 +12,18 @@ struct charCount
 	int count;
 };
 
+std::string& str::replace(std::string &str, char oldChar, char newChar)
+{
+	for(std::string::iterator it = str.begin(); it != str.end(); it++)
+	{
+		if(*it == oldChar)
+		{
+			*it = newChar;
+		}
+	}
+	return str;
+}
+
 int str::count(std::string str, char chr)
 {
 	return std::count(str.begin(), str.end(), chr);

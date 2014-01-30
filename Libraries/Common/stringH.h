@@ -5,6 +5,8 @@
 
 namespace str
 {
+
+	std::string& replace(std::string &str, char oldChar, char newChar);
 	/*
 		Counts the number of occurances of a given char.
 		param: std::string str - the string to check for occurances

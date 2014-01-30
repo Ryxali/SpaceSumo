@@ -14,8 +14,6 @@ text=auto
 
 *.vcxproj text eol=crlf
 
-*.vcxproj.filters diff=astextplain eol=crlf
-
 # Denote all files that are truly binary and should not be modified.
 
 *.png binary

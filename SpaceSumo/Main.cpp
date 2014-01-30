@@ -10,8 +10,10 @@
 #include <ResourceManager\SSound.h>
 #include <SFML/Graphics.hpp>
 #include <Common/mathH.h>
+#include <Common\error.h>
 #include <Common/Config.h>
 int main() {
+	SAssert(false, "");
 	Config cfg("conf.cfg", true);
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Test", sf::Style::Fullscreen);
