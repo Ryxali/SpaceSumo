@@ -57,10 +57,70 @@ void Config::close()
 	mFile.close();
 }
 
+template<>
 std::string Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
 	assert( it != mConfData.end());
 	 
 	return it->second;
+}
+
+template<>
+int Config::getValue(std::string option)
+{
+	std::map<std::string, std::string>::iterator it = mConfData.find(option);
+	assert( it != mConfData.end());
+ 
+	return std::stoi(it->second);
+}
+
+template<>
+bool Config::getValue(std::string option)
+{
+	std::map<std::string, std::string>::iterator it = mConfData.find(option);
+	assert( it != mConfData.end());
+ 
+	if(it->second == "false")
+	{
+		return false;
+	}
+	else if(it->second == "true")
+	{
+		return true;
+	}
+	else
+	{
+		assert(false);
+		return false;
+	}
+	
+}
+
+template<>
+float Config::getValue(std::string option)
+{
+	std::map<std::string, std::string>::iterator it = mConfData.find(option);
+	assert( it != mConfData.end());
+ 
+	return std::stof(it->second);
+}
+
+template<>
+double Config::getValue(std::string option)
+{
+	std::map<std::string, std::string>::iterator it = mConfData.find(option);
+	assert( it != mConfData.end());
+ 
+	return std::stod(it->second);
+}
+
+template<>
+char Config::getValue(std::string option)
+{
+	std::map<std::string, std::string>::iterator it = mConfData.find(option);
+	assert( it != mConfData.end());
+ 
+	assert(it->second.length() == 1);
+	return (it->second.at(0));
 }

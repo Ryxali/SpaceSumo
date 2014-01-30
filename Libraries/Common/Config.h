@@ -19,8 +19,8 @@ public:
 	*/
 	void loadToMemory();
 	
-
-	std::string getValue(std::string option);
+	template <typename Tval>
+	Tval getValue(std::string option);
 private:
 	/*
 		Closes the stream to the config file.

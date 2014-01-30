@@ -14,13 +14,15 @@
 
 int main() {
 	Config cfg("config.cfg", true);
+
+
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
-	sf::RenderWindow window(sf::VideoMode(192, 108), "Test", sf::Style::Default);
+	sf::RenderWindow window(sf::VideoMode(cfg.getValue<int>("screenWidth"), cfg.getValue<int>("screenHeight")), "Test", cfg.getValue<int>("fullscreen"));
 	window.setFramerateLimit(160);
 
 	// A view is a simple camera, a "rectangle" which you see through into the world.
 	sf::View view;
-	view.setSize(192, 108);
+	view.setSize(cfg.getValue<float>("screenWidth"), cfg.getValue<float>("screenHeight"));
 	// An event can be polled against window. If an event occurs, it will be fille with the event data.
 	sf::Event evt;
 	Debug::getS().setRenderTarget(window);
