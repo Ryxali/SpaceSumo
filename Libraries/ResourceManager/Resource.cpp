@@ -1,5 +1,5 @@
 #include "Resource.h"
-#include <cassert>
+#include <error.h>
 
 Resource::Resource(std::string ref) : mRef(ref), mIsLoaded(false), mVersion(0)
 {
@@ -15,7 +15,7 @@ void Resource::load()
 	if(isLoaded())
 		unload();
 	mIsLoaded = loadResource();
-	assert(isLoaded());
+	SAssert(isLoaded(), "Loading failed for some reason.");
 	mVersion++;
 }
 

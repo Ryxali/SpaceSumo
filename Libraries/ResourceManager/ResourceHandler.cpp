@@ -1,5 +1,5 @@
 #include "ResourceHandler.h"
-#include <cassert>
+#include <error.h>
 #include <string>
 #include <locale>
 #include <sstream>
@@ -39,10 +39,10 @@ void ResourceHandler::add(std::string fileRef)
 			mLoadables.insert(std::pair<std::string, Loadable&>(fileRef, mSBufStore.add(fileRef)));
 			break;
 		case Resource_Type::UNKNOWN:
-			assert(false);
+			SError("fileRef check failed", "fileRef was UNKNOWN!");
 			break;
 		default:
-			assert(false);
+			SError("fileRef check failed", "type not in list!");
 			break;
 		}
 	} else 

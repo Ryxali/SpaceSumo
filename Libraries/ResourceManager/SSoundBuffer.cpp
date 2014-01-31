@@ -1,7 +1,7 @@
 #include "SSoundBuffer.h"
 
 
-#include <cassert>
+#include <error.h>
 
 SSoundBuffer::SSoundBuffer(std::string ref) : Resource(ref)
 {
@@ -17,7 +17,7 @@ bool SSoundBuffer::loadResource()
 {
 	mSBuffer = new sf::SoundBuffer();
 	bool success = mSBuffer->loadFromFile(getRef());
-	assert(success);
+	SAssert(success, "Loading failed for some reason.");
 	return success;
 }
 
@@ -28,6 +28,6 @@ void SSoundBuffer::unloadResource()
 
 const sf::SoundBuffer &SSoundBuffer::getSoundBuffer() const
 {
-	assert(isLoaded());
+	SAssert(isLoaded(), "You need to load files before playing them.");
 	return *mSBuffer;
 }

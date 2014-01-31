@@ -26,13 +26,10 @@ static std::string stripPathInformation(const std::string &filename){
 /* Public functions */
 void VGCAssertBox::messageBox(const std::string &expression, const std::string &filename, int lineNumber, std::string line){
 
-	if(line == "\"\"")
+	if(line.length() == 0)
 	{
 		line = "No specific info provided";
 	}
-
-	line.replace(line.begin(), line.begin()+1, "");
-	line.replace(line.end()-1, line.end(), "");
 	std::string total = expression + "\n\nFile: " + stripPathInformation(filename) + "\n\nLine: " + std::to_string(lineNumber) + "\n\n" + line;
 	std::wstring wexpression(total.begin(), total.end());
 	 

@@ -19,6 +19,7 @@ struct VGCAssertBox{
 #define SReleaseAssert(exp) ((void)0)
 #endif
 
-#define SAssert(exp, line) if(!(exp)){VGCAssertBox::messageBox(#exp, __FILE__, __LINE__, #line); std::exit(0);} ((void)0)
-	
+#define SAssert(exp, line) if(!(exp)){VGCAssertBox::messageBox(#exp, __FILE__, __LINE__, line); std::exit(0);} ((void)0)
+#define SError(msg, addInfo) if(true){VGCAssertBox::messageBox(msg, __FILE__, __LINE__, addInfo); std::exit(0);} ((void)0)
+
 #endif

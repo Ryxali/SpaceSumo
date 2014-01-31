@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include <stringH.h>
 #include "Loadable.h"
 
 class Resource : public Loadable

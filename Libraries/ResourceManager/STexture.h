@@ -3,7 +3,7 @@
 
 #include <SFML\Graphics\Texture.hpp>
 #include "Resource.h"
-#include <string>
+#include <stringH.h>
 
 class STexture : public Resource
 {

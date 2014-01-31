@@ -1,5 +1,5 @@
 #include "TextureStore.h"
-#include <cassert>
+#include <error.h>
 
 TextureStore::TextureStore() : mItems()
 {
@@ -19,6 +19,6 @@ Loadable& TextureStore::add(std::string ref)
 
 const STexture& TextureStore::get(std::string ref) const
 {
-	assert(mItems.count(ref) > 0);
+	SAssert(mItems.count(ref) > 0, "No such file in store!");
 	return mItems.at(ref);
 }

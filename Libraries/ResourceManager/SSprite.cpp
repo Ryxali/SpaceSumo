@@ -1,5 +1,5 @@
 #include "SSprite.h"
-#include <cassert>
+#include <error.h>
 
 SSprite::SSprite(const STexture &tex) : mSprite(), mSTex(tex), mTexVersion(0)
 {
@@ -17,18 +17,19 @@ SSprite::~SSprite()
 
 const sf::Texture& SSprite::getTexture() const
 {
-	assert(mSTex.isLoaded());
+	SAssert(mSTex.isLoaded(), "You need to load the texture before using.");
 	return mSTex.getTexture();
 }
 
 void SSprite::draw(sf::RenderWindow &win)
 {
-	assert(mSTex.isLoaded());
+	
 	if(mTexVersion != mSTex.getVersion())
 	{
 		mSprite.setTexture(getTexture());
 		mTexVersion = mSTex.getVersion();
 	}
+	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
 	win.draw(mSprite);
 }
 

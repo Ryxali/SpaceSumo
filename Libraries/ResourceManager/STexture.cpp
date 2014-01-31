@@ -1,5 +1,5 @@
 #include "STexture.h"
-#include <cassert>
+#include <error.h>
 
 STexture::STexture(std::string ref) : Resource(ref)
 {
@@ -15,7 +15,7 @@ bool STexture::loadResource()
 {
 	mTexture = new sf::Texture();
 	bool success = mTexture->loadFromFile(getRef());
-	assert(success);
+	SAssert(success, "Couldn't load texture.");
 	return success;
 }
 
@@ -26,6 +26,6 @@ void STexture::unloadResource()
 
 const sf::Texture &STexture::getTexture() const
 {
-	assert(isLoaded());
+	SAssert(isLoaded(), "Texture isn't loaded.");
 	return *mTexture;
 }

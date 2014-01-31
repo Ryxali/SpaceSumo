@@ -1,5 +1,5 @@
 #include "SoundBufferStore.h"
-#include <cassert>
+#include <error.h>
 
 SoundBufferStore::SoundBufferStore() : mItems()
 {
@@ -19,6 +19,6 @@ Loadable& SoundBufferStore::add(std::string ref)
 
 const SSoundBuffer& SoundBufferStore::get(std::string ref) const
 {
-	assert(mItems.count(ref) > 0);
+	SAssert(mItems.count(ref) > 0, "No such file in store");
 	return mItems.at(ref);
 }

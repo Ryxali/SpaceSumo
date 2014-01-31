@@ -1,5 +1,5 @@
 #include "SSound.h"
-#include <cassert>
+#include <error.h>
 
 SSound::SSound(const SSoundBuffer &sb) : mSound(), mSBuf(sb), mSoundBufVersion(0)
 {
@@ -16,17 +16,17 @@ SSound::~SSound()
 
 void SSound::play()
 {
-	assert(mSBuf.isLoaded());
 	if(mSoundBufVersion != mSBuf.getVersion())
 	{
 		mSound.setBuffer(getSoundBuffer());
 		mSoundBufVersion = mSBuf.getVersion();
 	}
+	SAssert(mSBuf.isLoaded(), "The sound buffer isn't loaded");
 	mSound.play();
 }
 
 const sf::SoundBuffer& SSound::getSoundBuffer() const
 {
-	assert(mSBuf.isLoaded());
+	SAssert(mSBuf.isLoaded(), "You need to load files before playing them.");
 	return mSBuf.getSoundBuffer();
 }
