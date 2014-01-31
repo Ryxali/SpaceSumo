@@ -1,8 +1,8 @@
 #include "SpaceMan.h"
 
 
-SpaceMan::SpaceMan(sf::Keyboard::Key up, sf::Keyboard::Key left, sf::Keyboard::Key down, sf::Keyboard::Key right, sf::Keyboard::Key fire) :
-	mUp(up), mLeft(left), mDown(down), mRight(right), mFire(fire)
+SpaceMan::SpaceMan(sf::Keyboard::Key &up, sf::Keyboard::Key &left, sf::Keyboard::Key &right, sf::Keyboard::Key &fire) :
+	mUp(up), mLeft(left), mRight(right), mFire(fire)
 {
 }
 
@@ -22,10 +22,6 @@ void SpaceMan::movement()
 	}
 
 	if(sf::Keyboard::isKeyPressed(mLeft))
-	{
-	}
-
-	if(sf::Keyboard::isKeyPressed(mDown))
 	{
 	}
 	

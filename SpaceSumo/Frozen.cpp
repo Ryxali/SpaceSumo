@@ -1,6 +1,6 @@
 #include "Frozen.h"
 
-Frozen::Frozen(Entity ** e, int freezeCharges, sf::Keyboard::Key unFreezeKey) : mFreezeCharges(freezeCharges), mUnFreezeKey(unFreezeKey) 
+Frozen::Frozen(Entity ** e, int &freezeCharges, sf::Keyboard::Key &unFreezeKey) : mFreezeCharges(freezeCharges), mUnFreezeKey(unFreezeKey) 
 {
 	initiate(e);
 }

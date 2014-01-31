@@ -18,9 +18,10 @@ public:
 		Opens up the stream to the config file, then loads its' content into memory.
 	*/
 	void loadToMemory();
+	void saveConfigChange();
 	
-
-	std::string getValue(std::string option);
+	template <typename Tval>
+	Tval getValue(std::string option);
 private:
 	/*
 		Closes the stream to the config file.
@@ -28,7 +29,7 @@ private:
 	void close();
 	// std::map<OptionName, OptionValue>
 	std::map<std::string, std::string> mConfData;
-	std::ifstream mFile;
+	std::fstream mFile;
 	std::string mFilePath;
 };
 

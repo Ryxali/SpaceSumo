@@ -13,20 +13,22 @@
 #include <Common\stringH.h>
 #include <Common\error.h>
 #include <Common/Config.h>
-#include <iostream>
+
 int main() {
-	//Config cfg("conf.cfg", true);
+	Config config("config.cfg", true);
+
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Test", sf::Style::Fullscreen);
+	sf::RenderWindow window(sf::VideoMode(config.getValue<int>("screenWidth"), config.getValue<int>("screenHeight")), "Test", config.getValue<int>("fullscreen"));
 	window.setFramerateLimit(160);
 
 	// A view is a simple camera, a "rectangle" which you see through into the world.
 	sf::View view;
-	view.setSize(1920, 1080);
+	view.setSize(config.getValue<float>("screenWidth"), config.getValue<float>("screenHeight"));
 	// An event can be polled against window. If an event occurs, it will be fille with the event data.
 	sf::Event evt;
 	Debug::getS().setRenderTarget(window);
-	
+
+	/* Don't have test files, OBS! More commented out at the bottom
 	res::addResource("Test.png");
 	res::addResource("TestSound.ogg");
 	
@@ -34,7 +36,7 @@ int main() {
 	res::loadResource("Test.png");
 	SSound testS(res::getSoundBuffer("TestSound.ogg"));
 	res::loadResource("TestSound.ogg");
-	testS.play();
+	testS.play();*/
 	while(window.isOpen())
 	{
 		// Loop runs through all new events
@@ -49,14 +51,14 @@ int main() {
 			{
 				if(evt.key.code == sf::Keyboard::Escape) 
 				{
-					
+					config.saveConfigChange();
 					window.close();
 				}
 			}
 		}
 		window.clear();
 		// Flip buffers
-		test.draw(window);
+		//test.draw(window);		*Don't have test files*
 		window.display();
 	}
 	return 0;
