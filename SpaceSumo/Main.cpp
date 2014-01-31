@@ -9,6 +9,7 @@
 #include <SFML\Audio\Listener.hpp>
 #include "Collisions.h"
 #include "Debug.h"
+#include <Box2D\Box2D.h>
 
 int main() {
 	// Create a window with resolution 640x360 and set title to "Workshop". Note that this resolution is independent of view-resolution. You can change this and the view will scale up to fit the window. Very handy!
