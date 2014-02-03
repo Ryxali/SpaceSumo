@@ -90,7 +90,6 @@
     <ClCompile Include="EffectImp.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
-    <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RenderList.cpp" />
