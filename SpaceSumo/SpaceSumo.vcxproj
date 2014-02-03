@@ -88,6 +88,7 @@
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectImp.cpp" />
+    <ClCompile Include="Effects.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectImp.h" />
+    <ClInclude Include="Effects.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />

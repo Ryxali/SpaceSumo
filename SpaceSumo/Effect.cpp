@@ -11,6 +11,11 @@ Effect::~Effect()
 	mImp->~EffectImp();
 }
 
+Effect::Effect(const Effect &e) : mImp(e.mImp)
+{
+
+}
+
 void Effect::update()
 {
 	mImp->update();
@@ -24,4 +29,9 @@ void Effect::draw()
 bool Effect::isAlive()
 {
 	return mImp->isAlive();
+}
+
+Effect Effect::duplicate()
+{
+	return Effect(mImp);
 }
