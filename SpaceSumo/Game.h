@@ -2,6 +2,8 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML\Window.hpp>
 #include "RenderList.h"
+#include <Common\Config.h>
+
 class Game
 {
 public:
