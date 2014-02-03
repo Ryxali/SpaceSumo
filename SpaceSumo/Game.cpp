@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Game.h"
 #include <Common\Config.h>
-
 Game::Game() : mConfig("config.cfg", true), 
 	mWindow
 	(
