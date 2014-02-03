@@ -1,5 +1,5 @@
 #include "SSprite.h"
-#include <error.h>
+#include <Common/error.h>
 
 SSprite::SSprite(const STexture &tex) : mSprite(), mSTex(tex), mTexVersion(0)
 {

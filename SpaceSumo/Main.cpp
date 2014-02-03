@@ -1,3 +1,4 @@
+#include "stdafx.h"
 /*
 	Home of main() (and only main()!).
 */

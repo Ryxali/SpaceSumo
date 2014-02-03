@@ -1,5 +1,5 @@
 #include "SSound.h"
-#include <error.h>
+#include <Common/error.h>
 
 SSound::SSound(const SSoundBuffer &sb) : mSound(), mSBuf(sb), mSoundBufVersion(0)
 {

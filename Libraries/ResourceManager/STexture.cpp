@@ -1,5 +1,5 @@
 #include "STexture.h"
-#include <error.h>
+#include <Common/error.h>
 
 STexture::STexture(std::string ref) : Resource(ref)
 {

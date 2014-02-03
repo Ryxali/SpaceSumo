@@ -1,6 +1,6 @@
 #ifndef SPACE_SUMO_LOADABLE_INCLUDED
 #define SPACE_SUMO_LOADABLE_INCLUDED
-#include <stringH.h>
+#include <Common/stringH.h>
 /*
 	The loadable protocol for our resources
 */

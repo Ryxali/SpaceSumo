@@ -1,5 +1,5 @@
 #include "Resource.h"
-#include <error.h>
+#include <Common/error.h>
 
 Resource::Resource(std::string ref) : mRef(ref), mIsLoaded(false), mVersion(0)
 {

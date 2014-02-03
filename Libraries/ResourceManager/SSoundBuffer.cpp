@@ -1,7 +1,7 @@
 #include "SSoundBuffer.h"
 
 
-#include <error.h>
+#include <Common/error.h>
 
 SSoundBuffer::SSoundBuffer(std::string ref) : Resource(ref)
 {

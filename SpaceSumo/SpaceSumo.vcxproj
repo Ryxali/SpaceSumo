@@ -51,8 +51,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -90,14 +89,18 @@
     <ClCompile Include="EffectEntity.cpp" />
     <ClCompile Include="EmpEffect.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="GeneralEntity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SpaceMan.cpp" />
+    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="EntityImp.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="SVector.h" />
   </ItemGroup>
   <ItemGroup>
