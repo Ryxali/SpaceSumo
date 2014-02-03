@@ -86,9 +86,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Entity.cpp" />
+=======
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EffectImp.cpp" />
+    <ClCompile Include="Effects.cpp" />
+    <ClCompile Include="EffectStatus.cpp" />
+>>>>>>> dev_LA
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RenderList.cpp" />
@@ -97,9 +105,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
+<<<<<<< HEAD
     <ClInclude Include="Entity.h" />
+=======
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectImp.h" />
+    <ClInclude Include="Effects.h" />
+    <ClInclude Include="EffectStatus.h" />
+>>>>>>> dev_LA
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
+    <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
@@ -114,7 +130,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config.cfg" />
+    <None Include="res\config.cfg" />
+    <None Include="res\frozen.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
