@@ -91,8 +91,10 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Frozen.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GeneralEntity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceMan.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SVector.cpp" />
@@ -100,6 +102,8 @@
   <ItemGroup>
     <ClInclude Include="Debug.h" />
     <ClInclude Include="EntityImp.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="RenderList.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SVector.h" />
   </ItemGroup>
