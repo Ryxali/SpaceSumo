@@ -4,6 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <BasicShapes\PointProtocol.h>
 
+
 class SVector : public PointProtocol, protected sf::Vector2f
 {
 public:
