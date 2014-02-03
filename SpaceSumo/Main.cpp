@@ -7,5 +7,6 @@
 int main() {
 	Game g;
 	g.start();
+	DUMP_MEMORY_BUFFER;
 	return 0;
 }	 
