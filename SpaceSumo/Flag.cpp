@@ -2,7 +2,8 @@
 #include "Flag.h"
 
 
-Flag::Flag(Type flagT) : mFlag(flagT)
+Flag::Flag(Type flagT) 
+	: mFlag(flagT), mSeverity(0), mStatus(true), mExtra(0)
 {
 }
 Flag::Flag(Type flagT, int severity, bool status, float extra) 

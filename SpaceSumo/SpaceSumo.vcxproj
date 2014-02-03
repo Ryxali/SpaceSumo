@@ -86,8 +86,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EffectImp.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RenderList.cpp" />
@@ -95,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectImp.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
@@ -111,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.cfg" />
+    <None Include="frozen.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
