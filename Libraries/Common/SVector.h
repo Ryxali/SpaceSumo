@@ -2,7 +2,7 @@
 #define SPACE_SUMO_SVECTOR_INCLUDED
 
 #include <SFML/System/Vector2.hpp>
-#include <PointProtocol.h>
+#include <BasicShapes\PointProtocol.h>
 
 class SVector : public PointProtocol, protected sf::Vector2f
 {

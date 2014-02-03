@@ -1,6 +1,6 @@
 #include "ResourceHandler.h"
 #include <Common/error.h>
-#include <string>
+#include <Common\stringH.h>
 #include <locale>
 #include <sstream>
 namespace stringhelp
@@ -62,7 +62,8 @@ const SoundBufferStore& ResourceHandler::getSBufStore() const
 }
 ResourceHandler::Resource_Type ResourceHandler::type(std::string fileRef)
 {
-	fileRef = stringhelp::toLowerCase(fileRef.substr(fileRef.find_last_of(".")+1, fileRef.length()));
+	str::toLowerCase_copy((std::string)(fileRef.substr(fileRef.find_last_of(".")+1, fileRef.length())));
+	//fileRef = stringhelp::toLowerCase();
 	if(fileRef.compare("png") == 0)
 		return Resource_Type::TEXTURE;
 	if(fileRef.compare("ogg") == 0)
