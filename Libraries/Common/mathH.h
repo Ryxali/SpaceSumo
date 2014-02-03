@@ -9,10 +9,34 @@ namespace math
 	// TODO add more functionality here
 	// REMINDER put templated function at the bottom!
 
+	//sinus
+	template <typename Tval>
+	/*
+		Get the sinus of a value
+		param: Tval - the value you need the sinus of
+		returns: the sinus of that value
+	*/
+	Tval sin(Tval val);
 
+	//cosinus
+	template <typename Tval>
+	/*
+		Get the cosinus of a value
+		param: Tval - the value you need the cosinus of
+		returns: the cosinus of that value
+	*/
+	Tval cos(Tval val);
 
+	//squareroot
+	template <typename Tval>
+	/*
+		Get the squareroot of a value
+		param: Tval - the value you need the squareroot of
+		returns: the squareroot of that value
+	*/
+	Tval sqrt(Tval val);
 
-	
+	//smallest value
 	template <typename Tval0, typename Tval1>
 	/*
 		Get the smallest of two values.
@@ -29,6 +53,7 @@ namespace math
 		return (v0 < v1) ? v0 : v1;
 	}
 
+	//largest value
 	template <typename Tval0, typename Tval1>
 	/*
 		Get the largest of two values.
