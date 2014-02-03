@@ -7,6 +7,6 @@ public:
 	virtual void update() = 0;
 	virtual void draw() = 0;
 	// TODO add Effect to param
-	virtual void afflict() = 0;
+	virtual void addEffect() = 0;
 };
 
