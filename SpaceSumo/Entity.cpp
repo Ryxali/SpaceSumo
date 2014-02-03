@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "Entity.h"
+
 
 
 Entity::Entity(EntityImp* entity):
@@ -24,5 +26,5 @@ void Entity::draw()
 
 bool Entity::addEffect()
 {
-
+	return true;
 }

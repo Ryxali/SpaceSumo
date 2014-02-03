@@ -1,8 +1,8 @@
 #pragma once
 #include "entityimp.h"
-#include <Box2D\Box2D.h>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
+#include <Box2D\Box2D.h>
 class SpaceManImp :
 	public EntityImp
 {
@@ -18,9 +18,6 @@ public:
 	virtual void update();
 	virtual void draw();
 	virtual void addEffect();
-	
-	//temporary renderfunction
-	sf::Shape& getShape();
 
 private:
 	//Keys
@@ -30,12 +27,8 @@ private:
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
 
-	//Box2D stuff
-	b2Body * mBody;
-	b2BodyDef mBodyDef;
-	b2PolygonShape mBodyShape;
-	b2FixtureDef mBodyFix;
-	sf::RectangleShape mShape;
+	b2World &mWorld;
+
 
 };
 
