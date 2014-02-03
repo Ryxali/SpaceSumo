@@ -11,8 +11,8 @@ public:
 	virtual bool isAlive();
 	
 	//TODO Add more flags
-	virtual Flag getFlag_CAN_MOVE();
 	virtual Flag getFlag_CAN_ALTER_MOVE();
+	virtual Flag getFlag_CAN_MOVE();
 
 protected:
 	bool mIsAlive;

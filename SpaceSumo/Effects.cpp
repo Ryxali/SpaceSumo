@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Effects.h"
+#include "EffectStatus.h"
 
 
 Effects::Effects()
@@ -34,5 +35,12 @@ void Effects::addEffect(Effect effect)
 
 Effect Effects::getStatus()
 {
-	return Effect(0);
+	EffectStatus status;
+
+	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
+	{
+		status.addFlag(mEffectList.at(i));
+	}
+
+	return Effect(&status);
 }
