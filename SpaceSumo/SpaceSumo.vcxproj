@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Game.h" />
