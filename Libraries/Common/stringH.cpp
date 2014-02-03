@@ -84,10 +84,10 @@ bool str::contains(std::string str, std::string chrs, bool caseSensitive, bool o
 					result = true;
 				}
 			}
-			return result;
+			//return result;
 		}
 
-		return false;
+		return result;
 	}
 	return str.find(chrs) != std::string::npos;
 }
