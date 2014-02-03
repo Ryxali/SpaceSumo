@@ -3,7 +3,7 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <BasicShapes\PointProtocol.h>
-
+#include <Box2D\Box2D.h>
 
 class SVector : public PointProtocol, protected sf::Vector2f
 {
@@ -12,6 +12,11 @@ public:
 	SVector(const PointProtocol &v);
 	SVector(const sf::Vector2f &v);
 	~SVector();
+
+	sf::Vector2f &asSfVector2f();
+	b2Vec2 cloneB2f();
+	sf::Vector2f cloneV2f();
+
 	virtual float getX() const final;
 	virtual float getY() const final;
 	virtual void setX(float x) final;

@@ -19,6 +19,20 @@ SVector::~SVector()
 	x = 0;
 	y = 0;
 }
+
+sf::Vector2f &SVector::asSfVector2f()
+{
+	return *this;
+}
+b2Vec2 SVector::cloneB2f()
+{
+	return b2Vec2(x, y);
+}
+sf::Vector2f SVector::cloneV2f()
+{
+	return sf::Vector2f(x, y);
+}
+
 float SVector::getX() const
 {
 	return x;
