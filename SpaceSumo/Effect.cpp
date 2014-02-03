@@ -35,3 +35,13 @@ Effect Effect::duplicate()
 {
 	return Effect(mImp);
 }
+
+Flag Effect::getFlag_CAN_MOVE()
+{
+	return mImp->getFlag_CAN_MOVE();
+}
+
+Flag Effect::getFlag_CAN_ALTER_MOVE()
+{
+	return mImp->getFlag_CAN_ALTER_MOVE();
+}

@@ -12,6 +12,10 @@ public:
 	void draw();
 	bool isAlive();
 	Effect duplicate();
+
+	//TODO Add more flags
+	Flag getFlag_CAN_MOVE();
+	Flag getFlag_CAN_ALTER_MOVE();
 	
 private:
 	EffectImp* mImp;
