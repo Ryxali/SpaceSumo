@@ -86,20 +86,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="EffectEntity.cpp" />
-    <ClCompile Include="EmpEffect.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityImp.cpp" />
-    <ClCompile Include="Frozen.cpp" />
-    <ClCompile Include="GeneralEntity.cpp" />
+    <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SpaceMan.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="SVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
     <ClInclude Include="EntityImp.h" />
+    <ClInclude Include="Flag.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SVector.h" />
   </ItemGroup>
@@ -110,12 +106,6 @@
     <ProjectReference Include="..\Libraries\ResourceManager\ResourceManager.vcxproj">
       <Project>{b0fd0ebb-de0c-4151-b9b5-7e99c1dd5521}</Project>
     </ProjectReference>
-    <ClInclude Include="EffectEntity.h" />
-    <ClInclude Include="EmpEffect.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Frozen.h" />
-    <ClInclude Include="GeneralEntity.h" />
-    <ClInclude Include="SpaceMan.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config.cfg" />
