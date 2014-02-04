@@ -13,7 +13,7 @@ FreezeBolt::~FreezeBolt()
 
 void FreezeBolt::update(int delta)
 {
-	float f = delta / 1000;
+	float f = (float)delta / 1000;
 	//TODO add f to force with speed
 }
 

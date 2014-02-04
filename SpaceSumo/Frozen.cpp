@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Frozen.h"
 
-Config Frozen::mConfig("res/frozen.cfg", true);
+Config Frozen::mConfig("res/conf/frozen.cfg", true);
 
 Frozen::Frozen() : mTimer(mConfig.getValue<int>("duration"))
 {

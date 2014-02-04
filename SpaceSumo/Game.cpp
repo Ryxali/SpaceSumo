@@ -2,18 +2,19 @@
 #include "Game.h"
 #include <Common\Config.h>
 
-Game::Game() : mConfig("res/config.cfg", true), 
+Game::Game() : mConfig("res/conf/main.cfg", true), 
 	mWindow
 	(
 	sf::VideoMode(
 	mConfig.getValue<int>("screenWidth"),
 	mConfig.getValue<int>("screenHeight")),
 	"Test",
-	mConfig.getValue<int>("fullscreen")
-	),
+	mConfig.getValue<int>("fullscreen")),
 	mRenderList()
 {
 	mWindow.setFramerateLimit(160);
+	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
+
 }
 
 
