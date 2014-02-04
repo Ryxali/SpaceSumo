@@ -4,7 +4,7 @@ struct Flag
 public:
 	enum Type 
 	{
-		CAN_MOVE, CAN_ALTER_MOVE
+		CAN_MOVE, CAN_ALTER_MOVE // TODO Add more flags
 	};
 
 	Flag(Type flagT);
@@ -25,4 +25,3 @@ public:
 private:
 	Flag();
 };
-
