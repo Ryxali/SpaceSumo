@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ability.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -93,6 +94,8 @@
     <ClCompile Include="EffectStatus.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="FreezeBolt.cpp" />
+    <ClCompile Include="Freezer.cpp" />
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -102,6 +105,7 @@
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ability.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />
@@ -110,6 +114,8 @@
     <ClInclude Include="EffectStatus.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
+    <ClInclude Include="FreezeBolt.h" />
+    <ClInclude Include="Freezer.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="PowerUp.h" />

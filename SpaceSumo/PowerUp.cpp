@@ -4,3 +4,7 @@
 PowerUp::~PowerUp()
 {
 }
+
+void PowerUp::addEffect()
+{
+}

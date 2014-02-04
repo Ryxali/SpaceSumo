@@ -6,7 +6,8 @@ class PowerUp :
 public:
 	~PowerUp();
 
-	virtual void update() = 0;
-	virtual void draw() = 0;
+	virtual void update(int delta) = 0;
+	virtual void draw(RenderList& renderList) = 0;
+	virtual void addEffect();
 };
 
