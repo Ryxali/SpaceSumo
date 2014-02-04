@@ -95,6 +95,7 @@
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -108,6 +109,7 @@
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
