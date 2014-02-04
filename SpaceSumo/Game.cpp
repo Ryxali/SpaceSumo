@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 #include <Common\Config.h>
+
 Game::Game() : mConfig("res/config.cfg", true), 
 	mWindow
 	(
@@ -23,6 +24,8 @@ Game::~Game()
 
 void Game::start()
 {
+
+
 	while(mWindow.isOpen())
 	{
 		loop();

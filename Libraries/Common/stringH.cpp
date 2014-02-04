@@ -6,12 +6,6 @@
 #include <map>
 #include <algorithm>
 
-struct charCount
-{
-	std::string str;
-	int count;
-};
-
 std::string& str::purge(std::string &str, char token)
 {
 	for(std::string::iterator it = str.begin(); it != str.end(); ++it)
@@ -45,6 +39,11 @@ int str::count(std::string str, char chr)
 	return std::count(str.begin(), str.end(), chr);
 }
 
+int str::count(const std::string &str, char chr)
+{
+	return std::count(str.begin(), str.end(), chr);
+}
+
 std::string &str::toLowerCase(std::string &str)
 {
 	std::locale loc;
@@ -53,41 +52,45 @@ std::string &str::toLowerCase(std::string &str)
 	return str;
 }
 
-std::string str::toLowerCase_copy(std::string str)
+char str::toLowerCase(char chr)
 {
 	std::locale loc;
-	for (std::string::size_type i = 0; i < str.length(); ++i)
-		str[i] = std::tolower(str[i], loc);
+	return std::tolower(chr, loc);;
+}
+
+std::string str::toLowerCase_copy(std::string str)
+{
+	return str::toLowerCase(str);
+}
+
+std::string& str::toUpperCase(std::string &str)
+{
+	std::locale loc;
+	for (std::string::size_type i=0; i<str.length(); ++i)
+		str[i] = std::toupper(str[i], loc);
 	return str;
+}
+std::string toUpperCase_copy(std::string str)
+{
+	return str::toUpperCase(str);
 }
 
 bool str::contains(std::string str, char ch, bool caseSensitive)
 {
-	if(caseSensitive) str::toLowerCase(str);
+	if(caseSensitive)
+	{
+		str::toLowerCase(str);
+		str::toLowerCase(ch);
+	}
 	return str.find(ch) != std::string::npos;
 }
 
-bool str::contains(std::string str, std::string chrs, bool caseSensitive, bool orderSensitive)
+bool str::contains(std::string str, std::string chrs, bool caseSensitive)
 {
-	if(caseSensitive) str::toLowerCase(str);
-	if(orderSensitive)
+	if(caseSensitive)
 	{
-		std::map<char, int> charList;
-		bool result = false;
-		for(std::string::iterator it = chrs.begin(); it != chrs.end(); it++)
-		{
-			if(charList.count(*it) == 0)
-			{
-				charList.insert(std::pair<char, int>(*it, str::count(chrs, *it)));
-				if(str::count(str, *it) == charList.at(*it))
-				{
-					result = true;
-				}
-			}
-			return result;
-		}
-
-		return false;
+		str::toLowerCase(str);
+		str::toLowerCase(chrs);
 	}
 	return str.find(chrs) != std::string::npos;
 }

@@ -3,6 +3,7 @@
 #include <SFML\Window.hpp>
 #include "RenderList.h"
 #include <Common\Config.h>
+#include <Box2D/Box2D.h>
 
 class Game
 {
@@ -19,5 +20,9 @@ private:
 	sf::RenderWindow mWindow;
 	sf::View mView;
 	RenderList mRenderList;
+
+	// Box2D stuff
+	b2World* myWorld;
+	
 };
 

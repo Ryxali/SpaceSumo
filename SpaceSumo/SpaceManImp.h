@@ -11,7 +11,8 @@ public:
 				sf::Keyboard::Key down,
 				sf::Keyboard::Key right,
 				sf::Keyboard::Key left,
-				sf::Keyboard::Key push);
+				sf::Keyboard::Key push,
+				b2World* world);
 	~SpaceManImp();
 
 	virtual void update(int delta);
@@ -25,5 +26,10 @@ private:
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
+
+	//Box2D stuff
+	b2Body* mBody;
+	b2BodyDef *mBodyDef;
+	
 };
 
