@@ -7,15 +7,12 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key down,
 	sf::Keyboard::Key right,
 	sf::Keyboard::Key left,
-	sf::Keyboard::Key attack,
-	b2World& world): 
-	//initlist
+	sf::Keyboard::Key push):
 	mUp(up),
 	mDown(down),
 	mRight(right),
 	mLeft(left),
-	mPush(attack),
-	mWorld(world)
+	mPush(push)
 {
 
 }
@@ -25,12 +22,12 @@ SpaceManImp::~SpaceManImp()
 
 }
 
-void SpaceManImp::update()
+void SpaceManImp::update(int delta)
 {
 
 }
 
-void SpaceManImp::draw()
+void SpaceManImp::draw(RenderList& renderList)
 {
 
 }
