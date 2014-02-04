@@ -104,11 +104,59 @@ sf::Keyboard::Key str::toKey(char chr)
 {
 	
 	switch(str::toUpperCase(chr))
-	{
+	{	
 	case 'A':
 		return sf::Keyboard::A;
 	case 'B':
 		return sf::Keyboard::B;
+	case 'C':
+		return sf::Keyboard::C;
+	case 'D':
+		return sf::Keyboard::D;
+	case 'E':
+		return sf::Keyboard::E;
+	case 'F':
+		return sf::Keyboard::F;
+	case 'G':
+		return sf::Keyboard::G;
+	case 'H':
+		return sf::Keyboard::H;
+	case 'I':
+		return sf::Keyboard::I;
+	case 'J':
+		return sf::Keyboard::J;
+	case 'K':
+		return sf::Keyboard::K;
+	case 'L':
+		return sf::Keyboard::L;
+	case 'M':
+		return sf::Keyboard::M;
+	case 'N':
+		return sf::Keyboard::N;
+	case 'O':
+		return sf::Keyboard::O;
+	case 'P':
+		return sf::Keyboard::P;
+	case 'Q':
+		return sf::Keyboard::Q;
+	case 'R':
+		return sf::Keyboard::R;
+	case 'S':
+		return sf::Keyboard::S;
+	case 'T':
+		return sf::Keyboard::T;
+	case 'U':
+		return sf::Keyboard::U;
+	case 'V':
+		return sf::Keyboard::V;
+	case 'W':
+		return sf::Keyboard::W;
+	case 'X':
+		return sf::Keyboard::X;
+	case 'Y':
+		return sf::Keyboard::Y;
+	case 'Z':
+		return sf::Keyboard::Z;
 	default:
 		SError("Key not found", "No key matches: " + chr);
 	}
