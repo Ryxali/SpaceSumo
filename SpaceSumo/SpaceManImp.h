@@ -12,7 +12,7 @@ public:
 				sf::Keyboard::Key right,
 				sf::Keyboard::Key left,
 				sf::Keyboard::Key push,
-				b2World& world);
+				b2World* world);
 	~SpaceManImp();
 
 	virtual void update(int delta);

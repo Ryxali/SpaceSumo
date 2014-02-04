@@ -24,9 +24,7 @@ Game::~Game()
 
 void Game::start()
 {
-	///////////////////// BOX2D ///////////////////////
-	b2Vec2 gravity(0.0f,9.8f);
-    myWorld->SetGravity(gravity);
+
 
 	while(mWindow.isOpen())
 	{
