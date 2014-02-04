@@ -2,6 +2,8 @@
 #include "Game.h"
 #include <Common\Config.h>
 #include <SFML\Window\Keyboard.hpp>
+#include "SpaceManImp.h"
+
 Game::Game() : mConfig("res/config.cfg", true), 
 	mWindow
 	(
@@ -11,7 +13,15 @@ Game::Game() : mConfig("res/config.cfg", true),
 	"Test",
 	mConfig.getValue<int>("fullscreen")
 	),
-	mRenderList()
+	mRenderList(),
+	mGravity(b2Vec2( 0 , 0 )),
+	mWorld(new b2World(mGravity)),
+	mSpaceman(sf::Keyboard::Up,
+	sf::Keyboard::Down,
+	sf::Keyboard::Right,
+	sf::Keyboard::Left,
+	sf::Keyboard::Space,
+	mWorld)
 {
 	mWindow.setFramerateLimit(160);
 }
@@ -24,6 +34,11 @@ Game::~Game()
 
 void Game::start()
 {
+	
+	
+	
+	
+	
 
 	while(mWindow.isOpen())
 	{
@@ -37,6 +52,10 @@ void Game::loop()
 	// Loop runs through all new events
 	while(mWindow.isOpen())
 	{
+
+		float timeStep = 1/60.f;
+		mWorld->Step(timeStep,8,3);
+
 		while(mWindow.pollEvent(evt))
 		{
 			// Switch-statements can be used instead of if-statements, good in case we have many eventtypes to handle.
@@ -49,10 +68,11 @@ void Game::loop()
 				if(evt.key.code == sf::Keyboard::Escape) 
 				{
 					mWindow.close();
+					
 				}
 			}
 		}
-		mWindow.clear();
+		mWindow.clear(sf::Color::Blue);
 
 		update();
 		preDraw();
@@ -64,7 +84,7 @@ void Game::loop()
 
 void Game::update()
 {
-
+	mSpaceman.update(1);
 }
 
 void Game::preDraw()
@@ -74,5 +94,5 @@ void Game::preDraw()
 
 void Game::draw()
 {
-
+	mWindow.draw(mSpaceman.getShape());
 }

@@ -2,6 +2,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML\Window.hpp>
 #include "RenderList.h"
+#include "SpaceManImp.h"
 #include <Common\Config.h>
 #include <Box2D/Box2D.h>
 
@@ -16,13 +17,15 @@ private:
 	void update();
 	void preDraw();
 	void draw();
+	b2Vec2 mGravity;
+	b2World* mWorld;
+	SpaceManImp mSpaceman;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;
 	RenderList mRenderList;
 
 	// Box2D stuff
-	b2World* myWorld;
 	
 };
 
