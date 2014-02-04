@@ -18,6 +18,7 @@ public:
 	virtual void update(int delta);
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
+	sf::RectangleShape getShape();
 
 private:
 	//Keys
@@ -28,8 +29,10 @@ private:
 	sf::Keyboard::Key mPush;
 
 	//Box2D stuff
-	b2Body* mBody;
-	b2BodyDef *mBodyDef;
-	
+	b2Body * m_body;
+	b2BodyDef m_bodyDef;
+	b2PolygonShape m_bodyShape;
+	b2FixtureDef m_bodyFix;
+	sf::RectangleShape m_shape; //SFML shape
 };
 
