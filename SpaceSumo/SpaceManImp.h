@@ -11,12 +11,11 @@ public:
 				sf::Keyboard::Key down,
 				sf::Keyboard::Key right,
 				sf::Keyboard::Key left,
-				sf::Keyboard::Key attack,
-				b2World& world);
+				sf::Keyboard::Key push);
 	~SpaceManImp();
 
-	virtual void update();
-	virtual void draw();
+	virtual void update(int delta);
+	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
 
 private:
@@ -26,9 +25,5 @@ private:
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
-
-	b2World &mWorld;
-
-
 };
 
