@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
-
+#include "error.h"
 std::string& str::purge(std::string &str, char token)
 {
 	for(std::string::iterator it = str.begin(); it != str.end(); ++it)
@@ -70,6 +70,11 @@ std::string& str::toUpperCase(std::string &str)
 		str[i] = std::toupper(str[i], loc);
 	return str;
 }
+char toUpperCase(char chr)
+{
+	std::locale loc;
+	return std::toupper(chr, loc);
+}
 std::string toUpperCase_copy(std::string str)
 {
 	return str::toUpperCase(str);
@@ -80,7 +85,7 @@ bool str::contains(std::string str, char ch, bool caseSensitive)
 	if(caseSensitive)
 	{
 		str::toLowerCase(str);
-		str::toLowerCase(ch);
+		ch = str::toLowerCase(ch);
 	}
 	return str.find(ch) != std::string::npos;
 }
@@ -93,4 +98,51 @@ bool str::contains(std::string str, std::string chrs, bool caseSensitive)
 		str::toLowerCase(chrs);
 	}
 	return str.find(chrs) != std::string::npos;
+}
+
+sf::Keyboard::Key str::toKey(char chr)
+{
+	
+	switch(str::toUpperCase(chr))
+	{
+	case 'A':
+		return sf::Keyboard::A;
+	case 'B':
+		return sf::Keyboard::B;
+	default:
+		SError("Key not found", "No key matches: " + chr);
+	}
+}
+sf::Keyboard::Key str::toKey(std::string keyName)
+{
+	if(keyName.length() == 1)
+	{
+		return str::toKey(keyName.at(0));
+	}
+	str::toUpperCase(keyName);
+	if(keyName == "ESCAPE" || keyName == "ESC")
+	{
+		return sf::Keyboard::Escape;
+	}
+	if(keyName == "LCTRL" || keyName == "LCONTROL")
+	{
+		return sf::Keyboard::LControl;
+	}
+	if(keyName == "RCTRL" || keyName == "RCONTROL")
+	{
+		return sf::Keyboard::RControl;
+	}
+	if(keyName == "TAB" || keyName == "TAB")
+	{
+		return sf::Keyboard::Tab;
+	}
+	if(keyName == "LSHIFT")
+	{
+		return sf::Keyboard::LShift;
+	}
+	if(keyName == "RSHIFT")
+	{
+		return sf::Keyboard::RShift;
+	}
+	SError("Unknown Key", "Couldn't find char value for key: " + keyName);
 }

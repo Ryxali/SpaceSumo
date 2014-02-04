@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Game.h"
 #include <Common\Config.h>
-
+#include <SFML\Window\Keyboard.hpp>
 Game::Game() : mConfig("res/config.cfg", true), 
 	mWindow
 	(
@@ -24,7 +24,6 @@ Game::~Game()
 
 void Game::start()
 {
-
 
 	while(mWindow.isOpen())
 	{

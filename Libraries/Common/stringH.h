@@ -2,7 +2,7 @@
 #define SPACESUMO_COMMON_STRING_INCLUDED
 
 #include <string>
-
+#include <SFML\Window\Keyboard.hpp>
 namespace str
 {
 	/*
@@ -62,6 +62,12 @@ namespace str
 	*/
 	std::string& toUpperCase(std::string &str);
 	/*
+		Get the uppercase alternative to given char
+		param: char chr - the char to convert
+		returns: char - a uppercase variant of the char provided
+	*/
+	char toUpperCase(char chr);
+	/*
 		Creates a copy of the string and converts it to upper case.
 		param: std::string str - the string to use for conversion
 		returns: std::string - a copy of the string in uppercase form
@@ -86,7 +92,8 @@ namespace str
 	bool contains(std::string str, std::string chrs, bool caseSensitive = true);
 
 	// TODO add string functionality
-
+	sf::Keyboard::Key toKey(char chr);
+	sf::Keyboard::Key toKey(std::string keyName);
 }
 
 

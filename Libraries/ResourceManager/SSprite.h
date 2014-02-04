@@ -24,7 +24,7 @@ public:
 		Draws this sprite onto a window
 		Causes an error should the Texture not be loaded
 	*/
-	void draw(sf::RenderWindow &win);
+	virtual void draw(sf::RenderWindow &win);
 	
 private:
 

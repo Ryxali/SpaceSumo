@@ -85,6 +85,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="LoadableBundle.h" />
     <ClInclude Include="Resource.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="TextureStore.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="LoadableBundle.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceHandler.cpp" />
