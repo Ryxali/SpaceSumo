@@ -26,7 +26,7 @@ sf::Vector2f &SVector::asSfVector2f()
 }
 b2Vec2 SVector::cloneB2f()
 {
-	return b2Vec2(x, y);
+	return b2Vec2( x/30 , y/30 ); // divided by pixels per meter
 }
 sf::Vector2f SVector::cloneV2f()
 {
@@ -45,9 +45,9 @@ void SVector::setX(float x)
 {
 	this -> x = x;
 }
-void SVector::setY(float Y) 
+void SVector::setY(float y) 
 {
-	this -> x = x;
+	this -> y = y;
 }
 
 float SVector::length() const {
@@ -70,7 +70,7 @@ SVector &SVector::rotate(float degrees) {
 	float y = getY();
 	float cn = cos(radian);
 	float sn = sin(radian);
-	setX(getX() * cn - getY() * sn);
-	setY(getX() * sn + getY() * cn);
+	setX(x * cn - y * sn);
+	setY(x * sn + y * cn);
 	return *this;
 }

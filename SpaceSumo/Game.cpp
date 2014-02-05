@@ -49,6 +49,7 @@ void Game::start()
 
 void Game::loop()
 {
+
 	sf::Event evt;
 	// Loop runs through all new events
 	while(mWindow.isOpen())
@@ -73,11 +74,13 @@ void Game::loop()
 				}
 			}
 		}
-		mWindow.clear(sf::Color::Blue);
+		mWindow.clear(sf::Color::White);
 
 		update();
 		preDraw();
 		draw();
+		mDeltaClock.restart();
+
 
 		mWindow.display();
 	}
@@ -85,7 +88,7 @@ void Game::loop()
 
 void Game::update()
 {
-	mSpaceman.update(1);
+	mSpaceman.update(mDeltaClock.getElapsedTime().asMilliseconds());
 }
 
 void Game::preDraw()
