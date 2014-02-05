@@ -20,7 +20,13 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 	sf::Keyboard::Right,
 	sf::Keyboard::Left,
 	sf::Keyboard::Space,
-	mWorld, 700, 300)
+	mWorld, 700.0f, 300.0f),
+	mSpaceman2(sf::Keyboard::W,
+	sf::Keyboard::S,
+	sf::Keyboard::D,
+	sf::Keyboard::A,
+	sf::Keyboard::T,
+	mWorld, 300.0f, 300.0f)
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
@@ -90,6 +96,7 @@ void Game::loop()
 void Game::update()
 {
 	mSpaceman.update(mDeltaClock.getElapsedTime().asMilliseconds());
+	mSpaceman2.update(mDeltaClock.getElapsedTime().asMilliseconds());
 }
 
 void Game::preDraw()
@@ -100,4 +107,5 @@ void Game::preDraw()
 void Game::draw()
 {
 	mWindow.draw(mSpaceman.getShape());
+	mWindow.draw(mSpaceman2.getShape());
 }

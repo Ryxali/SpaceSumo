@@ -15,13 +15,13 @@ public:
 				sf::Keyboard::Key left,
 				sf::Keyboard::Key push,
 				b2World* world,
-				int x, int y);
+				float x, float y);
 	~SpaceManImp();
 
 	virtual void update(int delta);
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
-	sf::RectangleShape getShape();
+	sf::CircleShape getShape();
 
 private:
 	//Keys
@@ -43,8 +43,8 @@ private:
 
 	b2Body * mBody;
 	b2BodyDef mBodyDef;
-	b2PolygonShape mBodyShape;
+	b2CircleShape mBodyShape;
 	b2FixtureDef mBodyFix;
-	sf::RectangleShape mShape; //SFML shape
+	sf::CircleShape mShape; //SFML shape
 };
 
