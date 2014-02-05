@@ -3,6 +3,8 @@
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <Box2D\Box2D.h>
+#include <Common\SVector.h>
+#include <Common\Config.h>
 class SpaceManImp :
 	public EntityImp
 {
@@ -27,12 +29,19 @@ private:
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
+	static Config mConfig;
+
 
 	//Box2D stuff
-	b2Body * m_body;
-	b2BodyDef m_bodyDef;
-	b2PolygonShape m_bodyShape;
-	b2FixtureDef m_bodyFix;
-	sf::RectangleShape m_shape; //SFML shape
+	float mSpeed;
+	SVector mDirection;
+	float mAngle;
+
+
+	b2Body * mBody;
+	b2BodyDef mBodyDef;
+	b2PolygonShape mBodyShape;
+	b2FixtureDef mBodyFix;
+	sf::RectangleShape mShape; //SFML shape
 };
 

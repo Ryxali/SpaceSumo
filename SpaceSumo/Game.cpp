@@ -43,6 +43,7 @@ void Game::start()
 
 void Game::loop()
 {
+
 	sf::Event evt;
 	// Loop runs through all new events
 	float timeStep = 1/60.f;
@@ -64,18 +65,19 @@ void Game::loop()
 			}
 		}
 	}
-	mWindow.clear(sf::Color::Blue);
 
 	update();
 	preDraw();
 	draw();
+		mDeltaClock.restart();
 
-	mWindow.display();
+
+	}
 }
 
 void Game::update()
 {
-	mSpaceman.update(1);
+	mSpaceman.update(mDeltaClock.getElapsedTime().asMilliseconds());
 }
 
 void Game::preDraw()

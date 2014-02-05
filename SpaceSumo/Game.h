@@ -25,7 +25,7 @@ private:
 	sf::View mView;
 	RenderList mRenderList;
 
-	// Box2D stuff
+	sf::Clock mDeltaClock;
 	
 };
 
