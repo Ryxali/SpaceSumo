@@ -23,7 +23,7 @@ Config::~Config()
 void Config::loadToMemory()
 {
 	mFile.open(mFilePath);
-	SAssert(mFile.is_open(), "Could not open config file");
+	SAssert(mFile.is_open(), "Could not open config file: " + mFilePath);
 	std::string line = "";
 	while(std::getline(mFile, line))
 	{
@@ -144,8 +144,10 @@ bool Config::getValue(std::string option)
 	}
 	else
 	{
-		SAssert(false, "Cannot convert " + it->second + " to bool" );
+		SError("Conversion Error" , "Cannot convert " + it->second + " to bool" );
+		#ifdef NDEBUG
 		return false;
+		#endif
 	}
 	
 }

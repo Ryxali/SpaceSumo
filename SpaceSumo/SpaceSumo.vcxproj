@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ability.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -93,14 +94,18 @@
     <ClCompile Include="EffectStatus.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
+    <ClCompile Include="FreezeBolt.cpp" />
+    <ClCompile Include="Freezer.cpp" />
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ability.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />
@@ -109,8 +114,11 @@
     <ClInclude Include="EffectStatus.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
+    <ClInclude Include="FreezeBolt.h" />
+    <ClInclude Include="Freezer.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="stdafx.h" />
@@ -124,8 +132,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\config.cfg" />
-    <None Include="res\frozen.cfg" />
+    <None Include="res\conf\freezer.cfg" />
+    <None Include="res\conf\frozen.cfg" />
+    <None Include="res\conf\main.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

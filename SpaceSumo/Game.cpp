@@ -4,15 +4,14 @@
 #include <SFML\Window\Keyboard.hpp>
 #include "SpaceManImp.h"
 
-Game::Game() : mConfig("res/config.cfg", true), 
+Game::Game() : mConfig("res/conf/main.cfg", true), 
 	mWindow
 	(
 	sf::VideoMode(
 	mConfig.getValue<int>("screenWidth"),
 	mConfig.getValue<int>("screenHeight")),
 	"Test",
-	mConfig.getValue<int>("fullscreen")
-	),
+	mConfig.getValue<int>("fullscreen")),
 	mRenderList(),
 	mGravity(b2Vec2( 0 , 0 )),
 	mWorld(new b2World(mGravity)),
@@ -24,6 +23,8 @@ Game::Game() : mConfig("res/config.cfg", true),
 	mWorld)
 {
 	mWindow.setFramerateLimit(160);
+	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
+
 }
 
 

@@ -8,7 +8,7 @@ Effect::Effect(EffectImp* imp) : mImp(imp)
 
 Effect::~Effect()
 {
-	mImp->~EffectImp();
+	delete mImp;
 }
 
 Effect::Effect(const Effect &e) : mImp(e.mImp)
