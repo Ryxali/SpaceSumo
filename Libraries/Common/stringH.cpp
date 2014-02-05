@@ -70,12 +70,12 @@ std::string& str::toUpperCase(std::string &str)
 		str[i] = std::toupper(str[i], loc);
 	return str;
 }
-char toUpperCase(char chr)
+char str::toUpperCase(char chr)
 {
 	std::locale loc;
 	return std::toupper(chr, loc);
 }
-std::string toUpperCase_copy(std::string str)
+std::string str::toUpperCase_copy(std::string str)
 {
 	return str::toUpperCase(str);
 }
