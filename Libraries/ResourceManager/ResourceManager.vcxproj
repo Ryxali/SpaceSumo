@@ -40,12 +40,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)SFML-2.1\include;$(SolutionDir)Libraries;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SFML-2.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SFML-2.1\include;$(SolutionDir)Libraries;$(SolutionDir)Box2D\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SFML-2.1\lib;$(SolutionDir)Box2D\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)SFML-2.1\include;$(SolutionDir)Libraries;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)SFML-2.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SFML-2.1\include;$(SolutionDir)Libraries;$(SolutionDir)Box2D\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SFML-2.1\lib;$(SolutionDir)Box2D\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="LoadableBundle.h" />
     <ClInclude Include="Resource.h" />

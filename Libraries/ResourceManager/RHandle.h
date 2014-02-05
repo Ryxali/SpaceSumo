@@ -12,7 +12,7 @@ namespace res
 	void addResource(std::string ref);
 	/*
 		Loads a resource that exists in the resource list.
-		param: std::string ref - the file yoy want to load;
+		param: std::string ref - the file you want to load;
 		usage: res::loadResource("Resources/example.png");
 		warning; loading a non-added resource will cause an error!
 	*/

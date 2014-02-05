@@ -3,6 +3,7 @@
 #include <Common\Config.h>
 #include <SFML\Window\Keyboard.hpp>
 #include "SpaceManImp.h"
+#include <ResourceManager\RHandle.h>
 
 Game::Game() : mConfig("res/conf/main.cfg", true), 
 	mWindow
@@ -24,7 +25,6 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
-
 }
 
 
@@ -35,12 +35,6 @@ Game::~Game()
 
 void Game::start()
 {
-	
-	
-	
-	
-	
-
 	while(mWindow.isOpen())
 	{
 		loop();
@@ -51,36 +45,32 @@ void Game::loop()
 {
 	sf::Event evt;
 	// Loop runs through all new events
-	while(mWindow.isOpen())
+	float timeStep = 1/60.f;
+	mWorld->Step(timeStep,8,3);
+
+	while(mWindow.pollEvent(evt))
 	{
-
-		float timeStep = 1/60.f;
-		mWorld->Step(timeStep,8,3);
-
-		while(mWindow.pollEvent(evt))
+		// Switch-statements can be used instead of if-statements, good in case we have many eventtypes to handle.
+		if(evt.type == sf::Event::Closed)
 		{
-			// Switch-statements can be used instead of if-statements, good in case we have many eventtypes to handle.
-			if(evt.type == sf::Event::Closed)
+			mWindow.close();
+		}
+		else if(evt.type == sf::Event::KeyPressed) 
+		{
+			if(evt.key.code == sf::Keyboard::Escape) 
 			{
 				mWindow.close();
-			}
-			else if(evt.type == sf::Event::KeyPressed) 
-			{
-				if(evt.key.code == sf::Keyboard::Escape) 
-				{
-					mWindow.close();
-					
-				}
+
 			}
 		}
-		mWindow.clear(sf::Color::Blue);
-
-		update();
-		preDraw();
-		draw();
-
-		mWindow.display();
 	}
+	mWindow.clear(sf::Color::Blue);
+
+	update();
+	preDraw();
+	draw();
+
+	mWindow.display();
 }
 
 void Game::update()

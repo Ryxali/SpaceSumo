@@ -5,7 +5,7 @@
 #include "SpaceManImp.h"
 #include <Common\Config.h>
 #include <Box2D/Box2D.h>
-
+#include <ResourceManager\Animation.h>
 class Game
 {
 public:

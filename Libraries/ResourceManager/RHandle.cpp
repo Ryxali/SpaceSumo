@@ -1,7 +1,7 @@
 #include "RHandle.h"
 #include "ResourceHandler.h"
 
-ResourceHandler handler;
+static ResourceHandler handler;
 
 void res::addResource(std::string ref) 
 {

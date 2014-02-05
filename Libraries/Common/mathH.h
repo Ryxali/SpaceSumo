@@ -9,6 +9,8 @@ namespace math
 	// TODO add more functionality here
 	// REMINDER put templated function at the bottom!
 
+	int round(float val);
+
 	//sinus
 	template <typename Tval>
 	/*

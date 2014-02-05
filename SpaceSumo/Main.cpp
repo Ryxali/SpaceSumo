@@ -3,7 +3,7 @@
 	Home of main() (and only main()!).
 */
 #include "Game.h"
-
+#include <ResourceManager\RHandle.h>
 int main() {
 	Game g;
 	g.start();
