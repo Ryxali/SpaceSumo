@@ -20,7 +20,7 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 	sf::Keyboard::Right,
 	sf::Keyboard::Left,
 	sf::Keyboard::Space,
-	mWorld)
+	mWorld, 700, 300)
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
@@ -45,6 +45,7 @@ void Game::start()
 	{
 		loop();
 	}
+	delete mWorld; //destroys the world, just like the human race :'(
 }
 
 void Game::loop()

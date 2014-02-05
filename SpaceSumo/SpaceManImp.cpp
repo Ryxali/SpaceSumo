@@ -11,12 +11,13 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key right,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
-	b2World* world):
+	b2World* world, int x, int y):
 	mUp(up),
 	mDown(down),
 	mRight(right),
 	mLeft(left),
 	mPush(push),
+	mSpawnpoint( x , y ),
 	mDirection( 0 , -1 ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0)
@@ -24,11 +25,11 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mShape = sf::RectangleShape(sf::Vector2f( 20 , 20 ));
 	mShape.setOrigin(10,10);
 	mShape.setFillColor(sf::Color::Cyan);
-    mBodyDef.position.Set( 300.0f/PPM , 300.0f/PPM );
+    mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
     mBodyDef.type = b2_dynamicBody;
     mBodyShape.SetAsBox( 20.0f/PPM , 20.0f/PPM );
     mBodyFix.shape = &mBodyShape;
-    mBodyFix.density = 0.3f;
+    mBodyFix.density = mConfig.getValue<float>("density");
     mBodyFix.friction = 0.5f;
     mBody = world->CreateBody(&mBodyDef);
     mBody->CreateFixture(&mBodyFix);

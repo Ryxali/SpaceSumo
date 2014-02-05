@@ -14,7 +14,8 @@ public:
 				sf::Keyboard::Key right,
 				sf::Keyboard::Key left,
 				sf::Keyboard::Key push,
-				b2World* world);
+				b2World* world,
+				int x, int y);
 	~SpaceManImp();
 
 	virtual void update(int delta);
@@ -29,8 +30,10 @@ private:
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
-	static Config mConfig;
 
+	//config
+	static Config mConfig;
+	SVector mSpawnpoint;
 
 	//Box2D stuff
 	float mSpeed;
