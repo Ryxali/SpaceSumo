@@ -62,11 +62,10 @@ const SoundBufferStore& ResourceHandler::getSBufStore() const
 }
 ResourceHandler::Resource_Type ResourceHandler::type(std::string fileRef)
 {
-	str::toLowerCase_copy((std::string)(fileRef.substr(fileRef.find_last_of(".")+1, fileRef.length())));
 	//fileRef = stringhelp::toLowerCase();
-	if(fileRef.compare("png") == 0)
+	if(str::contains(fileRef, "png", false))
 		return Resource_Type::TEXTURE;
-	if(fileRef.compare("ogg") == 0)
+	if(str::contains(fileRef, "ogg", false))
 		return Resource_Type::AUDIO;
 
 	// Last resort

@@ -2,8 +2,11 @@
 #include "STexture.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
+#include "Drawable.h"
 
-class SSprite
+class SVector;
+
+class SSprite : public Drawable
 {
 public:
 	/*
@@ -24,8 +27,10 @@ public:
 		Draws this sprite onto a window
 		Causes an error should the Texture not be loaded
 	*/
-	virtual void draw(sf::RenderWindow &win);
-	
+	void draw(sf::RenderWindow &win);
+
+	sf::Sprite& getSprite();
+
 private:
 
 	SSprite& operator=(const SSprite &sp);

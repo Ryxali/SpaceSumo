@@ -1,9 +1,10 @@
 #include "SSprite.h"
 #include <Common/error.h>
+#include <Common\SVector.h>
 
 SSprite::SSprite(const STexture &tex) : mSprite(), mSTex(tex), mTexVersion(0)
 {
-	
+
 }
 
 SSprite::SSprite(const SSprite &sp) : mSprite(), mSTex(sp.mSTex), mTexVersion(0)
@@ -23,7 +24,7 @@ const sf::Texture& SSprite::getTexture() const
 
 void SSprite::draw(sf::RenderWindow &win)
 {
-	
+
 	if(mTexVersion != mSTex.getVersion())
 	{
 		mSprite.setTexture(getTexture());
@@ -33,3 +34,7 @@ void SSprite::draw(sf::RenderWindow &win)
 	win.draw(mSprite);
 }
 
+sf::Sprite& SSprite::getSprite()
+{
+	return mSprite;
+}

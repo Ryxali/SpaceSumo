@@ -4,6 +4,15 @@
 #include <cmath>
 
 
+int math::round(float val)
+{
+	int r = (int) val;
+	val -= (float)r;
+	if(val < 0.5)
+		  return r;
+	return r++;
+}
+
 //sinus
 template <>
 float math::sin<float>(float val)
