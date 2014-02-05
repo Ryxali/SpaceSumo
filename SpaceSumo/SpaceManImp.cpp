@@ -4,7 +4,7 @@
 static int PPM = 30;
 static int n = 1;
 
-Config SpaceManImp::mConfig("res/spaceman.cfg", true);
+Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key down,
@@ -45,10 +45,10 @@ void SpaceManImp::update(int delta)
 	float fDelta = (float)delta/1000;
 	mDirection.rotate(mBody->GetAngle() - mAngle);
 	mAngle = mBody->GetAngle();
-	/*if(!sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
+	if(!sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
-		mBody->SetAngularVelocity(0);
-	}*/
+		mBody->SetAngularVelocity(200);
+	}
 
 	if(sf::Keyboard::isKeyPressed(mUp))
 
@@ -60,18 +60,16 @@ void SpaceManImp::update(int delta)
 
 		if(sf::Keyboard::isKeyPressed(mRight))
 		{
-			mBody->ApplyAngularImpulse( mConfig.getValue<float>("rotationspeed")*fDelta, false );
-			mDirection.rotate(mBody->GetAngle() - mAngle);
-			mAngle = mBody->GetAngle();
+			mBody->ApplyAngularImpulse( mConfig.getValue<float>("rotationspeed")*fDelta, true );
+
 			
 		
 		}
 
 		if(sf::Keyboard::isKeyPressed(mLeft))
 		{
-			mBody->ApplyAngularImpulse( - mConfig.getValue<float>("rotationspeed")*fDelta, false );
-			mDirection.rotate(mBody->GetAngle() - mAngle);
-			mAngle = mBody->GetAngle();
+			mBody->ApplyAngularImpulse( - mConfig.getValue<float>("rotationspeed")*fDelta, true );
+
 		}
 
 		// the rectangle that represents the collision box
