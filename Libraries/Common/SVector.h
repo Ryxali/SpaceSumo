@@ -37,6 +37,7 @@ public:
 		returns: SVector& - this vector in it's newly rotated form
 	*/
 	SVector &rotate(float degrees);
+	SVector &rotateRad(float radian);
 
 
 	inline SVector &operator=(SVector &v) {

@@ -64,6 +64,16 @@ SVector &SVector::normalize() {
 	return *this;
 }
 
+SVector &SVector::rotateRad(float radian) {
+	float x = getX();
+	float y = getY();
+	float cn = cos(radian);
+	float sn = sin(radian);
+	setX(x * cn - y * sn);
+	setY(x * sn + y * cn);
+	return *this;
+}
+
 SVector &SVector::rotate(float degrees) {
 	float radian = degrees * (3.14159265f/180);
 	float x = getX();

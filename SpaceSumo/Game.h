@@ -20,6 +20,7 @@ private:
 	b2Vec2 mGravity;
 	b2World* mWorld;
 	SpaceManImp mSpaceman;
+	SpaceManImp mSpaceman2;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;
