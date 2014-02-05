@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "SpaceManImp.h"
+#include <iostream>
 static int PPM = 30;
 static int n = 1;
+
+Config SpaceManImp::mConfig("res/spaceman.cfg", true);
 
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key down,
@@ -13,20 +16,23 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDown(down),
 	mRight(right),
 	mLeft(left),
-	mPush(push)
+	mPush(push),
+	mDirection( 0 , -1 ),
+	mSpeed(mConfig.getValue<float>("speed")),
+	mAngle(0)
 {
-	m_shape = sf::RectangleShape(sf::Vector2f(20,20));//(0,0,50,50,sf::Color(255,255,255));
-	m_shape.setOrigin(10,10);
-	m_shape.setFillColor(sf::Color::Cyan);
-    m_bodyDef.position.Set(300.0f/PPM,300.0f/PPM);
-    m_bodyDef.type = b2_dynamicBody;
-	m_bodyDef.linearDamping = 4.5; // air-resitance
-    m_bodyShape.SetAsBox(10.0f/PPM,10.0f/PPM);
-    m_bodyFix.shape = &m_bodyShape;
-    m_bodyFix.density = 0.3f;
-    m_bodyFix.friction = 0.5f;
-    m_body = world->CreateBody(&m_bodyDef);
-    m_body->CreateFixture(&m_bodyFix);
+	mShape = sf::RectangleShape(sf::Vector2f( 20 , 20 ));
+	mShape.setOrigin(10,10);
+	mShape.setFillColor(sf::Color::Cyan);
+    mBodyDef.position.Set( 300.0f/PPM , 300.0f/PPM );
+    mBodyDef.type = b2_dynamicBody;
+    mBodyShape.SetAsBox( 20.0f/PPM , 20.0f/PPM );
+    mBodyFix.shape = &mBodyShape;
+    mBodyFix.density = 0.3f;
+    mBodyFix.friction = 0.5f;
+    mBody = world->CreateBody(&mBodyDef);
+    mBody->CreateFixture(&mBodyFix);
+	mBody->SetAngularDamping(1);
 }
 
 SpaceManImp::~SpaceManImp()
@@ -36,19 +42,41 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(int delta)
 {
+	float fDelta = (float)delta/1000;
+	mDirection.rotate(mBody->GetAngle() - mAngle);
+	mAngle = mBody->GetAngle();
+	/*if(!sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
+	{
+		mBody->SetAngularVelocity(0);
+	}*/
+
 	if(sf::Keyboard::isKeyPressed(mUp))
-	{
-		m_body->ApplyForce(b2Vec2( 0 , -1 ), m_body->GetWorldCenter(), true);
-	}
-	if(sf::Keyboard::isKeyPressed(mDown))
-	{
-		m_body->ApplyForce(b2Vec2( 0 , 1 ), m_body->GetWorldCenter(), true);
-	}
 
+		{
+			mBody->ApplyForce( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
+									  mDirection.getY() * ( mSpeed * fDelta )), 
+									  mBody->GetWorldCenter(), true);
+		}
 
-	// the rectangle that represents the collision box
-	m_shape.setRotation( m_body->GetAngle() );
-    m_shape.setPosition( m_body->GetPosition().x*PPM, m_body->GetPosition().y*PPM);
+		if(sf::Keyboard::isKeyPressed(mRight))
+		{
+			mBody->ApplyAngularImpulse( mConfig.getValue<float>("rotationspeed")*fDelta, false );
+			mDirection.rotate(mBody->GetAngle() - mAngle);
+			mAngle = mBody->GetAngle();
+			
+		
+		}
+
+		if(sf::Keyboard::isKeyPressed(mLeft))
+		{
+			mBody->ApplyAngularImpulse( - mConfig.getValue<float>("rotationspeed")*fDelta, false );
+			mDirection.rotate(mBody->GetAngle() - mAngle);
+			mAngle = mBody->GetAngle();
+		}
+
+		// the rectangle that represents the collision box
+		mShape.setRotation( mBody->GetAngle() );
+		mShape.setPosition( mBody->GetPosition().x*PPM, mBody->GetPosition().y*PPM);
 }
 
 void SpaceManImp::draw(RenderList& renderList)
@@ -58,7 +86,7 @@ void SpaceManImp::draw(RenderList& renderList)
 
 sf::RectangleShape SpaceManImp::getShape()
 {
-	return m_shape;
+	return mShape;
 }
 
 void SpaceManImp::addEffect()
