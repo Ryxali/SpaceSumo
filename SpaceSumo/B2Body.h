@@ -16,14 +16,18 @@ public:
 	//getfunctions
 	const b2Vec2 getLinearVelocity();
 	const b2Vec2 getWorldCenter();
+	const b2Vec2 getPosition();
 	float32 getAngularVelocity();
 	float32 getAngle();
 
 	//setfunctions
-	void ApplyAngularImpulse(float32 impulse, bool wake);
+	void applyAngularImpulse(float32 impulse, bool wake);
+	void applyLinearImpulse(b2Vec2 impulse, b2Vec2 point, bool wake);
+	void setAngularVelocity(float32 velocity);
 	void setLinearVelocity(const b2Vec2 vector);
 
 private:
+	B2Body(const B2Body& b2b);
 	SVector mSpawnpoint;
 	Config mConfig;
 

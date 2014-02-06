@@ -1,5 +1,6 @@
 #pragma once
 #include "entityimp.h"
+#include "B2Body.h"
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <Box2D\Box2D.h>
@@ -14,6 +15,7 @@ public:
 				sf::Keyboard::Key left,
 				sf::Keyboard::Key push,
 				b2World& world,
+				std::string bodyData,
 				float x, float y);
 	~SpaceManImp();
 
@@ -33,16 +35,12 @@ private:
 	static Config mConfig;
 	SVector mSpawnpoint;
 
-	//Box2D stuff
+	//Spaceman stuff
+	B2Body mSpaceman;
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;
-
-
-	b2Body * mBody;
-	b2BodyDef mBodyDef;
-	b2CircleShape mBodyShape;
-	b2FixtureDef mBodyFix;
+	
 	sf::CircleShape mShape; //SFML shape
 };
 

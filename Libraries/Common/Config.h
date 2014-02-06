@@ -23,6 +23,7 @@ public:
 	template <typename Tval>
 	Tval getValue(std::string option);
 private:
+	Config(const Config& cfg);
 	/*
 		Closes the stream to the config file.
 	*/
