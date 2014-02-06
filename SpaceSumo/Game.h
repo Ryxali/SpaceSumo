@@ -14,7 +14,7 @@ public:
 	void start();
 private:
 	void loop();
-	void update();
+	void update(int delta);
 	void preDraw();
 	void draw();
 	b2Vec2 mGravity;

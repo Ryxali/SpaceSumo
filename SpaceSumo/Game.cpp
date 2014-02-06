@@ -2,11 +2,11 @@
 #include "Game.h"
 #include <Common\Config.h>
 #include <SFML\Window\Keyboard.hpp>
-#include "GameState.h"
+#include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
+#include <iostream>
 
-
-Game::Game() : mConfig("res/conf/main.cfg", true),
+Game::Game() : mConfig("res/conf/main.cfg", true), 
 	mWindow
 	(
 	sf::VideoMode(
@@ -51,11 +51,10 @@ void Game::start()
 
 void Game::loop()
 {
-
+	sf::Time delta = mDeltaClock.restart();
 	sf::Event evt;
 	// Loop runs through all new events
-	float timeStep = 1/60.f;
-	mWorld->Step(timeStep,8,3);
+	mWorld->Step(delta.asSeconds(),8,3);
 
 	while(mWindow.pollEvent(evt))
 	{
@@ -64,31 +63,33 @@ void Game::loop()
 		{
 			mWindow.close();
 		}
-		else if(evt.type == sf::Event::KeyPressed)
+		else if(evt.type == sf::Event::KeyPressed) 
 		{
-			if(evt.key.code == sf::Keyboard::Escape)
+			if(evt.key.code == sf::Keyboard::Escape) 
 			{
 				mWindow.close();
-
 			}
 		}
+		
 	}
-
-	update();
+	std::cout << mDeltaClock.getElapsedTime().asMicroseconds() << std::endl;
+	mWindow.clear(sf::Color::White);
+	update(delta.asMilliseconds());
 	preDraw();
 	draw();
-	mDeltaClock.restart();
+	mWindow.display();
+	
 }
 
-void Game::update()
+void Game::update(int delta)
 {
-	mSpaceman.update(mDeltaClock.getElapsedTime().asMilliseconds());
-	mSpaceman2.update(mDeltaClock.getElapsedTime().asMilliseconds());
+	mSpaceman.update(delta);
+	mSpaceman2.update(delta);
 }
 
 void Game::preDraw()
 {
-	curState.draw(list);// TODO curState.preDraw(renderList& list);
+	// TODO curState.preDraw(renderList& list);
 }
 
 void Game::draw()

@@ -140,7 +140,6 @@
     <None Include="res\conf\frozen.cfg" />
     <None Include="res\conf\main.cfg" />
     <None Include="res\spaceman.cfg" />
-    <None Include="spaceman.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
