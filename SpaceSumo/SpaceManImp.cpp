@@ -10,6 +10,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key right,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
+	mUp(up),
 	b2World* world, float x, float y)
 	: mUp(up),
 	mRight(right),
@@ -17,7 +18,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mPush(push),
 	mSpawnpoint( x , y ),
 	mDirection( 0.0f , -1.0f ),
-	mSpeed(mConfig.getValue<float>("speed")),
+	mSpeed(mConfig.getValue<float>("speed")),)
 	mAngle(0.0f)
 {
 	mShape = sf::CircleShape( 40 , 7 );
@@ -41,15 +42,15 @@ SpaceManImp::~SpaceManImp()
 }
 
 void SpaceManImp::update(int delta)
-{	
+
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mBody->GetAngle() - mAngle);
 	mAngle = mBody->GetAngle();
 
 	if(mConfig.getValue<bool>("fixedRotation") && !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
-		mBody->SetAngularVelocity(0);
 	}
+
 
 	if(sf::Keyboard::isKeyPressed(mUp))
 	{
