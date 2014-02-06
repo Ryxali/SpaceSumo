@@ -24,7 +24,6 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 
 Game::~Game()
 {
-	mConfig.saveConfigChange();
 }
 
 void Game::start()

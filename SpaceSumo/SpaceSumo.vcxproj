@@ -105,7 +105,6 @@
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
-    <ClCompile Include="StateChanger.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +127,6 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
-    <ClInclude Include="StateChanger.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +138,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\conf\controls.cfg" />
+    <None Include="res\conf\controlsP1.cfg" />
     <None Include="res\conf\freezer.cfg" />
     <None Include="res\conf\frozen.cfg" />
     <None Include="res\conf\main.cfg" />

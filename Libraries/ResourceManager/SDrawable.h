@@ -1,13 +1,15 @@
+#pragma once
 #include <SFML\Graphics\RenderWindow.hpp>
 
-class Drawable
+class SDrawable
 {
 public:
+	virtual ~SDrawable(){}
 	virtual void draw(sf::RenderWindow &win) = 0;
 	virtual short getZ() const = 0;
 };
 
-bool operator<(const Drawable& d0, const Drawable& d1)
+inline bool operator<(const SDrawable& d0, const SDrawable& d1)
 {
 	return d0.getZ() < d1.getZ();
 }

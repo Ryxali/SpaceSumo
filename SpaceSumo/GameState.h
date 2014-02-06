@@ -1,17 +1,19 @@
-#include "RenderList.h";
-#include "Entity.h";
-#include <vector>;
-#include <iostream>;
+#pragma once
+#include "RenderList.h"
+#include "Entity.h"
+#include <vector>
+#include <iostream>
+#include "GameData.h"
 
 
 
 class GameState{
 public:
-	GameState();
+	GameState(GameData& gameData);
 	void draw(RenderList &list);
 	
 
 private:
-	void spacemanCreation();
+	void spacemanCreation(GameData& gameData);
 	std::vector<Entity> mEntities;
 };

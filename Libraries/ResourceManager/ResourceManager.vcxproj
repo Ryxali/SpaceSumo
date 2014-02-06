@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="SDrawable.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="LoadableBundle.h" />
     <ClInclude Include="Resource.h" />

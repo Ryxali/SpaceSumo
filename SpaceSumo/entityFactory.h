@@ -5,5 +5,5 @@
 
 namespace entFac
 {
-	EntityImp* createSpaceMan(std::string conf, b2World* world);
+	EntityImp* createSpaceMan(std::string conf, b2World& world);
 };

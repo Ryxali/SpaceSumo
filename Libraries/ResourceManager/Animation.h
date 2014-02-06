@@ -1,11 +1,13 @@
 #pragma once
-#include "SSprite.h"
+#include "SDrawable.h"
+#include "STexture.h"
+#include <SFML\Graphics\Sprite.hpp>
 #include <SFML\System\Clock.hpp>
 #include <utility>
 #include <Common\Config.h>
 class SVector;
 
-class Animation : public Drawable
+class Animation : public SDrawable
 {
 public:
 	Animation(const STexture &tex, std::string animInfo);

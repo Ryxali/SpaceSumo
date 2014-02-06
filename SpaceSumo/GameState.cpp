@@ -1,8 +1,11 @@
+#include "stdafx.h"
 #include "GameState.h"
+#include "entityFactory.h"
+#include "Entity.h"
 
-GameState::GameState() : mEntities()
+GameState::GameState(GameData& gameData) : mEntities()
 {
-	spacemanCreation();
+	spacemanCreation(gameData);
 }
 
 void GameState::draw(RenderList &list)
@@ -13,7 +16,8 @@ void GameState::draw(RenderList &list)
 	}
 }
 
-void GameState::spacemanCreation()
+void GameState::spacemanCreation(GameData& gameData)
 {
-	// TODO mEntitites.push_back(..);
+	mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world)));
+	mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world)));
 }

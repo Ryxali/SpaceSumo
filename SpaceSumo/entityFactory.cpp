@@ -4,7 +4,7 @@
 #include "SpaceManImp.h"
 #include <Common\stringH.h>
 
-EntityImp* entFac::createSpaceMan(std::string conf, b2World* world)
+EntityImp* entFac::createSpaceMan(std::string conf, b2World& world)
 {
 	Config config("res/conf/spaceman.cfg");
 	Config controls(conf);
