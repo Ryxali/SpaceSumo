@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -109,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="B2Body.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />

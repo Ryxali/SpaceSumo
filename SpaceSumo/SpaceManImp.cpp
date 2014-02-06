@@ -59,7 +59,6 @@ void SpaceManImp::update(int delta)
 									mDirection.getY() * ( mSpeed * fDelta )), 
 									mBody->GetWorldCenter(), true);
 
-
 		//Speed limit
 		if(mBody->GetLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
 		{
