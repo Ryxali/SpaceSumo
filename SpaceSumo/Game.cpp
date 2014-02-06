@@ -15,7 +15,8 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 	"Test",
 	mConfig.getValue<int>("fullscreen")),
 	mRenderList(),
-	mGameData()
+	mGameData(),
+	mCurState(new MenuState())
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
@@ -68,13 +69,16 @@ void Game::loop()
 
 void Game::update(int delta)
 {
+	mCurState->update(mGameData);
 }
 
 void Game::preDraw()
 {
+	mCurState->draw(mRenderList);
 	// TODO curState.preDraw(renderList& list);
 }
 
 void Game::draw()
 {
+	mRenderList.render(mWindow);
 }

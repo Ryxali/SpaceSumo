@@ -86,6 +86,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -102,13 +103,16 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />
@@ -123,10 +127,12 @@
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="MenuState.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
