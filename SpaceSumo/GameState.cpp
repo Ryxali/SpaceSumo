@@ -19,7 +19,5 @@ void GameState::draw(RenderList &list)
 
 void GameState::spacemanCreation(GameData& gameData)
 {
-
-	//mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, B2Body body, float x, float y)));
-	//mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, B2Body body, float x, float y)));
+	
 }

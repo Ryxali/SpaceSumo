@@ -7,6 +7,9 @@
 #include <Box2D/Box2D.h>
 #include <ResourceManager\Animation.h>
 #include "GameData.h"
+#include "MenuState.h"
+#include "StateList.h"
+
 class Game
 {
 public:
@@ -19,11 +22,11 @@ private:
 	void preDraw();
 	void draw();
 	GameData mGameData;
+	StateList mStates;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;
 	RenderList mRenderList;
-
 	sf::Clock mDeltaClock;
 	
 };
