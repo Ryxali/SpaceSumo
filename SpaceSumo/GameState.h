@@ -4,11 +4,14 @@
 #include <iostream>;
 
 
+
 class GameState{
 public:
+	GameState();
 	void draw(RenderList &list);
-	void spacemanCreation();
+	
 
 private:
-	std::vector<Entity> EntityList;
+	void spacemanCreation();
+	std::vector<Entity> mEntities;
 };
