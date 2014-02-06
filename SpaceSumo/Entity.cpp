@@ -19,7 +19,7 @@ void Entity::update()
 
 }
 
-void Entity::draw()
+void Entity::draw(RenderList& renderList)
 {
 
 }

@@ -6,7 +6,7 @@ public:
 	Entity(EntityImp* entity);
 	~Entity();
 	void update();
-	void draw();
+	void draw(RenderList& renderList);
 	bool addEffect();
 
 private:

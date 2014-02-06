@@ -72,7 +72,6 @@ void Game::loop()
 		}
 		
 	}
-	std::cout << mDeltaClock.getElapsedTime().asMicroseconds() << std::endl;
 	mWindow.clear(sf::Color::White);
 	update(delta.asMilliseconds());
 	preDraw();
