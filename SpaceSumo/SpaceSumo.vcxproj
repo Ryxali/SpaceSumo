@@ -95,9 +95,11 @@
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
+    <ClCompile Include="StateChanger.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,8 +113,10 @@
     <ClInclude Include="Flag.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
+    <ClInclude Include="StateChanger.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

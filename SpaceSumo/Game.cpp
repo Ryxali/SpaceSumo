@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Game.h"
 #include <Common\Config.h>
+#include "GameState.h"
+
 Game::Game() : mConfig("res/config.cfg", true), 
 	mWindow
 	(
@@ -67,7 +69,7 @@ void Game::update()
 
 void Game::preDraw()
 {
-	// TODO curState.preDraw(renderList& list);
+	curState.draw(list);// TODO curState.preDraw(renderList& list);
 }
 
 void Game::draw()
