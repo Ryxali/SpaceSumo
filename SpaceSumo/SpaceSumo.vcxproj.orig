@@ -120,8 +120,11 @@
     <ClInclude Include="Freezer.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
+<<<<<<< HEAD
     <ClInclude Include="PowerUp.h" />
+=======
     <ClInclude Include="GameState.h" />
+>>>>>>> bec97c1bde372a16b63f0c2f0e725aa6abac48bd
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="StateChanger.h" />

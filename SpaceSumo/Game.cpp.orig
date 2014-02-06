@@ -1,12 +1,17 @@
 #include "stdafx.h"
 #include "Game.h"
 #include <Common\Config.h>
+<<<<<<< HEAD
 #include <SFML\Window\Keyboard.hpp>
-#include "GameState.h"
+#include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
 
+Game::Game() : mConfig("res/conf/main.cfg", true), 
+=======
+#include "GameState.h"
 
-Game::Game() : mConfig("res/conf/main.cfg", true),
+Game::Game() : mConfig("res/config.cfg", true), 
+>>>>>>> bec97c1bde372a16b63f0c2f0e725aa6abac48bd
 	mWindow
 	(
 	sf::VideoMode(
@@ -64,9 +69,9 @@ void Game::loop()
 		{
 			mWindow.close();
 		}
-		else if(evt.type == sf::Event::KeyPressed)
+		else if(evt.type == sf::Event::KeyPressed) 
 		{
-			if(evt.key.code == sf::Keyboard::Escape)
+			if(evt.key.code == sf::Keyboard::Escape) 
 			{
 				mWindow.close();
 
@@ -77,7 +82,10 @@ void Game::loop()
 	update();
 	preDraw();
 	draw();
-	mDeltaClock.restart();
+		mDeltaClock.restart();
+
+
+	}
 }
 
 void Game::update()
