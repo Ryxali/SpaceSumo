@@ -19,6 +19,7 @@ public:
 	sf::Sprite& getSprite();
 	unsigned char getCurAnimLength();
 	unsigned short getCurAnimTime();
+	void setCurrentRow(unsigned char row);
 private:
 	Animation& operator=(const Animation& anim);
 	const STexture &mSTex;

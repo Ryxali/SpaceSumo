@@ -26,7 +26,7 @@ Animation::Animation(const STexture &tex, std::string animInfo) :
 	if(cf.getValue<bool>("UniformDisplayTime"))
 	{
 		mAnimTime = 0;
-		mAnimUniTime = cf.getValue<int>("DisplayTime");
+		mAnimUniTime = (unsigned short) cf.getValue<int>("DisplayTime");
 	}
 	else
 	{
@@ -102,10 +102,15 @@ int Animation::getCurrentFrame()
 	return (int)( ((float)timeElapsed) / ((float)getCurAnimTime()) * (float)getCurAnimLength() );
 }
 
+void Animation::setCurrentRow(unsigned char row)
+{
+	mCurrentRow = row;
+}
+
 void Animation::reevaluateSizeValues()
 {
-	mSliceWidth = mSprite.getTexture()->getSize().x / mColumns;
-	mSliceHeight = mSprite.getTexture()->getSize().y / mRows;
+	mSliceWidth = (unsigned short) (mSprite.getTexture()->getSize().x / mColumns);
+	mSliceHeight = (unsigned short) ( mSprite.getTexture()->getSize().y / mRows);
 
 }
 
