@@ -10,7 +10,6 @@ class SpaceManImp :
 {
 public:
 	SpaceManImp(sf::Keyboard::Key up,
-				sf::Keyboard::Key down,
 				sf::Keyboard::Key right,
 				sf::Keyboard::Key left,
 				sf::Keyboard::Key push,
@@ -26,7 +25,6 @@ public:
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
-	sf::Keyboard::Key mDown;
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
