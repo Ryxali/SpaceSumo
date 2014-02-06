@@ -6,6 +6,7 @@
 #include <Common\Config.h>
 #include <Box2D/Box2D.h>
 #include <ResourceManager\Animation.h>
+#include "GameData.h"
 class Game
 {
 public:
@@ -17,10 +18,7 @@ private:
 	void update(int delta);
 	void preDraw();
 	void draw();
-	b2Vec2 mGravity;
-	b2World* mWorld;
-	SpaceManImp mSpaceman;
-	SpaceManImp mSpaceman2;
+	GameData mGameData;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;

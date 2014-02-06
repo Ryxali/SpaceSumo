@@ -92,12 +92,14 @@
     <ClCompile Include="EffectImp.cpp" />
     <ClCompile Include="Effects.cpp" />
     <ClCompile Include="EffectStatus.cpp" />
+    <ClCompile Include="entityFactory.cpp" />
     <ClCompile Include="EntityImp.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="FreezeBolt.cpp" />
     <ClCompile Include="Freezer.cpp" />
     <ClCompile Include="Frozen.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
@@ -112,12 +114,14 @@
     <ClInclude Include="EffectImp.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="EffectStatus.h" />
+    <ClInclude Include="entityFactory.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="FreezeBolt.h" />
     <ClInclude Include="Freezer.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
@@ -132,6 +136,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\conf\controls.cfg" />
     <None Include="res\conf\freezer.cfg" />
     <None Include="res\conf\frozen.cfg" />
     <None Include="res\conf\main.cfg" />

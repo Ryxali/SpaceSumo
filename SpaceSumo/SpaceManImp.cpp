@@ -7,13 +7,11 @@ static float RADTODEG = 57.2957795f;
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
-	sf::Keyboard::Key down,
 	sf::Keyboard::Key right,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
 	b2World* world, float x, float y)
 	: mUp(up),
-	mDown(down),
 	mRight(right),
 	mLeft(left),
 	mPush(push),
