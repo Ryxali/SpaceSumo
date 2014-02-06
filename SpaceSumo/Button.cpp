@@ -1,7 +1,8 @@
+#include "stdafx.h"
 #include "Button.h"
 
 
-Button::Button(void)
+Button::Button(void) : Rectangle(0, 0)
 {
 }
 
@@ -15,7 +16,13 @@ float Button::getCenterX()
 }
 float Button::getCenterY()
 {
-
+	return 0;
 }
-bool hasBeenClicked();
-void update(sf::Mouse &mouse);
+bool hasBeenClicked()
+{
+	return false;
+}
+void update(sf::Mouse &mouse)
+{
+	
+}

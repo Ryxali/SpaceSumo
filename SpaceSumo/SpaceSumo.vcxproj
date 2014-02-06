@@ -108,6 +108,7 @@
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateList.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="StateList.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

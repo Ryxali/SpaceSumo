@@ -9,7 +9,8 @@ static const STexture& get_addTexture(std::string ref)
 	return res::getTexture(ref);
 }
 
-MenuState::MenuState(void) :
+MenuState::MenuState(StateList &owner) : 
+	State(owner),
 	mBackground(get_addTexture("res/img/MenuBackground.png"))
 {
 	

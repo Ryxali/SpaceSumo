@@ -4,7 +4,7 @@
 class MenuState : public State
 {
 public:
-	MenuState();
+	MenuState(StateList &owner);
 	~MenuState();
 	virtual void draw(RenderList &list);
 private:

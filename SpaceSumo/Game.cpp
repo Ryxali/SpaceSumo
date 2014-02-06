@@ -5,7 +5,8 @@
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
 #include <iostream>
-
+#include "MenuState.h"
+#define NO_MEMORY_TRACKING
 Game::Game() : mConfig("res/conf/main.cfg", true), 
 	mWindow
 	(
@@ -16,10 +17,12 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 	mConfig.getValue<int>("fullscreen")),
 	mRenderList(),
 	mGameData(),
-	mCurState(new MenuState())
+	mStates()
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
+	mStates.add(new MenuState(mStates));
+	mStates.changeState(0);
 }
 
 
@@ -69,12 +72,12 @@ void Game::loop()
 
 void Game::update(int delta)
 {
-	mCurState->update(mGameData);
+	mStates.getCurrent().update(mGameData);
 }
 
 void Game::preDraw()
 {
-	mCurState->draw(mRenderList);
+	mStates.getCurrent().draw(mRenderList);
 	// TODO curState.preDraw(renderList& list);
 }
 
