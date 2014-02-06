@@ -4,7 +4,7 @@
 static int PPM = 30;
 static float RADTODEG = 57.2957795f;
 
-Config SpaceManImp::mConfig("res/spaceman.cfg", true);
+Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key down,
@@ -43,12 +43,11 @@ SpaceManImp::~SpaceManImp()
 }
 
 void SpaceManImp::update(int delta)
-{
-	std::cout << mBody->GetAngularVelocity() << std::endl;
-	
+{	
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mBody->GetAngle() - mAngle);
 	mAngle = mBody->GetAngle();
+
 	if(mConfig.getValue<bool>("fixedRotation") && !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
 		mBody->SetAngularVelocity(0);
@@ -87,7 +86,7 @@ void SpaceManImp::update(int delta)
 
 	if(sf::Keyboard::isKeyPressed(mRight))
 	{
-		mBody->ApplyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , mConfig.getValue<bool>("wakeTurning"));
+		mBody->ApplyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 
 			
 		
@@ -95,7 +94,7 @@ void SpaceManImp::update(int delta)
 
 	if(sf::Keyboard::isKeyPressed(mLeft))
 	{
-		mBody->ApplyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , mConfig.getValue<bool>("wakeTurning"));
+		mBody->ApplyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 
 	}
 
