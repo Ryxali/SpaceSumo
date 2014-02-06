@@ -1,11 +1,13 @@
 #pragma once
-#include "SSprite.h"
+#include "SDrawable.h"
+#include "STexture.h"
+#include <SFML\Graphics\Sprite.hpp>
 #include <SFML\System\Clock.hpp>
 #include <utility>
 #include <Common\Config.h>
 class SVector;
 
-class Animation : public Drawable
+class Animation : public SDrawable
 {
 public:
 	Animation(const STexture &tex, std::string animInfo);
@@ -13,6 +15,7 @@ public:
 	~Animation();
 	const sf::Texture& getTexture() const;
 	virtual void draw(sf::RenderWindow &win);
+	virtual short getZ() const;
 	sf::Sprite& getSprite();
 	unsigned char getCurAnimLength();
 	unsigned short getCurAnimTime();

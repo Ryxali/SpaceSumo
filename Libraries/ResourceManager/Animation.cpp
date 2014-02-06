@@ -57,6 +57,11 @@ void Animation::draw(sf::RenderWindow &win)
 	win.draw(mSprite);
 }
 
+short Animation::getZ() const
+{
+	return 0;
+}
+
 sf::Sprite& Animation::getSprite()
 {
 	return mSprite;

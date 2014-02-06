@@ -1,17 +1,16 @@
 #pragma once
-#include <vector>
+#include <list>
 #include <SFML\Graphics.hpp>
+#include <ResourceManager\SDrawable.h>
 
 class RenderList
 {
 public:
 	RenderList();
-	void addSprite(sf::Sprite& sprite);
+	void addSprite(SDrawable& drawable);
 	void render(sf::RenderWindow& renderWindow);
 
 private:
-	typedef std::vector<sf::Sprite*> SpriteVector;
-	SpriteVector mSpriteVector;
-
+	//typedef std::vector<sf::Sprite*> SpriteVector;
+	std::list<SDrawable*> mDrawList;
 };
-

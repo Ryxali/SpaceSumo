@@ -1,22 +1,23 @@
 #include "stdafx.h"
 #include "RenderList.h"
+#include <algorithm>
 
-
-RenderList::RenderList()
+RenderList::RenderList() : mDrawList()
 {
 
 }
 
-void RenderList::addSprite(sf::Sprite& sprite)
+void RenderList::addSprite(SDrawable& drawable)
 {
-	mSpriteVector.push_back(&sprite);
+	mDrawList.push_back(&drawable);
 }
 
 void RenderList::render(sf::RenderWindow& renderWindow)
 {
-	while(mSpriteVector.begin() != mSpriteVector.end())
+	mDrawList.sort();
+	while(mDrawList.begin() != mDrawList.end())
 	{
-		renderWindow.draw((*mSpriteVector.back()));
-		mSpriteVector.pop_back();
+		(*mDrawList.front()).draw(renderWindow);
+		mDrawList.pop_front();
 	}
 }

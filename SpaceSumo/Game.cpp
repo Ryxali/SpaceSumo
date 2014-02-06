@@ -15,20 +15,7 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 	"Test",
 	mConfig.getValue<int>("fullscreen")),
 	mRenderList(),
-	mGravity(b2Vec2( 0 , 0 )),
-	mWorld(new b2World(mGravity)),
-	mSpaceman(sf::Keyboard::Up,
-	sf::Keyboard::Down,
-	sf::Keyboard::Right,
-	sf::Keyboard::Left,
-	sf::Keyboard::Space,
-	mWorld, 700.0f, 300.0f),
-	mSpaceman2(sf::Keyboard::W,
-	sf::Keyboard::S,
-	sf::Keyboard::D,
-	sf::Keyboard::A,
-	sf::Keyboard::T,
-	mWorld, 300.0f, 300.0f)
+	mGameData()
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
@@ -37,7 +24,6 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 
 Game::~Game()
 {
-	mConfig.saveConfigChange();
 }
 
 void Game::start()
@@ -46,7 +32,7 @@ void Game::start()
 	{
 		loop();
 	}
-	delete mWorld; //destroys the world, just like the human race :'(
+	
 }
 
 void Game::loop()
@@ -54,7 +40,7 @@ void Game::loop()
 	sf::Time delta = mDeltaClock.restart();
 	sf::Event evt;
 	// Loop runs through all new events
-	mWorld->Step(delta.asSeconds(),8,3);
+	mGameData.world.Step(delta.asSeconds(),8,3);
 
 	while(mWindow.pollEvent(evt))
 	{
@@ -82,8 +68,6 @@ void Game::loop()
 
 void Game::update(int delta)
 {
-	mSpaceman.update(delta);
-	mSpaceman2.update(delta);
 }
 
 void Game::preDraw()
@@ -93,6 +77,4 @@ void Game::preDraw()
 
 void Game::draw()
 {
-	mWindow.draw(mSpaceman.getShape());
-	mWindow.draw(mSpaceman2.getShape());
 }

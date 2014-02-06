@@ -7,13 +7,11 @@ static float RADTODEG = 57.2957795f;
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
-	sf::Keyboard::Key down,
 	sf::Keyboard::Key right,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
-	b2World* world, float x, float y)
+	b2World& world, float x, float y)
 	: mUp(up),
-	mDown(down),
 	mRight(right),
 	mLeft(left),
 	mPush(push),
@@ -32,7 +30,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
     mBodyFix.density = mConfig.getValue<float>("density");
 	mBodyFix.restitution = mConfig.getValue<float>("restitution");
     mBodyFix.friction = mConfig.getValue<float>("friction");
-    mBody = world->CreateBody(&mBodyDef);
+    mBody = world.CreateBody(&mBodyDef);
     mBody->CreateFixture(&mBodyFix);
 	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
 }
@@ -43,7 +41,8 @@ SpaceManImp::~SpaceManImp()
 }
 
 void SpaceManImp::update(int delta)
-{	
+{
+
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mBody->GetAngle() - mAngle);
 	mAngle = mBody->GetAngle();
@@ -52,6 +51,7 @@ void SpaceManImp::update(int delta)
 	{
 		mBody->SetAngularVelocity(0);
 	}
+
 
 	if(sf::Keyboard::isKeyPressed(mUp))
 	{

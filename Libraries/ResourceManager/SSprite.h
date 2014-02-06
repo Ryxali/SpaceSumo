@@ -2,11 +2,11 @@
 #include "STexture.h"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
-#include "Drawable.h"
+#include "SDrawable.h"
 
 class SVector;
 
-class SSprite : public Drawable
+class SSprite : public SDrawable
 {
 public:
 	/*
@@ -28,6 +28,7 @@ public:
 		Causes an error should the Texture not be loaded
 	*/
 	void draw(sf::RenderWindow &win);
+	virtual short getZ() const;
 
 	sf::Sprite& getSprite();
 
