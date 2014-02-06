@@ -33,6 +33,10 @@ void SSprite::draw(sf::RenderWindow &win)
 	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
 	win.draw(mSprite);
 }
+short SSprite::getZ() const
+{
+	return 0;
+}
 
 sf::Sprite& SSprite::getSprite()
 {

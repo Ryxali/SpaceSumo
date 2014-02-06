@@ -28,6 +28,7 @@ public:
 		Causes an error should the Texture not be loaded
 	*/
 	void draw(sf::RenderWindow &win);
+	virtual short getZ() const;
 
 	sf::Sprite& getSprite();
 

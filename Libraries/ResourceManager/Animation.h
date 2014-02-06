@@ -13,6 +13,7 @@ public:
 	~Animation();
 	const sf::Texture& getTexture() const;
 	virtual void draw(sf::RenderWindow &win);
+	virtual short getZ() const;
 	sf::Sprite& getSprite();
 	unsigned char getCurAnimLength();
 	unsigned short getCurAnimTime();
