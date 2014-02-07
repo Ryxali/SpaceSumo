@@ -17,12 +17,14 @@ Game::Game() :
 	mConfig.getValue<int>("screenHeight")),
 	"Test",
 	mConfig.getValue<int>("fullscreen")),
+	mView(sf::FloatRect(0, 0, 1920, 1080)),
 	mRenderList(),
 	mGameData(),
 	mStates()
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
+	mWindow.setView(mView);
 	mStates.add(new MenuState(mStates));
 	mStates.add(new GameState(mStates, mGameData));
 	mStates.changeState(1);

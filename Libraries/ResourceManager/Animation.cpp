@@ -91,13 +91,9 @@ Animation::~Animation()
 int Animation::getCurrentFrame()
 {
 	int timeElapsed = mAnimationTimer.getElapsedTime().asMilliseconds();
-	if(timeElapsed > getCurAnimTime())
+	if(timeElapsed >= getCurAnimTime())
 	{
-		timeElapsed = ( mAnimationTimer.restart().asMilliseconds()-1)%getCurAnimTime();
-	}
-	else
-	{
-		timeElapsed = mAnimationTimer.getElapsedTime().asMilliseconds();
+		timeElapsed = ( mAnimationTimer.restart().asMilliseconds())%getCurAnimTime();
 	}
 	return (int)( (timeElapsed) / (((getCurAnimTime()) * getCurAnimLength() )));
 }
