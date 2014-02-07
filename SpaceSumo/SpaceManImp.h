@@ -20,7 +20,7 @@ public:
 				float x, float y);
 	~SpaceManImp();
 
-	virtual void update(int delta);
+	virtual void update(GameData &data, int delta);
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
 	sf::CircleShape getShape();

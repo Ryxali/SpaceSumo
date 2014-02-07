@@ -18,9 +18,10 @@ Entity::~Entity()
 	
 }
 
-void Entity::update()
+void Entity::update(GameData &data, int delta)
 {
 	//mEntity->update();
+	mEntity.get()->update(data, delta);
 }
 
 void Entity::draw(RenderList& renderList)

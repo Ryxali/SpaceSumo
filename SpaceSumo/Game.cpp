@@ -75,7 +75,7 @@ void Game::loop()
 
 void Game::update(int delta)
 {
-	mStates.getCurrent().update(mGameData);
+	mStates.getCurrent().update(mGameData, delta);
 }
 
 void Game::preDraw()

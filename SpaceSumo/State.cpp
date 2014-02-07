@@ -8,10 +8,10 @@ State::State(StateList &owner) : mOwner(owner)
 
 void State::draw(RenderList &list)
 {
-	mOwner.changeState(this);
+
 }
 
-void State::update(GameData &data)
+void State::update(GameData &data, int delta)
 {
 
 }
