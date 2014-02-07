@@ -12,6 +12,7 @@ public:
 	B2Body(b2World &world , std::string configFile,
 		float x, float y );
 	
+	void initBody(b2World& world);
 
 	//getfunctions
 	const b2Vec2 getLinearVelocity();

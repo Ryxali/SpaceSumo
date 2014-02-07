@@ -2,24 +2,12 @@
 #include "B2Body.h"
 static float PPM = 30;
 
-static b2BodyDef getDeffed(int val)
-{
-}
 
 B2Body::B2Body(b2World &world , std::string configFile,
 		float x, float y)
 		: mConfig(configFile)
 {
-	mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
-	mBodyDef.type = (b2BodyType) mConfig.getValue<int>("bodyType");
-    mBodyShape.m_radius = mConfig.getValue<float>("radius")/PPM;
-    mBodyFix.shape = &mBodyShape;
-    mBodyFix.density = mConfig.getValue<float>("density");
-	mBodyFix.restitution = mConfig.getValue<float>("restitution");
-    mBodyFix.friction = mConfig.getValue<float>("friction");
-    mBody = world.CreateBody(&mBodyDef);
-    mBody->CreateFixture(&mBodyFix);
-	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
+	initBody(world);
 }
 
 const b2Vec2 B2Body::getLinearVelocity()
@@ -68,4 +56,18 @@ void B2Body::setAngularVelocity(float32 velocity)
 void B2Body::setLinearVelocity( const b2Vec2 vector )
 {
 	mBody->SetLinearVelocity( vector );
+}
+
+void B2Body::initBody(b2World& world)
+{
+	mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
+	mBodyDef.type = (b2BodyType) mConfig.getValue<int>("bodyType");
+    mBodyShape.m_radius = mConfig.getValue<float>("radius")/PPM;
+    mBodyFix.shape = &mBodyShape;
+    mBodyFix.density = mConfig.getValue<float>("density");
+	mBodyFix.restitution = mConfig.getValue<float>("restitution");
+    mBodyFix.friction = mConfig.getValue<float>("friction");
+    mBody = world.CreateBody(&mBodyDef);
+    mBody->CreateFixture(&mBodyFix);
+	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
 }
