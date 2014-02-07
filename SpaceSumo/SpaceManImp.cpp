@@ -24,8 +24,9 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg")
 {
 	mShape = sf::CircleShape( 40 , 7 );
-	mShape.setOrigin( 40 , 40 );
+	mShape.setOrigin( 64 , 64 );
 	mShape.setFillColor(sf::Color::Cyan);
+	mAnim.getSprite().setOrigin( 64 , 64 );
 }
 
 SpaceManImp::~SpaceManImp()
@@ -33,7 +34,7 @@ SpaceManImp::~SpaceManImp()
 
 }
 
-void SpaceManImp::update(int delta)
+void SpaceManImp::update(GameData &data, int delta)
 {
 
 	float fDelta = (float)delta/1000;
@@ -48,6 +49,7 @@ void SpaceManImp::update(int delta)
 
 	if(sf::Keyboard::isKeyPressed(mUp))
 	{
+		std::cout << "upwards" << std::endl;
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
@@ -89,9 +91,20 @@ void SpaceManImp::update(int delta)
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 
 	}
+	
+	if(sf::Keyboard::isKeyPressed(mPush))
+	{
+  		mAnim.setCurrentRow(1);
+	}
+	else
+	{
+		mAnim.setCurrentRow(0);
+	}
 
 
 	// the rectangle that represents the collision box
+	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADTODEG );
+	mAnim.getSprite().setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
 	mShape.setRotation( mSpaceman.getAngle() * RADTODEG );
 	mShape.setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
 }

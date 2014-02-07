@@ -7,4 +7,6 @@ struct GameData
 	b2Vec2 gravity;
 	b2World world;
 	Input input;
+private:
+	GameData(const GameData& data);
 };
