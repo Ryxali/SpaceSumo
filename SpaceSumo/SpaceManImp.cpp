@@ -49,7 +49,6 @@ void SpaceManImp::update(GameData &data, int delta)
 
 	if(sf::Keyboard::isKeyPressed(mUp))
 	{
-		std::cout << "upwards" << std::endl;
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
