@@ -4,7 +4,7 @@
 #include <Box2D\Box2D.h>
 #include "B2Body.h"
 #include <Common\Config.h>
-#include "Ability.h"
+#include "Freezer.h"
 
 class LHydrogen :
 	public PowerUp
@@ -15,9 +15,9 @@ public:
 
 	virtual void update(int delta);
 	virtual void draw(RenderList& renderList);
-	void activate();
+	Ability* getAbility();
 
 private:
+	bool mPickedUp;
 	B2Body mBody;
 };
-

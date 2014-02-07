@@ -9,7 +9,7 @@ public:
 	Freezer();
 	~Freezer();
 
-	virtual void activate(SVector pos, SVector dir);
+	virtual void activate(SVector pos, SVector dir, Entity& target);
 
 private:
 	static Config mConfig;

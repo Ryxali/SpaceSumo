@@ -13,4 +13,6 @@ public:
 private:
 	void spacemanCreation(GameData& gameData);
 	std::vector<Entity> mEntities;
+
 };
+

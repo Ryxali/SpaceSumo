@@ -7,6 +7,7 @@
 GameState::GameState(GameData& gameData) : mEntities()
 {
 	spacemanCreation(gameData);
+
 }
 
 void GameState::draw(RenderList &list)

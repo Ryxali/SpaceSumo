@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Freezer.h"
+#include "FreezeBolt.h"
 
 Config Freezer::mConfig("res/conf/freezer.cfg", true);
 
@@ -13,7 +14,8 @@ Freezer::~Freezer()
 {
 }
 
-void Freezer::activate(SVector pos, SVector dir)
+void Freezer::activate(SVector pos, SVector dir, Entity& target)
 {
-
+	//TODO return to vector? 
+	//new FreezeBolt(pos, SVector(dir.getX() * mSpeed, dir.getY() * mSpeed));
 }
