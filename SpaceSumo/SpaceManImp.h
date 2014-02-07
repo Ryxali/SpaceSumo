@@ -17,19 +17,20 @@ public:
 				sf::Keyboard::Key push,
 				b2World& world,
 				std::string bodyData,
-				float x, float y);
+				float x, float y, float32 rotation);
 	~SpaceManImp();
 
 	virtual void update(GameData &data, int delta);
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
-	sf::CircleShape getShape();
+
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
+
 
 	//config
 	static Config mConfig;
@@ -41,7 +42,6 @@ private:
 	SVector mDirection;
 	float mAngle;
 	
-	sf::CircleShape mShape; //SFML shape
 	Animation mAnim;
 };
 

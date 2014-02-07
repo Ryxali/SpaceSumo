@@ -26,6 +26,7 @@ public:
 	void applyLinearImpulse(b2Vec2 impulse, b2Vec2 point, bool wake);
 	void setAngularVelocity(float32 velocity);
 	void setLinearVelocity(const b2Vec2 vector);
+	void setRotation(float32 angle);
 
 private:
 	B2Body(const B2Body& b2b);

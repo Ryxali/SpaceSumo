@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "B2Body.h"
 static float PPM = 30;
+static float DEGREES_TO_RADIANS = 0.0174532925;
 
 
 B2Body::B2Body(b2World &world , std::string configFile,
@@ -58,6 +59,12 @@ void B2Body::setLinearVelocity( const b2Vec2 vector )
 {
 	mBody->SetLinearVelocity( vector );
 }
+
+void B2Body::setRotation(float32 angle)
+{
+	mBody->SetTransform( mBody->GetPosition() , DEGREES_TO_RADIANS * angle );
+}
+
 
 void B2Body::initBody(b2World& world)
 {
