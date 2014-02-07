@@ -2,6 +2,7 @@
 #include "MenuState.h"
 #include <ResourceManager\RHandle.h>
 
+
 static const STexture& get_addTexture(std::string ref)
 {
 	res::addResource(ref);
@@ -22,5 +23,6 @@ MenuState::~MenuState(void)
 
 void MenuState::draw(RenderList &list)
 {
+	
 	list.addSprite(mBackground);
 }
