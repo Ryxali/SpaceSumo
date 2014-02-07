@@ -6,6 +6,7 @@
 #include <Box2D\Box2D.h>
 #include <Common\SVector.h>
 #include <Common\Config.h>
+#include <ResourceManager\Animation.h>
 class SpaceManImp :
 	public EntityImp
 {
@@ -23,7 +24,6 @@ public:
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
 	sf::CircleShape getShape();
-
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -42,5 +42,6 @@ private:
 	float mAngle;
 	
 	sf::CircleShape mShape; //SFML shape
+	Animation mAnim;
 };
 

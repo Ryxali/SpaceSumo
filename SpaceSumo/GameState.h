@@ -6,9 +6,9 @@
 
 
 
-class GameState{
+class GameState : public State {
 public:
-	GameState(GameData& gameData);
+	GameState(StateList &owner, GameData& gameData);
 	virtual void draw(RenderList &list);
 private:
 	void spacemanCreation(GameData& gameData);

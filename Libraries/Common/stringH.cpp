@@ -192,5 +192,9 @@ sf::Keyboard::Key str::toKey(std::string keyName)
 	{
 		return sf::Keyboard::RShift;
 	}
+	if(keyName == "SPACE")
+	{
+		return sf::Keyboard::Space;
+	}
 	SError("Unknown Key", "Couldn't find char value for key: " + keyName);
 }

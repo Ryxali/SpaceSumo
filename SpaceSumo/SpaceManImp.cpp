@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SpaceManImp.h"
 #include <iostream>
+#include <ResourceManager\RHandle.h>
 static int PPM = 30;
 static float RADTODEG = 57.2957795f;
 
@@ -19,7 +20,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpaceman(world , bodyData, x , y ),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
-	mAngle(0.0f)
+	mAngle(0.0f),
+	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg")
 {
 	mShape = sf::CircleShape( 40 , 7 );
 	mShape.setOrigin( 40 , 40 );
@@ -93,10 +95,9 @@ void SpaceManImp::update(int delta)
 	mShape.setRotation( mSpaceman.getAngle() * RADTODEG );
 	mShape.setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
 }
-
 void SpaceManImp::draw(RenderList& renderList)
 {
-
+	renderList.addSprite(mAnim);
 }
 
 sf::CircleShape SpaceManImp::getShape()

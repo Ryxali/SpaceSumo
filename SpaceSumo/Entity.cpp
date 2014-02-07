@@ -8,20 +8,24 @@ Entity::Entity(EntityImp* entity):
 {
 
 }
+Entity::Entity(const Entity& ent) : mEntity(ent.mEntity)
+{
+	
+}
 
 Entity::~Entity()
 {
-	delete mEntity;
+	
 }
 
 void Entity::update()
 {
-
+	//mEntity->update();
 }
 
 void Entity::draw(RenderList& renderList)
 {
-
+	mEntity.get()->draw(renderList);
 }
 
 bool Entity::addEffect()

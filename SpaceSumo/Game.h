@@ -9,7 +9,7 @@
 #include "GameData.h"
 #include "MenuState.h"
 #include "StateList.h"
-
+#include "Input.h"
 class Game
 {
 public:
