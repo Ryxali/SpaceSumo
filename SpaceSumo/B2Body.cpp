@@ -5,7 +5,8 @@ static float PPM = 30;
 
 B2Body::B2Body(b2World &world , std::string configFile,
 		float x, float y)
-		: mConfig(configFile)
+		: mConfig(configFile),
+		mSpawnpoint( x , y )
 {
 	initBody(world);
 }
