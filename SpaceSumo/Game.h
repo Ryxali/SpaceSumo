@@ -8,6 +8,8 @@
 #include <ResourceManager\Animation.h>
 #include "GameData.h"
 #include "MenuState.h"
+#include "StateList.h"
+#include "Input.h"
 class Game
 {
 public:
@@ -20,7 +22,7 @@ private:
 	void preDraw();
 	void draw();
 	GameData mGameData;
-	State* mCurState;
+	StateList mStates;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;

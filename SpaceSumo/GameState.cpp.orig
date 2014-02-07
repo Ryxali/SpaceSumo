@@ -1,0 +1,30 @@
+#include "stdafx.h"
+#include "GameState.h"
+#include "entityFactory.h"
+#include "Entity.h"
+#include "B2Body.h"
+
+GameState::GameState(GameData& gameData) : mEntities()
+{
+	spacemanCreation(gameData);
+}
+
+void GameState::draw(RenderList &list)
+{
+	for (std::vector<Entity>::iterator it = mEntities.begin(); it != mEntities.end(); it++)
+	{
+		(*it).update();
+	}
+}
+
+void GameState::spacemanCreation(GameData& gameData)
+{
+<<<<<<< HEAD
+
+	//mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, B2Body body, float x, float y)));
+	//mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, B2Body body, float x, float y)));
+=======
+	mEntities.push_back(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world));
+	mEntities.push_back(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world));
+>>>>>>> dev_NL
+}

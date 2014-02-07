@@ -5,8 +5,11 @@
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
 #include <iostream>
-
-Game::Game() : mConfig("res/conf/main.cfg", true), 
+#include "MenuState.h"
+#include "GameState.h"
+#define NO_MEMORY_TRACKING
+Game::Game() :
+	mConfig("res/conf/main.cfg", true), 
 	mWindow
 	(
 	sf::VideoMode(
@@ -16,10 +19,13 @@ Game::Game() : mConfig("res/conf/main.cfg", true),
 	mConfig.getValue<int>("fullscreen")),
 	mRenderList(),
 	mGameData(),
-	mCurState(new MenuState())
+	mStates()
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
+	mStates.add(new MenuState(mStates));
+	mStates.add(new GameState(mStates, mGameData));
+	mStates.changeState(1);
 }
 
 
@@ -45,40 +51,41 @@ void Game::loop()
 
 	while(mWindow.pollEvent(evt))
 	{
-		// Switch-statements can be used instead of if-statements, good in case we have many eventtypes to handle.
-		if(evt.type == sf::Event::Closed)
+		switch(evt.type)
 		{
+		case sf::Event::Closed:
 			mWindow.close();
-		}
-		else if(evt.type == sf::Event::KeyPressed) 
-		{
+			break;
+		case sf::Event::KeyPressed:
 			if(evt.key.code == sf::Keyboard::Escape) 
 			{
 				mWindow.close();
+				break;
 			}
+		default:
+			mGameData.input.add(evt);
+			break;
 		}
-		
 	}
 	mWindow.clear(sf::Color::White);
 	update(delta.asMilliseconds());
 	preDraw();
 	draw();
-	mWindow.display();
-	
 }
 
 void Game::update(int delta)
 {
-	mCurState->update(mGameData);
+	mStates.getCurrent().update(mGameData, delta);
 }
 
 void Game::preDraw()
 {
-	mCurState->draw(mRenderList);
+	mStates.getCurrent().draw(mRenderList);
 	// TODO curState.preDraw(renderList& list);
 }
 
 void Game::draw()
 {
 	mRenderList.render(mWindow);
+	mWindow.display();
 }

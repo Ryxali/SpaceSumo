@@ -86,8 +86,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="B2Body.cpp" />
+=======
     <ClCompile Include="Button.cpp" />
+>>>>>>> dev_NL
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -103,7 +106,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameData.cpp" />
-    <ClCompile Include="Input.cpp" />
     <ClCompile Include="LHydrogen.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -116,8 +118,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
+<<<<<<< HEAD
     <ClInclude Include="B2Body.h" />
+=======
     <ClInclude Include="Button.h" />
+>>>>>>> dev_NL
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />
@@ -132,9 +137,11 @@
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
-    <ClInclude Include="Input.h" />
+<<<<<<< HEAD
     <ClInclude Include="LHydrogen.h" />
+=======
     <ClInclude Include="MenuState.h" />
+>>>>>>> dev_NL
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />

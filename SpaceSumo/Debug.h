@@ -21,4 +21,3 @@ private:
 	sf::RenderWindow *mWin;
 	void setColor(Color col);
 };
-
