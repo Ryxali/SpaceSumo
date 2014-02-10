@@ -13,7 +13,7 @@ public:
 	LHydrogen(b2World world, std::string bodyData);
 	~LHydrogen();
 
-	virtual void update(int delta);
+	virtual void update(GameData &data, int delta);
 	virtual void draw(RenderList& renderList);
 	Ability* getAbility();
 

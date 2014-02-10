@@ -16,7 +16,7 @@ LHydrogen::~LHydrogen()
 	}
 }
 
-void LHydrogen::update(int delta)
+void LHydrogen::update(GameData &data, int delta)
 {
 	if(mPickedUp = true)
 	{

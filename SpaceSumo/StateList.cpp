@@ -3,7 +3,7 @@
 #include "State.h"
 #include <Common\error.h>
 #include <algorithm>
-StateList::StateList()
+StateList::StateList() : mStates(), mCurState(0)
 {
 }
 

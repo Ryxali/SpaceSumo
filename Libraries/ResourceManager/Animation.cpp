@@ -50,9 +50,9 @@ void Animation::draw(sf::RenderWindow &win)
 		mTexVersion = mSTex.getVersion();
 	}
 	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
-
 	int curFrame = getCurrentFrame();
-	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, curFrame*mSliceHeight, mSliceWidth, mSliceHeight));
+	SAssert(curFrame == 0, "Wat");
+	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
 	mSprite.setTextureRect(r);
 	win.draw(mSprite);
 }
@@ -91,15 +91,11 @@ Animation::~Animation()
 int Animation::getCurrentFrame()
 {
 	int timeElapsed = mAnimationTimer.getElapsedTime().asMilliseconds();
-	if(timeElapsed > getCurAnimTime())
+	if(timeElapsed >= getCurAnimTime())
 	{
-		timeElapsed = mAnimationTimer.restart().asMilliseconds()%getCurAnimTime();
+		timeElapsed = ( mAnimationTimer.restart().asMilliseconds())%getCurAnimTime();
 	}
-	else
-	{
-		timeElapsed = mAnimationTimer.getElapsedTime().asMilliseconds();
-	}
-	return (int)( ((float)timeElapsed) / ((float)getCurAnimTime()) * (float)getCurAnimLength() );
+	return (int)( (timeElapsed) / (((getCurAnimTime()) * getCurAnimLength() )));
 }
 
 void Animation::setCurrentRow(unsigned char row)

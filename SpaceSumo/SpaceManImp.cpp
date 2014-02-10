@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SpaceManImp.h"
 #include <iostream>
+#include <ResourceManager\RHandle.h>
 static int PPM = 30;
 static float RADTODEG = 57.2957795f;
 
@@ -19,11 +20,13 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpaceman(world , bodyData, x , y ),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
-	mAngle(0.0f)
+	mAngle(0.0f),
+	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg")
 {
 	mShape = sf::CircleShape( 40 , 7 );
-	mShape.setOrigin( 40 , 40 );
+	mShape.setOrigin( 64 , 64 );
 	mShape.setFillColor(sf::Color::Cyan);
+	mAnim.getSprite().setOrigin( 64 , 64 );
 }
 
 SpaceManImp::~SpaceManImp()
@@ -31,7 +34,7 @@ SpaceManImp::~SpaceManImp()
 
 }
 
-void SpaceManImp::update(int delta)
+void SpaceManImp::update(GameData &data, int delta)
 {
 
 	float fDelta = (float)delta/1000;
@@ -87,16 +90,26 @@ void SpaceManImp::update(int delta)
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 
 	}
+	
+	if(sf::Keyboard::isKeyPressed(mPush))
+	{
+  		mAnim.setCurrentRow(1);
+	}
+	else
+	{
+		mAnim.setCurrentRow(0);
+	}
 
 
 	// the rectangle that represents the collision box
+	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADTODEG );
+	mAnim.getSprite().setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
 	mShape.setRotation( mSpaceman.getAngle() * RADTODEG );
 	mShape.setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
 }
-
 void SpaceManImp::draw(RenderList& renderList)
 {
-
+	renderList.addSprite(mAnim);
 }
 
 sf::CircleShape SpaceManImp::getShape()
