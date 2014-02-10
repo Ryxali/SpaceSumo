@@ -1,6 +1,8 @@
 #pragma once
 #include "entityimp.h"
-#include "Ability.h"
+
+class Ability;
+
 class PowerUp :
 	public EntityImp
 {

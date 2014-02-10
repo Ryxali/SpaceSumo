@@ -2,7 +2,6 @@
 #include "entityFactory.h"
 #include "SpaceManImp.h"
 #include <Common\Config.h>
-#include <Common\stringH.h>
 #include "LHydrogen.h"
 
 EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,

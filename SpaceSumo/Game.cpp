@@ -2,12 +2,10 @@
 #include "Game.h"
 #include <Common\Config.h>
 #include <SFML\Window\Keyboard.hpp>
-#include "SpaceManImp.h"
-#include <ResourceManager\RHandle.h>
-#include <iostream>
 #include "MenuState.h"
 #include "GameState.h"
 #define NO_MEMORY_TRACKING
+
 Game::Game() :
 	mConfig("res/conf/main.cfg", true), 
 	mWindow

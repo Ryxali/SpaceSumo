@@ -2,7 +2,6 @@
 #include "State.h"
 #include "Entity.h"
 #include <vector>
-#include <iostream>
 #include <ResourceManager\SSprite.h>
 
 

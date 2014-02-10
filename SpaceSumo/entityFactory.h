@@ -1,8 +1,8 @@
 #pragma once
-#include "EntityImp.h"
-#include "B2Body.h"
 #include <string>
 #include <Box2D\Box2D.h>
+
+class EntityImp;
 
 namespace entFac
 {

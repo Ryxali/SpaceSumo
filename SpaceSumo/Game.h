@@ -1,15 +1,12 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML\Window.hpp>
+#include <SFML/Graphics/View.hpp>
+#include <SFML/System/Clock.hpp>
 #include "RenderList.h"
-#include "SpaceManImp.h"
 #include <Common\Config.h>
-#include <Box2D/Box2D.h>
-#include <ResourceManager\Animation.h>
 #include "GameData.h"
-#include "MenuState.h"
 #include "StateList.h"
-#include "Input.h"
+
 class Game
 {
 public:

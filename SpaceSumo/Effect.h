@@ -1,5 +1,6 @@
 #pragma once
-#include "EffectImp.h"
+
+class EffectImp;
 
 class Effect
 {

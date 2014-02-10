@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "LHydrogen.h"
+#include "Freezer.h"
 
 LHydrogen::LHydrogen(b2World world, std::string bodyData) : 
 	mPickedUp(false),

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Entity.h"
-
-
+#include "EntityImp.h"
 
 Entity::Entity(EntityImp* entity):
 	mEntity(entity)

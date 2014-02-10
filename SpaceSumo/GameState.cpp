@@ -2,9 +2,8 @@
 #include "GameState.h"
 #include "entityFactory.h"
 #include "Entity.h"
-#include "B2Body.h"
 #include <ResourceManager\RHandle.h>
-GameState::GameState(GameData& gameData)
+
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
 {
 	spacemanCreation(gameData);
