@@ -4,10 +4,21 @@
 #include "Entity.h"
 #include <ResourceManager\RHandle.h>
 #include "Sumo.h"
+#include "Terra.h"
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
 {
 	spacemanCreation(gameData);
-
+	mGameMode = new Sumo();
+	mGameMap = new Terra();
+}
+GameState::~GameState()
+{
+	while(mEntities.begin() != mEntities.end())
+	{
+		mEntities.pop_back();
+	}
+	delete mGameMode;
+	delete mGameMap;
 }
 void GameState::update(GameData &data, int delta)
 {
@@ -18,6 +29,8 @@ void GameState::update(GameData &data, int delta)
 }
 void GameState::draw(RenderList &list)
 {
+	mGameMode->draw(list);
+	mGameMap->draw(list);
 	list.addSprite(mBackground);
 	for (std::vector<Entity>::iterator it = mEntities.begin(); it != mEntities.end(); it++)
 	{

@@ -29,7 +29,7 @@ SSprite::~SSprite()
 
 const sf::Texture& SSprite::getTexture() const
 {
-	SAssert(mSTex.isLoaded(), "You need to load the texture before using.");
+	SAssert(mSTex.isLoaded(), "You need to load the texture before using. " + mSTex.getRef());
 	return mSTex.getTexture();
 }
 
@@ -41,7 +41,7 @@ void SSprite::draw(sf::RenderWindow &win)
 		mSprite.setTexture(getTexture());
 		mTexVersion = mSTex.getVersion();
 	}
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
+	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
 	win.draw(mSprite);
 }
 short SSprite::getZ() const

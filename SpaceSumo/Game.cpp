@@ -56,7 +56,7 @@ void Game::loop()
 			mWindow.close();
 			break;
 		case sf::Event::KeyPressed:
-			if(evt.key.code == sf::Keyboard::Escape) 
+			if(evt.key.code == sf::Keyboard::Escape || evt.key.code == sf::Keyboard::R) 
 			{
 				mWindow.close();
 				break;

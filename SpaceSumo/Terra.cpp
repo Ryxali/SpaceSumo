@@ -21,6 +21,5 @@ void Terra::draw(RenderList &list)
 
 void Terra::init(GameData &data)
 {
-	res::addResource("res/img/Terra_BG.png");
 	res::loadResource("res/img/Terra_BG.png");
 }

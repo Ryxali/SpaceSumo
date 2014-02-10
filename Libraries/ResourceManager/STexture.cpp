@@ -19,7 +19,7 @@ bool STexture::loadResource()
 {
 	mTexture = new sf::Texture();
 	bool success = mTexture->loadFromFile(getRef());
-	SAssert(success, "Couldn't load texture.");
+	SAssert(success, "Couldn't load texture. " + getRef());
 	return success;
 }
 
@@ -30,6 +30,6 @@ void STexture::unloadResource()
 
 const sf::Texture &STexture::getTexture() const
 {
-	SAssert(isLoaded(), "Texture isn't loaded.");
+	SAssert(isLoaded(), "Texture isn't loaded: " + getRef());
 	return *mTexture;
 }
