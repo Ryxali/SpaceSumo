@@ -1,5 +1,8 @@
 #pragma once
 #include "entityimp.h"
+
+class Ability;
+
 class PowerUp :
 	public EntityImp
 {
@@ -9,5 +12,7 @@ public:
 	virtual void update(GameData &data, int delta) = 0;
 	virtual void draw(RenderList& renderList) = 0;
 	virtual void addEffect();
-};
 
+protected:
+	Ability* mAbility;
+};

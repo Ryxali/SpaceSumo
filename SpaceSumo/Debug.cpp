@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Debug.h"
-#include <cassert>
+#include <Common\error.h>
 #include <SFML\Graphics\RectangleShape.hpp>
 Debug& Debug::getS() {
 	return d;
@@ -20,7 +20,7 @@ Debug::~Debug()
 
 void Debug::drawRect(float x, float y, float width, float height, Color color, float rotation)
 {
-	assert(mWin != 0);
+	SAssert(mWin != 0, "No Render Window");
 	setColor(color);
 	sf::RectangleShape r(sf::Vector2f(width, height));
 	r.setPosition(x, y);
@@ -70,7 +70,7 @@ void Debug::setColor(Color col)
 		mDebugColor.b = 50;
 		break;
 	default:
-		assert(false);
+		SAssert(false, "No such color");
 		break;
 	}
 }

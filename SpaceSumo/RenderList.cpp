@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RenderList.h"
-#include <algorithm>
+#include <ResourceManager\SDrawable.h>
 
 RenderList::RenderList() : mDrawList()
 {

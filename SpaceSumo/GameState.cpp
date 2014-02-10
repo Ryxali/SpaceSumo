@@ -2,11 +2,12 @@
 #include "GameState.h"
 #include "entityFactory.h"
 #include "Entity.h"
-#include "B2Body.h"
 #include <ResourceManager\RHandle.h>
+
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
 {
 	spacemanCreation(gameData);
+
 }
 void GameState::update(GameData &data, int delta)
 {
@@ -28,4 +29,8 @@ void GameState::spacemanCreation(GameData& gameData)
 {
 	mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", 50.f, 300.f)));
 	mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", 300.f, 300.f)));
+}
+
+GameState::GameStateData::GameStateData() : mEntities()
+{
 }

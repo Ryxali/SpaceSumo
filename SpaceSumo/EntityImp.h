@@ -1,6 +1,7 @@
 #pragma once
 #include "RenderList.h"
 #include "GameData.h"
+
 class EntityImp
 {
 public:

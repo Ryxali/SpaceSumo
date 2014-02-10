@@ -1,10 +1,15 @@
 #include "stdafx.h"
 #include "StateList.h"
-#include "State.h"
 #include <Common\error.h>
 #include <algorithm>
-StateList::StateList() : mStates(), mCurState(0)
+#include "MenuState.h"
+#include "GameState.h"
+#include "GameData.h"
+StateList::StateList(GameData &data) : mStates(), mCurState(0)
 {
+	add(new MenuState(*this));
+	add(new GameState(*this, data));
+	changeState(State_Type::GAME_STATE);
 }
 
 
@@ -23,7 +28,7 @@ void StateList::changeState(int index)
 }
 void StateList::changeState(State* state)
 {
-#if NDEBUG
+#if !NDEBUG
 	for (std::vector<State*>::iterator it = mStates.begin(); it != mStates.end(); it++)
 	{
 		SAssert((*it) == state, "State not in list!");
@@ -33,6 +38,7 @@ void StateList::changeState(State* state)
 }
 State& StateList::getCurrent()
 {
+	SAssert(mCurState != 0, "No active state");
 	return *mCurState;
 }
 void StateList::add(State* state)

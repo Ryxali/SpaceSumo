@@ -1,7 +1,7 @@
 #pragma once
-#include "EntityImp.h"
-#include <memory>
 #include "GameData.h"
+
+class EntityImp;
 
 class Entity
 {

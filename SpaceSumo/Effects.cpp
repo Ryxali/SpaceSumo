@@ -2,11 +2,9 @@
 #include "Effects.h"
 #include "EffectStatus.h"
 
-
 Effects::Effects()
 {
 }
-
 
 Effects::~Effects()
 {
