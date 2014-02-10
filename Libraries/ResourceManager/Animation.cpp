@@ -1,9 +1,26 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_ANIMATION_INCLUDED
 #include "Animation.h"
+#endif
+#ifndef SPACESUMO_COMMON_CONFIG_INCLUDED
 #include <Common\Config.h>
+#endif
+#ifndef SPACESUMO_COMMON_STRINGH_INCLUDED
 #include <Common\stringH.h>
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common\error.h>
+#endif
+#ifndef SPACESUMO_COMMON_MATHH_INCLUDED
 #include <Common\mathH.h>
+#endif
+#ifndef SPACESUMO_COMMON_SVECTOR_INCLUDED
 #include <Common\SVector.h>
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
+#include "STexture.h"
+#endif
+#include <SFML\Graphics\RenderWindow.hpp>
+#include <SFML\Graphics\Texture.hpp>
 Animation::Animation(const STexture &tex, std::string animInfo) :
 	mSTex(tex),
 	mSprite(),

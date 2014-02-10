@@ -1,6 +1,11 @@
-#pragma once
+#ifndef SPACESUMO_RESOURCEMANAGER_SOUNDBUFFERSTORE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_SOUNDBUFFERSTORE_INCLUDED
+
 #include <map>
-#include "SSoundBuffer.h"
+
+class SSoundBuffer;
+class Loadable;
+
 class SoundBufferStore
 {
 public:
@@ -29,3 +34,4 @@ private:
 	std::map<std::string, SSoundBuffer> mItems;
 };
 
+#endif

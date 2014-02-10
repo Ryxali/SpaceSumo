@@ -1,6 +1,10 @@
-#pragma once
-#include "STexture.h"
-#include "SSoundBuffer.h"
+#ifndef SPACESUMO_RESOURCEMANAGER_RHANDLE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_RHANDLE_INCLUDED
+
+#include <string>
+
+class STexture;
+class SSoundBuffer;
 
 namespace res
 {
@@ -34,3 +38,5 @@ namespace res
 	*/
 	const SSoundBuffer &getSoundBuffer(std::string ref);
 };
+
+#endif

@@ -1,8 +1,5 @@
-#ifndef SPACESUMO_COMMON_MATH_INCLUDED
-#define SPACESUMO_COMMON_MATH_INCLUDED
-#include <type_traits>
-#include <cstdint>
-#include <cassert>
+#ifndef SPACESUMO_COMMON_MATHH_INCLUDED
+#define SPACESUMO_COMMON_MATHH_INCLUDED
 
 namespace math
 {

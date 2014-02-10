@@ -1,9 +1,15 @@
-#ifndef SPACE_SUMO_TEXTURE_INCLUDED
-#define SPACE_SUMO_TEXTURE_INCLUDED
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
 
-#include <SFML\Graphics\Texture.hpp>
+namespace sf
+{
+	class Texture;
+};
+
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCE_INCLUDED
 #include "Resource.h"
-#include <Common/stringH.h>
+#endif
+#include <string>
 
 class STexture : public Resource
 {

@@ -1,5 +1,15 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_RHANDLE_INCLUDED
 #include "RHandle.h"
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCEHANDLER_INCLUDED
 #include "ResourceHandler.h"
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
+#include "STexture.h"
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_SSOUNDBUFFER_INCLUDED
+#include "SSoundBuffer.h"
+#endif
 
 static ResourceHandler handler;
 

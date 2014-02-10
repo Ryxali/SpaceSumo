@@ -1,8 +1,18 @@
-#pragma once
-#include "STexture.h"
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML\Graphics\RenderWindow.hpp>
+#ifndef SPACESUMO_RESOURCEMANAGER_SSPRITE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_SSPRITE_INCLUDED
+
+class STexture;
+
+
+namespace sf
+{
+	class RenderWindow;
+	class Texture;
+};
+#include <SFML\Graphics\Sprite.hpp>
+#ifndef SPACESUMO_RESOURCEMANAGER_SDRAWABLE_INCLUDED
 #include "SDrawable.h"
+#endif
 
 class SVector;
 
@@ -41,3 +51,4 @@ private:
 	unsigned short mTexVersion;
 };
 
+#endif

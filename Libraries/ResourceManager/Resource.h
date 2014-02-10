@@ -1,6 +1,9 @@
-#pragma once
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_RESOURCE_INCLUDED
+#ifndef SPACESUMO_RESOURCEMANAGER_LOADABLE_INCLUDED
 #include "Loadable.h"
-#include <Common/stringH.h>
+#endif
+#include <string>
 
 
 class Resource : public Loadable
@@ -52,3 +55,4 @@ private:
 	unsigned short mVersion;
 };
 
+#endif

@@ -1,6 +1,9 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_TEXTURESTORE_INCLUDED
 #include "TextureStore.h"
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
-
+#endif
 TextureStore::TextureStore() : mItems()
 {
 

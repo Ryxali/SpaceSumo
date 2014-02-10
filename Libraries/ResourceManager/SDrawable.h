@@ -1,6 +1,9 @@
-#pragma once
-#include <SFML\Graphics\RenderWindow.hpp>
-
+#ifndef SPACESUMO_RESOURCEMANAGER_SDRAWABLE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_SDRAWABLE_INCLUDED
+namespace sf
+{
+	class RenderWindow;
+};
 class SDrawable
 {
 public:
@@ -13,3 +16,4 @@ inline bool operator<(const SDrawable& d0, const SDrawable& d1)
 {
 	return d0.getZ() < d1.getZ();
 }
+#endif
