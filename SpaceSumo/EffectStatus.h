@@ -1,6 +1,8 @@
 #pragma once
-#include "effect.h"
+#include "EffectImp.h"
 #include "Flag.h"
+
+class Effect;
 
 class EffectStatus :
 	public EffectImp

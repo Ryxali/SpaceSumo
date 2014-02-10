@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Effect.h"
+#include "EffectImp.h"
 
 
 Effect::Effect(EffectImp* imp) : mImp(imp)

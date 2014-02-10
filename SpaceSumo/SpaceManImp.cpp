@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "SpaceManImp.h"
-#include <iostream>
 #include <ResourceManager\RHandle.h>
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;

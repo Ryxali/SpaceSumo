@@ -1,7 +1,8 @@
 #pragma once
 #include <list>
 #include <SFML\Graphics.hpp>
-#include <ResourceManager\SDrawable.h>
+
+class SDrawable;
 
 class RenderList
 {

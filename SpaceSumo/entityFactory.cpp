@@ -2,7 +2,6 @@
 #include "entityFactory.h"
 #include "SpaceManImp.h"
 #include <Common\Config.h>
-#include <Common\stringH.h>
 #include "LHydrogen.h"
 
 EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
@@ -21,12 +20,11 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 
 EntityImp* entFac::createPowerUpLHydrogen(b2World& world)
 {
-	Config config("res/conf/LHydrogen.cfg");
-
-	return new LHydrogen();
+	std::string bodyData("res/conf/powerUpBody.cfg");
+	return new LHydrogen(world, bodyData);
 }
 
 EntityImp* entFac::createPowerUpRandom(std::string conf, b2World& world)
 {
-	return new LHydrogen();
+	return new LHydrogen(world, conf);
 }

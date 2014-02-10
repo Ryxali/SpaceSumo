@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EffectStatus.h"
 #include <Common\error.h>
+#include "Effect.h"
 
 
 EffectStatus::EffectStatus() 
