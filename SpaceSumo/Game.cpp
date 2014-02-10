@@ -23,12 +23,6 @@ Game::Game() :
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
-<<<<<<< .mine
-	mStates.add(new MenuState(mStates));			// MEMORYLEAK
-=======
-	
->>>>>>> .theirs
-	mStates.add(new GameState(mStates, mGameData)); // MEMORYLEAK
 	mStates.changeState(1);
 }
 
