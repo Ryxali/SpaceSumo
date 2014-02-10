@@ -107,6 +107,7 @@
     <ClCompile Include="LHydrogen.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Mode.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="StateList.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Terra.cpp" />
+    <ClCompile Include="Sumo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
@@ -147,6 +149,7 @@
     <ClInclude Include="StateList.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terra.h" />
+    <ClInclude Include="Sumo.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Common\Common.vcxproj">
