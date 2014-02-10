@@ -2,6 +2,7 @@
 #include <BasicShapes\Rectangle.h>
 #include <Common\SVector.h>
 #include <SFML\Window\Mouse.hpp>
+
 class Button : public Rectangle
 {
 public:

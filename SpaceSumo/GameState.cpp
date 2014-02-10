@@ -3,6 +3,8 @@
 #include "entityFactory.h"
 #include "Entity.h"
 #include <ResourceManager\RHandle.h>
+#include "RenderList.h"
+#include "GameData.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
 {
