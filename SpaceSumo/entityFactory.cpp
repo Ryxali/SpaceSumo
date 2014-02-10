@@ -3,7 +3,7 @@
 #include "SpaceManImp.h"
 #include <Common\Config.h>
 #include "LHydrogen.h"
-
+#include <Common\stringH.h>
 EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 								  std::string bodyData, float x, float y)
 {

@@ -18,7 +18,7 @@ Game::Game() :
 	mView(sf::FloatRect(0, 0, 1920, 1080)),
 	mRenderList(),
 	mGameData(),
-	mStates()
+	mStates(mGameData)
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));

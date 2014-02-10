@@ -22,4 +22,3 @@ private:
 	std::vector<State*> mStates;
 	State* mCurState;
 };
-

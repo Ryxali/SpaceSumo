@@ -1,7 +1,8 @@
 #pragma once
-#include "GameData.h"
-
+#include <memory>
 class EntityImp;
+class RenderList;
+struct GameData;
 
 class Entity
 {
