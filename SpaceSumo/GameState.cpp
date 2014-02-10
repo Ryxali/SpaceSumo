@@ -4,7 +4,7 @@
 #include "Entity.h"
 #include "B2Body.h"
 
-GameState::GameState(GameData& gameData) : mEntities()
+GameState::GameState(GameData& gameData)
 {
 	spacemanCreation(gameData);
 
@@ -12,7 +12,7 @@ GameState::GameState(GameData& gameData) : mEntities()
 
 void GameState::draw(RenderList &list)
 {
-	for (std::vector<Entity>::iterator it = mEntities.begin(); it != mEntities.end(); it++)
+	for (std::vector<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
 	{
 		(*it).update();
 	}
@@ -21,4 +21,8 @@ void GameState::draw(RenderList &list)
 void GameState::spacemanCreation(GameData& gameData)
 {
 	
+}
+
+GameState::GameStateData::GameStateData() : mEntities()
+{
 }

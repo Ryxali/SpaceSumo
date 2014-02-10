@@ -21,7 +21,7 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 
 EntityImp* entFac::createPowerUpLHydrogen(b2World& world)
 {
-	std::string bodyData("");
+	std::string bodyData("res/conf/powerUpBody.cfg");
 	return new LHydrogen(world, bodyData);
 }
 
