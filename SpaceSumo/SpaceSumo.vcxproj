@@ -134,7 +134,10 @@
     <ClInclude Include="GameData.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LHydrogen.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Map_Type.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Mode.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
