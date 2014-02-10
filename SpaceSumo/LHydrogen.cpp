@@ -1,36 +1,41 @@
 #include "stdafx.h"
 #include "LHydrogen.h"
 #include "Freezer.h"
+#include "GameStateData.h"
+#include <ResourceManager\RHandle.h>
 
-LHydrogen::LHydrogen(b2World world, std::string bodyData) : 
-	mPickedUp(false),
-	mBody(world, bodyData, 222, 222)
+LHydrogen::LHydrogen(b2World &world, std::string bodyData) : 
+	mAlive(true),
+	mBody(world, bodyData, 222, 222),
+	mAnim(res::getTexture("res/img/Test_ikon.png"), "res/conf/Test_ikon.cfg")
 {
-	mAbility = new Freezer();
+
 }
 
 LHydrogen::~LHydrogen()
 {
-	if(mPickedUp = false)
-	{
-		delete mAbility;
-	}
+
 }
 
-void LHydrogen::update(GameData &data, int delta)
+void LHydrogen::update(GameData &data, GameStateData &gData, int delta)
 {
-	if(mPickedUp = true)
-	{
-		delete this;
-	}
+
 }
 
 void LHydrogen::draw(RenderList& renderList)
 {
+	mAnim.getSprite().setPosition(mBody.getPosition().x, mBody.getPosition().y);
+	renderList.addSprite(mAnim);
 }
 
 Ability* LHydrogen::getAbility()
 {
-	mPickedUp = true;
+	mAbility = new Freezer();
+	mAlive = true;
 	return mAbility;
+}
+
+bool LHydrogen::isAlive()
+{
+	return mAlive;
 }

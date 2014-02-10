@@ -3,6 +3,7 @@
 #include "EntityImp.h"
 #include "RenderList.h"
 #include "GameData.h"
+#include "GameStateData.h"
 Entity::Entity(EntityImp* entity):
 	mEntity(entity)
 {
@@ -18,10 +19,10 @@ Entity::~Entity()
 	
 }
 
-void Entity::update(GameData &data, int delta)
+void Entity::update(GameData &data, GameStateData &gData, int delta)
 {
 	//mEntity->update();
-	mEntity.get()->update(data, delta);
+	mEntity.get()->update(data, gData, delta);
 }
 
 void Entity::draw(RenderList& renderList)
@@ -32,4 +33,9 @@ void Entity::draw(RenderList& renderList)
 bool Entity::addEffect()
 {
 	return true;
+}
+
+bool Entity::isAlive()
+{
+	return mEntity.get()->isAlive();
 }

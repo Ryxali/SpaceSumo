@@ -2,14 +2,17 @@
 #include "RenderList.h"
 #include "GameData.h"
 
+struct GameStateData;
+
 class EntityImp
 {
 public:
 	virtual ~EntityImp() {}
 
-	virtual void update(GameData &data, int delta) = 0;
+	virtual void update(GameData &data, GameStateData &gData, int delta) = 0;
 	virtual void draw(RenderList& renderList) = 0;
 	// TODO add Effect to param
 	virtual void addEffect() = 0;
+	virtual bool isAlive() = 0;
 };
 

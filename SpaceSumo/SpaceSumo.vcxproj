@@ -103,6 +103,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameStateData.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LHydrogen.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameStateData.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LHydrogen.h" />
     <ClInclude Include="Map.h" />
