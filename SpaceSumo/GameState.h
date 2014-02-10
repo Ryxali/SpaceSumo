@@ -3,7 +3,8 @@
 #include "Entity.h"
 #include <vector>
 #include <ResourceManager\SSprite.h>
-
+class Mode;
+class Map;
 
 class GameState : public State {
 	struct GameStateData
@@ -22,4 +23,6 @@ private:
 	GameStateData mData;
 	std::vector<Entity> mEntities;
 	SSprite mBackground;
+	Mode* mGameMode;
+	Map* mGameMap;
 };
