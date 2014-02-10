@@ -1,7 +1,11 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_SSOUNDBUFFER_INCLUDED
 #include "SSoundBuffer.h"
+#endif
 
-
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
+#endif
+#include <SFML\Audio\SoundBuffer.hpp>
 
 SSoundBuffer::SSoundBuffer(std::string ref) : Resource(ref)
 {

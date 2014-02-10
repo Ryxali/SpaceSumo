@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SPACESUMO_COMMON_TIMER_INCLUDED
+#define SPACESUMO_COMMON_TIMER_INCLUDED
+
 #include <SFML\System\Clock.hpp>
 
 class Timer
@@ -17,3 +19,4 @@ private:
 	int mStartTime;
 };
 
+#endif

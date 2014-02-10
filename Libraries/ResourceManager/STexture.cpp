@@ -1,6 +1,10 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
 #include "STexture.h"
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
-
+#endif
+#include <SFML\Graphics\Texture.hpp>
 STexture::STexture(std::string ref) : Resource(ref)
 {
 }

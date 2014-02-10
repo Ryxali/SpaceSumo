@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPACESUMO_COMMON_CONFIG_INCLUDED
+#define SPACESUMO_COMMON_CONFIG_INCLUDED
 #include <fstream>
 #include <map>
 class Config
@@ -34,3 +35,4 @@ private:
 	std::string mFilePath;
 };
 
+#endif

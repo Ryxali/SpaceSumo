@@ -1,6 +1,11 @@
-#pragma once
+#ifndef SPACESUMO_RESOURCEMANAGER_ANIMATION_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_ANIMATION_INCLUDED
+
+#ifndef SPACESUMO_RESOURCEMANAGER_SDRAWABLE_INCLUDED
 #include "SDrawable.h"
-#include "STexture.h"
+#endif
+
+class STexture;
 #include <SFML\Graphics\Sprite.hpp>
 #include <SFML\System\Clock.hpp>
 #include <utility>
@@ -44,3 +49,4 @@ private:
 	void setUniformTimeOptions(Config &cf);
 };
 
+#endif

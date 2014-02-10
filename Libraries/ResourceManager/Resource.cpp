@@ -1,5 +1,9 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCE_INCLUDED
 #include "Resource.h"
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
+#endif
 
 Resource::Resource(std::string ref) : mRef(ref), mIsLoaded(false), mVersion(0)
 {

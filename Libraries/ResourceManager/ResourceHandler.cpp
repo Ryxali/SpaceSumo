@@ -1,6 +1,15 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCEHANDLER_INCLUDED
 #include "ResourceHandler.h"
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
+#endif
+#ifndef SPACESUMO_COMMON_STRINGH_INCLUDED
 #include <Common\stringH.h>
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_LOADABLE_INCLUDED
+#include "Loadable.h"
+#endif
 #include <locale>
 #include <sstream>
 namespace stringhelp

@@ -1,6 +1,17 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_SSPRITE_INCLUDED
 #include "SSprite.h"
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
+#include "STexture.h"
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
+#endif
+#ifndef SPACESUMO_COMMON_SVECTOR_INCLUDED
 #include <Common\SVector.h>
+#endif
+#include <SFML\Graphics\RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 SSprite::SSprite(const STexture &tex) : mSprite(), mSTex(tex), mTexVersion(0)
 {

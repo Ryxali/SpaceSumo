@@ -1,5 +1,6 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_LOADABLEBUNDLE_INCLUDED
 #include "LoadableBundle.h"
-
+#endif
 
 LoadableBundle::LoadableBundle() : mLoadables()
 {

@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Entity.h"
 #include "EntityImp.h"
-
+#include "RenderList.h"
+#include "GameData.h"
 Entity::Entity(EntityImp* entity):
 	mEntity(entity)
 {

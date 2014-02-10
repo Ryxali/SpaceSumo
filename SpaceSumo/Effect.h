@@ -1,7 +1,7 @@
 #pragma once
 
 class EffectImp;
-
+#include "Flag.h"
 class Effect
 {
 public:

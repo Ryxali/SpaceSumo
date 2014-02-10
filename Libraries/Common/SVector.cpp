@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SVector.h"
 #include <math.h>
-
+#include <Box2D\Box2D.h>
 SVector::SVector(float x, float y) : sf::Vector2f(x, y)
 {
 

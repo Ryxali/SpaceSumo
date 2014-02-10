@@ -1,5 +1,7 @@
-#pragma once
-#include "SSoundBuffer.h"
+#ifndef SPACESUMO_RESOURCEMANAGER_SSOUND_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_SSOUND_INCLUDED
+
+class SSoundBuffer;
 #include <SFML\Audio\Sound.hpp>
 
 class SSound
@@ -34,3 +36,5 @@ private:
 	// The version of this instance's sound buffer
 	unsigned short mSoundBufVersion;
 };
+
+#endif
