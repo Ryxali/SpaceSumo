@@ -3,9 +3,7 @@
 */
 #include "stdafx.h"
 #include "MemTracker.h"
-
 #include "stringH.h"
-
 #include <iostream>
 #include <malloc.h>
 #include <vector>

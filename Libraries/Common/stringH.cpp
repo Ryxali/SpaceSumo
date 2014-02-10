@@ -2,8 +2,6 @@
 #include "stringH.h"
 #include <locale>
 #include <sstream>
-#include <vector>
-#include <map>
 #include <algorithm>
 #include "error.h"
 std::string& str::purge(std::string &str, char token)

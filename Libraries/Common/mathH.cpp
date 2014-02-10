@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "mathH.h"
-#include "SVector.h"
 #include <cmath>
 
 
