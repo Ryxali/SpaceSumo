@@ -4,21 +4,32 @@
 #include "Entity.h"
 #include <ResourceManager\RHandle.h>
 #include "Sumo.h"
+<<<<<<< HEAD
 #include "Terra.h"
+GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
+{
+	spacemanCreation(gameData);
+	mGameMode = new Sumo();
+	mGameMap = new Terra();
+}
+GameState::~GameState()
+{
+	while(mEntities.begin() != mEntities.end())
+	{
+		mEntities.pop_back();
+	}
+	delete mGameMode;
+	delete mGameMap;
+=======
 #include "RenderList.h"
 #include "GameData.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mBackground(res::getTexture("res/img/Terra_BG.png"))
 {
 	spacemanCreation(gameData);
-	mGameMode = new Sumo();
 	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-	mGameMap = new Terra();
-}
-GameState::~GameState()
-{
-	delete mGameMode;
-	delete mGameMap;
+
+>>>>>>> 22e042b596bf2819069bd4c29db9f0c0d0eaf3fd
 }
 void GameState::update(GameData &data, int delta)
 {
