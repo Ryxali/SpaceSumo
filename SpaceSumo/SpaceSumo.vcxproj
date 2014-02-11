@@ -117,6 +117,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Terra.cpp" />
     <ClCompile Include="Sumo.cpp" />
+    <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />
+    <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Common\Common.vcxproj">
