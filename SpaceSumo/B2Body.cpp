@@ -37,6 +37,11 @@ float32 B2Body::getAngle()
 	return mBody->GetAngle();
 }
 
+b2Body* B2Body::getBody()
+{
+	return mBody;
+}
+
 
 void B2Body::applyAngularImpulse(float32 impulse, bool wake)
 {

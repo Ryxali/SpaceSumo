@@ -34,6 +34,9 @@ private:
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
 
+	//helpfunctions
+	void initializeArms(b2World& world);
+
 
 	//config
 	static Config mConfig;
@@ -42,6 +45,15 @@ private:
 
 	//Spaceman stuff
 	B2Body mSpaceman;
+
+	b2Joint* mLeftArmJoint;
+	b2PrismaticJoint* mLeftArm;
+	B2Body mLeftHand;
+	B2Body mRightHand;
+	b2PrismaticJointDef mLeftArmDef;
+	b2PrismaticJointDef mRightArmDef;
+
+
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;

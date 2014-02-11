@@ -2,11 +2,18 @@
 #include "Debug.h"
 #include <Common\error.h>
 #include <SFML\Graphics\RectangleShape.hpp>
+
+float Debug::getZ()const
+{
+	return 500.f;
+}
+
+
 Debug& Debug::getS() {
 	return d;
 }
-void Debug::setRenderTarget(sf::RenderWindow &win) {
-	mWin = &win;
+void Debug::setRenderList(RenderList& renderList) {
+	mRenderList = &renderList;
 }
 
 Debug::Debug() : mDebugColor(0, 255, 0, 255)
