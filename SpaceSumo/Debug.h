@@ -5,10 +5,11 @@
 #include "RenderList.h"
 #include <ResourceManager\SDrawable.h>
 class Circle
-	: public SDrawable
+	: public SDrawable, public sf::CircleShape
 {
 public:
 	virtual float getZ()const;
+
 };
 
 class Debug

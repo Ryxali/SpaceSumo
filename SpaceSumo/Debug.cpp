@@ -2,6 +2,13 @@
 #include "Debug.h"
 #include <Common\error.h>
 #include <SFML\Graphics\RectangleShape.hpp>
+
+float Debug::getZ()const
+{
+	return 500.f;
+}
+
+
 Debug& Debug::getS() {
 	return d;
 }
