@@ -105,7 +105,12 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	{
-		mAbility->activate(SVector(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM), mDirection, gData, data.world);
+		if(mAbility != 0)
+		{
+			mAbility->activate(SVector(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM), mDirection, gData, data.world);
+
+			mAbility = 0;
+		}
 	}
 	else
 	{

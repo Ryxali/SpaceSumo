@@ -22,6 +22,13 @@ GameState::~GameState()
 }
 void GameState::update(GameData &data, int delta)
 {
+	for(std::vector<Entity>::iterator it = mData.mNewEntities.begin(); it != mData.mNewEntities.end(); it++)
+	{
+		mData.mEntities.push_back(*it);
+	}
+
+	mData.mNewEntities.clear();
+
 	for (std::vector<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
 	{
 		(*it).update(data, mData,delta);

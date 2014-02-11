@@ -18,7 +18,7 @@ Entity::Entity(const Entity& ent) : mEntity(ent.mEntity)
 
 Entity::~Entity()
 {
-	
+
 }
 
 void Entity::update(GameData &data, GameStateData &gData, int delta)
