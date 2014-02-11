@@ -7,6 +7,9 @@
 #include <Common\SVector.h>
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
+
+struct GameStateData;
+
 class SpaceManImp :
 	public EntityImp
 {
@@ -20,10 +23,10 @@ public:
 				float x, float y, float32 rotation);
 	~SpaceManImp();
 
-	virtual void update(GameData &data, int delta);
+	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
-
+	virtual bool isAlive();
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -31,13 +34,26 @@ private:
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
 
+	//helpfunctions
+	void initializeArms(b2World& world);
+
 
 	//config
 	static Config mConfig;
 	SVector mSpawnpoint;
+	bool mAlive;
 
 	//Spaceman stuff
 	B2Body mSpaceman;
+
+	b2Joint* mLeftArmJoint;
+	b2PrismaticJoint* mLeftArm;
+	B2Body mLeftHand;
+	B2Body mRightHand;
+	b2PrismaticJointDef mLeftArmDef;
+	b2PrismaticJointDef mRightArmDef;
+
+
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;

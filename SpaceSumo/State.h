@@ -1,6 +1,6 @@
 #pragma once
-#include "RenderList.h"
 #include "GameData.h"
+#include "RenderList.h"
 class StateList;
 class State
 {

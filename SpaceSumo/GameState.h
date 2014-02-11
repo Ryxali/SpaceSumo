@@ -3,16 +3,13 @@
 #include "Entity.h"
 #include <vector>
 #include <ResourceManager\SSprite.h>
+#include "GameStateData.h"
 class Mode;
 class Map;
 
-class GameState : public State {
-	struct GameStateData
-	{
-		GameStateData();
-		std::vector<Entity> mEntities;
-	};
-
+class GameState 
+	: public State 
+{
 public:
 	GameState(StateList &owner, GameData& gameData);
 	~GameState();
@@ -22,7 +19,6 @@ public:
 private:
 	void spacemanCreation(GameData& gameData);
 	GameStateData mData;
-	std::vector<Entity> mEntities;
 	SSprite mBackground;
 	Mode* mGameMode;
 	Map* mGameMap;

@@ -4,9 +4,13 @@
 */
 #include "Game.h"
 #include <ResourceManager\RHandle.h>
+int main() {
+	res::addResource("res/img/Test_ikon.png");
 #include <SFML\Window\Keyboard.hpp>
 
+	res::loadResource("res/img/Test_ikon.png");
 #include <fstream>
+	res::addResource("res/img/Anim.png");
 #include <string>
 void init()
 {
