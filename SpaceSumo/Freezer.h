@@ -9,7 +9,7 @@ public:
 	Freezer();
 	~Freezer();
 
-	virtual void activate(SVector pos, SVector dir, Entity& target);
+	virtual void activate(SVector pos, SVector dir, GameStateData& data, b2World& world);
 
 private:
 	static Config mConfig;

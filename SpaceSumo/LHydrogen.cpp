@@ -12,7 +12,7 @@ LHydrogen::LHydrogen(b2World &world, std::string bodyData) :
 	mBody(world, bodyData, 666, 666),
 	mAnim(res::getTexture("res/img/Test_ikon.png"), "res/conf/Test_ikon.cfg", 3.f)
 {
-
+	mBody.getBody()->SetUserData(this);
 }
 
 LHydrogen::~LHydrogen()

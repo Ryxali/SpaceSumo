@@ -6,6 +6,7 @@
 #include <Common\Config.h>
 #include "GameData.h"
 #include "StateList.h"
+#include "ContactListener.h"
 
 class Game
 {
@@ -25,6 +26,7 @@ private:
 	sf::View mView;
 	RenderList mRenderList;
 	sf::Clock mDeltaClock;
+	ContactListener mListener;
 	
 };
 

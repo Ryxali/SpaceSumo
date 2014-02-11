@@ -4,6 +4,8 @@
 #include "RenderList.h"
 #include "GameData.h"
 #include "GameStateData.h"
+#include "EntityType.h"
+
 Entity::Entity(EntityImp* entity):
 	mEntity(entity)
 {
@@ -38,4 +40,9 @@ bool Entity::addEffect()
 bool Entity::isAlive()
 {
 	return mEntity.get()->isAlive();
+}
+
+EntityType Entity::getType()
+{
+	return mEntity.get()->getType();
 }

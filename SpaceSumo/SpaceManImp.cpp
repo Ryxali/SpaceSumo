@@ -2,6 +2,8 @@
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
 #include "GameStateData.h"
+#include "EntityType.h"
+#include "Ability.h"
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
@@ -23,11 +25,13 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f)
+	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
+	mAbility(0)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);
-	initializeArms(world);
+	//initializeArms(world);
+	mSpaceman.getBody()->SetUserData(this);
 }
 
 SpaceManImp::~SpaceManImp()
@@ -98,6 +102,11 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mLeftArm->SetMotorSpeed(9);
 		//mLeftHand.getPosition
 	}
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		mAbility->activate(SVector(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM), mDirection, gData, data.world);
+	}
 	else
 	{
 		mAnim.setCurrentRow(0);
@@ -118,10 +127,31 @@ void SpaceManImp::addEffect()
 
 }
 
+void SpaceManImp::addAbility(Ability* ability)
+{
+	mAbility = ability;
+}
+
 bool SpaceManImp::isAlive()
 {
 	return mAlive;
 }
+
+EntityType SpaceManImp::getType()
+{
+	return EntityType::PLAYER;
+}
+
+bool SpaceManImp::isAbilityFree()
+{
+	if(mAbility != 0)
+	{
+		return false;
+	}
+	else
+		return true;
+}
+
 void SpaceManImp::initializeArms(b2World& world)
 {
 	// Left arm

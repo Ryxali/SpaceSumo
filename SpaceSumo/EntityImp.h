@@ -2,6 +2,7 @@
 #include "RenderList.h"
 #include "GameData.h"
 
+enum EntityType;
 struct GameStateData;
 
 class EntityImp
@@ -14,5 +15,6 @@ public:
 	// TODO add Effect to param
 	virtual void addEffect() = 0;
 	virtual bool isAlive() = 0;
+	virtual EntityType getType() = 0;
 };
 

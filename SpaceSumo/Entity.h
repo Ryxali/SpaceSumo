@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 
+enum EntityType;
 struct GameStateData;
 class EntityImp;
 class RenderList;
@@ -16,6 +17,7 @@ public:
 	void draw(RenderList& renderList);
 	bool addEffect();
 	bool isAlive();
+	EntityType getType();
 
 private:
 	std::shared_ptr<EntityImp> mEntity;

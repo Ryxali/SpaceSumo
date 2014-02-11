@@ -24,6 +24,7 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mStates.changeState(1);
+	mGameData.world.SetContactListener(&mListener);
 }
 
 

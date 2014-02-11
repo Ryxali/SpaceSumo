@@ -88,6 +88,7 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Ability.h" />
     <ClInclude Include="B2Body.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />
@@ -130,6 +132,7 @@
     <ClInclude Include="EffectStatus.h" />
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="EntityImp.h" />
+    <ClInclude Include="EntityType.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="FreezeBolt.h" />
     <ClInclude Include="Freezer.h" />
@@ -146,6 +149,7 @@
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />
@@ -168,6 +172,9 @@
     <None Include="res\conf\main.cfg" />
     <None Include="res\conf\powerUpBody.cfg" />
     <None Include="res\conf\spaceman.cfg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SpaceSumo.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

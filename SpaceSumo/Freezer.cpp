@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Freezer.h"
 #include "FreezeBolt.h"
+#include "GameStateData.h"
 
 Config Freezer::mConfig("res/conf/freezer.cfg", true);
 
@@ -14,8 +15,7 @@ Freezer::~Freezer()
 {
 }
 
-void Freezer::activate(SVector pos, SVector dir, Entity& target)
+void Freezer::activate(SVector pos, SVector dir, GameStateData& data, b2World& world)
 {
-	//TODO return to vector? 
-	//new FreezeBolt(pos, SVector(dir.getX() * mSpeed, dir.getY() * mSpeed));
+	data.mEntities.push_back(new FreezeBolt(pos, dir, world));
 }

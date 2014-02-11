@@ -8,7 +8,9 @@
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
 
+enum EntityType;
 struct GameStateData;
+class Ability;
 
 class SpaceManImp :
 	public EntityImp
@@ -26,7 +28,10 @@ public:
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
+	void addAbility(Ability*);
 	virtual bool isAlive();
+	virtual EntityType getType();
+	bool isAbilityFree();
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -53,7 +58,7 @@ private:
 	b2PrismaticJointDef mLeftArmDef;
 	b2PrismaticJointDef mRightArmDef;
 
-
+	Ability* mAbility;
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;
