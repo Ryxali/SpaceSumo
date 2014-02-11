@@ -67,7 +67,7 @@ void Animation::draw(sf::RenderWindow &win)
 		reevaluateSizeValues();
 		mTexVersion = mSTex.getVersion();
 	}
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
+	SAssert(mSTex.isLoaded(), "The texture isn't loaded. "+mSTex.getRef());
 	int curFrame = getCurrentFrame();
 	SAssert(curFrame == 0, "Wat");
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));

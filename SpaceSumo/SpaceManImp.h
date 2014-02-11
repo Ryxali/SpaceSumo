@@ -7,6 +7,8 @@
 #include <Common\SVector.h>
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
+#include "Debug.h"
+
 
 struct GameStateData;
 
@@ -27,6 +29,7 @@ public:
 	virtual void draw(RenderList& renderList);
 	virtual void addEffect();
 	virtual bool isAlive();
+
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -36,7 +39,7 @@ private:
 
 	//helpfunctions
 	void initializeArms(b2World& world);
-
+	Circle* mCircle;
 
 	//config
 	static Config mConfig;
@@ -46,12 +49,10 @@ private:
 	//Spaceman stuff
 	B2Body mSpaceman;
 
-	b2Joint* mLeftArmJoint;
+	b2PrismaticJoint* mLeftArmJoint;
 	b2PrismaticJoint* mLeftArm;
 	B2Body mLeftHand;
-	B2Body mRightHand;
 	b2PrismaticJointDef mLeftArmDef;
-	b2PrismaticJointDef mRightArmDef;
 
 
 	float mSpeed;

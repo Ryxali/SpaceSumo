@@ -12,7 +12,7 @@ GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData
 {
 	spacemanCreation(gameData);
 	mGameMode = new Sumo();
-	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
+	//mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
 	mGameMap = new Terra();
 }
 GameState::~GameState()
@@ -41,7 +41,7 @@ void GameState::draw(RenderList &list)
 
 void GameState::spacemanCreation(GameData& gameData)
 {
-	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", 50.f, 300.f, 90.f)));
+	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", 800.f, 500.f, 0.f)));
 	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", 300.f, 300.f, 240.f)));
 }
 

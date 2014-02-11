@@ -8,6 +8,11 @@ float Circle::getZ() const
 	return 500.f;
 }
 
+void Circle::draw(sf::RenderWindow& renderWindow)
+{
+	renderWindow.draw(*this);
+}
+
 
 Debug& Debug::getS() {
 	return d;
