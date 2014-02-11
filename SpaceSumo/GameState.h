@@ -23,7 +23,6 @@ private:
 	void spacemanCreation(GameData& gameData);
 	GameStateData mData;
 	std::vector<Entity> mEntities;
-	SSprite mBackground;
 	Mode* mGameMode;
 	Map* mGameMap;
 };

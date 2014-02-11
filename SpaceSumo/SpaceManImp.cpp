@@ -20,7 +20,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg")
+	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);

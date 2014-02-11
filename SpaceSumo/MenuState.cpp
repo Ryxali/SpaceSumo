@@ -11,7 +11,7 @@ static const STexture& get_addTexture(std::string ref)
 
 MenuState::MenuState(StateList &owner) : 
 	State(owner),
-	mBackground(get_addTexture("res/img/MenuBackground.png"))
+	mBackground(get_addTexture("res/img/MenuBackground.png"), -1.f)
 {
 	
 }

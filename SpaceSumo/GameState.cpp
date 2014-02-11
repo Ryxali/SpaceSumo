@@ -5,7 +5,7 @@
 #include <ResourceManager\RHandle.h>
 #include "Sumo.h"
 #include "Terra.h"
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
+GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities()
 {
 	spacemanCreation(gameData);
 	mGameMode = new Sumo();
@@ -31,7 +31,6 @@ void GameState::draw(RenderList &list)
 {
 	mGameMode->draw(list);
 	mGameMap->draw(list);
-	list.addSprite(mBackground);
 	for (std::vector<Entity>::iterator it = mEntities.begin(); it != mEntities.end(); it++)
 	{
 		(*it).draw(list);

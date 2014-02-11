@@ -13,7 +13,7 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-SSprite::SSprite(const STexture &tex) : mSprite(), mSTex(tex), mTexVersion(0)
+SSprite::SSprite(const STexture &tex, float z) : mSprite(), mSTex(tex), mTexVersion(0), mZ(z)
 {
 
 }
@@ -44,9 +44,13 @@ void SSprite::draw(sf::RenderWindow &win)
 	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
 	win.draw(mSprite);
 }
-short SSprite::getZ() const
+float SSprite::getZ() const
 {
-	return 0;
+	return mZ;
+}
+void SSprite::setZ(float z)
+{
+	mZ = z;
 }
 
 sf::Sprite& SSprite::getSprite()
