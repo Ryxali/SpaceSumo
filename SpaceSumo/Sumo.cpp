@@ -2,7 +2,7 @@
 #include "Sumo.h"
 #include <ResourceManager\RHandle.h>
 #include "RenderList.h"
-Sumo::Sumo(void) : Mode(), mTest(res::getTexture("res/img/Map_Barrier/Laser_Long.png"))
+Sumo::Sumo(void) : Mode(), mTest(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 0.f)
 {
 	addSupportedMapType(Map_Type::TERRA);
 	addSupportedMapType(Map_Type::MINING_COLONY);

@@ -23,7 +23,7 @@ public:
 		Constructs this object with a reference to a Texture
 		param: const STexture &tex - the Texture to link this Sprite to
 	*/
-	SSprite(const STexture &tex);
+	SSprite(const STexture &tex, float z);
 	/*
 		Copy constructor for the SSprite
 		param: const SSPrite &sp - the SSprite to copy from
@@ -38,8 +38,8 @@ public:
 		Causes an error should the Texture not be loaded
 	*/
 	void draw(sf::RenderWindow &win);
-	virtual short getZ() const;
-
+	virtual float getZ() const;
+	void setZ(float z);
 	sf::Sprite& getSprite();
 
 private:
@@ -49,6 +49,8 @@ private:
 	sf::Sprite mSprite;
 	// The version of this instance's texture
 	unsigned short mTexVersion;
+
+	float mZ;
 };
 
 #endif

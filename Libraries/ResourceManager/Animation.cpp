@@ -21,13 +21,14 @@
 #endif
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\Graphics\Texture.hpp>
-Animation::Animation(const STexture &tex, std::string animInfo) :
+Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 	mSTex(tex),
 	mSprite(),
 	mTexVersion(0),
 	mAnimationTimer(),
 	mCurrentRow(0),
-	mAnimUniTime(0)
+	mAnimUniTime(0),
+	mZ(z)
 {
 	Config cf(animInfo, true);
 	mColumns = (unsigned char) cf.getValue<int>("AnimationWidth");
@@ -74,9 +75,13 @@ void Animation::draw(sf::RenderWindow &win)
 	win.draw(mSprite);
 }
 
-short Animation::getZ() const
+float Animation::getZ() const
 {
-	return 0;
+	return mZ;
+}
+void Animation::setZ(float z)
+{
+	mZ = z;
 }
 
 sf::Sprite& Animation::getSprite()

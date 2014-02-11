@@ -10,7 +10,7 @@ static float RADTODEG = 57.2957795f;
 LHydrogen::LHydrogen(b2World &world, std::string bodyData) : 
 	mAlive(true),
 	mBody(world, bodyData, 666, 666),
-	mAnim(res::getTexture("res/img/Test_ikon.png"), "res/conf/Test_ikon.cfg")
+	mAnim(res::getTexture("res/img/Test_ikon.png"), "res/conf/Test_ikon.cfg", 3.f)
 {
 
 }

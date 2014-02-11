@@ -15,12 +15,13 @@ class SVector;
 class Animation : public SDrawable
 {
 public:
-	Animation(const STexture &tex, std::string animInfo);
+	Animation(const STexture &tex, std::string animInfo, float z);
 	Animation(const Animation &anim);
 	~Animation();
 	const sf::Texture& getTexture() const;
 	virtual void draw(sf::RenderWindow &win);
-	virtual short getZ() const;
+	virtual float getZ() const;
+	void setZ(float z);
 	sf::Sprite& getSprite();
 	unsigned char getCurAnimLength();
 	unsigned short getCurAnimTime();
@@ -42,6 +43,7 @@ private:
 	unsigned short * mAnimTime;
 	unsigned short mAnimUniTime;
 	int getCurrentFrame();
+	float mZ;
 	void reevaluateSizeValues();
 	void setAdvancedLengthOptions(Config &cf);
 	void setUniformLengthOptions(Config &cf);

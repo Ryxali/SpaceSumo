@@ -4,32 +4,25 @@
 #include "Entity.h"
 #include <ResourceManager\RHandle.h>
 #include "Sumo.h"
-<<<<<<< HEAD
 #include "Terra.h"
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities(), mBackground(res::getTexture("res/img/Terra_BG.png"))
-{
-	spacemanCreation(gameData);
-	mGameMode = new Sumo();
-	mGameMap = new Terra();
-}
-GameState::~GameState()
-{
-	while(mEntities.begin() != mEntities.end())
-	{
-		mEntities.pop_back();
-	}
-	delete mGameMode;
-	delete mGameMap;
-=======
+<<<<<<< HEAD
 #include "RenderList.h"
 #include "GameData.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mBackground(res::getTexture("res/img/Terra_BG.png"))
+=======
+GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mEntities()
+>>>>>>> dev_NL
 {
 	spacemanCreation(gameData);
+	mGameMode = new Sumo();
 	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-
->>>>>>> 22e042b596bf2819069bd4c29db9f0c0d0eaf3fd
+	mGameMap = new Terra();
+}
+GameState::~GameState()
+{
+	delete mGameMode;
+	delete mGameMap;
 }
 void GameState::update(GameData &data, int delta)
 {
@@ -44,8 +37,12 @@ void GameState::draw(RenderList &list)
 {
 	mGameMode->draw(list);
 	mGameMap->draw(list);
+<<<<<<< HEAD
 	list.addSprite(mBackground);
 	for (std::vector<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
+=======
+	for (std::vector<Entity>::iterator it = mEntities.begin(); it != mEntities.end(); it++)
+>>>>>>> dev_NL
 	{
 		(*it).draw(list);
 	}

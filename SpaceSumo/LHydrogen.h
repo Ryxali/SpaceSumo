@@ -1,5 +1,5 @@
 #pragma once
-#include "powerup.h"
+#include "PowerUp.h"
 #include <Box2D\Box2D.h>
 #include "B2Body.h"
 #include <ResourceManager\Animation.h>

@@ -4,7 +4,7 @@
 #include "RenderList.h"
 
 Terra::Terra():
-	mBackground(res::getTexture("res/img/Terra_BG.png"))
+	mBackground(res::getTexture("res/img/Terra_BG.png"), -1.f)
 {
 
 }

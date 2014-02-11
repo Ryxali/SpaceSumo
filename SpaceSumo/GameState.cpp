@@ -8,7 +8,7 @@
 #include "RenderList.h"
 #include "GameData.h"
 
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mBackground(res::getTexture("res/img/Terra_BG.png"))
+GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData()
 {
 	spacemanCreation(gameData);
 	mGameMode = new Sumo();
@@ -33,7 +33,6 @@ void GameState::draw(RenderList &list)
 {
 	mGameMode->draw(list);
 	mGameMap->draw(list);
-	list.addSprite(mBackground);
 	for (std::vector<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
 	{
 		(*it).draw(list);

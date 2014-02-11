@@ -23,7 +23,12 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
+<<<<<<< HEAD
+	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg"),
+	mAlive(true)
+=======
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f)
+>>>>>>> dev_NL
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);
@@ -96,7 +101,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
   		mAnim.setCurrentRow(1);
 		mLeftArm->SetMotorSpeed(9);
-		//mLeftHand.getPosition
+		mLeftHand.getPosition
 	}
 	else
 	{

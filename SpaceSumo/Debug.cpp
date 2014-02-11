@@ -3,7 +3,7 @@
 #include <Common\error.h>
 #include <SFML\Graphics\RectangleShape.hpp>
 
-float Debug::getZ()const
+float Circle::getZ() const
 {
 	return 500.f;
 }
@@ -27,13 +27,13 @@ Debug::~Debug()
 
 void Debug::drawRect(float x, float y, float width, float height, Color color, float rotation)
 {
-	SAssert(mWin != 0, "No Render Window");
+	SAssert(mRenderList != 0, "No RenderList");
 	setColor(color);
-	sf::RectangleShape r(sf::Vector2f(width, height));
-	r.setPosition(x, y);
-	r.setFillColor(mDebugColor);
-	r.rotate(rotation);
-	mWin->draw(r);
+	//sf::RectangleShape r(sf::Vector2f(width, height));
+	//r.setPosition(x, y);
+	//r.setFillColor(mDebugColor);
+	//r.rotate(rotation);
+	//mWin->draw(r);
 }
 void Debug::drawRect(SVector pos, float width, float height, Color color, float rotation)
 {
