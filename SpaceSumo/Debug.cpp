@@ -5,8 +5,8 @@
 Debug& Debug::getS() {
 	return d;
 }
-void Debug::setRenderTarget(sf::RenderWindow &win) {
-	mWin = &win;
+void Debug::setRenderList(RenderList& renderList) {
+	mRenderList = &renderList;
 }
 
 Debug::Debug() : mDebugColor(0, 255, 0, 255)

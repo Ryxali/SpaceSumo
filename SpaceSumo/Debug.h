@@ -2,6 +2,15 @@
 #include <Common\SVector.h>
 #include <SFML\Graphics\Color.hpp>
 #include <SFML\Graphics\RenderWindow.hpp>
+#include "RenderList.h"
+#include <ResourceManager\SDrawable.h>
+class Circle
+	: public SDrawable
+{
+public:
+	virtual float getZ()const;
+};
+
 class Debug
 {
 public:
@@ -9,7 +18,7 @@ public:
 		WHITE, BLACK, RED, BLUE, GREEN, YELLOW
 	};
 	static Debug &getS();
-	void setRenderTarget(sf::RenderWindow &win);
+	void setRenderList(RenderList& renderList);
 	void drawRect(float x, float y, float width, float height, Color color, float rotation = 0);
 	void drawRect(SVector pos, float width, float height, Color color, float rotation = 0);
 private:
@@ -18,6 +27,6 @@ private:
 	~Debug();
 	static Debug d;
 	sf::Color mDebugColor;
-	sf::RenderWindow *mWin;
+	RenderList* mRenderList;
 	void setColor(Color col);
 };

@@ -20,6 +20,7 @@ public:
 	const b2Vec2 getPosition();
 	float32 getAngularVelocity();
 	float32 getAngle();
+	b2Body* getBody();
 
 	//setfunctions
 	void applyAngularImpulse(float32 impulse, bool wake);
@@ -33,7 +34,7 @@ private:
 	SVector mSpawnpoint;
 	Config mConfig;
 
-	b2Body * mBody;
+	b2Body* mBody;
 	b2BodyDef mBodyDef;
 	b2CircleShape mBodyShape;
 	b2FixtureDef mBodyFix;

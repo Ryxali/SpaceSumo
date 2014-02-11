@@ -17,6 +17,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mLeft(left),
 	mPush(push),
 	mSpaceman(world , bodyData, x , y ),
+	mLeftHand(world, bodyData, x , y ),
+	mRightHand(world, bodyData, x, y),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
@@ -24,6 +26,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);
+	initializeArms(world);
 }
 
 SpaceManImp::~SpaceManImp()
@@ -91,6 +94,8 @@ void SpaceManImp::update(GameData &data, int delta)
 	if(sf::Keyboard::isKeyPressed(mPush))
 	{
   		mAnim.setCurrentRow(1);
+		mLeftArm->SetMotorSpeed(9);
+		mLeftHand.getPosition
 	}
 	else
 	{
@@ -112,3 +117,19 @@ void SpaceManImp::addEffect()
 
 }
 
+void SpaceManImp::initializeArms(b2World& world)
+{
+	// Left arm
+	mLeftArmDef.bodyA = mLeftHand.getBody();
+	mLeftArmDef.bodyB = mSpaceman.getBody();
+	mLeftArmDef.collideConnected = false;
+	mLeftArmDef.localAxisA.Set( 0 , 1 );
+	mLeftArmDef.localAxisA.Normalize();
+
+	mLeftArmDef.localAnchorA.Set( 0 , 0 );
+	mLeftArmDef.localAnchorB.Set( 0 , 0 );
+
+	
+	mLeftArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mLeftArmDef);
+
+}
