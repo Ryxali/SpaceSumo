@@ -1,6 +1,8 @@
 #pragma once
 #include "entityimp.h"
 
+struct GameStateData;
+
 class Ability;
 
 class PowerUp :
@@ -9,7 +11,7 @@ class PowerUp :
 public:
 	~PowerUp();
 
-	virtual void update(GameData &data, int delta) = 0;
+	virtual void update(GameData &data, GameStateData &gData, int delta) = 0;
 	virtual void draw(RenderList& renderList) = 0;
 	virtual void addEffect();
 

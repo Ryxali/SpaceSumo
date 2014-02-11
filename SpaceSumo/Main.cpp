@@ -5,6 +5,8 @@
 #include "Game.h"
 #include <ResourceManager\RHandle.h>
 int main() {
+	res::addResource("res/img/Test_ikon.png");
+	res::loadResource("res/img/Test_ikon.png");
 	res::addResource("res/img/Anim.png");
 	res::loadResource("res/img/Anim.png");
 	res::addResource("res/img/Terra_BG.png");

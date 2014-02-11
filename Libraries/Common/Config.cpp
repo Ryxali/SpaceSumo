@@ -58,7 +58,7 @@ void Config::saveConfigChange()
 {
 	close();
 	mFile.open(mFilePath);
-	SAssert(mFile.is_open(), "Could not open config file");
+	SAssert(mFile.is_open(), "Could not open config file: " + mFilePath);
 
 	std::string tempString = "";
 	std::string line = "";
@@ -82,7 +82,6 @@ void Config::saveConfigChange()
 				if( std::getline(is_line, value) ) 
 				{
 					std::map<std::string, std::string>::iterator it = mConfData.find(key);
-					SAssert( it != mConfData.end(), "Key not found");
 
 					value = it->second;
 					
@@ -114,7 +113,7 @@ template<>
 std::string Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
 	 
 	return it->second;
 }
@@ -123,7 +122,7 @@ template<>
 int Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
  
 	return std::stoi(it->second);
 }
@@ -132,7 +131,7 @@ template<>
 bool Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
  
 	if(it->second == "false")
 	{
@@ -156,7 +155,7 @@ template<>
 float Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
  
 	return std::stof(it->second);
 }
@@ -165,7 +164,7 @@ template<>
 double Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
  
 	return std::stod(it->second);
 }
@@ -174,7 +173,7 @@ template<>
 char Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
  
 	SAssert(it->second.length() == 1, "String can't be loaded into a single char");
 	return (it->second.at(0));

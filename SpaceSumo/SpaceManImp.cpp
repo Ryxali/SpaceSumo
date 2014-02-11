@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
+#include "GameStateData.h"
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
@@ -20,7 +21,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg")
+	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg"),
+	mAlive(true)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);
@@ -31,7 +33,7 @@ SpaceManImp::~SpaceManImp()
 
 }
 
-void SpaceManImp::update(GameData &data, int delta)
+void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
 
 	float fDelta = (float)delta/1000;
@@ -112,3 +114,7 @@ void SpaceManImp::addEffect()
 
 }
 
+bool SpaceManImp::isAlive()
+{
+	return mAlive;
+}
