@@ -2,7 +2,6 @@
 #include "powerup.h"
 #include <Box2D\Box2D.h>
 #include "B2Body.h"
-#include <Common\Config.h>
 #include <ResourceManager\Animation.h>
 
 struct GameStateData;
