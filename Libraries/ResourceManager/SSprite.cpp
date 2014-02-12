@@ -15,7 +15,7 @@
 
 SSprite::SSprite(const STexture &tex, float z) : mSprite(), mSTex(tex), mTexVersion(0), mZ(z)
 {
-
+	
 }
 
 SSprite::SSprite(const SSprite &sp) : mSprite(), mSTex(sp.mSTex), mTexVersion(0)
@@ -36,14 +36,20 @@ const sf::Texture& SSprite::getTexture() const
 void SSprite::draw(sf::RenderWindow &win)
 {
 
+	sync();
+	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
+	win.draw(mSprite);
+}
+
+void SSprite::sync()
+{
 	if(mTexVersion != mSTex.getVersion())
 	{
 		mSprite.setTexture(getTexture());
 		mTexVersion = mSTex.getVersion();
 	}
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
-	win.draw(mSprite);
 }
+
 float SSprite::getZ() const
 {
 	return mZ;

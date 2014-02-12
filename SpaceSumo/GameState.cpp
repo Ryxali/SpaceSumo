@@ -28,6 +28,8 @@ void GameState::update(GameData &data, int delta)
 		
 		
 	}
+	mGameMap->update(data);
+	mGameMode->update(data, mData, delta);
 }
 void GameState::draw(RenderList &list)
 {

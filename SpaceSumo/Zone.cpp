@@ -3,12 +3,23 @@
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\STexture.h>
 #include "RenderList.h"
+#include <Common\ConfigReader.h>
 Zone::Zone() :
-	mRope0(0, sf::Vector2f(200, 200)),
-	mRope1(90, sf::Vector2f(600, 200)),
-	mRope2(180, sf::Vector2f(600, 600)),
-	mRope3(270, sf::Vector2f(200, 600))
+	mTopLeftPos(1920 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), 1080 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
+	mSize(ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
+	mRope0(0, mTopLeftPos.asSfVector2f(), mSize.getX()),
+	mRope1(90, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY()), mSize.getY()),
+	mRope2(180, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getY()),
+	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX())
 {
+	mRope0.setBack(&mRope3);
+	mRope0.setFront(&mRope1);
+	mRope1.setBack(&mRope0);
+	mRope1.setFront(&mRope2);
+	mRope2.setBack(&mRope1);
+	mRope2.setFront(&mRope3);
+	mRope3.setBack(&mRope2);
+	mRope3.setFront(&mRope0);
 	mPulses.push_back(new Pulse());
 	mRope0.add_back(mPulses[0]);
 }
@@ -21,7 +32,7 @@ Zone::~Zone()
 
 void Zone::update(GameData &data, GameStateData &gData, int delta)
 {
-	mRope0.traverse(delta, 30.f);
+	mRope0.traverse(delta);
 	mRope1.traverse(delta);
 	mRope2.traverse(delta);
 	mRope3.traverse(delta);
@@ -39,7 +50,7 @@ void Zone::draw(RenderList& renderList)
 	}
 }
 
-Zone::Pulse::Pulse() : mImg(res::getTexture("res/img/Map_Barrier/Laser_Thick.png"), 2.f)
+Zone::Pulse::Pulse() : mImg(res::getTexture("res/img/Map_Barrier/Laser_Thick.png"), 2.f), mPercPos(0.f)
 {
 	mImg.getSprite().setOrigin(sf::Vector2f((float)mImg.getTexture().getSize().x/2.f, (float)mImg.getTexture().getSize().y/2.f));
 }
@@ -63,14 +74,23 @@ sf::Vector2f Zone::Pulse::getPosition()
 {
 	return mImg.getSprite().getPosition();
 }
-
+void Zone::Pulse::move(float perc)
+{
+	mPercPos += perc;
+}
+float Zone::Pulse::getPercMoved()
+{
+	return mPercPos;
+}
 void Zone::Pulse::draw(RenderList &list)
 {
 	list.addSprite(mImg);
 }
 
-Zone::Rope::Rope(float rotation, sf::Vector2f pos) : mImg(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 1.f), mDir(1, 0)
+Zone::Rope::Rope(float rotation, sf::Vector2f pos, SVector length) : mImg(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 1.f), mDir(1, 0)
 {
+	mImg.sync();
+	//mImg.getSprite().setScale(((float)mImg.getSprite().getTexture()->getSize().x) / length.getX(), ((float)mImg.getSprite().getTexture()->getSize().y) / length.getY());
 	mImg.getSprite().setOrigin(sf::Vector2f(0.f, (float)mImg.getTexture().getSize().y/2.f));
 	mImg.getSprite().setPosition(pos);
 	mImg.getSprite().setRotation(rotation);
@@ -79,25 +99,28 @@ Zone::Rope::Rope(float rotation, sf::Vector2f pos) : mImg(res::getTexture("res/i
 
 void Zone::Rope::traverse(int delta, float factor)
 {
+	float perc = factor * (float)delta/1000.f;
 	sf::Vector2f f((mDir.asSfVector2f()*factor*(float)delta)/1000.f);
 	for(std::vector<Pulse*>::iterator it = mPulses.begin(); it != mPulses.end();)
 	{
-		if(!mImg.getSprite().getGlobalBounds().contains((*it)->getPosition()+f))
+		(*it)->move(perc);
+		if((*it)->getPercMoved() > 1)
 		{
-			if(factor > 0)
-			{
-				transfer(it, true);
-			}
-			else
-			{
-				transfer(it, false);
-			}
+			(*it)->move(-1.f);
+			transfer(it, true);
+		}
+		else if((*it)->getPercMoved() < 0)
+		{
+			(*it)->move(1.f);
+			transfer(it, false);
 		}
 		else
 		{
-			(*it)->setPosition((*it)->getPosition()+f);
+			(*it)->setPosition(mImg.getSprite().getPosition() + (*it)->getPercMoved() * (mDir * mImg.getTexture().getSize().x).asSfVector2f());
 			it++;
 		}
+		//(*it)->setPosition(mImg.getSprite().getPosition() + (*it)->getPercMoved() * (mDir * SVector(mImg.getTexture().getSize().x, mImg.getTexture().getSize().y)).asSfVector2f());
+		//it++;
 	}
 	
 	
@@ -118,12 +141,14 @@ void Zone::Rope::transfer(std::vector<Pulse*>::iterator& pulse, bool forward)
 
 void Zone::Rope::add_front(Pulse* pulse)
 {
+	mPulses.push_back(pulse);
 	pulse->setPosition(mImg.getSprite().getPosition());
 	pulse->setRotation(mImg.getSprite().getRotation());
 }
 
 void Zone::Rope::add_back(Pulse* pulse)
 {
+	mPulses.push_back(pulse);
 	pulse->setPosition(mImg.getSprite().getPosition());  
 	pulse->setRotation(mImg.getSprite().getRotation());
 }
@@ -141,4 +166,9 @@ void Zone::Rope::setBack(Rope* rope)
 void Zone::Rope::draw(RenderList &list)
 {
 	list.addSprite(mImg);
+}
+
+SVector Zone::Rope::end()
+{
+	return mImg.getSprite().getPosition() + (mDir*mImg.getTexture().getSize().x).asSfVector2f();
 }
