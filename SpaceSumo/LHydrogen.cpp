@@ -13,6 +13,7 @@ LHydrogen::LHydrogen(b2World &world, std::string bodyData) :
 	mAnim(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg", 3.f)
 {
 	mBody.getBody()->SetUserData(this);
+	mAnim.getSprite().setOrigin(64, 64);
 }
 
 LHydrogen::~LHydrogen()
@@ -23,7 +24,7 @@ LHydrogen::~LHydrogen()
 void LHydrogen::update(GameData &data, GameStateData &gData, int delta)
 {
 	mAnim.getSprite().setRotation( mBody.getAngle() * RADTODEG );
-	mAnim.getSprite().setPosition( mBody.getPosition().x*PPM, mBody.getPosition().y*PPM);
+	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
 }
 
 void LHydrogen::draw(RenderList& renderList)
