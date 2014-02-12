@@ -14,13 +14,15 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
 	b2World& world, std::string bodyData,
+	std::string handData,
 	float x, float y, float32 rotation)
 	: mUp(up),
 	mRight(right),
 	mLeft(left),
 	mPush(push),
 	mSpaceman(world , bodyData, x , y ),
-	mLeftHand(world, bodyData, x , y ),
+	mLeftHand(world, handData, x , y ),
+	mRightHand(world, handData, x , y ),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
@@ -28,11 +30,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);
-	mCircle = new Circle;
 	initializeArms(world);
-	mCircle->setPointCount(30);
-	mCircle->setFillColor(sf::Color::Blue);
-	mCircle->setRadius(20);
 }
 
 
@@ -98,26 +96,25 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
   		mAnim.setCurrentRow(1);
 		mLeftArmJoint->SetMotorSpeed(20);
+		mRightArmJoint->SetMotorSpeed(20);
 		
 	}
 	else
 	{
 		mAnim.setCurrentRow(0);
 		mLeftArmJoint->SetMotorSpeed(-20);
+		mRightArmJoint->SetMotorSpeed(-20);
 	}
 
 
 	// the rectangle that represents the collision box
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
-
-	mCircle->setPosition( (mLeftHand.getPosition().x * PPM ), (mLeftHand.getPosition().y) * PPM );
 }
 
 void SpaceManImp::draw(RenderList& renderList)
 {
 	renderList.addSprite(mAnim);
-	renderList.addSprite(*mCircle);
 }
 
 void SpaceManImp::addEffect()
@@ -133,40 +130,35 @@ bool SpaceManImp::isAlive()
 void SpaceManImp::initializeArms(b2World& world)
 {
 	// Left arm
-
-	
-
 	mLeftArmDef.bodyA = mLeftHand.getBody();
 	mLeftArmDef.bodyB = mSpaceman.getBody();
 	mLeftArmDef.collideConnected = false;
 	mLeftArmDef.localAxisA.Set( 0 , 1 );
 	mLeftArmDef.localAxisA.Normalize();
-
 	mLeftArmDef.localAnchorA.Set( 0 , 0 );
-	mLeftArmDef.localAnchorB.Set( 0 , 0 );
-
+	mLeftArmDef.localAnchorB.Set( -49/PPM , 0 );
 	mLeftArmDef.enableLimit = true;
 	mLeftArmDef.lowerTranslation = 0;
-	mLeftArmDef.upperTranslation = 1;
-
+	mLeftArmDef.upperTranslation = 2;
 	mLeftArmDef.enableMotor = true;
 	mLeftArmDef.maxMotorForce = 300;
 	mLeftArmDef.motorSpeed = 0;
-	
 	mLeftArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mLeftArmDef);
 
-	//b2PrismaticJointDef prismaticJointDef;
- //           prismaticJointDef.bodyA = m_bodyB;
- //           prismaticJointDef.bodyB = trayBody;
- //           prismaticJointDef.collideConnected = true;
- //           prismaticJointDef.localAxis1.Set(1,0);
- //           prismaticJointDef.localAnchorA.Set(1,-4);//bottom right corner of lift slider
- //           prismaticJointDef.localAnchorB.Set(-0.5,-0.5);//bottom left corner of tray
- //           prismaticJointDef.enableLimit = true;
- //           prismaticJointDef.lowerTranslation = 0;
- //           prismaticJointDef.upperTranslation = 7;
- //           prismaticJointDef.enableMotor = true;//let user toggle this later
- //           prismaticJointDef.maxMotorForce = 300;
- //           prismaticJointDef.motorSpeed = -4;
+	// right hand
+	mRightArmDef.bodyA = mRightHand.getBody();
+	mRightArmDef.bodyB = mSpaceman.getBody();
+	mRightArmDef.collideConnected = false;
+	mRightArmDef.localAxisA.Set( 0 , 1 );
+	mRightArmDef.localAxisA.Normalize();
+	mRightArmDef.localAnchorA.Set( 0 , 0 );
+	mRightArmDef.localAnchorB.Set( 49/PPM , 0 );
+	mRightArmDef.enableLimit = true;
+	mRightArmDef.lowerTranslation = 0;
+	mRightArmDef.upperTranslation = 2;
+	mRightArmDef.enableMotor = true;
+	mRightArmDef.maxMotorForce = 300;
+	mRightArmDef.motorSpeed = 0;
+	mRightArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mRightArmDef);
 }
 

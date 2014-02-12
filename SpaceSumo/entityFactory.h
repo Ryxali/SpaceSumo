@@ -7,7 +7,8 @@ class EntityImp;
 namespace entFac
 {
 	EntityImp* createSpaceMan(std::string conf, b2World& world,
-		std::string bodyData, float x, float y, float32 rotation);
+		std::string bodyData, std::string handData,
+		float x, float y, float32 rotation);
 
 	EntityImp* createPowerUpLHydrogen(b2World& world);
 

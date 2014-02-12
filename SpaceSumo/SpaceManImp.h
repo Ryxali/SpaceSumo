@@ -22,6 +22,7 @@ public:
 				sf::Keyboard::Key push,
 				b2World& world,
 				std::string bodyData,
+				std::string handData,
 				float x, float y, float32 rotation);
 	~SpaceManImp();
 
@@ -39,7 +40,6 @@ private:
 
 	//helpfunctions
 	void initializeArms(b2World& world);
-	Circle* mCircle;
 
 	//config
 	static Config mConfig;
@@ -49,11 +49,17 @@ private:
 	//Spaceman stuff
 	B2Body mSpaceman;
 
+	// left hand
 	b2PrismaticJoint* mLeftArmJoint;
 	b2PrismaticJoint* mLeftArm;
 	B2Body mLeftHand;
 	b2PrismaticJointDef mLeftArmDef;
 
+	//right hand
+	b2PrismaticJoint* mRightArmJoint;
+	b2PrismaticJoint* mRightArm;
+	B2Body mRightHand;
+	b2PrismaticJointDef mRightArmDef;
 
 	float mSpeed;
 	SVector mDirection;
