@@ -55,7 +55,7 @@ Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 
 const sf::Texture &Animation::getTexture() const
 {
-	SAssert(mSTex.isLoaded(), "You need to load the texture before using.");
+	SAssert(mSTex.isLoaded(), "You need to load the texture before using. " + mSTex.getRef());
 	return mSTex.getTexture();
 }
 
@@ -67,7 +67,7 @@ void Animation::draw(sf::RenderWindow &win)
 		reevaluateSizeValues();
 		mTexVersion = mSTex.getVersion();
 	}
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
+	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
 	int curFrame = getCurrentFrame();
 	SAssert(curFrame == 0, "Wat");
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));

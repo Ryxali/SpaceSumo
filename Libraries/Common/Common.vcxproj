@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
+    <ClInclude Include="ConfigReader.h" />
     <ClInclude Include="error.h" />
     <ClInclude Include="mathH.h" />
     <ClInclude Include="MemTracker.h" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="ConfigReader.cpp" />
     <ClCompile Include="error.cpp" />
     <ClCompile Include="mathH.cpp" />
     <ClCompile Include="MemTracker.cpp" />
