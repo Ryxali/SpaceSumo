@@ -107,9 +107,10 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(mAbility != 0)
 		{
-			mAbility->activate(SVector(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM), mDirection, gData, data.world);
+			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, gData, data.world);
 
-			mAbility = 0;
+			//delete mAbility;
+			//mAbility = 0;
 		}
 	}
 	else

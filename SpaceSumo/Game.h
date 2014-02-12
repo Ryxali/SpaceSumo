@@ -19,6 +19,7 @@ private:
 	void update(int delta);
 	void preDraw();
 	void draw();
+	void cleanUp();
 	GameData mGameData;
 	StateList mStates;
 	Config mConfig;

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "B2Body.h"
+#include <string>
 static float PPM = 30;
 static float DEGREES_TO_RADIANS = 0.0174532925;
 
@@ -10,6 +11,11 @@ B2Body::B2Body(b2World &world , std::string configFile,
 		mSpawnpoint( x , y )
 {
 	initBody(world);
+}
+
+B2Body::~B2Body()
+{
+	mBody->GetWorld()->DestroyBody(mBody);
 }
 
 const b2Vec2 B2Body::getLinearVelocity()
@@ -80,6 +86,18 @@ void B2Body::initBody(b2World& world)
     mBodyFix.density = mConfig.getValue<float>("density");
 	mBodyFix.restitution = mConfig.getValue<float>("restitution");
     mBodyFix.friction = mConfig.getValue<float>("friction");
+	mBodyFix.filter.categoryBits = (uint16)mConfig.getValue<int>("category");
+	int i = mConfig.getValue<int>("Nmasks");
+	if( i != 0 )
+	{
+		uint16 val = mConfig.getValue<int>("mask_0");
+		for ( int t = 1; t < i; t++)
+		{
+			val = val | mConfig.getValue<int>("mask_" + std::to_string(t));
+		}
+		mBodyFix.filter.maskBits = val;
+	}
+	mBodyFix.isSensor = mConfig.getValue<bool>("isSensor");
     mBody = world.CreateBody(&mBodyDef);
     mBody->CreateFixture(&mBodyFix);
 	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));

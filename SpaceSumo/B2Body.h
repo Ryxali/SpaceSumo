@@ -11,6 +11,7 @@ struct B2Body
 public:
 	B2Body(b2World &world , std::string configFile,
 		float x, float y );
+	~B2Body();
 	
 	void initBody(b2World& world);
 

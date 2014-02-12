@@ -5,6 +5,7 @@
 #include "GameData.h"
 #include "GameStateData.h"
 #include "EntityType.h"
+#include <iostream>
 
 Entity::Entity(EntityImp* entity):
 	mEntity(entity)
@@ -18,7 +19,11 @@ Entity::Entity(const Entity& ent) : mEntity(ent.mEntity)
 
 Entity::~Entity()
 {
-
+	std::cout << mEntity.use_count() << "<----" << std::endl;
+	if(mEntity.use_count() == 0)
+	{
+		delete mEntity.get();
+	}
 }
 
 void Entity::update(GameData &data, GameStateData &gData, int delta)

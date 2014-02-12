@@ -16,5 +16,6 @@ public:
 	virtual void addEffect() = 0;
 	virtual bool isAlive() = 0;
 	virtual EntityType getType() = 0;
+	virtual void clean(GameData& data);
 };
 

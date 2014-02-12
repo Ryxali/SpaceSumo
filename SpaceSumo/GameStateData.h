@@ -1,11 +1,10 @@
 #pragma once
-#include <vector>
 #include "Entity.h"
+#include <list>
 
 struct GameStateData
 {
 	GameStateData();
-	std::vector<Entity> mEntities;
-	std::vector<Entity> mNewEntities;
+	std::list<Entity> mEntities;
 
 };

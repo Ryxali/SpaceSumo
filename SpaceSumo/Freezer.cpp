@@ -17,5 +17,7 @@ Freezer::~Freezer()
 
 void Freezer::activate(SVector pos, SVector dir, GameStateData& data, b2World& world)
 {
-	data.mNewEntities.push_back(new FreezeBolt(pos, dir, world));
+	data.mEntities.push_back(new FreezeBolt(SVector(pos.getX() - 65 + (dir.getX() * 70), pos.getY() - 65 + (dir.getY() * 70)), 
+		dir, 
+		world));
 }
