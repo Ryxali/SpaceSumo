@@ -1,5 +1,10 @@
 res/img/Anim.png
 res/img/Terra_BG.png
 res/img/Map_Barrier/Laser_Long.png
+<<<<<<< HEAD
+res/img/Test_ikon.png
 res/img/Map_Barrier/Laser_Thick.png
 res/img/face1.png
+=======
+res/img/Test_ikon.png
+>>>>>>> dev_AO

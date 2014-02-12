@@ -175,9 +175,6 @@
     <None Include="res\conf\powerUpBody.cfg" />
     <None Include="res\conf\spaceman.cfg" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="SpaceSumo.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

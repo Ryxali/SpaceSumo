@@ -18,11 +18,16 @@ void init()
 		std::getline(stream, nextLine);
 		res::addResource(nextLine);
 	}
-	res::loadResource("res/img/face1.png");
+	res::loadResource("res/img/Test_ikon.png");
 	res::loadResource("res/img/Anim.png");
 	res::loadResource("res/img/Terra_BG.png");
 	res::loadResource("res/img/Map_Barrier/Laser_Long.png");
+<<<<<<< HEAD
+	res::loadResource("res/img/face1.png");
 	res::loadResource("res/img/Map_Barrier/Laser_Thick.png");
+=======
+	res::loadResource("res/img/Test_ikon.png");
+>>>>>>> dev_AO
 }
 
 void run()
