@@ -106,8 +106,6 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mRightArmJoint->SetMotorSpeed(-20);
 	}
 
-
-	// the rectangle that represents the collision box
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
 }
