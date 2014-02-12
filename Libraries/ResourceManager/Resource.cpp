@@ -25,8 +25,11 @@ void Resource::load()
 
 void Resource::unload()
 {
-	unloadResource();
-	mIsLoaded = false;
+	if(mIsLoaded)
+	{
+		unloadResource();
+		mIsLoaded = false;
+	}
 }
 
 const std::string& Resource::getRef() const
