@@ -15,14 +15,15 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
 	b2World& world, std::string bodyData,
+	std::string handData,
 	float x, float y, float32 rotation)
 	: mUp(up),
 	mRight(right),
 	mLeft(left),
 	mPush(push),
 	mSpaceman(world , bodyData, x , y ),
-	mLeftHand(world, bodyData, x , y ),
-	mRightHand(world, bodyData, x, y),
+	mLeftHand(world, handData, x , y ),
+	mRightHand(world, handData, x , y ),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
@@ -34,6 +35,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	//initializeArms(world);
 	mSpaceman.getBody()->SetUserData(this);
 }
+
 
 SpaceManImp::~SpaceManImp()
 {
@@ -86,22 +88,19 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	if(sf::Keyboard::isKeyPressed(mRight))
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
-
-			
-		
 	}
 
 	if(sf::Keyboard::isKeyPressed(mLeft))
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
-
 	}
 	
 	if(sf::Keyboard::isKeyPressed(mPush))
 	{
   		mAnim.setCurrentRow(1);
-		mLeftArm->SetMotorSpeed(9);
-		//mLeftHand.getPosition
+		mLeftArmJoint->SetMotorSpeed(20);
+		mRightArmJoint->SetMotorSpeed(20);
+		
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -117,13 +116,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	else
 	{
 		mAnim.setCurrentRow(0);
+		mLeftArmJoint->SetMotorSpeed(-20);
+		mRightArmJoint->SetMotorSpeed(-20);
 	}
 
-
-	// the rectangle that represents the collision box
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 }
+
 void SpaceManImp::draw(RenderList& renderList)
 {
 	renderList.addSprite(mAnim);
@@ -167,11 +167,30 @@ void SpaceManImp::initializeArms(b2World& world)
 	mLeftArmDef.collideConnected = false;
 	mLeftArmDef.localAxisA.Set( 0 , 1 );
 	mLeftArmDef.localAxisA.Normalize();
-
 	mLeftArmDef.localAnchorA.Set( 0 , 0 );
-	mLeftArmDef.localAnchorB.Set( 0 , 0 );
-
-	
+	mLeftArmDef.localAnchorB.Set( -49/PPM , 0 );
+	mLeftArmDef.enableLimit = true;
+	mLeftArmDef.lowerTranslation = 0;
+	mLeftArmDef.upperTranslation = 2;
+	mLeftArmDef.enableMotor = true;
+	mLeftArmDef.maxMotorForce = 300;
+	mLeftArmDef.motorSpeed = 0;
 	mLeftArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mLeftArmDef);
 
+	// right hand
+	mRightArmDef.bodyA = mRightHand.getBody();
+	mRightArmDef.bodyB = mSpaceman.getBody();
+	mRightArmDef.collideConnected = false;
+	mRightArmDef.localAxisA.Set( 0 , 1 );
+	mRightArmDef.localAxisA.Normalize();
+	mRightArmDef.localAnchorA.Set( 0 , 0 );
+	mRightArmDef.localAnchorB.Set( 49/PPM , 0 );
+	mRightArmDef.enableLimit = true;
+	mRightArmDef.lowerTranslation = 0;
+	mRightArmDef.upperTranslation = 2;
+	mRightArmDef.enableMotor = true;
+	mRightArmDef.maxMotorForce = 300;
+	mRightArmDef.motorSpeed = 0;
+	mRightArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mRightArmDef);
 }
+
