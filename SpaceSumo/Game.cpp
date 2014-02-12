@@ -71,6 +71,7 @@ void Game::loop()
 	update(delta.asMilliseconds());
 	preDraw();
 	draw();
+	cleanUp();
 }
 
 void Game::update(int delta)
@@ -88,4 +89,9 @@ void Game::draw()
 {
 	mRenderList.render(mWindow);
 	mWindow.display();
+}
+
+void Game::cleanUp()
+{
+	mStates.getCurrent().cleanUp();
 }

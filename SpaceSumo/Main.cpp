@@ -22,7 +22,7 @@ void init()
 	res::loadResource("res/img/Anim.png");
 	res::loadResource("res/img/Terra_BG.png");
 	res::loadResource("res/img/Map_Barrier/Laser_Long.png");
-	res::loadResource("res/img/Test_ikon.png");
+	res::loadResource("res/img/face1.png");
 	res::loadResource("res/img/Map_Barrier/Laser_Thick.png");
 }
 

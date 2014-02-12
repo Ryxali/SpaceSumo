@@ -8,6 +8,7 @@ public:
 	~State() {}
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
+	virtual void cleanUp();
 protected:
 	State(StateList &owner);
 private:

@@ -16,3 +16,8 @@ void State::update(GameData &data, int delta)
 {
 
 }
+
+void State::cleanUp()
+{
+
+}

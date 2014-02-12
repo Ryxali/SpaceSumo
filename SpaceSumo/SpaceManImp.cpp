@@ -4,6 +4,7 @@
 #include "GameStateData.h"
 #include "EntityType.h"
 #include "Ability.h"
+#include <iostream>
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
@@ -107,8 +108,9 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(mAbility != 0)
 		{
-			mAbility->activate(SVector(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM), mDirection, gData, data.world);
+			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, gData, data.world);
 
+			delete mAbility;
 			mAbility = 0;
 		}
 	}
@@ -120,7 +122,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	// the rectangle that represents the collision box
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
-	mAnim.getSprite().setPosition( mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().y*PPM);
+	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 }
 void SpaceManImp::draw(RenderList& renderList)
 {
