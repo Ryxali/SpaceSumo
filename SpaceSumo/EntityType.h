@@ -2,5 +2,5 @@
 
 enum EntityType 
 {
-	POWER_UP, PLAYER, MISC
+	POWER_UP, PLAYER, EFFECTING, MISC
 };

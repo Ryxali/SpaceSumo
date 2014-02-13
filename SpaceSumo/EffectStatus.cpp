@@ -5,16 +5,16 @@
 
 
 EffectStatus::EffectStatus() 
-	: mFlag_CAN_MOVE(Flag::CAN_MOVE), mFlag_CAN_ALTER_MOVE(Flag::CAN_ALTER_MOVE)
+	: mFlag_CAN_MOVE(Flag::CAN_MOVE), mFlag_CAN_ROTATE(Flag::CAN_ROTATE)
 {
 }
 
 void EffectStatus::addFlag(Effect &effect)
 {
 	//TODO Add more flags
-	if (effect.getFlag_CAN_ALTER_MOVE().mSeverity > mFlag_CAN_ALTER_MOVE.mSeverity)
+	if (effect.getFlag_CAN_ROTATE().mSeverity > mFlag_CAN_ROTATE.mSeverity)
 	{
-		mFlag_CAN_ALTER_MOVE = effect.getFlag_CAN_ALTER_MOVE();
+		mFlag_CAN_ROTATE = effect.getFlag_CAN_ROTATE();
 	}
 
 	if (effect.getFlag_CAN_MOVE().mSeverity > mFlag_CAN_MOVE.mSeverity)
@@ -39,7 +39,7 @@ Flag EffectStatus::getFlag_CAN_MOVE()
 	return mFlag_CAN_MOVE;
 }
 
-Flag EffectStatus::getFlag_CAN_ALTER_MOVE()
+Flag EffectStatus::getFlag_CAN_ROTATE()
 {
-	return mFlag_CAN_ALTER_MOVE;
+	return mFlag_CAN_ROTATE;
 }

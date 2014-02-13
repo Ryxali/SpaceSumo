@@ -23,7 +23,7 @@ void Frozen::draw()
 {
 }
 
-Flag Frozen::getFlag_CAN_ALTER_MOVE()
+Flag Frozen::getFlag_CAN_ROTATE()
 {
-	return Flag(Flag::CAN_ALTER_MOVE, 10, false, 1);
+	return Flag(Flag::CAN_ROTATE, 10, false, 1);
 }

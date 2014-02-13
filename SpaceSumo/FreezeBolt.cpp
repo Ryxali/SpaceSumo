@@ -2,6 +2,8 @@
 #include "FreezeBolt.h"
 #include "EntityType.h"
 #include <ResourceManager\RHandle.h>
+#include "Effect.h"
+#include "Frozen.h"
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
@@ -14,6 +16,7 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
+	mBody.getBody()->SetUserData(this);
 }
 
 FreezeBolt::~FreezeBolt()
@@ -36,16 +39,12 @@ void FreezeBolt::draw(RenderList& renderList)
 	renderList.addSprite(mAnim);
 }
 
-void FreezeBolt::addEffect()
-{
-}
-
 bool FreezeBolt::isAlive()
 {
 	return mAlive;
 }
 
-EntityType FreezeBolt::getType()
+Effect FreezeBolt::getEffect()
 {
-	return MISC;
+	return new Frozen();
 }

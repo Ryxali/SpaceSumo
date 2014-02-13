@@ -53,7 +53,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	}
 
 
-	if(sf::Keyboard::isKeyPressed(mUp))
+	if(sf::Keyboard::isKeyPressed(mUp) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
@@ -83,7 +83,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	}
 
-	if(sf::Keyboard::isKeyPressed(mRight))
+	if(sf::Keyboard::isKeyPressed(mRight) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 
@@ -91,7 +91,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		
 	}
 
-	if(sf::Keyboard::isKeyPressed(mLeft))
+	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 
@@ -129,9 +129,9 @@ void SpaceManImp::draw(RenderList& renderList)
 	renderList.addSprite(mAnim);
 }
 
-void SpaceManImp::addEffect()
+void SpaceManImp::addEffect(Effect& effect)
 {
-
+	mEffects.addEffect(effect);
 }
 
 void SpaceManImp::addAbility(Ability* ability)

@@ -90,6 +90,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Effecting.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectImp.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="Effecting.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectImp.h" />

@@ -4,7 +4,7 @@ struct Flag
 public:
 	enum Type 
 	{
-		CAN_MOVE, CAN_ALTER_MOVE // TODO Add more flags
+		CAN_MOVE, CAN_ROTATE // TODO Add more flags
 	};
 
 	Flag(Type flagT);

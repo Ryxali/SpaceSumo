@@ -37,11 +37,6 @@ void Entity::draw(RenderList& renderList)
 	mEntity.get()->draw(renderList);
 }
 
-bool Entity::addEffect()
-{
-	return true;
-}
-
 bool Entity::isAlive()
 {
 	return mEntity.get()->isAlive();

@@ -7,7 +7,6 @@ class Effect
 public:
 	Effect(EffectImp*);
 	~Effect();
-	Effect(const Effect &e);
 
 	void update();
 	void draw();
@@ -16,9 +15,10 @@ public:
 
 	//TODO Add more flags
 	Flag getFlag_CAN_MOVE();
-	Flag getFlag_CAN_ALTER_MOVE();
+	Flag getFlag_CAN_ROTATE();
 	
 private:
 	EffectImp* mImp;
+	Effect(const Effect &e);
 };
 

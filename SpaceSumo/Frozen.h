@@ -13,7 +13,7 @@ public:
 	virtual void update();
 	virtual void draw();
 
-	virtual Flag getFlag_CAN_ALTER_MOVE();
+	virtual Flag getFlag_CAN_ROTATE();
 
 private:
 	static Config mConfig;

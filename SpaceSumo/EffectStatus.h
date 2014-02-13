@@ -15,11 +15,11 @@ public:
 
 	//TODO Add more flags
 	Flag getFlag_CAN_MOVE();
-	Flag getFlag_CAN_ALTER_MOVE();
+	Flag getFlag_CAN_ROTATE();
 
 private:
 	Flag mFlag_CAN_MOVE;
-	Flag mFlag_CAN_ALTER_MOVE;
+	Flag mFlag_CAN_ROTATE;
 
 };
 

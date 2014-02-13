@@ -7,7 +7,7 @@
 #include <Common\SVector.h>
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
-
+#include "Effects.h"
 enum EntityType;
 struct GameStateData;
 class Ability;
@@ -27,7 +27,7 @@ public:
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
-	virtual void addEffect();
+	virtual void addEffect(Effect& effect);
 	void addAbility(Ability*);
 	virtual bool isAlive();
 	virtual EntityType getType();
@@ -58,6 +58,7 @@ private:
 	b2PrismaticJointDef mLeftArmDef;
 	b2PrismaticJointDef mRightArmDef;
 
+	Effects mEffects;
 	Ability* mAbility;
 	float mSpeed;
 	SVector mDirection;
