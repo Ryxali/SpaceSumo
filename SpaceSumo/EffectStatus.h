@@ -12,6 +12,7 @@ public:
 	void addFlag(Effect &effect);
 	virtual void update();
 	virtual void draw();
+	virtual EffectImp* clone();
 
 	//TODO Add more flags
 	Flag getFlag_CAN_MOVE();

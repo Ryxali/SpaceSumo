@@ -12,8 +12,10 @@ public:
 
 	virtual void update();
 	virtual void draw();
+	virtual EffectImp* clone();
 
 	virtual Flag getFlag_CAN_ROTATE();
+	virtual Flag getFlag_CAN_MOVE();
 
 private:
 	static Config mConfig;

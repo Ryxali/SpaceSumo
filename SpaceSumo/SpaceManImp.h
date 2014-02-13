@@ -35,6 +35,8 @@ public:
 	virtual bool isAlive();
 	virtual EntityType getType();
 	bool isAbilityFree();
+	void slowDeath();
+
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -65,6 +67,7 @@ private:
 	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
 
+	bool mSlowDeath;
 	Effects mEffects;
 	Ability* mAbility;
 	float mSpeed;

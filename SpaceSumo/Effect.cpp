@@ -12,9 +12,14 @@ Effect::~Effect()
 	delete mImp;
 }
 
-Effect::Effect(const Effect &e) : mImp(e.mImp)
+Effect::Effect(const Effect &e) : mImp(e.mImp->clone())
 {
+}
 
+Effect& Effect::operator=(const Effect &e)
+{
+	mImp = e.mImp->clone();
+	return *this;
 }
 
 void Effect::update()

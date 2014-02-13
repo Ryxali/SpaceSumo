@@ -1,13 +1,15 @@
 #pragma once
+#include "Flag.h"
 
 class EffectImp;
-#include "Flag.h"
+
 class Effect
 {
 public:
 	Effect(EffectImp*);
 	~Effect();
-
+	Effect(const Effect &e);
+	Effect& operator=(const Effect &e);
 	void update();
 	void draw();
 	bool isAlive();
@@ -19,6 +21,5 @@ public:
 	
 private:
 	EffectImp* mImp;
-	Effect(const Effect &e);
 };
 

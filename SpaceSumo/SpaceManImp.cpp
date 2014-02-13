@@ -28,7 +28,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
-	mAbility(0)
+	mAbility(0),
+	mSlowDeath(false)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mSpaceman.setRotation(rotation);
@@ -48,6 +49,19 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
+	mEffects.update();
+	Effect mEffectStatus(mEffects.getStatus());
+
+	if(mSlowDeath)
+	{
+		b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2, 1080 / 2));
+		toTheEdge.Normalize();
+
+		mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
+									toTheEdge.y * ( mSpeed * fDelta )), 
+									mSpaceman.getWorldCenter(), true);
+		return;
+	}
 
 	if(mConfig.getValue<bool>("fixedRotation") && !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
@@ -55,7 +69,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	}
 
 
-	if(sf::Keyboard::isKeyPressed(mUp) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mUp) && mEffectStatus.getFlag_CAN_MOVE().mStatus)
 	{
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
@@ -85,12 +99,12 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	}
 
-	if(sf::Keyboard::isKeyPressed(mRight) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 	}
 
-	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mLeft) && mEffectStatus.getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 	}
@@ -119,14 +133,13 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			mAbility = 0;
 		}
 	}
-	
-
-	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
-	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 }
 
 void SpaceManImp::draw(RenderList& renderList)
 {
+	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
+	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
+
 	renderList.addSprite(mAnim);
 }
 
@@ -158,6 +171,11 @@ bool SpaceManImp::isAbilityFree()
 	}
 	else
 		return true;
+}
+
+void SpaceManImp::slowDeath()
+{
+	mSlowDeath = true;
 }
 
 void SpaceManImp::initializeArms(b2World& world)

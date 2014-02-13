@@ -13,6 +13,4 @@ namespace entFac
 	EntityImp* createPowerUpLHydrogen(b2World& world);
 
 	EntityImp* createPowerUpRandom(std::string conf, b2World& world);
-
-
 };

@@ -5,7 +5,7 @@
 class Sumo : public Mode
 {
 public:
-	Sumo();
+	Sumo(b2World& world);
 	~Sumo();
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList &list);

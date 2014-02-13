@@ -28,7 +28,7 @@ void Effects::update()
 
 void Effects::addEffect(Effect& effect)
 {
-	//mEffectList.push_back(effect.duplicate());
+	mEffectList.push_back(effect);
 }
 
 Effect Effects::getStatus()

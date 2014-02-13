@@ -2,20 +2,28 @@
 #include <ResourceManager\SSprite.h>
 #include <Common\SVector.h>
 #include <vector>
+#include "EntityImp.h"
+#include "B2Body.h"
+#include <Box2D\Box2D.h>
+
 struct GameData;
 struct GameStateData;
 class RenderList;
 
 class Zone
+	: EntityImp
 {
 public:
-	Zone();
+	Zone(b2World& world);
 	~Zone();
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
+	virtual bool isAlive();
+	virtual EntityType getType();
 private:
 	SVector mTopLeftPos;
 	SVector mSize;
+	B2Body mBody;
 	class Pulse
 	{
 	public:

@@ -33,6 +33,11 @@ void EffectStatus::draw()
 	SAssert(false, "Don't use EffectStatus draw()");
 }
 
+EffectImp* EffectStatus::clone()
+{
+	return new EffectStatus(*this);
+}
+
 //TODO add more flags
 Flag EffectStatus::getFlag_CAN_MOVE()
 {
