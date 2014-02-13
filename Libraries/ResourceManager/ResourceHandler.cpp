@@ -12,6 +12,7 @@
 #endif
 #include <locale>
 #include <sstream>
+#include <fstream>
 namespace stringhelp
 {
 	std::string toLowerCase(std::string &str)
@@ -38,7 +39,7 @@ void ResourceHandler::add(std::string fileRef)
 {
 	if(mLoadables.count(fileRef) < 1)
 	{
-		
+
 		switch(type(fileRef))
 		{
 		case Resource_Type::TEXTURE:
@@ -46,6 +47,9 @@ void ResourceHandler::add(std::string fileRef)
 			break;
 		case Resource_Type::AUDIO:
 			mLoadables.insert(std::pair<std::string, Loadable&>(fileRef, mSBufStore.add(fileRef)));
+			break;
+		case Resource_Type::BUNDLE:
+			addResources(fileRef);
 			break;
 		case Resource_Type::UNKNOWN:
 			SError("fileRef check failed", "fileRef was UNKNOWN!");
@@ -72,23 +76,54 @@ const SoundBufferStore& ResourceHandler::getSBufStore() const
 ResourceHandler::Resource_Type ResourceHandler::type(std::string fileRef)
 {
 	//fileRef = stringhelp::toLowerCase();
-	if(str::contains(fileRef, "png", false))
+	if(str::contains(fileRef, ".png", false))
 		return Resource_Type::TEXTURE;
-	if(str::contains(fileRef, "ogg", false))
+	if(str::contains(fileRef, ".ogg", false))
 		return Resource_Type::AUDIO;
+	if(str::contains(fileRef, ".xoxo", false))
+		return Resource_Type::BUNDLE;
 
 	// Last resort
 	return Resource_Type::UNKNOWN;
 }
 void ResourceHandler::load(std::string ref)
 {
-	SAssert(mLoadables.count(ref) > 0, "Couldn't load file: " + ref);
-	Loadable& tmp = mLoadables.at(ref);
-	tmp.load();
-	mCurLoaded.insert(std::pair<std::string, Loadable&>(ref, tmp));
+	if(str::contains(ref, ".xoxo", false))
+	{
+		loadResources(ref);
+	}
+	else
+	{
+		SAssert(mLoadables.count(ref) > 0, "Couldn't load file: " + ref);
+		Loadable& tmp = mLoadables.at(ref);
+		tmp.load();
+		mCurLoaded.insert(std::pair<std::string, Loadable&>(ref, tmp));
+	}
 }
 void ResourceHandler::loadCleanse(std::string ref)
 {
 	mCurLoaded.clear();
 	load(ref);
+}
+
+void ResourceHandler::addResources(std::string fileRef)
+{
+	std::ifstream stream(fileRef);
+	std::string nextLine;
+	while(!stream.eof())
+	{
+		std::getline(stream, nextLine);
+		add(nextLine);
+	}
+}
+
+void ResourceHandler::loadResources(std::string fileRef)
+{
+	std::ifstream stream(fileRef);
+	std::string nextLine;
+	while(!stream.eof())
+	{
+		std::getline(stream, nextLine);
+		load(nextLine);
+	}
 }

@@ -11,18 +11,8 @@
 
 void init()
 {
-	std::ifstream stream("res/ResourceList.xoxo");
-	std::string nextLine;
-	while(!stream.eof())
-	{
-		std::getline(stream, nextLine);
-		res::addResource(nextLine);
-	}
-	res::loadResource("res/img/face1.png");
-	res::loadResource("res/img/Anim.png");
-	res::loadResource("res/img/Terra_BG.png");
-	res::loadResource("res/img/Map_Barrier/Laser_Long.png");
-	res::loadResource("res/img/Map_Barrier/Laser_Thick.png");
+	res::addResource("res/ResourceList.xoxo");
+	res::loadResource("res/ResourceList.xoxo");
 }
 
 void run()
