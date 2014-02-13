@@ -5,7 +5,8 @@
 #include "LHydrogen.h"
 #include <Common\stringH.h>
 EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
-								  std::string bodyData, float x, float y, float32 rotation)
+								  std::string bodyData, std::string handData,
+								  float x, float y, float32 rotation)
 {
 	Config config("res/conf/spaceman.cfg");
 	Config controls(conf);
@@ -15,7 +16,7 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 		str::toKey(controls.getValue<std::string>("right")), 
 		str::toKey(controls.getValue<std::string>("left")), 
 		str::toKey(controls.getValue<std::string>("push")),
-		world, bodyData, x, y, rotation);
+		world, bodyData, handData,  x, y, rotation);
 }
 
 EntityImp* entFac::createPowerUpLHydrogen(b2World& world)

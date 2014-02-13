@@ -29,6 +29,8 @@ void GameState::update(GameData &data, int delta)
 	{
 		(*it).update(data, mData,delta);
 	}
+	mGameMap->update(data);
+	mGameMode->update(data, mData, delta);
 }
 void GameState::draw(RenderList &list)
 {
@@ -57,7 +59,7 @@ void GameState::cleanUp()
 
 void GameState::spacemanCreation(GameData& gameData)
 {
-	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", 50.f, 300.f, 90.f)));
-	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", 300.f, 300.f, 270.f)));
+	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
+	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
 }
 

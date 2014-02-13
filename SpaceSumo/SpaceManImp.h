@@ -8,6 +8,8 @@
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
 #include "Effects.h"
+#include "Debug.h"
+
 enum EntityType;
 struct GameStateData;
 class Ability;
@@ -22,6 +24,7 @@ public:
 				sf::Keyboard::Key push,
 				b2World& world,
 				std::string bodyData,
+				std::string handData,
 				float x, float y, float32 rotation);
 	~SpaceManImp();
 
@@ -42,7 +45,6 @@ private:
 	//helpfunctions
 	void initializeArms(b2World& world);
 
-
 	//config
 	static Config mConfig;
 	SVector mSpawnpoint;
@@ -51,11 +53,16 @@ private:
 	//Spaceman stuff
 	B2Body mSpaceman;
 
-	b2Joint* mLeftArmJoint;
+	// left hand
+	b2PrismaticJoint* mLeftArmJoint;
 	b2PrismaticJoint* mLeftArm;
 	B2Body mLeftHand;
-	B2Body mRightHand;
 	b2PrismaticJointDef mLeftArmDef;
+
+	//right hand
+	b2PrismaticJoint* mRightArmJoint;
+	b2PrismaticJoint* mRightArm;
+	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
 
 	Effects mEffects;

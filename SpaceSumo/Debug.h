@@ -9,7 +9,7 @@ class Circle
 {
 public:
 	virtual float getZ()const;
-
+	virtual void draw(sf::RenderWindow& renderWindow);
 };
 
 class Debug

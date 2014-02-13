@@ -22,6 +22,10 @@ Loadable& TextureStore::add(std::string ref)
 
 const STexture& TextureStore::get(std::string ref) const
 {
+<<<<<<< HEAD
+	SAssert(mItems.count(ref) > 0, "No such file in store!" + ref);
+=======
 	SAssert(mItems.count(ref) > 0, "No such file in store! " + ref);
+>>>>>>> dev_NL
 	return mItems.at(ref);
 }

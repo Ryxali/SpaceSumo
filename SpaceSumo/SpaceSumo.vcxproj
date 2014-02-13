@@ -119,6 +119,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Terra.cpp" />
     <ClCompile Include="Sumo.cpp" />
+    <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />
+    <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Common\Common.vcxproj">
@@ -174,9 +176,6 @@
     <None Include="res\conf\main.cfg" />
     <None Include="res\conf\powerUpBody.cfg" />
     <None Include="res\conf\spaceman.cfg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="SpaceSumo.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

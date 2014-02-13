@@ -82,7 +82,7 @@ ResourceHandler::Resource_Type ResourceHandler::type(std::string fileRef)
 }
 void ResourceHandler::load(std::string ref)
 {
-
+	SAssert(mLoadables.count(ref) > 0, "Couldn't load file: " + ref);
 	Loadable& tmp = mLoadables.at(ref);
 	tmp.load();
 	mCurLoaded.insert(std::pair<std::string, Loadable&>(ref, tmp));

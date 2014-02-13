@@ -38,6 +38,8 @@ public:
 		Causes an error should the Texture not be loaded
 	*/
 	void draw(sf::RenderWindow &win);
+
+	void sync();
 	virtual float getZ() const;
 	void setZ(float z);
 	sf::Sprite& getSprite();
