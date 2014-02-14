@@ -48,9 +48,13 @@ SpaceManImp::~SpaceManImp()
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
 
+
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
+
+	mTurn.setCurrentRow(2);
+
 
 	if(mConfig.getValue<bool>("fixedRotation") && !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
@@ -84,7 +88,6 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		{
 			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, -mConfig.getValue<float>("speedLimit")));
 		}
-
 
 	}
 
@@ -128,6 +131,9 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
+
+	mTurn.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
+	mTurn.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 }
 
 void SpaceManImp::draw(RenderList& renderList)
