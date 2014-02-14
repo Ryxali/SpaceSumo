@@ -150,7 +150,6 @@ void SpaceManImp::draw(RenderList& renderList)
 
 	mTurn.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mTurn.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
-}
 
 	renderList.addSprite(mAnim);
 	renderList.addSprite(mTurn);
