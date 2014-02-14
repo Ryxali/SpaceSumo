@@ -10,6 +10,7 @@ class SVector : public PointProtocol, protected sf::Vector2f
 public:
 	SVector(float x = 0, float y = 0);
 	SVector(const PointProtocol &v);
+	SVector(const SVector &v);
 	SVector(const sf::Vector2f &v);
 	~SVector();
 

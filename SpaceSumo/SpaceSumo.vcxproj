@@ -98,6 +98,7 @@
     <ClCompile Include="EffectStatus.cpp" />
     <ClCompile Include="entityFactory.cpp" />
     <ClCompile Include="EntityImp.cpp" />
+    <ClCompile Include="Face.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="FreezeBolt.cpp" />
     <ClCompile Include="Freezer.cpp" />
@@ -106,6 +107,8 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameStateData.cpp" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LHydrogen.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -136,6 +139,7 @@
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="EntityImp.h" />
     <ClInclude Include="EntityType.h" />
+    <ClInclude Include="Face.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="FreezeBolt.h" />
     <ClInclude Include="Freezer.h" />
@@ -143,6 +147,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameStateData.h" />
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="Hud.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LHydrogen.h" />
     <ClInclude Include="Map.h" />

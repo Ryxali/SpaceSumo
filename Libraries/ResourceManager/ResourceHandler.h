@@ -40,6 +40,8 @@ public:
 	// unloads all loadables that doesn't belong to this loadable, then loads all loadables that aren't already loaded
 	void loadCleanse(std::string ref);
 private:
+	void addResources(std::string fileRef);
+	void loadResources(std::string fileRef);
 	ResourceHandler(const ResourceHandler &rHandler);
 	std::map<std::string, Loadable&> mLoadables;
 	std::map<std::string, Loadable&> mCurLoaded;

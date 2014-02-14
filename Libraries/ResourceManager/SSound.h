@@ -24,11 +24,14 @@ public:
 		warning; causes an error should the sound not be loaded
 	*/
 	void play();
+
+	void stop();
 	/*
 		Get the sound buffer of this Sound
 		returns: const sf::SoundBuffer& - a reference to this sound's sound buffer 
 	*/
 	const sf::SoundBuffer& getSoundBuffer() const;
+	sf::Sound& getSound();
 private:
 	SSound& operator=(const SSound &sp);
 	const SSoundBuffer &mSBuf;

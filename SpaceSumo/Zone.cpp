@@ -6,14 +6,13 @@
 #include <Common\ConfigReader.h>
 #include "EntityType.h"
 Zone::Zone(b2World& world) :
-	mTopLeftPos(1920 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), 1080 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
+	mTopLeftPos((1920 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"))/2, (1080 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight"))/2),
 	mSize(ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
 	mRope0(0, mTopLeftPos.asSfVector2f(), mSize.getX()),
 	mRope1(90, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY()), mSize.getY()),
-	mRope2(180, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getY()),
-	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX()),
-	mBody(world, "res/conf/mode/sumo/zone.cfg", mTopLeftPos.getX(), mTopLeftPos.getY())
-{
+	mRope2(180, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX()),
+	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getY())
+	mBody(world, "res/conf/mode/sumo/zone.cfg", mTopLeftPos.getX(), mTopLeftPos.getY()){
 	mRope0.setBack(&mRope3);
 	mRope0.setFront(&mRope1);
 	mRope1.setBack(&mRope0);
@@ -100,9 +99,11 @@ void Zone::Pulse::draw(RenderList &list)
 	list.addSprite(mImg);
 }
 
-Zone::Rope::Rope(float rotation, sf::Vector2f pos, SVector length) : mImg(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 1.f), mDir(1, 0)
+Zone::Rope::Rope(float rotation, sf::Vector2f pos, int length) : mImg(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 1.f), mDir(1, 0)
 {
 	mImg.sync();
+	sf::IntRect r(0, 0, length, mImg.getTexture().getSize().y);
+	mImg.getSprite().setTextureRect(r);
 	//mImg.getSprite().setScale(((float)mImg.getSprite().getTexture()->getSize().x) / length.getX(), ((float)mImg.getSprite().getTexture()->getSize().y) / length.getY());
 	mImg.getSprite().setOrigin(sf::Vector2f(0.f, (float)mImg.getTexture().getSize().y/2.f));
 	mImg.getSprite().setPosition(pos);
@@ -129,7 +130,7 @@ void Zone::Rope::traverse(int delta, float factor)
 		}
 		else
 		{
-			(*it)->setPosition(mImg.getSprite().getPosition() + (*it)->getPercMoved() * (mDir * mImg.getTexture().getSize().x).asSfVector2f());
+			(*it)->setPosition(mImg.getSprite().getPosition() + (*it)->getPercMoved() * (mDir * mImg.getSprite().getTextureRect().width).asSfVector2f());
 			it++;
 		}
 		//(*it)->setPosition(mImg.getSprite().getPosition() + (*it)->getPercMoved() * (mDir * SVector(mImg.getTexture().getSize().x, mImg.getTexture().getSize().y)).asSfVector2f());

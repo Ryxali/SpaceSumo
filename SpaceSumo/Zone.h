@@ -46,7 +46,7 @@ private:
 	class Rope
 	{
 	public:
-		Rope(float rotation, sf::Vector2f pos, SVector length);
+		Rope(float rotation, sf::Vector2f pos, int length);
 		void traverse(int delta, float factor = 1.f);
 		void transfer(std::vector<Pulse*>::iterator& pulse, bool forward = true);
 		void add_back(Pulse* pulse);

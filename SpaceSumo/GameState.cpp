@@ -9,14 +9,15 @@
 #include "GameData.h"
 #include <list>
 
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData()
+GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mHud()
 {
 	spacemanCreation(gameData);
 	mGameMode = new Sumo(gameData.world);
 	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
 	//mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-
+	
 	mGameMap = new Terra();
+	mHud.setNPlayers(3);
 }
 GameState::~GameState()
 {
@@ -40,6 +41,7 @@ void GameState::draw(RenderList &list)
 	{
 		(*it).draw(list);
 	}
+	mHud.draw(list);
 }
 
 void GameState::cleanUp()

@@ -1,10 +1,12 @@
 #pragma once
+class Mode;
+class Map;
 #include "State.h"
 #include "Entity.h"
 #include <ResourceManager\SSprite.h>
 #include "GameStateData.h"
-class Mode;
-class Map;
+#include "Hud.h"
+
 
 class GameState : public State
 {
@@ -20,4 +22,5 @@ private:
 	GameStateData mData;
 	Mode* mGameMode;
 	Map* mGameMap;
+	Hud mHud;
 };
