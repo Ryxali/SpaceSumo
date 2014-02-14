@@ -54,7 +54,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(mSlowDeath)
 	{
-		b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2, 1080 / 2));
+		b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2 / PPM, 1080 / 2 / PPM));
 		toTheEdge.Normalize();
 
 		mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),

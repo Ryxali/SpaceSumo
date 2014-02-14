@@ -80,22 +80,24 @@ void B2Body::setRotation(float32 angle)
 
 void B2Body::initBody(b2World& world)
 {
-	
+
+	b2Shape* bodyShape;
+
 	
 	mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
 	mBodyDef.type = (b2BodyType) mConfig.getValue<int>("bodyType");
    
-	if(mConfig.getValue<std::string>("shape") == "circle")
+	if(mConfig.getValue<std::string>("shape") == "rectangle")
 	{
-		b2CircleShape mBodyShape;
-		mBodyShape.m_radius = mConfig.getValue<float>("radius")/PPM;
-		mBodyFix.shape = &mBodyShape;
+		bodyShape = new b2PolygonShape();
+		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(mConfig.getValue<int>("sizeX")/PPM, mConfig.getValue<int>("sizeY")/PPM);
+		mBodyFix.shape = bodyShape;
 	}
-	else if(mConfig.getValue<std::string>("shape") == "rectangle")
+	else
 	{
-		b2PolygonShape mBodyShape;
-		mBodyShape.SetAsBox(mConfig.getValue<int>("sizeX"), mConfig.getValue<int>("sizeY"));
-		mBodyFix.shape = &b2PolygonShape();
+		bodyShape = new b2CircleShape();
+		static_cast<b2CircleShape*>(bodyShape)->m_radius = mConfig.getValue<float>("radius")/PPM;
+		mBodyFix.shape = bodyShape;
 	}
     mBodyFix.density = mConfig.getValue<float>("density");
 	mBodyFix.restitution = mConfig.getValue<float>("restitution");
@@ -115,4 +117,6 @@ void B2Body::initBody(b2World& world)
     mBody = world.CreateBody(&mBodyDef);
     mBody->CreateFixture(&mBodyFix);
 	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
+
+	delete bodyShape;
 }
