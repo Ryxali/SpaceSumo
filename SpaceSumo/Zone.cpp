@@ -4,13 +4,15 @@
 #include <ResourceManager\STexture.h>
 #include "RenderList.h"
 #include <Common\ConfigReader.h>
-Zone::Zone() :
+#include "EntityType.h"
+Zone::Zone(b2World& world) :
 	mTopLeftPos(1920 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), 1080 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
 	mSize(ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
 	mRope0(0, mTopLeftPos.asSfVector2f(), mSize.getX()),
 	mRope1(90, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY()), mSize.getY()),
 	mRope2(180, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getY()),
-	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX())
+	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX()),
+	mBody(world, "res/conf/mode/sumo/zone.cfg", mTopLeftPos.getX(), mTopLeftPos.getY())
 {
 	mRope0.setBack(&mRope3);
 	mRope0.setFront(&mRope1);
@@ -22,6 +24,7 @@ Zone::Zone() :
 	mRope3.setFront(&mRope0);
 	mPulses.push_back(new Pulse());
 	mRope0.add_back(mPulses[0]);
+	mBody.getBody()->SetUserData(this);
 }
 
 
@@ -48,6 +51,16 @@ void Zone::draw(RenderList& renderList)
 	{
 		(*it)->draw(renderList);
 	}
+}
+
+bool Zone::isAlive()
+{
+	return true;
+}
+
+EntityType Zone::getType()
+{
+	return ARENA;
 }
 
 Zone::Pulse::Pulse() : mImg(res::getTexture("res/img/Map_Barrier/Laser_Thick.png"), 2.f), mPercPos(0.f)

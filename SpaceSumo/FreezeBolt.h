@@ -1,11 +1,13 @@
 #pragma once
-#include "entityimp.h"
 #include <Common\SVector.h>
 #include <ResourceManager\Animation.h>
 #include "B2Body.h"
+#include "Effecting.h"
+
+class Effect;
 
 class FreezeBolt :
-	public EntityImp
+	public Effecting
 {
 public:
 	FreezeBolt(SVector pos, SVector dir, b2World& world);
@@ -13,9 +15,8 @@ public:
 
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
-	virtual void addEffect();
 	virtual bool isAlive();
-	virtual EntityType getType();
+	virtual Effect getEffect();
 
 private:
 	float mSpeed;

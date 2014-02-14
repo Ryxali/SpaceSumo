@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Effect.h"
 
 enum EntityType;
 struct GameStateData;
@@ -15,7 +16,6 @@ public:
 	~Entity();
 	void update(GameData &data, GameStateData &gData,int delta);
 	void draw(RenderList& renderList);
-	bool addEffect();
 	bool isAlive();
 	EntityType getType();
 

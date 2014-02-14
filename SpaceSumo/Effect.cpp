@@ -12,9 +12,14 @@ Effect::~Effect()
 	delete mImp;
 }
 
-Effect::Effect(const Effect &e) : mImp(e.mImp)
+Effect::Effect(const Effect &e) : mImp(e.mImp->clone())
 {
+}
 
+Effect& Effect::operator=(const Effect &e)
+{
+	mImp = e.mImp->clone();
+	return *this;
 }
 
 void Effect::update()
@@ -42,7 +47,7 @@ Flag Effect::getFlag_CAN_MOVE()
 	return mImp->getFlag_CAN_MOVE();
 }
 
-Flag Effect::getFlag_CAN_ALTER_MOVE()
+Flag Effect::getFlag_CAN_ROTATE()
 {
-	return mImp->getFlag_CAN_ALTER_MOVE();
+	return mImp->getFlag_CAN_ROTATE();
 }

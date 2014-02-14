@@ -6,10 +6,6 @@ PowerUp::~PowerUp()
 {
 }
 
-void PowerUp::addEffect()
-{
-}
-
 EntityType PowerUp::getType()
 {
 	return EntityType::POWER_UP;

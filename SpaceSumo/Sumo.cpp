@@ -3,7 +3,7 @@
 #include <ResourceManager\RHandle.h>
 #include "RenderList.h"
 #include "GameData.h"
-Sumo::Sumo(void) : Mode(), mTest(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 0.f), mZone()
+Sumo::Sumo(b2World& world) : Mode(), mTest(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 0.f), mZone(world)
 {
 	addSupportedMapType(Map_Type::TERRA);
 	addSupportedMapType(Map_Type::MINING_COLONY);

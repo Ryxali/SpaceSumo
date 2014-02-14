@@ -1,14 +1,15 @@
 #pragma once
+#include "Flag.h"
 
 class EffectImp;
-#include "Flag.h"
+
 class Effect
 {
 public:
 	Effect(EffectImp*);
 	~Effect();
 	Effect(const Effect &e);
-
+	Effect& operator=(const Effect &e);
 	void update();
 	void draw();
 	bool isAlive();
@@ -16,7 +17,7 @@ public:
 
 	//TODO Add more flags
 	Flag getFlag_CAN_MOVE();
-	Flag getFlag_CAN_ALTER_MOVE();
+	Flag getFlag_CAN_ROTATE();
 	
 private:
 	EffectImp* mImp;

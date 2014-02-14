@@ -10,12 +10,10 @@ public:
 
 	void draw();
 	void update();
-	void addEffect(Effect);
+	void addEffect(Effect&);
 	Effect getStatus();
 
 private:
-	
-
 	std::vector<Effect> mEffectList;
 };
 

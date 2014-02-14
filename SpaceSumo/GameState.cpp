@@ -12,7 +12,7 @@
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData()
 {
 	spacemanCreation(gameData);
-	mGameMode = new Sumo();
+	mGameMode = new Sumo(gameData.world);
 	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
 	//mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
 

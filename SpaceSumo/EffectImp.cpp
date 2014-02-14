@@ -10,9 +10,9 @@ bool EffectImp::isAlive()
 	return mIsAlive;
 }
 
-Flag EffectImp::getFlag_CAN_ALTER_MOVE()
+Flag EffectImp::getFlag_CAN_ROTATE()
 {
-	return Flag(Flag::CAN_ALTER_MOVE);
+	return Flag(Flag::CAN_ROTATE);
 }
 
 Flag EffectImp::getFlag_CAN_MOVE()

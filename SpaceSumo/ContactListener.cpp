@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "EntityType.h"
 #include "SpaceManImp.h"
+#include "Effecting.h"
 
 
 ContactListener::ContactListener()
@@ -19,33 +20,90 @@ void ContactListener::BeginContact(b2Contact* contact)
 	void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
 	void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 
-	if(bodyUserDataA != 0)
-	{
-		if(bodyUserDataB != 0)
-		{
+	if(bodyUserDataA == 0 || bodyUserDataB == 0)
+		return;
 
-			//check if fixture A was a power up
-			if(static_cast<EntityImp*>( bodyUserDataA )->getType() == POWER_UP)
+	beginCase(bodyUserDataA, bodyUserDataB);
+	beginCase(bodyUserDataB, bodyUserDataA);
+
+}
+
+void ContactListener::EndContact(b2Contact* contact)
+{
+	void* bodyUserDataA = contact->GetFixtureA()->GetBody()->GetUserData();
+	void* bodyUserDataB = contact->GetFixtureB()->GetBody()->GetUserData();
+
+	if(bodyUserDataA == 0 || bodyUserDataB == 0)
+		return;
+
+	endCase(bodyUserDataA, bodyUserDataB);
+	endCase(bodyUserDataB, bodyUserDataA);
+
+}
+
+void ContactListener::beginCase(void* userDataA, void* userDataB)
+{
+
+	switch(static_cast<EntityImp*>( userDataA )->getType())
+	{
+	case POWER_UP :
+		switch(static_cast<EntityImp*>( userDataB )->getType())
+		{
+		case PLAYER:
+			if(static_cast<SpaceManImp*>( userDataB )->isAbilityFree())
 			{
-				if(static_cast<EntityImp*>( bodyUserDataB )->getType() == PLAYER)
-				{
-					if(static_cast<SpaceManImp*>( bodyUserDataB )->isAbilityFree())
-					{
-						static_cast<SpaceManImp*>( bodyUserDataB )->addAbility(static_cast<PowerUp*>( bodyUserDataA )->getAbility());
-					}
-				}
+				static_cast<SpaceManImp*>( userDataB )->addAbility(
+					static_cast<PowerUp*>( userDataA )->getAbility());
 			}
-			//check if fixture B was a power up
-			if(static_cast<EntityImp*>( bodyUserDataB )->getType() == POWER_UP)
-			{
-				if(static_cast<EntityImp*>( bodyUserDataA )->getType() == PLAYER)
-				{
-					if(static_cast<SpaceManImp*>( bodyUserDataA )->isAbilityFree())
-					{
-						static_cast<SpaceManImp*>( bodyUserDataA )->addAbility(static_cast<PowerUp*>( bodyUserDataB )->getAbility());
-					}
-				}
-			}
+			break;
+		default:
+			break;
 		}
+		break;
+
+	case EFFECTING:
+		switch(static_cast<EntityImp*>( userDataB )->getType())
+		{
+		case PLAYER:
+			static_cast<SpaceManImp*>( userDataB )->addEffect(
+				static_cast<Effecting*>( userDataA )->getEffect());
+			break;
+		default:
+			break;
+		}
+		break;
+
+	case PLAYER :
+		switch(static_cast<EntityImp*>( userDataB )->getType())
+		{
+		default:
+			break;
+		}
+		break;
+
+	default:
+		break;
+	}
+}
+
+void ContactListener::endCase(void* userDataA, void* userDataB)
+{
+	switch(static_cast<EntityImp*>( userDataA )->getType())
+	{
+	case ARENA:
+		switch(static_cast<EntityImp*>( userDataB )->getType())
+		{
+		case PLAYER:
+			static_cast<SpaceManImp*>( userDataB )->slowDeath();
+			break;
+
+		default:
+			break;
+		}
+
+		break;
+
+	default:
+		break;
 	}
 }

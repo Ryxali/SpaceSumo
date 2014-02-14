@@ -7,6 +7,7 @@
 #include <Common\SVector.h>
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
+#include "Effects.h"
 #include "Debug.h"
 
 enum EntityType;
@@ -29,11 +30,13 @@ public:
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
-	virtual void addEffect();
+	virtual void addEffect(Effect& effect);
 	void addAbility(Ability*);
 	virtual bool isAlive();
 	virtual EntityType getType();
 	bool isAbilityFree();
+	void slowDeath();
+
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -64,6 +67,8 @@ private:
 	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
 
+	bool mSlowDeath;
+	Effects mEffects;
 	Ability* mAbility;
 	float mSpeed;
 	SVector mDirection;

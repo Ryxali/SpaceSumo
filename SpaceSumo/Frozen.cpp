@@ -23,7 +23,17 @@ void Frozen::draw()
 {
 }
 
-Flag Frozen::getFlag_CAN_ALTER_MOVE()
+EffectImp* Frozen::clone()
 {
-	return Flag(Flag::CAN_ALTER_MOVE, 10, false, 1);
+	return new Frozen(*this);
+}
+
+Flag Frozen::getFlag_CAN_ROTATE()
+{
+	return Flag(Flag::CAN_ROTATE, 10, false, 1);
+}
+
+Flag Frozen::getFlag_CAN_MOVE()
+{
+	return Flag(Flag::CAN_MOVE, 10, false, 1);
 }

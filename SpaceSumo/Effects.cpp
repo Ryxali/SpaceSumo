@@ -26,19 +26,18 @@ void Effects::update()
 	}
 }
 
-void Effects::addEffect(Effect effect)
+void Effects::addEffect(Effect& effect)
 {
 	mEffectList.push_back(effect);
 }
 
 Effect Effects::getStatus()
 {
-	EffectStatus status;
+	EffectStatus* status = new EffectStatus;
 
 	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
 	{
-		status.addFlag(mEffectList.at(i));
+		status->addFlag(mEffectList.at(i));
 	}
-
-	return Effect(&status);
+	return status;
 }
