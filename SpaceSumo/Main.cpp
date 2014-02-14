@@ -11,8 +11,8 @@
 
 void init()
 {
-	}
 	res::addResource("res/ResourceList.xoxo");
+	res::loadResource("res/ResourceList.xoxo");
 }
 
 void run()

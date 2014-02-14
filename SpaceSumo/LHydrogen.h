@@ -15,7 +15,7 @@ public:
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
-	Ability* getAbility();
+	virtual Ability* getAbility();
 	virtual bool isAlive();
 
 private:
