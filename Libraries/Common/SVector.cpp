@@ -10,6 +10,10 @@ SVector::SVector(const PointProtocol &v)  : sf::Vector2f(v.getX(), v.getY())
 {
 
 }
+SVector::SVector(const SVector &v) : sf::Vector2f(v.x, v.y)
+{
+
+}
 SVector::SVector(const sf::Vector2f &v) : sf::Vector2f(v.x, v.y)
 {
 

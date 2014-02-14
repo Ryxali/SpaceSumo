@@ -31,8 +31,24 @@ void SSound::play()
 	mSound.play();
 }
 
+void SSound::stop()
+{
+	if(mSoundBufVersion != mSBuf.getVersion())
+	{
+		mSound.setBuffer(getSoundBuffer());
+		mSoundBufVersion = mSBuf.getVersion();
+	}
+	SAssert(mSBuf.isLoaded(), "The sound buffer isn't loaded");
+	mSound.stop();
+}
+
 const sf::SoundBuffer& SSound::getSoundBuffer() const
 {
 	SAssert(mSBuf.isLoaded(), "You need to load files before playing them.");
 	return mSBuf.getSoundBuffer();
+}
+
+sf::Sound& SSound::getSound()
+{
+	return mSound;
 }
