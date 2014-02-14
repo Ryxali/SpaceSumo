@@ -70,5 +70,6 @@ private:
 	float mAngle;
 	
 	Animation mAnim;
+	Animation mTurn;
 };
 

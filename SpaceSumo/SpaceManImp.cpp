@@ -28,9 +28,12 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
+	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
 	mAbility(0)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
+	mTurn.getSprite().setOrigin( 64 , 64 );
+	
 	mSpaceman.setRotation(rotation);
 	initializeArms(world);
 	mSpaceman.getBody()->SetUserData(this);
@@ -88,11 +91,13 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	if(sf::Keyboard::isKeyPressed(mRight))
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
+		mTurn.setCurrentRow(1);
 	}
 
 	if(sf::Keyboard::isKeyPressed(mLeft))
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
+		mTurn.setCurrentRow(0);
 	}
 	
 	if(sf::Keyboard::isKeyPressed(mPush))
@@ -128,6 +133,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 void SpaceManImp::draw(RenderList& renderList)
 {
 	renderList.addSprite(mAnim);
+	renderList.addSprite(mTurn);
 }
 
 void SpaceManImp::addEffect()
