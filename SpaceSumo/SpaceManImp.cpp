@@ -70,8 +70,8 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 			//TODO Some kind of better spawn
 			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
-			mLeftHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, 1080 / 2.f / PPM), 0);
-			mRightHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, 1080 / 2.f / PPM), 0);
+			mLeftHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
+			mRightHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
 			mLeftHand.setLinearVelocity(b2Vec2(0,0));
 			mRightHand.setLinearVelocity(b2Vec2(0,0));
 			mSpaceman.setAngularVelocity(0);
@@ -80,7 +80,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		}
 		else
 		{
-			b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2 / PPM, 1080 / 2 / PPM));
+			b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2((float32)(1920 / 2 / PPM),(float32)(1080 / 2 / PPM)));
 			toTheEdge.Normalize();
 
 			mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
