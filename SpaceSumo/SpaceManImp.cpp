@@ -61,19 +61,24 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(mSlowDeath)
 	{
+
+		if(mRespawnTimer.isExpired())
+		{
+			mSpaceman.getBody()->SetTransform(b2Vec2(1920 / 2 /PPM, 1080 / 2 / PPM), 0);
+			mSpaceman.setAngularVelocity(0);
+			mSpaceman.setLinearVelocity(b2Vec2(0,0));
+			mSlowDeath = false;
+
+			return;
+		}
+
+
 		b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2 / PPM, 1080 / 2 / PPM));
 		toTheEdge.Normalize();
 
 		mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
 									toTheEdge.y * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
-
-		if(mRespawnTimer.isExpired())
-		{
-			mSpaceman.setAngularVelocity(0);
-			//mSpaceman.setLinearVelocity(0);
-			mSlowDeath = false;
-		}
 
 		return;
 	}
