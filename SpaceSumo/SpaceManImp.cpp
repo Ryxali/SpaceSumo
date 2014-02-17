@@ -5,6 +5,7 @@
 #include "EntityType.h"
 #include "Ability.h"
 #include <iostream>
+
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
