@@ -6,6 +6,7 @@ class Map;
 #include <ResourceManager\SSprite.h>
 #include "GameStateData.h"
 #include "Hud.h"
+#include <Common\Timer.h>
 
 
 class GameState : public State
@@ -23,4 +24,5 @@ private:
 	Mode* mGameMode;
 	Map* mGameMap;
 	Hud mHud;
+	Timer mPowerUpSpawnTimer;
 };
