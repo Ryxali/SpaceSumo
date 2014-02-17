@@ -31,12 +31,14 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mAngle(0.0f),
 	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
-	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
+	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 5.f),
+	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 6.f),
 	mAbility(0),
 	mSlowDeath(false)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mTurn.getSprite().setOrigin( 64 , 64 );
+	mJet.getSprite().setOrigin( 32 , -37 );
 	
 	mSpaceman.setRotation(rotation);
 	initializeArms(world);
@@ -79,7 +81,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	}
 
 	mTurn.setCurrentRow(2);
-
+	mJet.setCurrentRow(0);
 
 	if(mConfig.getValue<bool>("fixedRotation") && !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
@@ -113,8 +115,11 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		{
 			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, -mConfig.getValue<float>("speedLimit")));
 		}
-
+		
+		mJet.setCurrentRow(1);
 	}
+
+	
 
 	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
 	{
@@ -162,8 +167,12 @@ void SpaceManImp::draw(RenderList& renderList)
 	mTurn.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mTurn.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 
+	mJet.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
+	mJet.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
+
 	renderList.addSprite(mAnim);
 	renderList.addSprite(mTurn);
+	renderList.addSprite(mJet);
 }
 
 void SpaceManImp::addEffect(Effect& effect)

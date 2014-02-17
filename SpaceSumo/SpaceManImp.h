@@ -78,7 +78,9 @@ private:
 	SVector mDirection;
 	float mAngle;
 	
+	//animations
 	Animation mAnim;
 	Animation mTurn;
+	Animation mJet;
 };
 
