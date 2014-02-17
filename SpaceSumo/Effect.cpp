@@ -42,6 +42,7 @@ Effect Effect::duplicate()
 	return Effect(mImp);
 }
 
+//TODO Add more flags
 Flag Effect::getFlag_CAN_MOVE()
 {
 	return mImp->getFlag_CAN_MOVE();
@@ -50,4 +51,14 @@ Flag Effect::getFlag_CAN_MOVE()
 Flag Effect::getFlag_CAN_ROTATE()
 {
 	return mImp->getFlag_CAN_ROTATE();
+}
+
+Flag Effect::getFlag_CAN_PUSH()
+{
+	return mImp->getFlag_CAN_PUSH();
+}
+
+Flag Effect::getFlag_CAN_ACTIVATE()
+{
+	return mImp->getFlag_CAN_ACTIVATE();
 }

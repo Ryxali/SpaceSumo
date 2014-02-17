@@ -10,19 +10,24 @@ Effects::~Effects()
 {
 }
 
+void Effects::update()
+{
+	for (std::vector<Effect>::iterator i = mEffectList.begin(); i != mEffectList.end();)
+	{
+		(*i).update();
+		if(!(*i).isAlive())
+		{
+			i = mEffectList.erase(i);
+		}
+		else i++;
+	}
+}
+
 void Effects::draw()
 {
 	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
 	{
 		mEffectList.at(i).draw();
-	}
-}
-
-void Effects::update()
-{
-	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
-	{
-		mEffectList.at(i).update();
 	}
 }
 

@@ -14,6 +14,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key right,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
+	sf::Keyboard::Key activate,
 	b2World& world, std::string bodyData,
 	std::string handData,
 	float x, float y, float32 rotation)
@@ -21,12 +22,14 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mRight(right),
 	mLeft(left),
 	mPush(push),
+	mActivate(activate),
 	mSpaceman(world , bodyData, x , y ),
 	mLeftHand(world, handData, x , y ),
 	mRightHand(world, handData, x , y ),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
+	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
 	mAbility(0),
@@ -64,6 +67,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
 									toTheEdge.y * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
+
+		if(mRespawnTimer.isExpired())
+		{
+			mSpaceman.setAngularVelocity(0);
+			//mSpaceman.setLinearVelocity(0);
+			mSlowDeath = false;
+		}
+
 		return;
 	}
 
@@ -117,7 +128,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mTurn.setCurrentRow(0);
 	}
 	
-	if(sf::Keyboard::isKeyPressed(mPush))
+	if(sf::Keyboard::isKeyPressed(mPush) && mEffectStatus.getFlag_CAN_PUSH().mStatus)
 	{
   		mAnim.setCurrentRow(1);
 		mLeftArmJoint->SetMotorSpeed(20);
@@ -131,7 +142,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mRightArmJoint->SetMotorSpeed(-20);
 	}
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mEffectStatus.getFlag_CAN_ACTIVATE().mStatus)
 	{
 		if(mAbility != 0)
 		{
@@ -188,6 +199,7 @@ bool SpaceManImp::isAbilityFree()
 void SpaceManImp::slowDeath()
 {
 	mSlowDeath = true;
+	mRespawnTimer.reset();
 }
 
 void SpaceManImp::initializeArms(b2World& world)
