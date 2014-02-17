@@ -64,23 +64,27 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 		if(mRespawnTimer.isExpired())
 		{
-			mSpaceman.getBody()->SetTransform(b2Vec2(1920 / 2 /PPM, 1080 / 2 / PPM), 0);
+
+			//TODO Some kind of better spawn
+			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
+			mLeftHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, 1080 / 2.f / PPM), 0);
+			mRightHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, 1080 / 2.f / PPM), 0);
+			mLeftHand.setLinearVelocity(b2Vec2(0,0));
+			mRightHand.setLinearVelocity(b2Vec2(0,0));
 			mSpaceman.setAngularVelocity(0);
 			mSpaceman.setLinearVelocity(b2Vec2(0,0));
 			mSlowDeath = false;
+		}
+		else
+		{
+			b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2 / PPM, 1080 / 2 / PPM));
+			toTheEdge.Normalize();
 
+			mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
+										toTheEdge.y * ( mSpeed * fDelta )), 
+										mSpaceman.getWorldCenter(), true);
 			return;
 		}
-
-
-		b2Vec2 toTheEdge = b2Vec2(mSpaceman.getWorldCenter() - b2Vec2(1920 / 2 / PPM, 1080 / 2 / PPM));
-		toTheEdge.Normalize();
-
-		mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
-									toTheEdge.y * ( mSpeed * fDelta )), 
-									mSpaceman.getWorldCenter(), true);
-
-		return;
 	}
 
 	mTurn.setCurrentRow(2);
@@ -147,7 +151,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mRightArmJoint->SetMotorSpeed(-20);
 	}
 
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::E) && mEffectStatus.getFlag_CAN_ACTIVATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mActivate) && mEffectStatus.getFlag_CAN_ACTIVATE().mStatus)
 	{
 		if(mAbility != 0)
 		{
@@ -216,7 +220,7 @@ void SpaceManImp::initializeArms(b2World& world)
 	mLeftArmDef.localAxisA.Set( 0 , 1 );
 	mLeftArmDef.localAxisA.Normalize();
 	mLeftArmDef.localAnchorA.Set( 0 , 0 );
-	mLeftArmDef.localAnchorB.Set( -49/PPM , 0 );
+	mLeftArmDef.localAnchorB.Set( -49.f/PPM , 0 );
 	mLeftArmDef.enableLimit = true;
 	mLeftArmDef.lowerTranslation = 0;
 	mLeftArmDef.upperTranslation = 2;
@@ -232,7 +236,7 @@ void SpaceManImp::initializeArms(b2World& world)
 	mRightArmDef.localAxisA.Set( 0 , 1 );
 	mRightArmDef.localAxisA.Normalize();
 	mRightArmDef.localAnchorA.Set( 0 , 0 );
-	mRightArmDef.localAnchorB.Set( 49/PPM , 0 );
+	mRightArmDef.localAnchorB.Set( 49.f/PPM , 0 );
 	mRightArmDef.enableLimit = true;
 	mRightArmDef.lowerTranslation = 0;
 	mRightArmDef.upperTranslation = 2;

@@ -7,9 +7,9 @@
 static int PPM = 30;
 static float RADTODEG = 57.2957795f;
 
-LHydrogen::LHydrogen(b2World &world, std::string bodyData) : 
+LHydrogen::LHydrogen(b2World &world, std::string bodyData, float x, float y) : 
 	mAlive(true),
-	mBody(world, bodyData, 666, 666),
+	mBody(world, bodyData, x, y),
 	mAnim(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg", 3.f)
 {
 	mBody.getBody()->SetUserData(this);

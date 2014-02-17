@@ -8,14 +8,12 @@
 #include "RenderList.h"
 #include "GameData.h"
 #include <list>
+#include <cstdlib>
 
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mHud()
+GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mHud(), mPowerUpSpawnTimer(10000)
 {
 	spacemanCreation(gameData);
 	mGameMode = new Sumo(gameData.world);
-	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-	//mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-	
 	mGameMap = new Terra();
 	mHud.setNPlayers(3);
 }
@@ -29,6 +27,12 @@ void GameState::update(GameData &data, int delta)
 	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
 	{
 		(*it).update(data, mData,delta);
+	}
+
+	if(mPowerUpSpawnTimer.isExpired())
+	{
+		mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(data.world, rand()% 1519 + 200, rand()% 680 + 200)));
+		mPowerUpSpawnTimer.reset();
 	}
 	mGameMap->update(data);
 	mGameMode->update(data, mData, delta);

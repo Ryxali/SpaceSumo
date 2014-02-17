@@ -20,13 +20,13 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 		world, bodyData, handData,  x, y, rotation);
 }
 
-EntityImp* entFac::createPowerUpLHydrogen(b2World& world)
+EntityImp* entFac::createPowerUpLHydrogen(b2World& world, float x, float y)
 {
 	std::string bodyData("res/conf/powerUpBody.cfg");
-	return new LHydrogen(world, bodyData);
+	return new LHydrogen(world, bodyData, x, y);
 }
 
-EntityImp* entFac::createPowerUpRandom(std::string conf, b2World& world)
+EntityImp* entFac::createPowerUpRandom(std::string conf, b2World& world, float x, float y)
 {
-	return new LHydrogen(world, conf);
+	return new LHydrogen(world, conf, x, y);
 }

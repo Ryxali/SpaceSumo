@@ -10,7 +10,7 @@ class LHydrogen :
 	public PowerUp
 {
 public:
-	LHydrogen(b2World &world, std::string bodyData);
+	LHydrogen(b2World &world, std::string bodyData, float x, float y);
 	~LHydrogen();
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
