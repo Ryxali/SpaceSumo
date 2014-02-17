@@ -14,6 +14,8 @@ public:
 	//TODO Add more flags
 	virtual Flag getFlag_CAN_ROTATE();
 	virtual Flag getFlag_CAN_MOVE();
+	virtual Flag getFlag_CAN_PUSH();
+	virtual Flag getFlag_CAN_ACTIVATE();
 
 protected:
 	bool mIsAlive;

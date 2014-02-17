@@ -16,6 +16,7 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 		str::toKey(controls.getValue<std::string>("right")), 
 		str::toKey(controls.getValue<std::string>("left")), 
 		str::toKey(controls.getValue<std::string>("push")),
+		str::toKey(controls.getValue<std::string>("activate")),
 		world, bodyData, handData,  x, y, rotation);
 }
 

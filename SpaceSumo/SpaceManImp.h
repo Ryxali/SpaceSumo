@@ -9,6 +9,7 @@
 #include <ResourceManager\Animation.h>
 #include "Effects.h"
 #include "Debug.h"
+#include <Common\Timer.h>
 
 enum EntityType;
 struct GameStateData;
@@ -22,6 +23,7 @@ public:
 				sf::Keyboard::Key right,
 				sf::Keyboard::Key left,
 				sf::Keyboard::Key push,
+				sf::Keyboard::Key activate,
 				b2World& world,
 				std::string bodyData,
 				std::string handData,
@@ -43,6 +45,7 @@ private:
 	sf::Keyboard::Key mRight;
 	sf::Keyboard::Key mLeft;
 	sf::Keyboard::Key mPush;
+	sf::Keyboard::Key mActivate;
 
 	//helpfunctions
 	void initializeArms(b2World& world);
@@ -67,6 +70,7 @@ private:
 	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
 
+	Timer mRespawnTimer;
 	bool mSlowDeath;
 	Effects mEffects;
 	Ability* mAbility;
