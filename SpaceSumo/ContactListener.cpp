@@ -67,6 +67,7 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 		case PLAYER:
 			static_cast<SpaceManImp*>( userDataB )->addEffect(
 				static_cast<Effecting*>( userDataA )->getEffect(static_cast<SpaceManImp*>(userDataB)));
+			static_cast<Effecting*>( userDataA )->kill();
 			break;
 		default:
 			break;

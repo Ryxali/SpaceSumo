@@ -15,5 +15,6 @@ public:
 	virtual bool isAlive() = 0;
 	virtual EntityType getType();
 	virtual Effect getEffect(SpaceManImp* owner) = 0;
+	virtual void kill() = 0;
 };
 

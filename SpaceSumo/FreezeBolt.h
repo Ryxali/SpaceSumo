@@ -17,6 +17,7 @@ public:
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
 	virtual Effect getEffect(SpaceManImp* owner);
+	virtual void kill();
 
 private:
 	float mSpeed;

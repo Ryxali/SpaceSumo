@@ -45,3 +45,8 @@ Effect FreezeBolt::getEffect(SpaceManImp* owner)
 {
 	return new Frozen(owner);
 }
+
+void FreezeBolt::kill()
+{
+	mAlive = false;
+}
