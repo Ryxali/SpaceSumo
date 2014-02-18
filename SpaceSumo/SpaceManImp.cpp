@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "SpaceManImp.h"
-#include <ResourceManager\RHandle.h>
 #include "GameStateData.h"
 #include "EntityType.h"
 #include "Ability.h"
 #include <iostream>
+#include <ResourceManager\RHandle.h>
+#include <ResourceManager\SSoundBuffer.h>
 
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
@@ -30,32 +31,33 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
+	mPushTimer(mConfig.getValue<int>("pushCooldown")),
 	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 5.f),
 	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 6.f),
 	mAbility(0),
+	mPushing(false),
 	mSlowDeath(false)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mTurn.getSprite().setOrigin( 64 , 64 );
 	mJet.getSprite().setOrigin( 32 , -37 );
-	
+
 	mSpaceman.setRotation(rotation);
 	initializeArms(world);
+	initializeSound();
 	mSpaceman.getBody()->SetUserData(this);
 }
 
 
 SpaceManImp::~SpaceManImp()
 {
-
+	
 }
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
-
-
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
@@ -98,14 +100,24 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mSpaceman.setAngularVelocity(0);
 	}
 
-
 	if(sf::Keyboard::isKeyPressed(mUp) && mEffectStatus.getFlag_CAN_MOVE().mStatus)
 	{
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
+	
+	// plays the startingsound of the jetpack
+	if(start_press == true)
+	{
+		mStartSound.play();
+		mMainSound.play();
 
-		//Speed limit
+		start_press = false;
+		stop_press = true;
+	}
+
+
+	//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
 		{
 			mSpaceman.setLinearVelocity( b2Vec2(-mConfig.getValue<float>("speedLimit"), mSpaceman.getLinearVelocity().y));
@@ -129,33 +141,51 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mJet.setCurrentRow(1);
 	}
 
-	
+	//plays the endingsound of the jetpack
+	if(!sf::Keyboard::isKeyPressed(mUp))
+	{
+		if(stop_press == true)
+		{
+			mEndSound.play();
+			mMainSound.pause();
+		}
 
+		start_press = true;
+		stop_press = false;
+	}
+	
+	// turn right
 	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(1);
 	}
 
+	//turn left
 	if(sf::Keyboard::isKeyPressed(mLeft) && mEffectStatus.getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(0);
-	}
-	
+	}	
+
+	// player push
 	if(sf::Keyboard::isKeyPressed(mPush) && mEffectStatus.getFlag_CAN_PUSH().mStatus)
 	{
-  		mAnim.setCurrentRow(1);
-		mLeftArmJoint->SetMotorSpeed(20);
-		mRightArmJoint->SetMotorSpeed(20);
-		
+		mPushing = true;
+		mPushTimer.reset();
 	} 
+
+	if( mPushing == true && !mPushTimer.isExpired() )
+	{
+		extendArms();
+	}
 	else
 	{
-		mAnim.setCurrentRow(0);
-		mLeftArmJoint->SetMotorSpeed(-20);
-		mRightArmJoint->SetMotorSpeed(-20);
+		retractArms();
+		mPushing = false;
 	}
+
+
 
 	if(sf::Keyboard::isKeyPressed(mActivate) && mEffectStatus.getFlag_CAN_ACTIVATE().mStatus)
 	{
@@ -263,3 +293,24 @@ void SpaceManImp::initializeArms(b2World& world)
 	mRightArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mRightArmDef);
 }
 
+void SpaceManImp::extendArms()
+{
+  	mAnim.setCurrentRow(1);
+	mLeftArmJoint->SetMotorSpeed(mConfig.getValue<float>("punchforce"));
+	mRightArmJoint->SetMotorSpeed(mConfig.getValue<float>("punchforce"));
+}
+	
+void SpaceManImp::retractArms()
+{
+	mAnim.setCurrentRow(0);
+	mLeftArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
+	mRightArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
+}
+
+void SpaceManImp::initializeSound()
+{
+	mStartSound.setBuffer(res::getSoundBuffer("res/sound/Start.ogg").getSoundBuffer());
+	mMainSound.setBuffer(res::getSoundBuffer("res/sound/Main.ogg").getSoundBuffer());
+	mEndSound.setBuffer(res::getSoundBuffer("res/sound/End.ogg").getSoundBuffer());
+	mMainSound.setLoop(true);
+}

@@ -117,6 +117,5 @@ void B2Body::initBody(b2World& world)
     mBody = world.CreateBody(&mBodyDef);
     mBody->CreateFixture(&mBodyFix);
 	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
-
 	delete bodyShape;
 }
