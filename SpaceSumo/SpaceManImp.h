@@ -38,6 +38,7 @@ public:
 	virtual EntityType getType();
 	bool isAbilityFree();
 	void slowDeath();
+	B2Body& getBody();
 
 private:
 	//Keys

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Effect.h"
 #include "EffectImp.h"
-
+#include "RenderList.h"
 
 Effect::Effect(EffectImp* imp) : mImp(imp)
 {
@@ -22,14 +22,14 @@ Effect& Effect::operator=(const Effect &e)
 	return *this;
 }
 
-void Effect::update()
+void Effect::update(sf::Keyboard::Key& push)
 {
-	mImp->update();
+	mImp->update(push);
 }
 
-void Effect::draw()
+void Effect::draw(RenderList& renderList)
 {
-	mImp->draw();
+	mImp->draw(renderList);
 }
 
 bool Effect::isAlive()

@@ -16,7 +16,7 @@ public:
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
-	virtual Effect getEffect();
+	virtual Effect getEffect(SpaceManImp* owner);
 
 private:
 	float mSpeed;

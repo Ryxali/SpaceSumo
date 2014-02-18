@@ -36,12 +36,12 @@ void EffectStatus::addFlag(Effect &effect)
 	}
 }
 
-void EffectStatus::update()
+void EffectStatus::update(sf::Keyboard::Key& push)
 {
 	SAssert(false, "Don't use EffectStatus update()");
 }
 
-void EffectStatus::draw()
+void EffectStatus::draw(RenderList& renderList)
 {
 	SAssert(false, "Don't use EffectStatus draw()");
 }

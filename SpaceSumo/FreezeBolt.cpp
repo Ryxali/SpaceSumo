@@ -41,7 +41,7 @@ bool FreezeBolt::isAlive()
 	return mAlive;
 }
 
-Effect FreezeBolt::getEffect()
+Effect FreezeBolt::getEffect(SpaceManImp* owner)
 {
-	return new Frozen();
+	return new Frozen(owner);
 }

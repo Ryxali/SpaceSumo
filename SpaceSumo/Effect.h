@@ -1,7 +1,9 @@
 #pragma once
 #include "Flag.h"
+#include <SFML\Window\Keyboard.hpp>
 
 class EffectImp;
+class RenderList;
 
 class Effect
 {
@@ -10,8 +12,8 @@ public:
 	~Effect();
 	Effect(const Effect &e);
 	Effect& operator=(const Effect &e);
-	void update();
-	void draw();
+	void update(sf::Keyboard::Key& push);
+	void draw(RenderList& renderList);
 	bool isAlive();
 	Effect duplicate();
 

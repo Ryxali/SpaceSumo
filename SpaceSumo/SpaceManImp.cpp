@@ -59,7 +59,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
-	mEffects.update();
+	mEffects.update(mPush);
 	Effect mEffectStatus(mEffects.getStatus());
 
 	if(mSlowDeath)
@@ -180,6 +180,8 @@ void SpaceManImp::draw(RenderList& renderList)
 	mJet.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mJet.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 
+	mEffects.draw(renderList);
+
 	renderList.addSprite(mAnim);
 	renderList.addSprite(mTurn);
 	renderList.addSprite(mJet);
@@ -219,6 +221,11 @@ void SpaceManImp::slowDeath()
 {
 	mSlowDeath = true;
 	mRespawnTimer.reset();
+}
+
+B2Body& SpaceManImp::getBody()
+{
+	return mSpaceman;
 }
 
 void SpaceManImp::initializeArms(b2World& world)
