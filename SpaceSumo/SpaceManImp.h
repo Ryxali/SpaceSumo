@@ -1,15 +1,16 @@
 #pragma once
 #include "entityimp.h"
 #include "B2Body.h"
+#include "Effects.h"
+#include "Debug.h"
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include <Box2D\Box2D.h>
 #include <Common\SVector.h>
 #include <Common\Config.h>
-#include <ResourceManager\Animation.h>
-#include "Effects.h"
-#include "Debug.h"
 #include <Common\Timer.h>
+#include <ResourceManager\Animation.h>
 
 enum EntityType;
 struct GameStateData;
@@ -49,6 +50,9 @@ private:
 
 	//helpfunctions
 	void initializeArms(b2World& world);
+	void initializeSound();
+	void extendArms();
+	void retractArms();
 
 	//config
 	static Config mConfig;
@@ -70,6 +74,10 @@ private:
 	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
 
+	Timer mPushTimer;
+	bool mPushing;
+
+
 	Timer mRespawnTimer;
 	bool mSlowDeath;
 	Effects mEffects;
@@ -82,5 +90,14 @@ private:
 	Animation mAnim;
 	Animation mTurn;
 	Animation mJet;
+
+	//sounds
+	sf::Sound mStartSound;
+	sf::Sound mMainSound;
+	sf::Sound mEndSound;
+
+	//bools for sounds
+	bool start_press;
+	bool stop_press;
 };
 
