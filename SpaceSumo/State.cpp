@@ -21,3 +21,8 @@ void State::cleanUp()
 {
 
 }
+
+void State::close()
+{
+
+}
