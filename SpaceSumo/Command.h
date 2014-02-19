@@ -5,7 +5,7 @@ public:
 	virtual ~Command();
 
 	virtual void Execute() = 0;
-private:
+protected:
 	Command();
 };
 

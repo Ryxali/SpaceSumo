@@ -21,7 +21,6 @@ public:
 	virtual void kill();
 
 private:
-	void initializeSound();
 
 	float mSpeed;
 	SVector mDirection;
@@ -29,10 +28,6 @@ private:
 	B2Body mBody;
 	bool mAlive;
 	Animation mAnim;
-
-	//sound
-	sf::Sound mActivate;
-	sf::Sound mHit;
 
 };
 

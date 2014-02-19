@@ -21,9 +21,6 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAnim.getSprite().setOrigin( 32 , 64 );
 	mBody.getBody()->SetUserData(this);
 	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
-	initializeSound();
-
-	mActivate.play();
 }
 
 FreezeBolt::~FreezeBolt()
@@ -49,6 +46,7 @@ bool FreezeBolt::isAlive()
 
 Effect FreezeBolt::getEffect(SpaceManImp* owner)
 {
+	
 	return new Frozen(owner);
 }
 
@@ -56,10 +54,4 @@ Effect FreezeBolt::getEffect(SpaceManImp* owner)
 void FreezeBolt::kill()
 {
 	mAlive = false;
-}
-
-void FreezeBolt::initializeSound()
-{
-	mActivate.setBuffer(res::getSoundBuffer("res/sound/freeze_blast.ogg").getSoundBuffer());
-	mHit.setBuffer(res::getSoundBuffer("res/sound/freeze_onhit.ogg").getSoundBuffer());
 }
