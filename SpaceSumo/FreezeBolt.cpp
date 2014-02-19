@@ -13,7 +13,7 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f)
+	mAnim(res::getTexture("res/img/entity/projectile/freezebolt.png"), "res/img/entity/projectile/freezebolt.cfg", 5.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mBody.getBody()->SetUserData(this);
