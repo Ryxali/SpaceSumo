@@ -211,7 +211,6 @@ void SpaceManImp::draw(RenderList& renderList)
 	mJet.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 
 	mEffects.draw(renderList);
-
 	renderList.addSprite(mAnim);
 	renderList.addSprite(mTurn);
 	renderList.addSprite(mJet);
