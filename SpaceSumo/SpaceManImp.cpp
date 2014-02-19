@@ -57,7 +57,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 
 SpaceManImp::~SpaceManImp()
 {
-	
+	delete mAbility;
 }
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)

@@ -11,7 +11,7 @@ class Frozen :
 {
 public:
 	Frozen(SpaceManImp* owner);
-	~Frozen();
+	virtual ~Frozen();
 
 	virtual void update(sf::Keyboard::Key& push);
 	virtual void draw(RenderList& renderList);

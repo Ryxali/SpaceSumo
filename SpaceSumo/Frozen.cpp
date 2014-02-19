@@ -9,6 +9,7 @@ Config Frozen::mConfig("res/conf/frozen.cfg", true);
 
 Frozen::Frozen(SpaceManImp* owner) 
 	: mIntensity(mConfig.getValue<int>("intensity")), 
+	mPrevKeyState(false),
 	mOwner(owner),
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
@@ -22,6 +23,7 @@ Frozen::~Frozen()
 Frozen::Frozen(Frozen const & das) 
 	: mIntensity(das.mIntensity),
 	mOwner(das.mOwner),
+	mPrevKeyState(das.mPrevKeyState),
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );

@@ -7,7 +7,7 @@ class RenderList;
 class EffectImp
 {
 public:
-	~EffectImp();
+	virtual ~EffectImp();
 
 	virtual void update(sf::Keyboard::Key& push) = 0;
 	virtual void draw(RenderList& renderList) = 0;
