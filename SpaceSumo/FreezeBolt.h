@@ -1,6 +1,7 @@
 #pragma once
 #include <Common\SVector.h>
 #include <ResourceManager\Animation.h>
+#include <SFML\Audio\Sound.hpp>
 #include "B2Body.h"
 #include "Effecting.h"
 
@@ -20,11 +21,18 @@ public:
 	virtual void kill();
 
 private:
+	void initializeSound();
+
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;
 	B2Body mBody;
 	bool mAlive;
 	Animation mAnim;
+
+	//sound
+	sf::Sound mActivate;
+	sf::Sound mHit;
+
 };
 

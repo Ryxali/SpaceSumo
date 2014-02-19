@@ -96,9 +96,17 @@ private:
 	sf::Sound mStartSound;
 	sf::Sound mMainSound;
 	sf::Sound mEndSound;
+	sf::Sound mStartTurnSound;
+	sf::Sound mMainTurnSound;
 
 	//bools for sounds
-	bool start_press;
-	bool stop_press;
+	bool mStartPress;
+	bool mStopPress;
+
+	bool mRightStart;
+	bool mRightStop;
+
+	bool mLeftStart;
+	bool mLeftStop;
 };
 
