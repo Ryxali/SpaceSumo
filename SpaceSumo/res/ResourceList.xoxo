@@ -13,3 +13,9 @@ res/img/powerup/frozen.png
 res/sound/End.ogg
 res/sound/Main.ogg
 res/sound/Start.ogg
+res/sound/Turn_main.ogg
+res/sound/Turn_start.ogg
+res/sound/freeze_blast.ogg
+res/sound/freeze_break.ogg
+res/sound/freeze_breaking.ogg
+res/sound/freeze_onhit.ogg

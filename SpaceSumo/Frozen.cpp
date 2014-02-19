@@ -13,7 +13,6 @@ Frozen::Frozen(SpaceManImp* owner)
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
-	mAnim.
 }
 
 Frozen::~Frozen()

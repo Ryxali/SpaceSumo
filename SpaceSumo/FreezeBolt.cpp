@@ -4,6 +4,8 @@
 #include <ResourceManager\RHandle.h>
 #include "Effect.h"
 #include "Frozen.h"
+#include <ResourceManager\SSoundBuffer.h>
+
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
@@ -19,10 +21,14 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAnim.getSprite().setOrigin( 32 , 64 );
 	mBody.getBody()->SetUserData(this);
 	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
+	initializeSound();
+
+	mActivate.play();
 }
 
 FreezeBolt::~FreezeBolt()
 {
+
 }
 
 void FreezeBolt::update(GameData &data, GameStateData &gData,int delta)
@@ -44,4 +50,10 @@ bool FreezeBolt::isAlive()
 Effect FreezeBolt::getEffect(SpaceManImp* owner)
 {
 	return new Frozen(owner);
+}
+
+void FreezeBolt::initializeSound()
+{
+	mActivate.setBuffer(res::getSoundBuffer("res/sound/freeze_blast.ogg").getSoundBuffer());
+	mHit.setBuffer(res::getSoundBuffer("res/sound/freeze_onhit.ogg").getSoundBuffer());
 }
