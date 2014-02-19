@@ -3,8 +3,6 @@
 #include <math.h>
 #include <Box2D\Box2D.h>
 
-//TODO update math.h with atan()
-
 SVector::SVector(float x, float y) : sf::Vector2f(x, y)
 {
 
@@ -96,7 +94,6 @@ SVector &SVector::rotate(float degrees) {
 	return *this;
 }
 
-//TODO Temp shait pls fixz
 float SVector::getAngle()
 {
 	return atan2(getY(), getX()) * 57.2957795f;
