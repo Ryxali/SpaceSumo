@@ -50,7 +50,7 @@ void Frozen::draw(RenderList& renderList)
 
 	renderList.addSprite(mAnim);
 }
-
+// TODO This causes memory leaks somewhere. Copy constructor needs a fix
 EffectImp* Frozen::clone()
 {
 	return new Frozen(*this);

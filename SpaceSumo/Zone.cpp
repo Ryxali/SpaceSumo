@@ -31,6 +31,11 @@ Zone::Zone(b2World& world) :
 
 Zone::~Zone()
 {
+	for (std::vector<Zone::Pulse*>::iterator it = mPulses.begin(); it != mPulses.end();)
+	{
+		delete *it;
+		it = mPulses.erase(it);
+	}
 }
 
 

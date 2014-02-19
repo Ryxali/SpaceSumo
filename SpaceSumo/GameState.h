@@ -17,6 +17,7 @@ public:
 	virtual void update(GameData &data, int delta);
 	virtual void draw(RenderList &list);
 	virtual void cleanUp();
+	virtual void close();
 	
 private:
 	void spacemanCreation(GameData& gameData);

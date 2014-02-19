@@ -20,6 +20,7 @@ private:
 	void preDraw();
 	void draw();
 	void cleanUp();
+	void close();
 	GameData mGameData;
 	StateList mStates;
 	Config mConfig;

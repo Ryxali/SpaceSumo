@@ -9,6 +9,7 @@
 #include "GameData.h"
 #include <list>
 #include <cstdlib>
+#include "EntityType.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mHud(), mPowerUpSpawnTimer(10000)
 {
@@ -34,6 +35,7 @@ void GameState::update(GameData &data, int delta)
 		mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(data.world, rand()% 1519 + 200, rand()% 680 + 200)));
 		mPowerUpSpawnTimer.reset();
 	}
+
 	mGameMap->update(data);
 	mGameMode->update(data, mData, delta);
 }
@@ -60,6 +62,16 @@ void GameState::cleanUp()
 		{
 			it++;
 		}
+	}
+}
+
+void GameState::close()
+{
+	delete mGameMode;
+	delete mGameMap;
+	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end();)
+	{
+		it = mData.mEntities.erase(it);
 	}
 }
 
