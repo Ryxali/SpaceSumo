@@ -20,10 +20,10 @@ Frozen::~Frozen()
 {
 }
 
-Frozen::Frozen(Frozen const & das) 
-	: mIntensity(das.mIntensity),
-	mOwner(das.mOwner),
-	mPrevKeyState(das.mPrevKeyState),
+Frozen::Frozen(Frozen const & f) 
+	: mIntensity(f.mIntensity),
+	mOwner(f.mOwner),
+	mPrevKeyState(f.mPrevKeyState),
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
