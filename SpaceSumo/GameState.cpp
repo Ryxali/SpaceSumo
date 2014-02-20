@@ -11,12 +11,11 @@
 #include <cstdlib>
 #include "EntityType.h"
 
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mHud(), mPowerUpSpawnTimer(10000)
+GameState::GameState(StateList &owner, GameData& gameData) 
+	: State(owner), mData(),
+	mGameData(gameData), mHud(), 
+	mPowerUpSpawnTimer(8000)
 {
-	spacemanCreation(gameData);
-	mGameMode = new Sumo(gameData.world);
-	mGameMap = new Terra();
-	mHud.setNPlayers(3);
 }
 GameState::~GameState()
 {
@@ -32,7 +31,8 @@ void GameState::update(GameData &data, int delta)
 
 	if(mPowerUpSpawnTimer.isExpired())
 	{
-		mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(data.world, rand()% 1519 + 200, rand()% 680 + 200)));
+		mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(
+			data.world, rand()% 1519 + 200, rand()% 680 + 200)));
 		mPowerUpSpawnTimer.reset();
 	}
 
@@ -63,6 +63,14 @@ void GameState::cleanUp()
 			it++;
 		}
 	}
+}
+
+void GameState::open()
+{
+	spacemanCreation(mGameData);
+	mGameMode = new Sumo(mGameData.world);
+	mGameMap = new Terra();
+	mHud.setNPlayers(3);
 }
 
 void GameState::close()

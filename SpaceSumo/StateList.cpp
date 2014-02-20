@@ -9,7 +9,7 @@ StateList::StateList(GameData &data) : mStates(), mCurState(0)
 {
 	add(new MenuState(*this));
 	add(new GameState(*this, data));
-	changeState(State_Type::GAME_STATE);
+	changeState(State_Type::MENU_STATE);
 }
 
 
@@ -24,7 +24,11 @@ StateList::~StateList()
 void StateList::changeState(int index)
 {
 	SAssert(mStates.size() > 0, "You don't have any states!");
+	if(mCurState != 0)
+		mCurState->close();
+
 	mCurState = mStates[index];
+	mCurState->open();
 }
 void StateList::changeState(State* state)
 {
@@ -34,7 +38,11 @@ void StateList::changeState(State* state)
 		SAssert((*it) == state, "State not in list!");
 	}
 #endif
+	if(mCurState != 0)
+		mCurState->close();
+
 	mCurState = state;
+	mCurState->open();
 }
 State& StateList::getCurrent()
 {

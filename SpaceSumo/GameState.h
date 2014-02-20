@@ -17,11 +17,13 @@ public:
 	virtual void update(GameData &data, int delta);
 	virtual void draw(RenderList &list);
 	virtual void cleanUp();
+	virtual void open();
 	virtual void close();
 	
 private:
 	void spacemanCreation(GameData& gameData);
 	GameStateData mData;
+	GameData& mGameData;
 	Mode* mGameMode;
 	Map* mGameMap;
 	Hud mHud;

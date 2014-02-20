@@ -22,6 +22,11 @@ void State::cleanUp()
 
 }
 
+void State::open()
+{
+
+}
+
 void State::close()
 {
 

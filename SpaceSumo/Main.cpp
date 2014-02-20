@@ -22,7 +22,8 @@ void run()
 	g.start();
 }
 
-int main() {
+int main() 
+{
 	init();
 	std::string s = "";
 	while (s != "q")

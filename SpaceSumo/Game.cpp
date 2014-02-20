@@ -23,7 +23,7 @@ Game::Game() :
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
-	mStates.changeState(1);
+	mStates.changeState(StateList::State_Type::MENU_STATE);
 	mGameData.world.SetContactListener(&mListener);
 }
 
