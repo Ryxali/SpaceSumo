@@ -9,17 +9,21 @@
 class Button : public Rectangle
 {
 public:
-	Button(float width , float height,
-		SVector position, Command *command,
+	Button(SVector position, Command *command,
 		std::string imageFile);
 	~Button();
 	void update(sf::Mouse &mouse);
 	void draw(RenderList &renderList);
+	virtual float getCenterX() const;
+	virtual float getCenterY() const;
+	bool isPressed();
+	void execute();
 	
 private:
 	Animation mAnimation;
 	SVector mPosition;
 	Command* mCommand;
 	bool mHovered;
+	bool mIsPressed;
 };
 

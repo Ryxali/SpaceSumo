@@ -5,13 +5,18 @@
 #include <ResourceManager\RHandle.h>
 
 
-Button::Button(float width , float height, SVector position, Command *command, std::string imageFile):
-	Rectangle( width , height ),
-	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 5.f),
+Button::Button(SVector position, Command *command, std::string imageFile):
+	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
+	Rectangle( 1,1 ),
 	mPosition(position),
-	mCommand(command)
+	mCommand(command),
+	mHovered(false),
+	mIsPressed(false)
 {
-
+	mAnimation.getSprite().setPosition(mPosition.getX() , mPosition.getY());
+	setHeight(mAnimation.getSliceHeight());
+	setWidth(mAnimation.getSliceWidth());
+	
 }
 
 Button::~Button()
@@ -32,7 +37,7 @@ void Button::update(sf::Mouse &mouse)
 
 	if( mHovered == true && ( mouse.isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
 	{
-		mCommand->Execute();
+		mIsPressed = true;
 	}
 
 }
@@ -40,4 +45,24 @@ void Button::update(sf::Mouse &mouse)
 void Button::draw(RenderList& renderList)
 {
 	renderList.addSprite(mAnimation);
+}
+
+float Button::getCenterX() const
+{
+	return mPosition.getX()+getWidth()/2;
+}
+
+float Button::getCenterY() const
+{
+	return  mPosition.getY()+getHeight()/2;
+}
+
+bool Button::isPressed()
+{
+	return mIsPressed;
+}
+
+void Button::execute()
+{
+	mCommand->Execute();
 }
