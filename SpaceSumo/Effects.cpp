@@ -33,7 +33,7 @@ void Effects::draw(RenderList& renderList)
 
 void Effects::addEffect(Effect& effect)
 {
-	mEffectList.push_back(effect);
+	mEffectList.emplace_back(effect);
 }
 
 Effect Effects::getStatus()

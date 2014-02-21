@@ -26,9 +26,9 @@ void MenuState::draw(RenderList &list)
 {
 	list.addSprite(mBackground);
 	
-	for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
 	{
-		(*it)->draw(list);
+		(*it).draw(list);
 	}
 
 }
@@ -41,13 +41,13 @@ void MenuState::update(GameData &datam, int delta)
 		mOwner.changeState(StateList::State_Type::GAME_STATE);
 	}
 
-	for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
 	{
-		(*it)->update(mMouse);
+		(*it).update(mMouse);
 		
-		if( (*it)->isPressed() )
+		if( (*it).isPressed() )
 		{
-			(*it)->execute();
+			(*it).execute();
 			break;
 		}
 
@@ -57,12 +57,12 @@ void MenuState::update(GameData &datam, int delta)
 
 void MenuState::open()
 {
-	mButtonList.push_back( new Button(SVector(200,200), new ChangeStateCommand(StateList::GAME_STATE, mOwner), (std::string)"res/img/Test_ikon.png"));
+	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(StateList::GAME_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
 }
 
 void MenuState::close()
 {
-	for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end();)
+	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end();)
 	{
 		it = mButtonList.erase(it);
 	}
@@ -70,11 +70,11 @@ void MenuState::close()
 
 void MenuState::cleanUp()
 {
-	for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
 	{
-		if( (*it)->isPressed() )
+		if( (*it).isPressed() )
 		{
-			(*it)->execute();
+			(*it).execute();
 			break;
 		}
 	}
