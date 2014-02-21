@@ -52,7 +52,7 @@ void ResourceHandler::add(std::string fileRef)
 			addResources(fileRef);
 			break;
 		case Resource_Type::UNKNOWN:
-			SError("fileRef check failed", "fileRef was UNKNOWN!");
+			SError("fileRef check failed", "fileRef was UNKNOWN with type: " + fileRef);
 			break;
 		default:
 			SError("fileRef check failed", "type not in list!");
@@ -113,7 +113,10 @@ void ResourceHandler::addResources(std::string fileRef)
 	while(!stream.eof())
 	{
 		std::getline(stream, nextLine);
-		add(nextLine);
+		if(nextLine.length() > 0)
+		{
+			add(nextLine);
+		}
 	}
 }
 
@@ -124,6 +127,9 @@ void ResourceHandler::loadResources(std::string fileRef)
 	while(!stream.eof())
 	{
 		std::getline(stream, nextLine);
-		load(nextLine);
+		if(nextLine.length() > 0)
+		{
+			load(nextLine);
+		}
 	}
 }

@@ -10,7 +10,7 @@ namespace entFac
 		std::string bodyData, std::string handData,
 		float x, float y, float32 rotation);
 
-	EntityImp* createPowerUpLHydrogen(b2World& world);
+	EntityImp* createPowerUpLHydrogen(b2World& world, float x, float y);
 
-	EntityImp* createPowerUpRandom(std::string conf, b2World& world);
+	EntityImp* createPowerUpRandom(std::string conf, b2World& world, float x, float y);
 };

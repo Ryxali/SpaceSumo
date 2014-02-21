@@ -24,7 +24,25 @@ namespace math
 		param: Tval - the value you need the cosinus of
 		returns: the cosinus of that value
 	*/
+
 	Tval cos(Tval val);
+
+
+	//atan2
+	template <typename Tval>
+	/*
+		Get the angle in radians of a vector
+		param: Tval - the values of the vector
+		returns: the randian angle
+	*/
+	Tval atan2(Tval val, Tval val2);
+
+	//squareroot
+	template <typename Tval>
+	/*
+		Get the squareroot of a value
+		param: Tval - the value you need the squareroot of
+		returns: the squareroot of that value
 
 	//squareroot
 	template <typename Tval>

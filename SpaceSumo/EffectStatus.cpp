@@ -5,7 +5,10 @@
 
 
 EffectStatus::EffectStatus() 
-	: mFlag_CAN_MOVE(Flag::CAN_MOVE), mFlag_CAN_ROTATE(Flag::CAN_ROTATE)
+	: mFlag_CAN_MOVE(Flag::CAN_MOVE), 
+	mFlag_CAN_ROTATE(Flag::CAN_ROTATE), 
+	mFlag_CAN_PUSH(Flag::CAN_PUSH), 
+	mFlag_CAN_ACTIVATE(Flag::CAN_ACTIVATE)
 {
 }
 
@@ -21,14 +24,24 @@ void EffectStatus::addFlag(Effect &effect)
 	{
 		mFlag_CAN_MOVE = effect.getFlag_CAN_MOVE();
 	}
+
+	if (effect.getFlag_CAN_PUSH().mSeverity > mFlag_CAN_PUSH.mSeverity)
+	{
+		mFlag_CAN_MOVE = effect.getFlag_CAN_PUSH();
+	}
+
+	if (effect.getFlag_CAN_ACTIVATE().mSeverity > mFlag_CAN_ACTIVATE.mSeverity)
+	{
+		mFlag_CAN_MOVE = effect.getFlag_CAN_ACTIVATE();
+	}
 }
 
-void EffectStatus::update()
+void EffectStatus::update(sf::Keyboard::Key& push)
 {
 	SAssert(false, "Don't use EffectStatus update()");
 }
 
-void EffectStatus::draw()
+void EffectStatus::draw(RenderList& renderList)
 {
 	SAssert(false, "Don't use EffectStatus draw()");
 }
@@ -47,4 +60,14 @@ Flag EffectStatus::getFlag_CAN_MOVE()
 Flag EffectStatus::getFlag_CAN_ROTATE()
 {
 	return mFlag_CAN_ROTATE;
+}
+
+Flag EffectStatus::getFlag_CAN_PUSH()
+{
+	return mFlag_CAN_PUSH;
+}
+
+Flag EffectStatus::getFlag_CAN_ACTIVATE()
+{
+	return mFlag_CAN_ACTIVATE;
 }

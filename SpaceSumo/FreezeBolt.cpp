@@ -4,6 +4,8 @@
 #include <ResourceManager\RHandle.h>
 #include "Effect.h"
 #include "Frozen.h"
+#include <ResourceManager\SSoundBuffer.h>
+
 static int PPM = 30;
 static float RADIAN_TO_DEGREES = 57.2957795f;
 
@@ -13,24 +15,22 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f)
+	mAnim(res::getTexture("res/img/powerup/freezebolt.png"), "res/img/powerup/freezebolt.cfg", 5.f)
 {
-	mAnim.getSprite().setOrigin( 64 , 64 );
+	mBody.setRotation( mDirection.getAngle() );
+	mAnim.getSprite().setOrigin( 32 , 64 );
 	mBody.getBody()->SetUserData(this);
+	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
 }
 
 FreezeBolt::~FreezeBolt()
 {
+
 }
 
 void FreezeBolt::update(GameData &data, GameStateData &gData,int delta)
 {
-	mDirection.rotateRad(mBody.getAngle() - mAngle);
-	mAngle = mBody.getAngle();
-
-	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
-
-	mAnim.getSprite().setRotation( mBody.getAngle() * RADIAN_TO_DEGREES );
+	mAnim.getSprite().setRotation( mDirection.getAngle() + 90);
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
 }
 
@@ -44,7 +44,14 @@ bool FreezeBolt::isAlive()
 	return mAlive;
 }
 
-Effect FreezeBolt::getEffect()
+Effect FreezeBolt::getEffect(SpaceManImp* owner)
 {
-	return new Frozen();
+	
+	return new Frozen(owner);
+}
+
+
+void FreezeBolt::kill()
+{
+	mAlive = false;
 }

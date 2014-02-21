@@ -10,19 +10,24 @@ Effects::~Effects()
 {
 }
 
-void Effects::draw()
+void Effects::update(sf::Keyboard::Key& push)
 {
-	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
+	for (std::vector<Effect>::iterator i = mEffectList.begin(); i != mEffectList.end();)
 	{
-		mEffectList.at(i).draw();
+		(*i).update(push);
+		if(!(*i).isAlive())
+		{
+			i = mEffectList.erase(i);
+		}
+		else i++;
 	}
 }
 
-void Effects::update()
+void Effects::draw(RenderList& renderList)
 {
 	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
 	{
-		mEffectList.at(i).update();
+		mEffectList.at(i).draw(renderList);
 	}
 }
 

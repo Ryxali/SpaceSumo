@@ -39,6 +39,7 @@ public:
 	*/
 	SVector &rotate(float degrees);
 	SVector &rotateRad(float radian);
+	float getAngle();
 
 
 	inline SVector &operator=(SVector &v) {

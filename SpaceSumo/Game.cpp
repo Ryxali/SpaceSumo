@@ -23,7 +23,7 @@ Game::Game() :
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
-	mStates.changeState(1);
+	mStates.changeState(StateList::State_Type::MENU_STATE);
 	mGameData.world.SetContactListener(&mListener);
 }
 
@@ -54,12 +54,14 @@ void Game::loop()
 		switch(evt.type)
 		{
 		case sf::Event::Closed:
-			mWindow.close();
+			close();
+			return;
 			break;
 		case sf::Event::KeyPressed:
 			if(evt.key.code == sf::Keyboard::Escape || evt.key.code == sf::Keyboard::R) 
 			{
-				mWindow.close();
+				close();
+				return;
 				break;
 			}
 		default:
@@ -94,4 +96,10 @@ void Game::draw()
 void Game::cleanUp()
 {
 	mStates.getCurrent().cleanUp();
+}
+
+void Game::close()
+{
+	mStates.getCurrent().close();
+	mWindow.close();
 }

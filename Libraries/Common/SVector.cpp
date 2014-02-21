@@ -2,22 +2,27 @@
 #include "SVector.h"
 #include <math.h>
 #include <Box2D\Box2D.h>
+
 SVector::SVector(float x, float y) : sf::Vector2f(x, y)
 {
 
 }
+
 SVector::SVector(const PointProtocol &v)  : sf::Vector2f(v.getX(), v.getY())
 {
 
 }
+
 SVector::SVector(const SVector &v) : sf::Vector2f(v.x, v.y)
 {
 
 }
+
 SVector::SVector(const sf::Vector2f &v) : sf::Vector2f(v.x, v.y)
 {
 
 }
+
 SVector::~SVector()
 {
 	x = 0;
@@ -87,4 +92,9 @@ SVector &SVector::rotate(float degrees) {
 	setX(x * cn - y * sn);
 	setY(x * sn + y * cn);
 	return *this;
+}
+
+float SVector::getAngle()
+{
+	return atan2(getY(), getX()) * 57.2957795f;
 }

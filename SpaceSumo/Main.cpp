@@ -11,6 +11,7 @@
 
 void init()
 {
+	srand(time(NULL));
 	res::addResource("res/ResourceList.xoxo");
 	res::loadResource("res/ResourceList.xoxo");
 }
@@ -21,7 +22,8 @@ void run()
 	g.start();
 }
 
-int main() {
+int main() 
+{
 	init();
 	std::string s = "";
 	while (s != "q")

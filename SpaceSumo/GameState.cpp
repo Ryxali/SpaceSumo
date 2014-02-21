@@ -8,16 +8,14 @@
 #include "RenderList.h"
 #include "GameData.h"
 #include <list>
+#include <cstdlib>
+#include "EntityType.h"
 
-GameState::GameState(StateList &owner, GameData& gameData) : State(owner), mData(), mHud()
+GameState::GameState(StateList &owner, GameData& gameData) 
+	: State(owner), mData(),
+	mGameData(gameData), mHud(), 
+	mPowerUpSpawnTimer(8000)
 {
-	spacemanCreation(gameData);
-	mGameMode = new Sumo(gameData.world);
-	mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-	//mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(gameData.world)));
-	
-	mGameMap = new Terra();
-	mHud.setNPlayers(3);
 }
 GameState::~GameState()
 {
@@ -30,6 +28,14 @@ void GameState::update(GameData &data, int delta)
 	{
 		(*it).update(data, mData,delta);
 	}
+
+	if(mPowerUpSpawnTimer.isExpired())
+	{
+		mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(
+			data.world, rand()% 1519 + 200, rand()% 680 + 200)));
+		mPowerUpSpawnTimer.reset();
+	}
+
 	mGameMap->update(data);
 	mGameMode->update(data, mData, delta);
 }
@@ -56,6 +62,24 @@ void GameState::cleanUp()
 		{
 			it++;
 		}
+	}
+}
+
+void GameState::open()
+{
+	spacemanCreation(mGameData);
+	mGameMode = new Sumo(mGameData.world);
+	mGameMap = new Terra();
+	mHud.setNPlayers(3);
+}
+
+void GameState::close()
+{
+	delete mGameMode;
+	delete mGameMap;
+	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end();)
+	{
+		it = mData.mEntities.erase(it);
 	}
 }
 

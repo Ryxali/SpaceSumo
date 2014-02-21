@@ -26,6 +26,8 @@ public:
 	unsigned char getCurAnimLength();
 	unsigned short getCurAnimTime();
 	void setCurrentRow(unsigned char row);
+	unsigned short getSliceWidth();
+	unsigned short getSliceHeight();
 private:
 	Animation& operator=(const Animation& anim);
 	const STexture &mSTex;

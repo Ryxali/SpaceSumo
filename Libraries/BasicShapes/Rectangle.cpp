@@ -8,7 +8,6 @@ Rectangle::Rectangle(float width, float height) :
 	assert(getWidth() > 0 && getHeight() > 0);
 }
 
-
 Rectangle::~Rectangle(void) {
 	mHalfWidth = 0;
 	mHalfHeight = 0;
@@ -77,7 +76,7 @@ float Rectangle::getHeight() const {
 }
 
 void Rectangle::setWidth(float width) {
-	mHalfHeight = width/2;
+	mHalfWidth = width/2;
 }
 void Rectangle::setHeight(float height) {
 	mHalfHeight = height/2;

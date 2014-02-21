@@ -5,6 +5,7 @@
 #include "RenderList.h"
 #include <Common\ConfigReader.h>
 #include "EntityType.h"
+
 Zone::Zone(b2World& world) :
 	mTopLeftPos((1920 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"))/2, (1080 - ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight"))/2),
 	mSize(ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneWidth"), ConfigReader::getValue<int>("res/conf/mode/sumo/zone.cfg", "ZoneHeight")),
@@ -12,7 +13,8 @@ Zone::Zone(b2World& world) :
 	mRope1(90, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY()), mSize.getY()),
 	mRope2(180, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX()),
 	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getY()),
-	mBody(world, "res/conf/mode/sumo/zone.cfg", mTopLeftPos.getX(), mTopLeftPos.getY()){
+	mBody(world, "res/conf/mode/sumo/zone.cfg", 1920/2, 1080/2){
+		
 	mRope0.setBack(&mRope3);
 	mRope0.setFront(&mRope1);
 	mRope1.setBack(&mRope0);
@@ -29,6 +31,11 @@ Zone::Zone(b2World& world) :
 
 Zone::~Zone()
 {
+	for (std::vector<Zone::Pulse*>::iterator it = mPulses.begin(); it != mPulses.end();)
+	{
+		delete *it;
+		it = mPulses.erase(it);
+	}
 }
 
 
