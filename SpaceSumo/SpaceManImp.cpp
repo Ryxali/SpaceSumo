@@ -41,7 +41,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mRightStart(true),
 	mRightStop(false),
 	mLeftStart(true),
-	mLeftStop(false)
+	mLeftStop(false),
+	mAlive(true)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mTurn.getSprite().setOrigin( 64 , 64 );

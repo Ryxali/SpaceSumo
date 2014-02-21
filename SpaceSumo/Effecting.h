@@ -8,7 +8,8 @@ class Effecting :
 	public EntityImp
 {
 public:
-	~Effecting();
+	Effecting() {}
+	virtual ~Effecting();
 
 	virtual void update(GameData &data, GameStateData &gData, int delta) = 0;
 	virtual void draw(RenderList& renderList) = 0;

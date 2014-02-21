@@ -54,7 +54,7 @@ void GameState::cleanUp()
 {
 	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end();)
 	{
-			if(!(*it).isAlive())
+		if(!(*it).isAlive())
 		{
 			it = mData.mEntities.erase(it);
 		}
