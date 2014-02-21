@@ -11,7 +11,7 @@
 
 void init()
 {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	res::addResource("res/ResourceList.xoxo");
 	res::loadResource("res/ResourceList.xoxo");
 }

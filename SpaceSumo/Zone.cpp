@@ -13,7 +13,7 @@ Zone::Zone(b2World& world) :
 	mRope1(90, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY()), mSize.getY()),
 	mRope2(180, sf::Vector2f(mTopLeftPos.getX() + mSize.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getX()),
 	mRope3(270, sf::Vector2f(mTopLeftPos.getX(), mTopLeftPos.getY() + mSize.getY()), mSize.getY()),
-	mBody(world, "res/conf/mode/sumo/zone.cfg", 1920/2, 1080/2){
+	mBody(world, "res/conf/mode/sumo/zone.cfg", (float)(1920/2), (float)(1080/2)){
 		
 	mRope0.setBack(&mRope3);
 	mRope0.setFront(&mRope1);

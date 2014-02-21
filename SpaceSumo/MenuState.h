@@ -16,7 +16,7 @@ public:
 
 private:
 	SSprite mBackground;
-	std::list<Button*> mButtonList;
+	std::list<Button> mButtonList;
 	sf::Mouse mMouse;
 };
 

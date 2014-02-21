@@ -21,7 +21,7 @@ Button::Button(SVector position, Command *command, std::string imageFile):
 
 Button::~Button()
 {
-
+	delete mCommand;
 }
 
 void Button::update(GameData &data)
