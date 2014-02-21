@@ -7,8 +7,7 @@
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\SSoundBuffer.h>
 
-static int PPM = 30;
-static float RADIAN_TO_DEGREES = 57.2957795f;
+
 
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 

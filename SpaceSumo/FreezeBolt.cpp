@@ -6,9 +6,6 @@
 #include "Frozen.h"
 #include <ResourceManager\SSoundBuffer.h>
 
-static int PPM = 30;
-static float RADIAN_TO_DEGREES = 57.2957795f;
-
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world) 
 	: mSpeed(20),
 	mDirection(dir),

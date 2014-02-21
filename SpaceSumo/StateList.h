@@ -13,6 +13,7 @@ public:
 	void add(State* state);
 	void changeState(int index);
 	State &getCurrent();
+	void sync();
 	enum State_Type
 	{
 		MENU_STATE, GAME_STATE, PLAY_STATE
@@ -21,4 +22,5 @@ private:
 	void changeState(State* state);
 	std::vector<State*> mStates;
 	State* mCurState;
+	State* mNextState;
 };

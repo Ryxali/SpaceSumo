@@ -2,8 +2,7 @@
 #include "B2Body.h"
 
 #include <string>
-static float PPM = 30;
-static float DEGREES_TO_RADIANS = 0.0174532925;
+
 
 
 B2Body::B2Body(b2World &world , std::string configFile,

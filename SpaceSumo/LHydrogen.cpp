@@ -4,9 +4,6 @@
 #include "GameStateData.h"
 #include <ResourceManager\RHandle.h>
 
-static int PPM = 30;
-static float RADTODEG = 57.2957795f;
-
 LHydrogen::LHydrogen(b2World &world, std::string bodyData, float x, float y) : 
 	mAlive(true),
 	mBody(world, bodyData, x, y),
@@ -23,7 +20,7 @@ LHydrogen::~LHydrogen()
 
 void LHydrogen::update(GameData &data, GameStateData &gData, int delta)
 {
-	mAnim.getSprite().setRotation( mBody.getAngle() * RADTODEG );
+	mAnim.getSprite().setRotation( mBody.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
 }
 

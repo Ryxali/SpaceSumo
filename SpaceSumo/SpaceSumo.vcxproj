@@ -132,6 +132,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ChangeStateCommand.h" />
     <ClInclude Include="Command.h" />
+    <ClInclude Include="consts.h" />
     <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Effecting.h" />

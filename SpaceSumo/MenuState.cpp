@@ -33,7 +33,7 @@ void MenuState::draw(RenderList &list)
 
 }
 
-void MenuState::update(GameData &datam, int delta)
+void MenuState::update(GameData &data, int delta)
 {
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
@@ -43,13 +43,13 @@ void MenuState::update(GameData &datam, int delta)
 
 	for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
 	{
-		(*it)->update(mMouse);
+		(*it)->update(data);
 		
-		if( (*it)->isPressed() )
+		/*if( (*it)->isPressed() )
 		{
 			(*it)->execute();
 			break;
-		}
+		}*/
 
 	}
 
@@ -70,12 +70,12 @@ void MenuState::close()
 
 void MenuState::cleanUp()
 {
-	for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	/*for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
 	{
 		if( (*it)->isPressed() )
 		{
 			(*it)->execute();
 			break;
 		}
-	}
+	}*/
 }

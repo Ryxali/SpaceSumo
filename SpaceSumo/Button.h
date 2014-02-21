@@ -5,14 +5,14 @@
 #include "Command.h"
 #include "RenderList.h"
 #include <ResourceManager\Animation.h>
-
+struct GameData;
 class Button : public Rectangle
 {
 public:
 	Button(SVector position, Command *command,
 		std::string imageFile);
 	~Button();
-	void update(sf::Mouse &mouse);
+	void update(GameData &data);
 	void draw(RenderList &renderList);
 	virtual float getCenterX() const;
 	virtual float getCenterY() const;

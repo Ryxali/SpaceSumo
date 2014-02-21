@@ -5,11 +5,12 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include "GameData.h"
-StateList::StateList(GameData &data) : mStates(), mCurState(0)
+StateList::StateList(GameData &data) : mStates(), mCurState(0), mNextState(0)
 {
 	add(new MenuState(*this));
 	add(new GameState(*this, data));
-	changeState(State_Type::MENU_STATE);
+	mCurState = mStates[0];
+	mCurState->open();
 }
 
 
@@ -24,11 +25,7 @@ StateList::~StateList()
 void StateList::changeState(int index)
 {
 	SAssert(mStates.size() > 0, "You don't have any states!");
-	if(mCurState != 0)
-		mCurState->close();
-
-	mCurState = mStates[index];
-	mCurState->open();
+	mNextState = mStates[index];
 }
 void StateList::changeState(State* state)
 {
@@ -38,11 +35,8 @@ void StateList::changeState(State* state)
 		SAssert((*it) == state, "State not in list!");
 	}
 #endif
-	if(mCurState != 0)
-		mCurState->close();
 
-	mCurState = state;
-	mCurState->open();
+	mNextState = state;
 }
 State& StateList::getCurrent()
 {
@@ -52,4 +46,13 @@ State& StateList::getCurrent()
 void StateList::add(State* state)
 {
 	mStates.push_back(state);
+}
+
+void StateList::sync()
+{
+	if(mCurState == mNextState || mNextState == 0)
+		return;
+	mCurState->close();
+	mCurState = mNextState;
+	mCurState->open();
 }

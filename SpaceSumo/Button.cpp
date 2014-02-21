@@ -3,7 +3,7 @@
 #include <BasicShapes\putils.h>
 #include <SFML\Window\Keyboard.hpp>
 #include <ResourceManager\RHandle.h>
-
+#include "GameData.h"
 
 Button::Button(SVector position, Command *command, std::string imageFile):
 	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
@@ -24,9 +24,9 @@ Button::~Button()
 
 }
 
-void Button::update(sf::Mouse &mouse)
+void Button::update(GameData &data)
 {
-	if( contains(Point( mouse.getPosition().x , mouse.getPosition().y ))) 
+	if( contains(Point( data.mPos.x , data.mPos.y ))) 
 	{
 		mHovered = true;
 	}
@@ -35,9 +35,10 @@ void Button::update(sf::Mouse &mouse)
 		mHovered = false;
 	}
 
-	if( mHovered == true && ( mouse.isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
+	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
 	{
 		mIsPressed = true;
+		execute();
 	}
 
 }

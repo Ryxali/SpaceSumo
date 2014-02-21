@@ -4,7 +4,18 @@
 #include <SFML\Window\Keyboard.hpp>
 #include "MenuState.h"
 #include "GameState.h"
+#include <Common\SVector.h>
 #define NO_MEMORY_TRACKING
+
+sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
+{
+	return sf::Vector2f(v0.x/v1.x, v0.y/v1.y);
+}
+
+sf::Vector2f operator*(const sf::Vector2f &v0, const sf::Vector2f &v1)
+{
+	return sf::Vector2f(v0.x*v1.x, v0.y*v1.y);
+}
 
 Game::Game() :
 	mConfig("res/conf/main.cfg", true), 
@@ -69,6 +80,7 @@ void Game::loop()
 			break;
 		}
 	}
+	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition() * ((sf::Vector2f)mWindow.getSize()/mView.getSize());
 	mWindow.clear(sf::Color::White);
 	update(delta.asMilliseconds());
 	preDraw();
@@ -84,7 +96,6 @@ void Game::update(int delta)
 void Game::preDraw()
 {
 	mStates.getCurrent().draw(mRenderList);
-	// TODO curState.preDraw(renderList& list);
 }
 
 void Game::draw()
@@ -96,6 +107,7 @@ void Game::draw()
 void Game::cleanUp()
 {
 	mStates.getCurrent().cleanUp();
+	mStates.sync();
 }
 
 void Game::close()
