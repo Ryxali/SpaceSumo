@@ -50,7 +50,13 @@ Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 	{
 		setAdvancedTimeOptions(cf);
 	}
-
+	
+	if(mTexVersion != mSTex.getVersion())
+	{
+		mSprite.setTexture(getTexture());
+		reevaluateSizeValues();
+		mTexVersion = mSTex.getVersion();
+	}
 }
 
 const sf::Texture &Animation::getTexture() const
@@ -148,4 +154,14 @@ void Animation::setAdvancedTimeOptions(Config &cf)
 	{
 		mAnimTime[i] = (unsigned short)cf.getValue<int>("Row_" + std::to_string(i) + "_DisplayTime");
 	}
+}
+
+unsigned short Animation::getSliceWidth()
+{
+	return mSliceWidth;
+}
+
+unsigned short Animation::getSliceHeight()
+{
+	return mSliceHeight;
 }
