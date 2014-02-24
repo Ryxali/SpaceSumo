@@ -89,6 +89,9 @@
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ChangeStateCommand.cpp" />
+    <ClCompile Include="CreateModeCommand.cpp" />
+    <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="ModeSelectState.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -109,6 +112,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameData.cpp" />
     <ClCompile Include="GameStateData.cpp" />
+    <ClCompile Include="GameStateList.cpp" />
     <ClCompile Include="Head.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -118,6 +122,7 @@
     <ClCompile Include="Mode.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
+    <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateList.cpp" />
@@ -131,6 +136,9 @@
     <ClInclude Include="B2Body.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ChangeStateCommand.h" />
+    <ClInclude Include="CreateModeCommand.h" />
+    <ClInclude Include="DualCommand.h" />
+    <ClInclude Include="ModeSelectState.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="consts.h" />
     <ClInclude Include="ContactListener.h" />
@@ -152,6 +160,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
     <ClInclude Include="GameStateData.h" />
+    <ClInclude Include="GameStateList.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="Input.h" />
@@ -160,13 +169,17 @@
     <ClInclude Include="Map_Type.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Mode.h" />
+    <ClInclude Include="Mode_Type.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SetupState.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />
+    <ClInclude Include="StateList_Main.h" />
+    <ClInclude Include="StateList_Setup.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />

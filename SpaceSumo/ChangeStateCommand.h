@@ -7,12 +7,12 @@ class ChangeStateCommand :
 {
 public:
 
-	ChangeStateCommand(StateList::State_Type stateType, StateList& stateList);
+	ChangeStateCommand(st::State_Type stateType, StateList& stateList);
 	~ChangeStateCommand();
 	
 	virtual void Execute();
 
 private:
-	StateList::State_Type mStateType;
+	st::State_Type mStateType;
 	StateList& mStateList;
 };

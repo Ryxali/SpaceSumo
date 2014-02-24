@@ -6,6 +6,7 @@
 class MenuState : public State
 {
 public:
+	
 	MenuState(StateList &owner);
 	~MenuState();
 	virtual void draw(RenderList &list);
@@ -13,6 +14,7 @@ public:
 	virtual void open();
 	virtual void close();
 	virtual void cleanUp();
+	
 
 private:
 	SSprite mBackground;

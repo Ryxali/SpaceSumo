@@ -26,7 +26,7 @@ Button::~Button()
 
 void Button::update(GameData &data)
 {
-	if( contains(Point( data.mPos.x , data.mPos.y ))) 
+	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos)) 
 	{
 		mHovered = true;
 	}
@@ -40,6 +40,21 @@ void Button::update(GameData &data)
 		mIsPressed = true;
 		execute();
 	}
+
+	/*if( contains(Point( data.mPos.x , data.mPos.y ))) 
+	{
+		mHovered = true;
+	}
+	else
+	{
+		mHovered = false;
+	}
+
+	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
+	{
+		mIsPressed = true;
+		execute();
+	}*/
 
 }
 

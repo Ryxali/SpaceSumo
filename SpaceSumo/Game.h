@@ -5,7 +5,7 @@
 #include "RenderList.h"
 #include <Common\Config.h>
 #include "GameData.h"
-#include "StateList.h"
+#include "GameStateList.h"
 #include "ContactListener.h"
 
 class Game
@@ -22,7 +22,7 @@ private:
 	void cleanUp();
 	void close();
 	GameData mGameData;
-	StateList mStates;
+	GameStateList mStates;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;

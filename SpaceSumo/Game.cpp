@@ -5,6 +5,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include <Common\SVector.h>
+
 #define NO_MEMORY_TRACKING
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
@@ -34,7 +35,6 @@ Game::Game() :
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
-	mStates.changeState(StateList::State_Type::MENU_STATE);
 	mGameData.world.SetContactListener(&mListener);
 }
 
@@ -80,7 +80,7 @@ void Game::loop()
 			break;
 		}
 	}
-	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition() * ((sf::Vector2f)mWindow.getSize()/mView.getSize());
+	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition(mWindow) * (mView.getSize()/(sf::Vector2f)mWindow.getSize());
 	mWindow.clear(sf::Color::White);
 	update(delta.asMilliseconds());
 	preDraw();

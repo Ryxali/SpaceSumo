@@ -3,24 +3,29 @@
 //#include "State.h"
 #include <vector>
 struct GameData;
+namespace st
+{
+	enum State_Type;
+}
 class StateList
 {
 private:
 	friend class State;
 public:
-	StateList(GameData &data);
+	StateList();
 	~StateList();
-	void add(State* state);
-	void changeState(int index);
+	
+	virtual void changeState(st::State_Type index) = 0;
 	State &getCurrent();
 	void sync();
-	enum State_Type
-	{
-		MENU_STATE, GAME_STATE, PLAY_STATE
-	};
-private:
-	void changeState(State* state);
+	
+protected:
+	void add(State* state);
+	void stateChange(State* state);
+	void changeState(int index);
 	std::vector<State*> mStates;
+private:
+	
 	State* mCurState;
 	State* mNextState;
 };

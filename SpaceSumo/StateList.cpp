@@ -2,15 +2,11 @@
 #include "StateList.h"
 #include <Common\error.h>
 #include <algorithm>
-#include "MenuState.h"
-#include "GameState.h"
-#include "GameData.h"
-StateList::StateList(GameData &data) : mStates(), mCurState(0), mNextState(0)
+#include "State.h"
+StateList::StateList() : mStates(), mCurState(0), mNextState(0)
 {
-	add(new MenuState(*this));
-	add(new GameState(*this, data));
-	mCurState = mStates[0];
-	mCurState->open();
+	//mCurState = mStates[0];
+	//mCurState->open();
 }
 
 
@@ -22,18 +18,23 @@ StateList::~StateList()
 		mStates.pop_back();
 	}
 }
+
 void StateList::changeState(int index)
 {
 	SAssert(mStates.size() > 0, "You don't have any states!");
+	SAssert(mStates.size() > index, "index out of range");
 	mNextState = mStates[index];
 }
-void StateList::changeState(State* state)
+
+void StateList::stateChange(State* state)
 {
 #if !NDEBUG
+	bool containsState = false;
 	for (std::vector<State*>::iterator it = mStates.begin(); it != mStates.end(); it++)
 	{
-		SAssert((*it) == state, "State not in list!");
+		if((*it) == state) containsState = true;
 	}
+	SAssert(containsState == false, "State not in list!");
 #endif
 
 	mNextState = state;
@@ -52,7 +53,8 @@ void StateList::sync()
 {
 	if(mCurState == mNextState || mNextState == 0)
 		return;
-	mCurState->close();
+	if(mCurState != 0)
+		mCurState->close();
 	mCurState = mNextState;
 	mCurState->open();
 }

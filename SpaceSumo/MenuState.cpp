@@ -1,19 +1,14 @@
 #include "stdafx.h"
 #include "MenuState.h"
 #include <ResourceManager\RHandle.h>
-#include "StateList.h"
+#include "GameStateList.h"
 #include "ChangeStateCommand.h"
-
-static const STexture& get_addTexture(std::string ref)
-{
-	res::addResource(ref);
-	res::loadResource(ref);
-	return res::getTexture(ref);
-}
+#include "StateList_Main.h"
 
 MenuState::MenuState(StateList &owner) : 
 	State(owner),
-	mBackground(get_addTexture("res/img/MenuBackground.png"), -1.f)
+	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
+	mButtonList()
 {
 		mOwner = owner;
 }
@@ -38,7 +33,7 @@ void MenuState::update(GameData &data, int delta)
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 	{
-		mOwner.changeState(StateList::State_Type::GAME_STATE);
+		mOwner.changeState(st::GAME_STATE);
 	}
 
 	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
@@ -57,7 +52,8 @@ void MenuState::update(GameData &data, int delta)
 
 void MenuState::open()
 {
-	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(StateList::GAME_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
+	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(st::GAME_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
+	mButtonList.emplace_back(SVector(200,400), new ChangeStateCommand(st::PLAY_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
 }
 
 void MenuState::close()
@@ -66,6 +62,7 @@ void MenuState::close()
 	{
 		it = mButtonList.erase(it);
 	}
+	mButtonList.clear();
 }
 
 void MenuState::cleanUp()
