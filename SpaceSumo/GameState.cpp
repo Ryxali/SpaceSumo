@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "GameState.h"
 #include "entityFactory.h"
-#include "Entity.h"
 #include <ResourceManager\RHandle.h>
 #include "Sumo.h"
 #include "Terra.h"
@@ -24,16 +23,13 @@ GameState::~GameState()
 }
 void GameState::update(GameData &data, int delta)
 {
-	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
-	{
-		(*it).update(data, mData,delta);
-	}
+	mData.mEntityImpList.update(data, mData, delta);
 
 	if(mPowerUpSpawnTimer.isExpired())
 	{
-		mData.mEntities.push_back(Entity(entFac::createPowerUpLHydrogen(
+		mData.mEntityImpList.add((entFac::createPowerUpLHydrogen(
 			data.world, rand()% 1519 + 200, rand()% 680 + 200)));
-		mPowerUpSpawnTimer.reset();
+			mPowerUpSpawnTimer.reset();
 	}
 
 	mGameMap->update(data);
@@ -43,26 +39,13 @@ void GameState::draw(RenderList &list)
 {
 	mGameMode->draw(list);
 	mGameMap->draw(list);
-	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end(); it++)
-	{
-		(*it).draw(list);
-	}
+	mData.mEntityImpList.draw(list);
 	mHud.draw(list);
 }
 
 void GameState::cleanUp()
 {
-	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end();)
-	{
-			if(!(*it).isAlive())
-		{
-			it = mData.mEntities.erase(it);
-		}
-		else
-		{
-			it++;
-		}
-	}
+	mData.mEntityImpList.clear();
 }
 
 void GameState::open()
@@ -77,15 +60,13 @@ void GameState::close()
 {
 	delete mGameMode;
 	delete mGameMap;
-	for (std::list<Entity>::iterator it = mData.mEntities.begin(); it != mData.mEntities.end();)
-	{
-		it = mData.mEntities.erase(it);
-	}
+	
+	mData.mEntityImpList.clear();
 }
 
 void GameState::spacemanCreation(GameData& gameData)
 {
-	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
-	mData.mEntities.push_back(Entity(entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
+	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
+	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
 }
 

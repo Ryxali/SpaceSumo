@@ -1,10 +1,12 @@
 #ifndef SPACESUMO_RESOURCEMANAGER_SSOUND_INCLUDED
 #define SPACESUMO_RESOURCEMANAGER_SSOUND_INCLUDED
 
+
 class SSoundBuffer;
 #include <SFML\Audio\Sound.hpp>
+#include "Playable.h"
 
-class SSound
+class SSound: public Playable
 {
 public:
 	/*
@@ -19,13 +21,18 @@ public:
 	SSound(const SSound &sound);
 	// Destructor
 	~SSound();
+
+	virtual bool isPlaying();
+	virtual bool hasEnded();
 	/* 
 		Plays the sound.
 		warning; causes an error should the sound not be loaded
 	*/
-	void play();
-
-	void stop();
+	virtual void play();
+	virtual void stop();
+	virtual void setDestroy(bool status);
+	virtual bool getDestroy();
+	virtual void update(GameData& gData);
 	/*
 		Get the sound buffer of this Sound
 		returns: const sf::SoundBuffer& - a reference to this sound's sound buffer 
@@ -33,6 +40,7 @@ public:
 	const sf::SoundBuffer& getSoundBuffer() const;
 	sf::Sound& getSound();
 private:
+	bool mDestroy;
 	SSound& operator=(const SSound &sp);
 	const SSoundBuffer &mSBuf;
 	sf::Sound mSound;

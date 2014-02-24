@@ -2,7 +2,6 @@
 class Mode;
 class Map;
 #include "State.h"
-#include "Entity.h"
 #include <ResourceManager\SSprite.h>
 #include "GameStateData.h"
 #include "Hud.h"

@@ -7,7 +7,7 @@
 
 Button::Button(SVector position, Command *command, std::string imageFile):
 	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
-	Rectangle( 1,1 ),
+	Rectangle( 1 , 1 ),
 	mPosition(position),
 	mCommand(command),
 	mHovered(false),
@@ -21,7 +21,7 @@ Button::Button(SVector position, Command *command, std::string imageFile):
 
 Button::~Button()
 {
-
+	 delete mCommand;
 }
 
 void Button::update(GameData &data)
