@@ -52,8 +52,8 @@ void MenuState::update(GameData &data, int delta)
 
 void MenuState::open()
 {
-	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(st::GAME_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
-	mButtonList.emplace_back(SVector(200,400), new ChangeStateCommand(st::PLAY_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
+	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(st::GAME_STATE, mOwner), (std::string)"res/img/UI/menu/tmp_menu");
+	mButtonList.emplace_back(SVector(200,400), new ChangeStateCommand(st::PLAY_STATE, mOwner), (std::string)"res/img/UI/menu/tmp_menu");
 }
 
 void MenuState::close()

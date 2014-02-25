@@ -13,7 +13,7 @@ ModeSelectState::ModeSelectState(StateList &owner, Mode **mode, b2World &world) 
 		new CreateModeCommand(SUMO, mode, world),
 		new ChangeStateCommand(st::WORLD_SELECTION_STATE, owner)
 		),
-		"res/img/UI/gamesetup/mode_sumo_active.png");
+		"res/img/UI/gamesetup/mode_sumo_active");
 }
 
 

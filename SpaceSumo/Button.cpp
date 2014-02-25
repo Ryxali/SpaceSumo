@@ -6,7 +6,7 @@
 #include "GameData.h"
 
 Button::Button(SVector position, Command *command, std::string imageFile):
-	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
+	mAnimation(res::getTexture(imageFile+".png"), imageFile+".cfg" , 2.f),
 	Rectangle( 1 , 1 ),
 	mPosition(position),
 	mCommand(command),
@@ -47,6 +47,7 @@ void Button::update(GameData &data)
 
 void Button::draw(RenderList& renderList)
 {
+	//mAnimation.setCurrentRow(aProperNumber);
 	renderList.addSprite(mAnimation);
 }
 
