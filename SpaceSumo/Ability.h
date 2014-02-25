@@ -1,6 +1,7 @@
 #pragma once
+struct GameStateData;
+
 #include <Common\SVector.h>
-#include "Entity.h"
 #include <Box2D\Box2D.h>
 
 class Ability

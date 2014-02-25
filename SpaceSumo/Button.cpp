@@ -7,7 +7,7 @@
 
 Button::Button(SVector position, Command *command, std::string imageFile):
 	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
-	Rectangle( 1,1 ),
+	Rectangle( 1 , 1 ),
 	mPosition(position),
 	mCommand(command),
 	mHovered(false),
@@ -21,7 +21,9 @@ Button::Button(SVector position, Command *command, std::string imageFile):
 
 Button::~Button()
 {
+
 	delete mCommand;
+
 }
 
 void Button::update(GameData &data)
@@ -40,21 +42,6 @@ void Button::update(GameData &data)
 		mIsPressed = true;
 		execute();
 	}
-
-	/*if( contains(Point( data.mPos.x , data.mPos.y ))) 
-	{
-		mHovered = true;
-	}
-	else
-	{
-		mHovered = false;
-	}
-
-	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
-	{
-		mIsPressed = true;
-		execute();
-	}*/
 
 }
 

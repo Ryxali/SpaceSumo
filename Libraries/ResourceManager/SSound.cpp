@@ -20,6 +20,30 @@ SSound::~SSound()
 {
 }
 
+bool SSound::isPlaying()
+{
+	if(mSound.getStatus() == sf::Sound::Status::Playing )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+bool SSound::hasEnded()
+{
+	if(mSound.getStatus() == sf::Sound::Status::Stopped )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void SSound::play()
 {
 	if(mSoundBufVersion != mSBuf.getVersion())
@@ -40,6 +64,22 @@ void SSound::stop()
 	}
 	SAssert(mSBuf.isLoaded(), "The sound buffer isn't loaded");
 	mSound.stop();
+}
+
+void SSound::setDestroy(bool status)
+{
+	mDestroy = status;
+}
+
+bool SSound::getDestroy()
+{
+	return mDestroy;
+}
+
+
+void SSound::update(GameData& gData)
+{
+ 
 }
 
 const sf::SoundBuffer& SSound::getSoundBuffer() const

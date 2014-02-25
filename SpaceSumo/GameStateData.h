@@ -1,10 +1,9 @@
 #pragma once
-#include "Entity.h"
-#include <list>
+#include "EntityImpList.h"
 
 struct GameStateData
 {
 	GameStateData();
-	std::list<Entity> mEntities;
+	EntityImpList mEntityImpList;
 
 };

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ContactListener.h"
-#include "Entity.h"
+#include "EntityImp.h"
 #include "EntityType.h"
 #include "SpaceManImp.h"
 #include "Effecting.h"
