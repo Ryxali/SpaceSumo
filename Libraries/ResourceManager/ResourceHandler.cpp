@@ -1,8 +1,18 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCEHANDLER_INCLUDED
 #include "ResourceHandler.h"
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common/error.h>
+#endif
+#ifndef SPACESUMO_COMMON_STRINGH_INCLUDED
 #include <Common\stringH.h>
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_LOADABLE_INCLUDED
+#include "Loadable.h"
+#endif
 #include <locale>
 #include <sstream>
+#include <fstream>
 namespace stringhelp
 {
 	std::string toLowerCase(std::string &str)
@@ -29,7 +39,7 @@ void ResourceHandler::add(std::string fileRef)
 {
 	if(mLoadables.count(fileRef) < 1)
 	{
-		
+
 		switch(type(fileRef))
 		{
 		case Resource_Type::TEXTURE:
@@ -38,8 +48,11 @@ void ResourceHandler::add(std::string fileRef)
 		case Resource_Type::AUDIO:
 			mLoadables.insert(std::pair<std::string, Loadable&>(fileRef, mSBufStore.add(fileRef)));
 			break;
+		case Resource_Type::BUNDLE:
+			addResources(fileRef);
+			break;
 		case Resource_Type::UNKNOWN:
-			SError("fileRef check failed", "fileRef was UNKNOWN!");
+			SError("fileRef check failed", "fileRef was UNKNOWN with type: " + fileRef);
 			break;
 		default:
 			SError("fileRef check failed", "type not in list!");
@@ -63,23 +76,60 @@ const SoundBufferStore& ResourceHandler::getSBufStore() const
 ResourceHandler::Resource_Type ResourceHandler::type(std::string fileRef)
 {
 	//fileRef = stringhelp::toLowerCase();
-	if(str::contains(fileRef, "png", false))
+	if(str::contains(fileRef, ".png", false))
 		return Resource_Type::TEXTURE;
-	if(str::contains(fileRef, "ogg", false))
+	if(str::contains(fileRef, ".ogg", false))
 		return Resource_Type::AUDIO;
+	if(str::contains(fileRef, ".xoxo", false))
+		return Resource_Type::BUNDLE;
 
 	// Last resort
 	return Resource_Type::UNKNOWN;
 }
 void ResourceHandler::load(std::string ref)
 {
-
-	Loadable& tmp = mLoadables.at(ref);
-	tmp.load();
-	mCurLoaded.insert(std::pair<std::string, Loadable&>(ref, tmp));
+	if(str::contains(ref, ".xoxo", false))
+	{
+		loadResources(ref);
+	}
+	else
+	{
+		SAssert(mLoadables.count(ref) > 0, "Couldn't load file: " + ref);
+		Loadable& tmp = mLoadables.at(ref);
+		tmp.load();
+		mCurLoaded.insert(std::pair<std::string, Loadable&>(ref, tmp));
+	}
 }
 void ResourceHandler::loadCleanse(std::string ref)
 {
 	mCurLoaded.clear();
 	load(ref);
+}
+
+void ResourceHandler::addResources(std::string fileRef)
+{
+	std::ifstream stream(fileRef);
+	std::string nextLine;
+	while(!stream.eof())
+	{
+		std::getline(stream, nextLine);
+		if(nextLine.length() > 0)
+		{
+			add(nextLine);
+		}
+	}
+}
+
+void ResourceHandler::loadResources(std::string fileRef)
+{
+	std::ifstream stream(fileRef);
+	std::string nextLine;
+	while(!stream.eof())
+	{
+		std::getline(stream, nextLine);
+		if(nextLine.length() > 0)
+		{
+			load(nextLine);
+		}
+	}
 }

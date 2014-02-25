@@ -1,29 +1,79 @@
 #include "stdafx.h"
 #include "Frozen.h"
+#include "RenderList.h"
+#include <SFML\Window\Keyboard.hpp>
+#include "SpaceManImp.h"
+#include <ResourceManager\RHandle.h>
 
 Config Frozen::mConfig("res/conf/frozen.cfg", true);
 
-Frozen::Frozen() : mTimer(mConfig.getValue<int>("duration"))
+Frozen::Frozen(SpaceManImp* owner) 
+	: mIntensity(mConfig.getValue<int>("intensity")), 
+	mPrevKeyState(false),
+	mOwner(owner),
+	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
+	mAnim.getSprite().setOrigin( 64 , 64 );
 }
 
 Frozen::~Frozen()
 {
 }
 
-void Frozen::update()
+Frozen::Frozen(Frozen const & f) 
+	: mIntensity(f.mIntensity),
+	mOwner(f.mOwner),
+	mPrevKeyState(f.mPrevKeyState),
+	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
-	if (mTimer.isExpired())
+	mAnim.getSprite().setOrigin( 64 , 64 );
+}
+
+void Frozen::update(sf::Keyboard::Key& push)
+{
+	if(sf::Keyboard::isKeyPressed(push) &! mPrevKeyState)
+	{
+		mIntensity--;
+		mPrevKeyState = true;
+	}
+	else if(!sf::Keyboard::isKeyPressed(push) && mPrevKeyState)
+		mPrevKeyState = false;
+
+	if (mIntensity <= 0)
 	{
 		mIsAlive = false;
 	}
 }
 
-void Frozen::draw()
+void Frozen::draw(RenderList& renderList)
 {
+	mAnim.getSprite().setRotation( mOwner->getBody().getAngle() * 57 );
+	mAnim.getSprite().setPosition( mOwner->getBody().getWorldCenter().x*30, mOwner->getBody().getWorldCenter().y*30);
+
+	renderList.addSprite(mAnim);
+}
+// TODO This causes memory leaks somewhere. Copy constructor needs a fix
+EffectImp* Frozen::clone()
+{
+	return new Frozen(*this);
 }
 
-Flag Frozen::getFlag_CAN_ALTER_MOVE()
+Flag Frozen::getFlag_CAN_ROTATE()
 {
-	return Flag(Flag::CAN_ALTER_MOVE, 10, false, 1);
+	return Flag(Flag::CAN_ROTATE, 10, false, 1);
+}
+
+Flag Frozen::getFlag_CAN_MOVE()
+{
+	return Flag(Flag::CAN_MOVE, 10, false, 1);
+}
+
+Flag Frozen::getFlag_CAN_ACTIVATE()
+{
+	return Flag(Flag::CAN_ACTIVATE, 10, false, 1);
+}
+
+Flag Frozen::getFlag_CAN_PUSH()
+{
+	return Flag(Flag::CAN_PUSH, 10, false, 1);
 }

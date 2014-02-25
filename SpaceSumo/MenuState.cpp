@@ -1,34 +1,74 @@
 #include "stdafx.h"
 #include "MenuState.h"
 #include <ResourceManager\RHandle.h>
-
-
-static const STexture& get_addTexture(std::string ref)
-{
-	res::addResource(ref);
-	res::loadResource(ref);
-	return res::getTexture(ref);
-}
+#include "GameStateList.h"
+#include "ChangeStateCommand.h"
+#include "StateList_Main.h"
 
 MenuState::MenuState(StateList &owner) : 
 	State(owner),
-	mBackground(get_addTexture("res/img/MenuBackground.png")),
-	mHighlight(get_addTexture("res/img/MenuHighlight.png")),
-	mGlitter(get_addTexture("res/img/MenuGlitter.png"))
+	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
+	mButtonList()
 {
-
+		mOwner = owner;
 }
 
-
-MenuState::~MenuState(void)
+MenuState::~MenuState()
 {
 }
 
 void MenuState::draw(RenderList &list)
 {
-	if (button1.mHovered){
-		list.addSprite(mHighlight);
-		list.addSprite(mGlitter);
-	}
 	list.addSprite(mBackground);
+	
+	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	{
+		(*it).draw(list);
+	}
+
+}
+
+void MenuState::update(GameData &data, int delta)
+{
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		mOwner.changeState(st::GAME_STATE);
+	}
+
+	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	{
+		(*it).update(data);
+		
+		/*if( (*it)->isPressed() )
+		{
+			(*it).execute();
+			break;
+		}*/
+
+	}
+
+}
+
+void MenuState::open()
+{
+	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(st::GAME_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
+	mButtonList.emplace_back(SVector(200,400), new ChangeStateCommand(st::PLAY_STATE, mOwner), (std::string)"res/img/Test_ikon.png");
+}
+
+void MenuState::close()
+{
+	mButtonList.clear();
+}
+
+void MenuState::cleanUp()
+{
+	/*for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
+	{
+		if( (*it).isPressed() )
+		{
+			(*it).execute();
+			break;
+		}
+	}*/
 }

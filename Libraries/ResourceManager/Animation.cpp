@@ -1,16 +1,34 @@
+#ifndef SPACESUMO_RESOURCEMANAGER_ANIMATION_INCLUDED
 #include "Animation.h"
+#endif
+#ifndef SPACESUMO_COMMON_CONFIG_INCLUDED
 #include <Common\Config.h>
+#endif
+#ifndef SPACESUMO_COMMON_STRINGH_INCLUDED
 #include <Common\stringH.h>
+#endif
+#ifndef SPACESUMO_COMMON_ERROR_INCLUDED
 #include <Common\error.h>
+#endif
+#ifndef SPACESUMO_COMMON_MATHH_INCLUDED
 #include <Common\mathH.h>
+#endif
+#ifndef SPACESUMO_COMMON_SVECTOR_INCLUDED
 #include <Common\SVector.h>
-Animation::Animation(const STexture &tex, std::string animInfo) :
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
+#include "STexture.h"
+#endif
+#include <SFML\Graphics\RenderWindow.hpp>
+#include <SFML\Graphics\Texture.hpp>
+Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 	mSTex(tex),
 	mSprite(),
 	mTexVersion(0),
 	mAnimationTimer(),
 	mCurrentRow(0),
-	mAnimUniTime(0)
+	mAnimUniTime(0),
+	mZ(z)
 {
 	Config cf(animInfo, true);
 	mColumns = (unsigned char) cf.getValue<int>("AnimationWidth");
@@ -32,12 +50,18 @@ Animation::Animation(const STexture &tex, std::string animInfo) :
 	{
 		setAdvancedTimeOptions(cf);
 	}
-
+	
+	if(mTexVersion != mSTex.getVersion())
+	{
+		mSprite.setTexture(getTexture());
+		reevaluateSizeValues();
+		mTexVersion = mSTex.getVersion();
+	}
 }
 
 const sf::Texture &Animation::getTexture() const
 {
-	SAssert(mSTex.isLoaded(), "You need to load the texture before using.");
+	SAssert(mSTex.isLoaded(), "You need to load the texture before using. " + mSTex.getRef());
 	return mSTex.getTexture();
 }
 
@@ -49,7 +73,7 @@ void Animation::draw(sf::RenderWindow &win)
 		reevaluateSizeValues();
 		mTexVersion = mSTex.getVersion();
 	}
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded.");
+	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
 	int curFrame = getCurrentFrame();
 	SAssert(curFrame == 0, "Wat");
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
@@ -57,9 +81,13 @@ void Animation::draw(sf::RenderWindow &win)
 	win.draw(mSprite);
 }
 
-short Animation::getZ() const
+float Animation::getZ() const
 {
-	return 0;
+	return mZ;
+}
+void Animation::setZ(float z)
+{
+	mZ = z;
 }
 
 sf::Sprite& Animation::getSprite()
@@ -91,13 +119,9 @@ Animation::~Animation()
 int Animation::getCurrentFrame()
 {
 	int timeElapsed = mAnimationTimer.getElapsedTime().asMilliseconds();
-	if(timeElapsed > getCurAnimTime())
+	if(timeElapsed >= getCurAnimTime())
 	{
-		timeElapsed = ( mAnimationTimer.restart().asMilliseconds()-1)%getCurAnimTime();
-	}
-	else
-	{
-		timeElapsed = mAnimationTimer.getElapsedTime().asMilliseconds();
+		timeElapsed = ( mAnimationTimer.restart().asMilliseconds())%getCurAnimTime();
 	}
 	return (int)( (timeElapsed) / (((getCurAnimTime()) * getCurAnimLength() )));
 }
@@ -130,4 +154,14 @@ void Animation::setAdvancedTimeOptions(Config &cf)
 	{
 		mAnimTime[i] = (unsigned short)cf.getValue<int>("Row_" + std::to_string(i) + "_DisplayTime");
 	}
+}
+
+unsigned short Animation::getSliceWidth()
+{
+	return mSliceWidth;
+}
+
+unsigned short Animation::getSliceHeight()
+{
+	return mSliceHeight;
 }

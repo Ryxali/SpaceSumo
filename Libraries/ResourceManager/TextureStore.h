@@ -1,6 +1,10 @@
-#pragma once
+#ifndef SPACESUMO_RESOURCEMANAGER_TEXTURESTORE_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_TEXTURESTORE_INCLUDED
+
 #include <map>
+#ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
 #include "STexture.h"
+#endif
 
 class TextureStore
 {
@@ -31,3 +35,4 @@ private:
 
 };
 
+#endif

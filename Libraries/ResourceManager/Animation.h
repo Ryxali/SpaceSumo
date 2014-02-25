@@ -1,6 +1,11 @@
-#pragma once
+#ifndef SPACESUMO_RESOURCEMANAGER_ANIMATION_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_ANIMATION_INCLUDED
+
+#ifndef SPACESUMO_RESOURCEMANAGER_SDRAWABLE_INCLUDED
 #include "SDrawable.h"
-#include "STexture.h"
+#endif
+
+class STexture;
 #include <SFML\Graphics\Sprite.hpp>
 #include <SFML\System\Clock.hpp>
 #include <utility>
@@ -10,16 +15,19 @@ class SVector;
 class Animation : public SDrawable
 {
 public:
-	Animation(const STexture &tex, std::string animInfo);
+	Animation(const STexture &tex, std::string animInfo, float z);
 	Animation(const Animation &anim);
 	~Animation();
 	const sf::Texture& getTexture() const;
 	virtual void draw(sf::RenderWindow &win);
-	virtual short getZ() const;
+	virtual float getZ() const;
+	void setZ(float z);
 	sf::Sprite& getSprite();
 	unsigned char getCurAnimLength();
 	unsigned short getCurAnimTime();
 	void setCurrentRow(unsigned char row);
+	unsigned short getSliceWidth();
+	unsigned short getSliceHeight();
 private:
 	Animation& operator=(const Animation& anim);
 	const STexture &mSTex;
@@ -37,6 +45,7 @@ private:
 	unsigned short * mAnimTime;
 	unsigned short mAnimUniTime;
 	int getCurrentFrame();
+	float mZ;
 	void reevaluateSizeValues();
 	void setAdvancedLengthOptions(Config &cf);
 	void setUniformLengthOptions(Config &cf);
@@ -44,3 +53,4 @@ private:
 	void setUniformTimeOptions(Config &cf);
 };
 
+#endif

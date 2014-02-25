@@ -2,12 +2,22 @@
 #include "Game.h"
 #include <Common\Config.h>
 #include <SFML\Window\Keyboard.hpp>
-#include "SpaceManImp.h"
-#include <ResourceManager\RHandle.h>
-#include <iostream>
 #include "MenuState.h"
 #include "GameState.h"
+#include <Common\SVector.h>
+
 #define NO_MEMORY_TRACKING
+
+sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
+{
+	return sf::Vector2f(v0.x/v1.x, v0.y/v1.y);
+}
+
+sf::Vector2f operator*(const sf::Vector2f &v0, const sf::Vector2f &v1)
+{
+	return sf::Vector2f(v0.x*v1.x, v0.y*v1.y);
+}
+
 Game::Game() :
 	mConfig("res/conf/main.cfg", true), 
 	mWindow
@@ -17,20 +27,21 @@ Game::Game() :
 	mConfig.getValue<int>("screenHeight")),
 	"Test",
 	mConfig.getValue<int>("fullscreen")),
+	mView(sf::FloatRect(0, 0, 1920, 1080)),
 	mRenderList(),
 	mGameData(),
-	mStates()
+	mStates(mGameData)
 {
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
-	mStates.add(new MenuState(mStates));
-	mStates.add(new GameState(mStates, mGameData));
-	mStates.changeState(1);
+	mWindow.setView(mView);
+	mGameData.world.SetContactListener(&mListener);
 }
 
 
 Game::~Game()
 {
+
 }
 
 void Game::start()
@@ -54,12 +65,14 @@ void Game::loop()
 		switch(evt.type)
 		{
 		case sf::Event::Closed:
-			mWindow.close();
+			close();
+			return;
 			break;
 		case sf::Event::KeyPressed:
-			if(evt.key.code == sf::Keyboard::Escape) 
+			if(evt.key.code == sf::Keyboard::Escape || evt.key.code == sf::Keyboard::R) 
 			{
-				mWindow.close();
+				close();
+				return;
 				break;
 			}
 		default:
@@ -67,10 +80,12 @@ void Game::loop()
 			break;
 		}
 	}
+	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition(mWindow) * (mView.getSize()/(sf::Vector2f)mWindow.getSize());
 	mWindow.clear(sf::Color::White);
 	update(delta.asMilliseconds());
 	preDraw();
 	draw();
+	cleanUp();
 }
 
 void Game::update(int delta)
@@ -81,11 +96,22 @@ void Game::update(int delta)
 void Game::preDraw()
 {
 	mStates.getCurrent().draw(mRenderList);
-	// TODO curState.preDraw(renderList& list);
 }
 
 void Game::draw()
 {
 	mRenderList.render(mWindow);
 	mWindow.display();
+}
+
+void Game::cleanUp()
+{
+	mStates.getCurrent().cleanUp();
+	mStates.sync();
+}
+
+void Game::close()
+{
+	mStates.getCurrent().close();
+	mWindow.close();
 }

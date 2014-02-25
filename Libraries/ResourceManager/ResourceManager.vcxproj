@@ -85,6 +85,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Playable.h" />
+    <ClInclude Include="SequentialSound.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="SDrawable.h" />
     <ClInclude Include="Loadable.h" />
@@ -100,6 +102,7 @@
     <ClInclude Include="TextureStore.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SequentialSound.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="LoadableBundle.cpp" />
     <ClCompile Include="Resource.cpp" />

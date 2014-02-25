@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPACESUMO_COMMON_CONFIG_INCLUDED
+#define SPACESUMO_COMMON_CONFIG_INCLUDED
 #include <fstream>
 #include <map>
 class Config
@@ -17,7 +18,7 @@ public:
 	/*
 		Opens up the stream to the config file, then loads its' content into memory.
 	*/
-	void loadToMemory();
+	void loadToMemory(std::string file);
 	void saveConfigChange();
 	
 	template <typename Tval>
@@ -34,3 +35,4 @@ private:
 	std::string mFilePath;
 };
 
+#endif

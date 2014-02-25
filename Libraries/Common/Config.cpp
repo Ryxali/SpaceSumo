@@ -11,7 +11,7 @@ Config::Config(std::string filePath, bool implicitLoad) : mConfData(), mFilePath
 	SAssert(str::contains(filePath, ".cfg"), "config file unknown format");
 	if(implicitLoad)
 	{
-		loadToMemory();
+		loadToMemory(mFilePath);
 	}
 }
 
@@ -20,34 +20,41 @@ Config::~Config()
 	close();
 }
 
-void Config::loadToMemory()
+void Config::loadToMemory(std::string file)
 {
-	mFile.open(mFilePath);
+	mFile.open(file);
 	SAssert(mFile.is_open(), "Could not open config file: " + mFilePath);
 	std::string line = "";
 	while(std::getline(mFile, line))
 	{
-		
-		
+
+
 		std::size_t comment = line.find('#', 0);
 		if(comment == std::string::npos)
 		{
-			//Removes Spaces
-			std::string::size_type space = line.find(' ');
-			while (std::string::npos != space)
+			if(str::contains(line, ".cfg")) 
 			{
-				line.erase(space, 1);
-				space = line.find(' ');
+				loadToMemory(file);
 			}
-
-			std::istringstream is_line(line);
-			std::string key;
-			if( std::getline(is_line, key, '=') )
+			else
 			{
-				std::string value;
-				if( std::getline(is_line, value) ) 
+				//Removes Spaces
+				std::string::size_type space = line.find(' ');
+				while (std::string::npos != space)
 				{
-					mConfData.emplace(key, value);
+					line.erase(space, 1);
+					space = line.find(' ');
+				}
+
+				std::istringstream is_line(line);
+				std::string key;
+				if( std::getline(is_line, key, '=') )
+				{
+					std::string value;
+					if( std::getline(is_line, value) ) 
+					{
+						mConfData.emplace(key, value);
+					}
 				}
 			}
 		}
@@ -58,7 +65,7 @@ void Config::saveConfigChange()
 {
 	close();
 	mFile.open(mFilePath);
-	SAssert(mFile.is_open(), "Could not open config file");
+	SAssert(mFile.is_open(), "Could not open config file: " + mFilePath);
 
 	std::string tempString = "";
 	std::string line = "";
@@ -82,10 +89,9 @@ void Config::saveConfigChange()
 				if( std::getline(is_line, value) ) 
 				{
 					std::map<std::string, std::string>::iterator it = mConfData.find(key);
-					SAssert( it != mConfData.end(), "Key not found");
 
 					value = it->second;
-					
+
 					line = key + " = " + value;
 				}
 			}
@@ -114,8 +120,8 @@ template<>
 std::string Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
-	 
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
+
 	return it->second;
 }
 
@@ -123,8 +129,8 @@ template<>
 int Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
- 
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
+
 	return std::stoi(it->second);
 }
 
@@ -132,8 +138,8 @@ template<>
 bool Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
- 
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
+
 	if(it->second == "false")
 	{
 		return false;
@@ -145,19 +151,19 @@ bool Config::getValue(std::string option)
 	else
 	{
 		SError("Conversion Error" , "Cannot convert " + it->second + " to bool" );
-		#ifdef NDEBUG
+#ifdef NDEBUG
 		return false;
-		#endif
+#endif
 	}
-	
+
 }
 
 template<>
 float Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
- 
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
+
 	return std::stof(it->second);
 }
 
@@ -165,8 +171,8 @@ template<>
 double Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
- 
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
+
 	return std::stod(it->second);
 }
 
@@ -174,8 +180,8 @@ template<>
 char Config::getValue(std::string option)
 {
 	std::map<std::string, std::string>::iterator it = mConfData.find(option);
-	SAssert( it != mConfData.end(), "Key: " + option + " not found");
- 
+	SAssert( it != mConfData.end(), "Key: " + option + " not found in " + mFilePath);
+
 	SAssert(it->second.length() == 1, "String can't be loaded into a single char");
 	return (it->second.at(0));
 }

@@ -66,7 +66,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -88,14 +88,22 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ChangeStateCommand.cpp" />
+    <ClCompile Include="CreateModeCommand.cpp" />
+    <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="ModeSelectState.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Effecting.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectImp.cpp" />
     <ClCompile Include="Effects.cpp" />
     <ClCompile Include="EffectStatus.cpp" />
     <ClCompile Include="entityFactory.cpp" />
     <ClCompile Include="EntityImp.cpp" />
+    <ClCompile Include="EntityImpList.cpp" />
+    <ClCompile Include="Face.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="FreezeBolt.cpp" />
     <ClCompile Include="Freezer.cpp" />
@@ -103,45 +111,79 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="GameStateData.cpp" />
+    <ClCompile Include="GameStateList.cpp" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LHydrogen.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="Mode.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
+    <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateList.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Terra.cpp" />
+    <ClCompile Include="Sumo.cpp" />
+    <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ability.h" />
     <ClInclude Include="B2Body.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ChangeStateCommand.h" />
+    <ClInclude Include="CreateModeCommand.h" />
+    <ClInclude Include="DualCommand.h" />
+    <ClInclude Include="ModeSelectState.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="consts.h" />
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="Debug.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Effecting.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectImp.h" />
     <ClInclude Include="Effects.h" />
     <ClInclude Include="EffectStatus.h" />
     <ClInclude Include="entityFactory.h" />
     <ClInclude Include="EntityImp.h" />
+    <ClInclude Include="EntityImpList.h" />
+    <ClInclude Include="EntityType.h" />
+    <ClInclude Include="Face.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="FreezeBolt.h" />
     <ClInclude Include="Freezer.h" />
     <ClInclude Include="Frozen.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="GameStateData.h" />
+    <ClInclude Include="GameStateList.h" />
+    <ClInclude Include="Head.h" />
+    <ClInclude Include="Hud.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LHydrogen.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Map_Type.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Mode.h" />
+    <ClInclude Include="Mode_Type.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SetupState.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />
+    <ClInclude Include="StateList_Main.h" />
+    <ClInclude Include="StateList_Setup.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Terra.h" />
+    <ClInclude Include="Sumo.h" />
+    <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Common\Common.vcxproj">
@@ -156,6 +198,7 @@
     <None Include="res\conf\freezer.cfg" />
     <None Include="res\conf\frozen.cfg" />
     <None Include="res\conf\main.cfg" />
+    <None Include="res\conf\powerUpBody.cfg" />
     <None Include="res\conf\spaceman.cfg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

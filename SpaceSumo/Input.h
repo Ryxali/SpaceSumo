@@ -1,6 +1,7 @@
 #pragma once
 #include <queue>
 #include <SFML\Window\Event.hpp>
+
 class Input
 {
 public:

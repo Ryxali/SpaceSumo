@@ -10,6 +10,7 @@ Flag::Flag(Type flagT, int severity, bool status, float extra)
 	: mFlag(flagT), mSeverity(severity), mStatus(status), mExtra(extra)
 {
 }
-Flag::Flag(const Flag &f)
+Flag::Flag(const Flag &f) 
+	: mFlag(f.mFlag), mSeverity(f.mSeverity), mStatus(f.mStatus), mExtra(f.mExtra)
 {
 }

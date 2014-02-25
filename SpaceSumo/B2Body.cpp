@@ -1,25 +1,21 @@
 #include "stdafx.h"
 #include "B2Body.h"
-static float PPM = 30;
 
-static b2BodyDef getDeffed(int val)
-{
-}
+#include <string>
+
+
 
 B2Body::B2Body(b2World &world , std::string configFile,
 		float x, float y)
-		: mConfig(configFile)
+		: mConfig(configFile),
+		mSpawnpoint( x , y )
 {
-	mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
-	mBodyDef.type = (b2BodyType) mConfig.getValue<int>("bodyType");
-    mBodyShape.m_radius = mConfig.getValue<float>("radius")/PPM;
-    mBodyFix.shape = &mBodyShape;
-    mBodyFix.density = mConfig.getValue<float>("density");
-	mBodyFix.restitution = mConfig.getValue<float>("restitution");
-    mBodyFix.friction = mConfig.getValue<float>("friction");
-    mBody = world.CreateBody(&mBodyDef);
-    mBody->CreateFixture(&mBodyFix);
-	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
+	initBody(world);
+}
+
+B2Body::~B2Body()
+{
+	mBody->GetWorld()->DestroyBody(mBody);
 }
 
 const b2Vec2 B2Body::getLinearVelocity()
@@ -47,6 +43,11 @@ float32 B2Body::getAngle()
 	return mBody->GetAngle();
 }
 
+b2Body* B2Body::getBody()
+{
+	return mBody;
+}
+
 
 void B2Body::applyAngularImpulse(float32 impulse, bool wake)
 {
@@ -68,4 +69,52 @@ void B2Body::setAngularVelocity(float32 velocity)
 void B2Body::setLinearVelocity( const b2Vec2 vector )
 {
 	mBody->SetLinearVelocity( vector );
+}
+
+void B2Body::setRotation(float32 angle)
+{
+	mBody->SetTransform( mBody->GetPosition() , DEGREES_TO_RADIANS * angle );
+}
+
+
+void B2Body::initBody(b2World& world)
+{
+
+	b2Shape* bodyShape;
+
+	
+	mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
+	mBodyDef.type = (b2BodyType) mConfig.getValue<int>("bodyType");
+   
+	if(mConfig.getValue<std::string>("shape") == "rectangle")
+	{
+		bodyShape = new b2PolygonShape();
+		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(mConfig.getValue<int>("sizeX")/PPM, mConfig.getValue<int>("sizeY")/PPM);
+		mBodyFix.shape = bodyShape;
+	}
+	else
+	{
+		bodyShape = new b2CircleShape();
+		static_cast<b2CircleShape*>(bodyShape)->m_radius = mConfig.getValue<float>("radius")/PPM;
+		mBodyFix.shape = bodyShape;
+	}
+    mBodyFix.density = mConfig.getValue<float>("density");
+	mBodyFix.restitution = mConfig.getValue<float>("restitution");
+    mBodyFix.friction = mConfig.getValue<float>("friction");
+	mBodyFix.filter.categoryBits = (uint16)mConfig.getValue<int>("category");
+	int i = mConfig.getValue<int>("Nmasks");
+	if( i != 0 )
+	{
+		uint16 val = mConfig.getValue<int>("mask_0");
+		for ( int t = 1; t < i; t++)
+		{
+			val = val | mConfig.getValue<int>("mask_" + std::to_string(t));
+		}
+		mBodyFix.filter.maskBits = val;
+	}
+	mBodyFix.isSensor = mConfig.getValue<bool>("isSensor");
+    mBody = world.CreateBody(&mBodyDef);
+    mBody->CreateFixture(&mBodyFix);
+	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
+	delete bodyShape;
 }

@@ -1,15 +1,13 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML\Window.hpp>
+#include <SFML/Graphics/View.hpp>
+#include <SFML/System/Clock.hpp>
 #include "RenderList.h"
-#include "SpaceManImp.h"
 #include <Common\Config.h>
-#include <Box2D/Box2D.h>
-#include <ResourceManager\Animation.h>
 #include "GameData.h"
-#include "MenuState.h"
-#include "StateList.h"
-#include "Input.h"
+#include "GameStateList.h"
+#include "ContactListener.h"
+
 class Game
 {
 public:
@@ -21,13 +19,16 @@ private:
 	void update(int delta);
 	void preDraw();
 	void draw();
+	void cleanUp();
+	void close();
 	GameData mGameData;
-	StateList mStates;
+	GameStateList mStates;
 	Config mConfig;
 	sf::RenderWindow mWindow;
 	sf::View mView;
 	RenderList mRenderList;
 	sf::Clock mDeltaClock;
+	ContactListener mListener;
 	
 };
 

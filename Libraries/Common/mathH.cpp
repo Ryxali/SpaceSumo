@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "mathH.h"
-#include "SVector.h"
 #include <cmath>
 
 
@@ -50,6 +49,14 @@ template <>
 long double math::cos<long double>(long double val)
 {
 	return std::cosl(val);
+}
+
+
+//atan2
+template <>
+float math::atan2<float>(float val, float val2)
+{
+	return std::atan2(val, val2);
 }
 
 // squareroot

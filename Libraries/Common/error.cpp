@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "error.h"
-
 #include <windows.h>
 #include "stringH.h"
 #include <sstream>

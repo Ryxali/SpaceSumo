@@ -1,10 +1,16 @@
-#pragma once
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCEHANDLER_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_RESOURCEHANDLER_INCLUDED
 
-#include "RHandle.h"
+class Loadable;
+#ifndef SPACESUMO_RESOURCEMANAGER_TEXTURESTORE_INCLUDED
 #include "TextureStore.h"
-#include "Loadable.h"
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_LOADABLEBUNDLE_INCLUDED
 #include "LoadableBundle.h"
+#endif
+#ifndef SPACESUMO_RESOURCEMANAGER_SOUNDBUFFERSTORE_INCLUDED
 #include "SoundBufferStore.h"
+#endif
 #include <vector>
 class ResourceHandler
 {
@@ -34,6 +40,8 @@ public:
 	// unloads all loadables that doesn't belong to this loadable, then loads all loadables that aren't already loaded
 	void loadCleanse(std::string ref);
 private:
+	void addResources(std::string fileRef);
+	void loadResources(std::string fileRef);
 	ResourceHandler(const ResourceHandler &rHandler);
 	std::map<std::string, Loadable&> mLoadables;
 	std::map<std::string, Loadable&> mCurLoaded;
@@ -46,3 +54,4 @@ private:
 	SoundBufferStore mSBufStore;
 };
 
+#endif

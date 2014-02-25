@@ -2,11 +2,11 @@
 #include "entityFactory.h"
 #include "SpaceManImp.h"
 #include <Common\Config.h>
-#include <Common\stringH.h>
 #include "LHydrogen.h"
-
+#include <Common\stringH.h>
 EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
-								  std::string bodyData, float x, float y)
+								  std::string bodyData, std::string handData,
+								  float x, float y, float32 rotation)
 {
 	Config config("res/conf/spaceman.cfg");
 	Config controls(conf);
@@ -16,17 +16,17 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 		str::toKey(controls.getValue<std::string>("right")), 
 		str::toKey(controls.getValue<std::string>("left")), 
 		str::toKey(controls.getValue<std::string>("push")),
-		world, bodyData, x, y);
+		str::toKey(controls.getValue<std::string>("activate")),
+		world, bodyData, handData,  x, y, rotation);
 }
 
-EntityImp* entFac::createPowerUpLHydrogen(b2World& world)
+EntityImp* entFac::createPowerUpLHydrogen(b2World& world, float x, float y)
 {
-	Config config("res/conf/LHydrogen.cfg");
-
-	return new LHydrogen();
+	std::string bodyData("res/conf/powerUpBody.cfg");
+	return new LHydrogen(world, bodyData, x, y);
 }
 
-EntityImp* entFac::createPowerUpRandom(std::string conf, b2World& world)
+EntityImp* entFac::createPowerUpRandom(std::string conf, b2World& world, float x, float y)
 {
-	return new LHydrogen();
+	return new LHydrogen(world, conf, x, y);
 }

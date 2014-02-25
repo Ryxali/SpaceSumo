@@ -2,7 +2,11 @@
 
 //#include "State.h"
 #include <vector>
-
+struct GameData;
+namespace st
+{
+	enum State_Type;
+}
 class StateList
 {
 private:
@@ -10,12 +14,18 @@ private:
 public:
 	StateList();
 	~StateList();
-	void add(State* state);
-	void changeState(int index);
+	
+	virtual void changeState(st::State_Type index) = 0;
 	State &getCurrent();
-private:
-	void changeState(State* state);
+	void sync();
+	
+protected:
+	void add(State* state);
+	void stateChange(State* state);
+	void changeState(int index);
 	std::vector<State*> mStates;
+private:
+	
 	State* mCurState;
+	State* mNextState;
 };
-

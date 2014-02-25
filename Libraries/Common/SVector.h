@@ -1,15 +1,16 @@
-#ifndef SPACE_SUMO_SVECTOR_INCLUDED
-#define SPACE_SUMO_SVECTOR_INCLUDED
+#ifndef SPACESUMO_COMMON_SVECTOR_INCLUDED
+#define SPACESUMO_COMMON_SVECTOR_INCLUDED
 
 #include <SFML/System/Vector2.hpp>
 #include <BasicShapes\PointProtocol.h>
-#include <Box2D\Box2D.h>
+struct b2Vec2;
 
 class SVector : public PointProtocol, protected sf::Vector2f
 {
 public:
 	SVector(float x = 0, float y = 0);
 	SVector(const PointProtocol &v);
+	SVector(const SVector &v);
 	SVector(const sf::Vector2f &v);
 	~SVector();
 
@@ -38,6 +39,7 @@ public:
 	*/
 	SVector &rotate(float degrees);
 	SVector &rotateRad(float radian);
+	float getAngle();
 
 
 	inline SVector &operator=(SVector &v) {

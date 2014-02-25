@@ -1,38 +1,99 @@
 #include "stdafx.h"
 #include "Button.h"
+#include <BasicShapes\putils.h>
+#include <SFML\Window\Keyboard.hpp>
+#include <ResourceManager\RHandle.h>
+#include "GameData.h"
 
-
+<<<<<<< HEAD
 Button::Button(void) : Rectangle(0, 0)
+=======
+Button::Button(SVector position, Command *command, std::string imageFile):
+	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
+	Rectangle( 1 , 1 ),
+	mPosition(position),
+	mCommand(command),
+	mHovered(false),
+	mIsPressed(false)
 {
+	mAnimation.getSprite().setPosition(mPosition.getX() , mPosition.getY());
+	setHeight(mAnimation.getSliceHeight());
+	setWidth(mAnimation.getSliceWidth());
+	
 }
 
+Button::~Button()
+>>>>>>> dev_NL
+{
 
-Button::~Button(void)
-{
+	delete mCommand;
+
 }
-float Button::getCenterX()
+
+void Button::update(GameData &data)
 {
-	return mPos.getX() + (getWidth()/2);
+	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos)) 
+	{
+		mHovered = true;
+	}
+	else
+	{
+		mHovered = false;
+	}
+
+	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
+	{
+		mIsPressed = true;
+		execute();
+	}
+
 }
-float Button::getCenterY()
+
+void Button::draw(RenderList& renderList)
 {
-	return 0;
+	renderList.addSprite(mAnimation);
+}
+
+float Button::getCenterX() const
+{
+	return mPosition.getX()+getWidth()/2;
+}
+
+float Button::getCenterY() const
+{
+<<<<<<< HEAD
+	return mPos.getY() + (getHeight()/2);
+}
+bool Button::hasBeenClicked()
+=======
+	return  mPosition.getY()+getHeight()/2;
+}
+
+bool Button::isPressed()
+>>>>>>> dev_NL
+{
+	return mIsPressed;
 }
 <<<<<<< HEAD
-bool Button::hasBeenClicked()
-{
-	return false;
-}
 void Button::update(sf::Mouse &mouse)
 {
+	SVector mPos(mouse.getPosition().x, mouse.getPosition().y);
+	if( contains(mPos) )
+	{
+		mHovered=true;
+		// Do hightlghtstufafas
+	}
+}
+
+void Button::draw(RenderList &list)
+{
+
+}
 
 =======
-bool hasBeenClicked()
+
+void Button::execute()
 {
-	return false;
+	mCommand->Execute();
 }
-void update(sf::Mouse &mouse)
-{
-	
->>>>>>> dev
-}
+>>>>>>> dev_NL

@@ -1,6 +1,13 @@
-#pragma once
-#include <SFML\Audio\SoundBuffer.hpp>
+#ifndef SPACESUMO_RESOURCEMANAGER_SOUNDBUFFER_INCLUDED
+#define SPACESUMO_RESOURCEMANAGER_SOUNDBUFFER_INCLUDED
+
+namespace sf
+{
+	class SoundBuffer;
+};
+#ifndef SPACESUMO_RESOURCEMANAGER_RESOURCE_INCLUDED
 #include "Resource.h"
+#endif
 class SSoundBuffer : public Resource
 {
 public:
@@ -37,3 +44,4 @@ private:
 	sf::SoundBuffer *mSBuffer;
 };
 
+#endif
