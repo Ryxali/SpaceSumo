@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Button.h"
 
+
 Button::Button(void) : Rectangle(0, 0)
 {
 }
@@ -15,24 +16,23 @@ float Button::getCenterX()
 }
 float Button::getCenterY()
 {
-	return mPos.getY() + (getHeight()/2);
+	return 0;
 }
+<<<<<<< HEAD
 bool Button::hasBeenClicked()
 {
 	return false;
 }
 void Button::update(sf::Mouse &mouse)
 {
-	SVector mPos(mouse.getPosition().x, mouse.getPosition().y);
-	if( contains(mPos) )
-	{
-		mHovered=true;
-		// Do hightlghtstufafas
-	}
-}
 
-void Button::draw(RenderList &list)
+=======
+bool hasBeenClicked()
 {
-
+	return false;
 }
-
+void update(sf::Mouse &mouse)
+{
+	
+>>>>>>> dev
+}
