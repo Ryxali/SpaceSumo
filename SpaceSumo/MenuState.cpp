@@ -10,8 +10,9 @@ MenuState::MenuState(StateList &owner) :
 	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
 	mButtonList()
 {
-		mOwner = owner;
+	mOwner = owner;
 }
+
 
 MenuState::~MenuState()
 {
@@ -58,11 +59,6 @@ void MenuState::open()
 
 void MenuState::close()
 {
-	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end();)
-	{
-		delete *it;
-		it = mButtonList.erase(it);
-	}
 	mButtonList.clear();
 }
 

@@ -6,7 +6,7 @@ class Playable
 {
 public:
 	Playable(){}
-	virtual ~Playable();
+	virtual ~Playable(){}
 
 	virtual bool isPlaying() = 0;
 	virtual bool hasEnded() = 0;
