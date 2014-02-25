@@ -89,8 +89,11 @@
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ChangeStateCommand.cpp" />
+    <ClCompile Include="CharacterSetupState.cpp" />
+    <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="MapSelectState.cpp" />
     <ClCompile Include="ModeSelectState.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="ContactListener.cpp" />
@@ -136,8 +139,11 @@
     <ClInclude Include="B2Body.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ChangeStateCommand.h" />
+    <ClInclude Include="CharacterSetupState.h" />
+    <ClInclude Include="CreateMapCommand.h" />
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
+    <ClInclude Include="MapSelectState.h" />
     <ClInclude Include="ModeSelectState.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="consts.h" />

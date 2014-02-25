@@ -5,7 +5,7 @@
 #include "ChangeStateCommand.h"
 #include "StateList_Setup.h"
 #include "Mode_Type.h"
-ModeSelectState::ModeSelectState(StateList &owner, Mode **mode, b2World &world) : State(owner), mModes()
+ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world) : State(owner), mModes()
 {
 	mModes.emplace_back(SVector(),
 		new DualCommand

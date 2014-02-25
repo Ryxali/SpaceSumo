@@ -9,11 +9,11 @@ enum Mode_Type;
 class CreateModeCommand : public Command
 {
 public:
-	CreateModeCommand(Mode_Type mode, Mode** target, b2World &world);
+	CreateModeCommand(Mode_Type mode, Mode *&target, b2World &world);
 	~CreateModeCommand();
 	virtual void Execute();
 private:
-	Mode **mTarget;
+	Mode *&mTarget;
 	Mode_Type mMode;
 	b2World &mWorld;
 };

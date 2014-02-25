@@ -9,10 +9,14 @@
 #include <list>
 #include <cstdlib>
 #include "EntityType.h"
+#include <Common\error.h>
 
 GameState::GameState(StateList &owner, GameData& gameData) 
 	: State(owner), mData(),
-	mGameData(gameData), mHud(), 
+	mGameData(gameData),
+	mGameMode(0),
+	mGameMap(0),
+	mHud(), 
 	mPowerUpSpawnTimer(8000)
 {
 }
@@ -50,18 +54,34 @@ void GameState::cleanUp()
 
 void GameState::open()
 {
+	SAssert(mGameMode != 0 && mGameMap != 0, "Game data not set!");
 	spacemanCreation(mGameData);
+	/*if(mGameMode != 0)
+		delete mGameMode;
+	if(mGameMap != 0)
+		delete mGameMap;
 	mGameMode = new Sumo(mGameData.world);
-	mGameMap = new Terra();
+	mGameMap = new Terra();*/
 	mHud.setNPlayers(3);
 }
 
 void GameState::close()
 {
-	delete mGameMode;
-	delete mGameMap;
-	
 	mData.mEntityImpList.clear();
+	/*delete mGameMode;
+	delete mGameMap;*/
+	mGameMode = 0;
+	mGameMap = 0;
+}
+
+void GameState::setup(Map *newMap, Mode *newMode)
+{
+	if(mGameMode != 0)
+		delete mGameMode;
+	if(mGameMap != 0)
+		delete mGameMap;
+	mGameMap = newMap;
+	mGameMode = newMode;
 }
 
 void GameState::spacemanCreation(GameData& gameData)
