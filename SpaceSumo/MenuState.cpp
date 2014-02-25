@@ -58,11 +58,6 @@ void MenuState::open()
 
 void MenuState::close()
 {
-	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end();)
-	{
-		delete *it;
-		it = mButtonList.erase(it);
-	}
 	mButtonList.clear();
 }
 
