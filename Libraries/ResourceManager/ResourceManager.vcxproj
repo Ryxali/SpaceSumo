@@ -95,6 +95,8 @@
     <ClInclude Include="ResourceHandler.h" />
     <ClInclude Include="RHandle.h" />
     <ClInclude Include="SoundBufferStore.h" />
+    <ClInclude Include="SoundList.h" />
+    <ClInclude Include="SoundQuene.h" />
     <ClInclude Include="SSound.h" />
     <ClInclude Include="SSoundBuffer.h" />
     <ClInclude Include="SSprite.h" />
@@ -109,6 +111,8 @@
     <ClCompile Include="ResourceHandler.cpp" />
     <ClCompile Include="RHandle.cpp" />
     <ClCompile Include="SoundBufferStore.cpp" />
+    <ClCompile Include="SoundList.cpp" />
+    <ClCompile Include="SoundQuene.cpp" />
     <ClCompile Include="SSound.cpp" />
     <ClCompile Include="SSoundBuffer.cpp" />
     <ClCompile Include="SSprite.cpp" />

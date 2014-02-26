@@ -10,8 +10,9 @@ MenuState::MenuState(StateList &owner) :
 	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
 	mButtonList()
 {
-		mOwner = owner;
+	mOwner = owner;
 }
+
 
 MenuState::~MenuState()
 {

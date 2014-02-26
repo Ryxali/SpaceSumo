@@ -3,6 +3,7 @@
 #include "B2Body.h"
 #include "Effects.h"
 #include "Debug.h"
+#include <ResourceManager\SoundQuene.h>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
@@ -93,20 +94,6 @@ private:
 	Animation mJet;
 
 	//sounds
-	sf::Sound mStartSound;
-	sf::Sound mMainSound;
-	sf::Sound mEndSound;
-	sf::Sound mStartTurnSound;
-	sf::Sound mMainTurnSound;
 
-	//bools for sounds
-	bool mStartPress;
-	bool mStopPress;
-
-	bool mRightStart;
-	bool mRightStop;
-
-	bool mLeftStart;
-	bool mLeftStop;
 };
 

@@ -38,10 +38,6 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mAbility(0),
 	mPushing(false),
 	mSlowDeath(false),
-	mRightStart(true),
-	mRightStop(false),
-	mLeftStart(true),
-	mLeftStop(false),
 	mAlive(true)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
@@ -109,17 +105,6 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
-	
-	// plays the startingsound of the jetpack
-	if( mStartPress == true)
-	{
-		mStartSound.play();
-		mMainSound.play();
-
-		mStartPress = false;
-		mStopPress = true;
-	}
-
 
 	//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
@@ -144,48 +129,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		
 		mJet.setCurrentRow(1);
 	}
-
-	//plays the endingsound of the jetpack
-	if(!sf::Keyboard::isKeyPressed(mUp))
-	{
-		if(mStopPress == true)
-		{
-			//mEndSound.play(); // utkommenterad pga: skapar ett litet klick
-			mMainSound.pause();
-		}
-
-		mStartPress = true;
-		mStopPress = false;
-	}
+	
 	
 	// turn right
 	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(1);
-
-		//plays the start sound for the right turn
-		if( mRightStart == true )
-		{
-			mStartTurnSound.play();
-			mMainTurnSound.play();
-
-			mRightStart = false;
-			mRightStop = true;
-		}
 	}
-
-	//pauses the right-turn sound when the key is released
-	if( !sf::Keyboard::isKeyPressed(mRight) )
-	{
-		if ( mRightStop == true )
-		{
-			mMainTurnSound.pause();
-		}
-		mRightStart = true;
-		mRightStop = false;
-	}
-
 
 
 	//turn left
@@ -193,28 +144,8 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(0);
-		
-		//plays the start sound for the left turn
-		if( mLeftStart == true )
-		{
-			mStartTurnSound.play();
-			mMainTurnSound.play();
-
-			mLeftStart = false;
-			mLeftStop = true;
-		}
 	}	
 
-	//pauses the left-turn sound when the key is released
-	if( !sf::Keyboard::isKeyPressed(mLeft) )
-	{
-		if ( mLeftStop == true )
-		{
-			mMainTurnSound.pause();
-		}
-		mLeftStart = true;
-		mLeftStop = false;
-	}
 
 	// player push
 	if(sf::Keyboard::isKeyPressed(mPush) && mEffectStatus.getFlag_CAN_PUSH().mStatus)
@@ -357,12 +288,5 @@ void SpaceManImp::retractArms()
 
 void SpaceManImp::initializeSound()
 {
-	mStartSound.setBuffer(res::getSoundBuffer("res/sound/Start.ogg").getSoundBuffer());
-	mMainSound.setBuffer(res::getSoundBuffer("res/sound/Main.ogg").getSoundBuffer());
-	mEndSound.setBuffer(res::getSoundBuffer("res/sound/End.ogg").getSoundBuffer());
-	mMainSound.setLoop(true);
-
-	mStartTurnSound.setBuffer(res::getSoundBuffer("res/sound/Turn_start.ogg").getSoundBuffer());
-	mMainTurnSound.setBuffer(res::getSoundBuffer("res/sound/Turn_main.ogg").getSoundBuffer());
-	mMainTurnSound.setLoop(true);
+	
 }
