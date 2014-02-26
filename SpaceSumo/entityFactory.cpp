@@ -20,6 +20,25 @@ EntityImp* entFac::createSpaceMan(std::string conf, b2World& world,
 		world, bodyData, handData,  x, y, rotation);
 }
 
+EntityImp* entFac::createSpaceMan(std::string playerConf, std::string bodyConf, std::string handConf, b2World& world)
+{
+	Config pConf(playerConf);
+	
+	return new SpaceManImp(
+		str::toKey(pConf.getValue<std::string>("up")), 
+		str::toKey(pConf.getValue<std::string>("right")), 
+		str::toKey(pConf.getValue<std::string>("left")), 
+		str::toKey(pConf.getValue<std::string>("push")),
+		str::toKey(pConf.getValue<std::string>("activate")),
+		world,
+		bodyConf,
+		handConf,
+		pConf.getValue<int>("startingX"),
+		pConf.getValue<int>("startingY"),
+		pConf.getValue<float>("startingRotation")
+		);
+}
+
 EntityImp* entFac::createPowerUpLHydrogen(b2World& world, float x, float y)
 {
 	std::string bodyData("res/conf/powerUpBody.cfg");

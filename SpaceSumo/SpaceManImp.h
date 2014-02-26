@@ -1,4 +1,10 @@
 #pragma once
+
+enum EntityType;
+struct GameStateData;
+class Ability;
+class Config;
+
 #include "entityimp.h"
 #include "B2Body.h"
 #include "Effects.h"
@@ -13,24 +19,30 @@
 #include <Common\Timer.h>
 #include <ResourceManager\Animation.h>
 
-enum EntityType;
-struct GameStateData;
-class Ability;
+
 
 class SpaceManImp :
 	public EntityImp
 {
 public:
 	SpaceManImp(sf::Keyboard::Key up,
-				sf::Keyboard::Key right,
-				sf::Keyboard::Key left,
-				sf::Keyboard::Key push,
-				sf::Keyboard::Key activate,
-				b2World& world,
-				std::string bodyData,
-				std::string handData,
-				float x, float y, float32 rotation);
-	~SpaceManImp();
+		sf::Keyboard::Key right,
+		sf::Keyboard::Key left,
+		sf::Keyboard::Key push,
+		sf::Keyboard::Key activate,
+		b2World& world,
+		std::string bodyData,
+		std::string handData,
+		float x, float y, float32 rotation);
+	SpaceManImp(
+		Config& playerData,
+		Config& spaceManData,
+		Config& bodyData,
+		Config& handData,
+		b2World& world
+		);
+
+		~SpaceManImp();
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
@@ -87,7 +99,7 @@ private:
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;
-	
+	int mJetOffset;
 	//animations
 	Animation mAnim;
 	Animation mTurn;

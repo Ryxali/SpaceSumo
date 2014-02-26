@@ -135,6 +135,8 @@ void Animation::reevaluateSizeValues()
 {
 	mSliceWidth = (unsigned short) (mSprite.getTexture()->getSize().x / mColumns);
 	mSliceHeight = (unsigned short) ( mSprite.getTexture()->getSize().y / mRows);
+	SAssert(mSliceWidth*mColumns <= mSprite.getTexture()->getSize().x, "Slice size too large");
+	SAssert(mSliceHeight*mRows <= mSprite.getTexture()->getSize().y, "Slice size too large");
 
 }
 

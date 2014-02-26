@@ -4,7 +4,5 @@
 class Face;
 struct SpacemanData
 {
-	sf::Keyboard::Key up, right, left, push, activate;
-	std::string bodyData, handData;
-	Face* head;
+	std::string spaceData, bodyData, handData, headRef;
 };
