@@ -2,15 +2,21 @@
 #include "B2Body.h"
 
 #include <string>
-
+#include <Common\Config.h>
 
 
 B2Body::B2Body(b2World &world , std::string configFile,
-		float x, float y)
-		: mConfig(configFile),
-		mSpawnpoint( x , y )
+			   float x, float y)
+			   : mSpawnpoint( x , y )
 {
-	initBody(world);
+	Config cfg(configFile);
+	initBody(world, cfg);
+}
+B2Body::B2Body(b2World &world , Config &config,
+			   float x, float y )
+			   : mSpawnpoint(x, y)
+{
+	initBody(world, config);
 }
 
 B2Body::~B2Body()
@@ -77,44 +83,44 @@ void B2Body::setRotation(float32 angle)
 }
 
 
-void B2Body::initBody(b2World& world)
+void B2Body::initBody(b2World& world, Config &config)
 {
 
 	b2Shape* bodyShape;
 
-	
+
 	mBodyDef.position.Set( mSpawnpoint.getX()/PPM , mSpawnpoint.getY()/PPM );
-	mBodyDef.type = (b2BodyType) mConfig.getValue<int>("bodyType");
-   
-	if(mConfig.getValue<std::string>("shape") == "rectangle")
+	mBodyDef.type = (b2BodyType) config.getValue<int>("bodyType");
+
+	if(config.getValue<std::string>("shape") == "rectangle")
 	{
 		bodyShape = new b2PolygonShape();
-		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(mConfig.getValue<int>("sizeX")/PPM, mConfig.getValue<int>("sizeY")/PPM);
+		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(config.getValue<int>("sizeX")/PPM, config.getValue<int>("sizeY")/PPM);
 		mBodyFix.shape = bodyShape;
 	}
 	else
 	{
 		bodyShape = new b2CircleShape();
-		static_cast<b2CircleShape*>(bodyShape)->m_radius = mConfig.getValue<float>("radius")/PPM;
+		static_cast<b2CircleShape*>(bodyShape)->m_radius = config.getValue<float>("radius")/PPM;
 		mBodyFix.shape = bodyShape;
 	}
-    mBodyFix.density = mConfig.getValue<float>("density");
-	mBodyFix.restitution = mConfig.getValue<float>("restitution");
-    mBodyFix.friction = mConfig.getValue<float>("friction");
-	mBodyFix.filter.categoryBits = (uint16)mConfig.getValue<int>("category");
-	int i = mConfig.getValue<int>("Nmasks");
+	mBodyFix.density = config.getValue<float>("density");
+	mBodyFix.restitution = config.getValue<float>("restitution");
+	mBodyFix.friction = config.getValue<float>("friction");
+	mBodyFix.filter.categoryBits = (uint16)config.getValue<int>("category");
+	int i = config.getValue<int>("Nmasks");
 	if( i != 0 )
 	{
-		uint16 val = mConfig.getValue<int>("mask_0");
+		uint16 val = config.getValue<int>("mask_0");
 		for ( int t = 1; t < i; t++)
 		{
-			val = val | mConfig.getValue<int>("mask_" + std::to_string(t));
+			val = val | config.getValue<int>("mask_" + std::to_string(t));
 		}
 		mBodyFix.filter.maskBits = val;
 	}
-	mBodyFix.isSensor = mConfig.getValue<bool>("isSensor");
-    mBody = world.CreateBody(&mBodyDef);
-    mBody->CreateFixture(&mBodyFix);
-	mBody->SetAngularDamping(mConfig.getValue<float>("angularDamping"));
+	mBodyFix.isSensor = config.getValue<bool>("isSensor");
+	mBody = world.CreateBody(&mBodyDef);
+	mBody->CreateFixture(&mBodyFix);
+	mBody->SetAngularDamping(config.getValue<float>("angularDamping"));
 	delete bodyShape;
 }

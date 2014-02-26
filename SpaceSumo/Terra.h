@@ -1,6 +1,7 @@
 #pragma once
 #include "map.h"
 #include <ResourceManager\SSprite.h>
+#include <SFML\Audio\Music.hpp>
 class Terra :
 	public Map
 {
@@ -12,6 +13,7 @@ public:
 
 private:
 	SSprite mBackground;
+	sf::Music mSoundtrack;
 
 };
 

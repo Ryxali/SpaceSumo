@@ -90,8 +90,13 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonSelectionEffect.cpp" />
     <ClCompile Include="ChangeStateCommand.cpp" />
+    <ClCompile Include="Characters.cpp" />
+    <ClCompile Include="CharacterSetupState.cpp" />
+    <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="LockButtonCommand.cpp" />
+    <ClCompile Include="MapSelectState.cpp" />
     <ClCompile Include="ModeSelectState.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="ContactListener.cpp" />
@@ -123,6 +128,7 @@
     <ClCompile Include="Mode.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
+    <ClCompile Include="SelectCharacterCommand.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="State.cpp" />
@@ -139,8 +145,13 @@
     <ClInclude Include="ButtonObserver.h" />
     <ClInclude Include="ButtonSelectionEffect.h" />
     <ClInclude Include="ChangeStateCommand.h" />
+    <ClInclude Include="Characters.h" />
+    <ClInclude Include="CharacterSetupState.h" />
+    <ClInclude Include="CreateMapCommand.h" />
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
+    <ClInclude Include="LockButtonCommand.h" />
+    <ClInclude Include="MapSelectState.h" />
     <ClInclude Include="ModeSelectState.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="consts.h" />
@@ -177,7 +188,9 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SelectCharacterCommand.h" />
     <ClInclude Include="SetupState.h" />
+    <ClInclude Include="SpacemanData.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />

@@ -1,8 +1,10 @@
 #pragma once
 
+class Config;
+
 #include <Box2D\Box2D.h>
 #include <Common\SVector.h>
-#include <Common\Config.h>
+#include <string>
 
 //this struct shall be used to initiate any Box2D body
 
@@ -11,9 +13,11 @@ struct B2Body
 public:
 	B2Body(b2World &world , std::string configFile,
 		float x, float y );
+	B2Body(b2World &world , Config &config,
+		float x, float y );
 	~B2Body();
 	
-	void initBody(b2World& world);
+	void initBody(b2World& world, Config &config);
 
 	//getfunctions
 	const b2Vec2 getLinearVelocity();
@@ -33,7 +37,6 @@ public:
 private:
 	B2Body(const B2Body& b2b);
 	SVector mSpawnpoint;
-	Config mConfig;
 
 	b2Body* mBody;
 	b2BodyDef mBodyDef;

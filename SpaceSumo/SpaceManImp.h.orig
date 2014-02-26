@@ -26,11 +26,23 @@ class SpaceManImp :
 {
 public:
 	SpaceManImp(sf::Keyboard::Key up,
+<<<<<<< HEAD
+				sf::Keyboard::Key right,
+				sf::Keyboard::Key left,
+				sf::Keyboard::Key push,
+				sf::Keyboard::Key activate,
+				b2World& world,
+				GameData& data,
+				std::string bodyData,
+				std::string handData,
+				float x, float y, float32 rotation);
+	~SpaceManImp();
+=======
 		sf::Keyboard::Key right,
 		sf::Keyboard::Key left,
 		sf::Keyboard::Key push,
 		sf::Keyboard::Key activate,
-		GameData& data, 
+		b2World& world,
 		std::string bodyData,
 		std::string handData,
 		float x, float y, float32 rotation);
@@ -39,10 +51,11 @@ public:
 		Config& spaceManData,
 		Config& bodyData,
 		Config& handData,
-		GameData& data
+		b2World& world
 		);
 
 		~SpaceManImp();
+>>>>>>> dev_NL
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);

@@ -194,5 +194,25 @@ sf::Keyboard::Key str::toKey(std::string keyName)
 	{
 		return sf::Keyboard::Space;
 	}
+	if(keyName == "LEFT")
+	{
+		return sf::Keyboard::Left;
+	}
+	if(keyName == "RIGHT")
+	{
+		return sf::Keyboard::Right;
+	}
+	if(keyName == "UP")
+	{
+		return sf::Keyboard::Up;
+	}
+	if(keyName == "DOWN")
+	{
+		return sf::Keyboard::Down;
+	}
+	if(keyName == "ENTER")
+	{
+		return sf::Keyboard::Return;
+	}
 	SError("Unknown Key", "Couldn't find char value for key: " + keyName);
 }

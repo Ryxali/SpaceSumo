@@ -15,8 +15,11 @@ res/img/UI/gamesetup/map_terra_active.png
 res/img/UI/gamesetup/map_terra_gray.png
 res/img/UI/gamesetup/mode_sumo_active.png
 res/img/UI/gamesetup/mode_sumo_gray.png
+<<<<<<< HEAD
 res/img/test_sparkle.png
+=======
 res/img/UI/menu/tmp_menu.png
+>>>>>>> dev_NL
 res/sound/End.ogg
 res/sound/Main.ogg
 res/sound/Start.ogg
