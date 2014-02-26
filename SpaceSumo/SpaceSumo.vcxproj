@@ -88,6 +88,7 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonSelectionEffect.cpp" />
     <ClCompile Include="ChangeStateCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
@@ -135,6 +136,8 @@
     <ClInclude Include="Ability.h" />
     <ClInclude Include="B2Body.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonObserver.h" />
+    <ClInclude Include="ButtonSelectionEffect.h" />
     <ClInclude Include="ChangeStateCommand.h" />
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />

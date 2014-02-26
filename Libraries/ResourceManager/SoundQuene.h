@@ -2,6 +2,7 @@
 #include "Playable.h"
 #include <vector>
 #include "SSound.h"
+#include <list>
 class SoundQuene : public  Playable
 {
 public:
@@ -16,13 +17,12 @@ public:
 	virtual void update(GameData& gData);
 	
 	void add(Playable* sound);
-	int getCurrentIndex();
-	void setCurrentIndex(int index);
+
 
 private:
-	std::vector<Playable*> mSounds;
+	std::list<Playable*> mSounds;
 	bool mDestroy;
 	bool atEnd;
-	int mCurrentSound;
+	std::list<Playable*>::iterator mCurrentSound;
 };
 

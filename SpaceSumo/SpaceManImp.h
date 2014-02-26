@@ -27,6 +27,7 @@ public:
 				sf::Keyboard::Key push,
 				sf::Keyboard::Key activate,
 				b2World& world,
+				GameData& data,
 				std::string bodyData,
 				std::string handData,
 				float x, float y, float32 rotation);
@@ -94,6 +95,7 @@ private:
 	Animation mJet;
 
 	//sounds
+	SoundQuene* mJetpack;
 
 };
 

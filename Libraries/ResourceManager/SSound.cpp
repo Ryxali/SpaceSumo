@@ -9,11 +9,12 @@
 #endif
 SSound::SSound(const SSoundBuffer &sb) : mSound(), mSBuf(sb), mSoundBufVersion(0)
 {
+	
 }
 
 SSound::SSound(const SSound &sound) : mSound(sound.mSound), mSBuf(sound.mSBuf), mSoundBufVersion(sound.mSoundBufVersion)
 {
-
+	
 }
 
 SSound::~SSound()

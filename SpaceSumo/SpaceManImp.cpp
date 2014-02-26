@@ -3,6 +3,7 @@
 #include "GameStateData.h"
 #include "EntityType.h"
 #include "Ability.h"
+#include <ResourceManager\LoopSound.h>
 #include <iostream>
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\SSoundBuffer.h>
@@ -16,7 +17,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
 	sf::Keyboard::Key activate,
-	b2World& world, std::string bodyData,
+	b2World& world, GameData& data, std::string bodyData,
 	std::string handData,
 	float x, float y, float32 rotation)
 	: mUp(up),
@@ -38,7 +39,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mAbility(0),
 	mPushing(false),
 	mSlowDeath(false),
-	mAlive(true)
+	mAlive(true),
+	mJetpack( new SoundQuene() )
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 	mTurn.getSprite().setOrigin( 64 , 64 );
@@ -48,6 +50,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	initializeArms(world);
 	initializeSound();
 	mSpaceman.getBody()->SetUserData(this);
+	data.soundlist.add(mJetpack);
 }
 
 
@@ -58,6 +61,7 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
+	data.soundlist.update(data);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
@@ -102,10 +106,13 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(sf::Keyboard::isKeyPressed(mUp) && mEffectStatus.getFlag_CAN_MOVE().mStatus)
 	{
+		
+		mJetpack->play();
+		
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 									mDirection.getY() * ( mSpeed * fDelta )), 
 									mSpaceman.getWorldCenter(), true);
-
+		
 	//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
 		{
@@ -129,7 +136,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		
 		mJet.setCurrentRow(1);
 	}
-	
+
 	
 	// turn right
 	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
@@ -288,5 +295,7 @@ void SpaceManImp::retractArms()
 
 void SpaceManImp::initializeSound()
 {
-	
+	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/Start.ogg")));
+	mJetpack->add(new LoopSound(res::getSoundBuffer("res/sound/Main.ogg")));
+	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/End.ogg")));
 }

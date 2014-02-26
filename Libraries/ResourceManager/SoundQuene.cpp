@@ -1,12 +1,13 @@
 #include "SoundQuene.h"
-
+#include <iostream>
 
 SoundQuene::SoundQuene():
+	mSounds(),
 	mDestroy(false),
-	atEnd(false),
-	mCurrentSound(0)
+	atEnd(true),
+	mCurrentSound(mSounds.begin())
 {
-
+	
 }
 
 
@@ -17,37 +18,29 @@ SoundQuene::~SoundQuene()
 
 bool SoundQuene::isPlaying()
 {
-	if( mSounds[mCurrentSound]->isPlaying() )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (*mCurrentSound)->isPlaying();
 }
 
 bool SoundQuene::hasEnded()
 {
-	if( atEnd )
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-
+	return atEnd;
 }
 
 void SoundQuene::play()
 {
-	mSounds[mCurrentSound]->play();
+	if( hasEnded() && !isPlaying())
+	{
+		mCurrentSound = mSounds.begin();
+		(*mCurrentSound)->play();
+		atEnd = false;
+	}
 }
 
 void SoundQuene::stop()
 {
-	mSounds[mCurrentSound]->stop();
+	atEnd = true;
+	(*mCurrentSound)->stop();
+	mCurrentSound = mSounds.begin();
 }
 
 void SoundQuene::setDestroy(bool status)
@@ -62,11 +55,21 @@ bool SoundQuene::getDestroy()
 
 void SoundQuene::update(GameData& gData)
 {
-	if( mSounds[mCurrentSound]->hasEnded() )
+	if( !hasEnded() )
 	{
-		if( mCurrentSound == mSounds.size() )
+		if( mCurrentSound != mSounds.end() )
 		{
 			mCurrentSound++;
+			
+			if( mCurrentSound == mSounds.end() )
+			{
+				mCurrentSound = mSounds.begin();
+				atEnd = true;
+			}
+			else
+			{
+				(*mCurrentSound)->play();
+			}
 		}
 		else
 		{
@@ -78,14 +81,5 @@ void SoundQuene::update(GameData& gData)
 void SoundQuene::add(Playable* sound)
 {
 	mSounds.push_back(sound);
-}
-
-int SoundQuene::getCurrentIndex()
-{
-	return mCurrentSound;
-}
-
-void SoundQuene::setCurrentIndex(int index)
-{
-	mCurrentSound = index;
+	mCurrentSound = mSounds.begin();
 }

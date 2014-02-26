@@ -2,6 +2,7 @@
 #include <Box2D\Box2D.h>
 #include <SFML\System\Vector2.hpp>
 #include "Input.h"
+#include <ResourceManager\SoundList.h>
 struct GameData
 {
 	GameData();
@@ -9,6 +10,7 @@ struct GameData
 	b2World world;
 	Input input;
 	sf::Vector2f mPos;
+	SoundList soundlist;
 private:
 	GameData(const GameData& data);
 };

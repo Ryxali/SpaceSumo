@@ -66,7 +66,7 @@ void GameState::close()
 
 void GameState::spacemanCreation(GameData& gameData)
 {
-	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
-	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
+	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData.world, gameData,  "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
+	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData.world, gameData, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
 }
 

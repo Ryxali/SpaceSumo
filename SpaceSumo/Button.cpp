@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "Button.h"
 #include <BasicShapes\putils.h>
 #include <SFML\Window\Keyboard.hpp>
 #include <ResourceManager\RHandle.h>
 #include "GameData.h"
+#include "Button.h"
 
 Button::Button(SVector position, Command *command, std::string imageFile):
 	mAnimation(res::getTexture("res/img/face1.png"), "res/conf/Test_ikon.cfg" , 2.f),
@@ -42,7 +42,6 @@ void Button::update(GameData &data)
 		mIsPressed = true;
 		execute();
 	}
-
 }
 
 void Button::draw(RenderList& renderList)
@@ -68,4 +67,14 @@ bool Button::isPressed()
 void Button::execute()
 {
 	mCommand->Execute();
+}
+
+void Button::setFocus()
+{
+
+}
+
+void Button::addObserver(ButtonObserver* observer)
+{
+	mObservers.push_back(observer);
 }
