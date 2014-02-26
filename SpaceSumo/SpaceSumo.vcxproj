@@ -181,6 +181,7 @@
     <ClInclude Include="RenderList.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SetupState.h" />
+    <ClInclude Include="SpacemanData.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateList.h" />
