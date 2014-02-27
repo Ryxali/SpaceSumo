@@ -88,6 +88,8 @@
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonMulti.cpp" />
+    <ClCompile Include="ButtonSingle.cpp" />
     <ClCompile Include="ButtonList.cpp" />
     <ClCompile Include="ButtonSelectionEffect.cpp" />
     <ClCompile Include="ChangeStateCommand.cpp" />
@@ -142,7 +144,8 @@
   <ItemGroup>
     <ClInclude Include="Ability.h" />
     <ClInclude Include="B2Body.h" />
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonMulti.h" />
+    <ClInclude Include="ButtonSingle.h" />
     <ClInclude Include="ButtonList.h" />
     <ClInclude Include="ButtonObserver.h" />
     <ClInclude Include="ButtonSelectionEffect.h" />
@@ -152,6 +155,7 @@
     <ClInclude Include="CreateMapCommand.h" />
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="LockButtonCommand.h" />
     <ClInclude Include="MapSelectState.h" />
     <ClInclude Include="ModeSelectState.h" />

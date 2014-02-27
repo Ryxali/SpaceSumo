@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ModeSelectState.h"
 
+#include "ButtonSingle.h"
 #include "Button.h"
 #include "DualCommand.h"
 #include "CreateModeCommand.h"
@@ -10,7 +11,7 @@
 ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world) 
 	: State(owner), mModes()
 {
-	mModes.add(new Button(
+	mModes.add(new ButtonSingle(
 		SVector(),
 		new DualCommand
 		(

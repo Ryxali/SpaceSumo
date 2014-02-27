@@ -2,12 +2,15 @@
 #include "Button.h"
 #include "ButtonSelectionEffect.h"
 #include <ResourceManager\RHandle.h>
+#include <Common\Config.h>
 
-ButtonSelectionEffect::ButtonSelectionEffect():
-	mAnim(res::getTexture("res/img/test_sparkle.png"), "res/conf/anim_buttonsparkle.cfg", 10.f)
+ButtonSelectionEffect::ButtonSelectionEffect(int playerNumber):
+	mAnim(res::getTexture("res/img/test_sparkle.png"), "res/conf/anim_buttonsparkle.cfg", 10.f),
+	mPlayerNumber(playerNumber)
 {
 	mAnim.getSprite().setOrigin((mAnim.getSprite().getLocalBounds().width / 2),
 								 mAnim.getSprite().getLocalBounds().height / 2);
+	Config mConfig("res/img/ControlsP"+playerNumber);
 }
 
 
@@ -23,5 +26,4 @@ void ButtonSelectionEffect::draw(RenderList& list)
 void ButtonSelectionEffect::update(Button& button, GameData& data, int delta)
 {
 	mAnim.getSprite().setPosition( button.getCenterX() , button.getCenterY() );
-	
 }

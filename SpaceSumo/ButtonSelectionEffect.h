@@ -7,7 +7,7 @@ class ButtonSelectionEffect :
 	public ButtonObserver
 {
 public:
-	ButtonSelectionEffect();
+	ButtonSelectionEffect(int playerNumber);
 	~ButtonSelectionEffect();
 
 	virtual void draw(RenderList& list);
@@ -15,5 +15,6 @@ public:
 
 private:
 	Animation mAnim;
+	int mPlayerNumber;
 };
 

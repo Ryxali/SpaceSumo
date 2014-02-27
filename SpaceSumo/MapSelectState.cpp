@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MapSelectState.h"
 
+#include "ButtonSingle.h"
 #include "Button.h"
 #include "DualCommand.h"
 #include "CreateMapCommand.h"
@@ -11,7 +12,7 @@
 MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world) 
 	: State(owner), mMaps()
 {
-	mMaps.add(new Button(
+	mMaps.add(new ButtonSingle(
 		SVector(300, 300),
 		new DualCommand
 		(
