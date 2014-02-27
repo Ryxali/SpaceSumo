@@ -108,7 +108,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
-	mEffects.update(mPush);
+	mEffects.update(mUp);
 	Effect mEffectStatus(mEffects.getStatus());
 
 	if(mSlowDeath)
