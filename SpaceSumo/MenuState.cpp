@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "MenuState.h"
+
+#include "Button.h"
 #include <ResourceManager\RHandle.h>
 #include "GameStateList.h"
 #include "ChangeStateCommand.h"
@@ -11,6 +13,14 @@ MenuState::MenuState(StateList &owner) :
 	mButtonList()
 {
 	mOwner = owner;
+	mButtonList.add(new Button(
+		SVector(200,200), 
+		new ChangeStateCommand(st::GAME_STATE, mOwner), 
+		(std::string)"res/img/UI/menu/tmp_menu"));
+	mButtonList.add(new Button(
+		SVector(200,400), 
+		new ChangeStateCommand(st::PLAY_STATE, mOwner),
+		(std::string)"res/img/UI/menu/tmp_menu"));
 }
 
 
@@ -22,10 +32,7 @@ void MenuState::draw(RenderList &list)
 {
 	list.addSprite(mBackground);
 	
-	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
-	{
-		(*it).draw(list);
-	}
+	mButtonList.draw(list);
 
 }
 
@@ -37,39 +44,21 @@ void MenuState::update(GameData &data, int delta)
 		mOwner.changeState(st::GAME_STATE);
 	}
 
-	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
-	{
-		(*it).update(data);
-		
-		/*if( (*it)->isPressed() )
-		{
-			(*it).execute();
-			break;
-		}*/
-
-	}
+	mButtonList.update(data, delta);
 
 }
 
 void MenuState::open()
 {
-	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(st::GAME_STATE, mOwner), (std::string)"res/img/UI/menu/tmp_menu");
-	mButtonList.emplace_back(SVector(200,400), new ChangeStateCommand(st::PLAY_STATE, mOwner), (std::string)"res/img/UI/menu/tmp_menu");
+	
 }
 
 void MenuState::close()
 {
-	mButtonList.clear();
+
 }
 
 void MenuState::cleanUp()
 {
-	/*for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
-	{
-		if( (*it).isPressed() )
-		{
-			(*it).execute();
-			break;
-		}
-	}*/
+
 }

@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "CharacterSetupState.h"
-
+#include "Button.h"
 
 CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameState &gameState) 
-	: State(owner), mSpacemenData(), mGameState(gameState)
+	: State(owner), mSpacemenData(), mGameState(gameState), mChars()
 {
 	for(int i = 0; i < 4; i++)
 	{

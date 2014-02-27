@@ -4,7 +4,7 @@ class Map;
 class b2World;
 
 #include "State.h"
-#include "Button.h"
+#include "ButtonList.h"
 #include <list>
 
 
@@ -16,7 +16,7 @@ public:
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
 private:
-	std::list<Button> mMaps;
+	ButtonList mMaps;
 	
 };
 

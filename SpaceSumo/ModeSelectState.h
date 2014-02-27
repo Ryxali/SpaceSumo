@@ -1,6 +1,6 @@
 #pragma once
 #include "State.h"
-#include "Button.h"
+#include "ButtonList.h"
 #include <list>
 class B2World;
 class Mode;
@@ -12,5 +12,5 @@ public:
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
 private:
-	std::list<Button> mModes;
+	ButtonList mModes;
 };

@@ -2,7 +2,7 @@
 class GameState;
 class StateList;
 struct GameData;
-#include "Button.h"
+#include "ButtonList.h"
 #include "State.h"
 #include <vector>
 #include "SpacemanData.h"
@@ -15,7 +15,7 @@ public:
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
 private:
-	std::vector<Button> mChars;
+	ButtonList mChars;
 	SpacemanData mSpacemenData[4];
 	GameState &mGameState;
 };
