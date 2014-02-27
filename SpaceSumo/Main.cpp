@@ -18,8 +18,11 @@ void init()
 
 void run()
 {
-	Game g;
-	g.start();
+	Game *g = new Game();
+	g->start();
+	delete g;
+
+	int i = 0;
 }
 
 int main() 

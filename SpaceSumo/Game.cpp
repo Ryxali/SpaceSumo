@@ -38,12 +38,6 @@ Game::Game() :
 	mGameData.world.SetContactListener(&mListener);
 }
 
-
-Game::~Game()
-{
-
-}
-
 void Game::start()
 {
 	while(mWindow.isOpen())

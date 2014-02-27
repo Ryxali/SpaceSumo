@@ -20,6 +20,7 @@ ButtonList::~ButtonList()
 	{
 		delete mButtons[i];
 	}
+	delete mButtons;
 }
 
 void ButtonList::add(Button* button)

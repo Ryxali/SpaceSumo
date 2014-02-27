@@ -7,7 +7,7 @@ CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameS
 {
 	for(int i = 0; i < 4; i++)
 	{
-		mSpacemenData[i].spaceData = "res/conf/characters/spaceman/data_player_" + std::to_string(i-1) + ".cfg";
+		mSpacemenData[i].spaceData = "res/conf/characters/spaceman/data_player_" + std::to_string(i+1) + ".cfg";
 	}
 }
 

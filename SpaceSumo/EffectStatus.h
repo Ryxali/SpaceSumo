@@ -9,7 +9,7 @@ class EffectStatus :
 {
 public:
 	EffectStatus();
-	void addFlag(Effect &effect);
+	void addFlag(EffectImp* effect);
 	virtual void update(sf::Keyboard::Key& push);
 	virtual void draw(RenderList& renderList);
 	virtual EffectImp* clone();
