@@ -24,3 +24,13 @@ void ControlList::update(GameData& data)
 	}
 
 }
+
+bool ControlList::isActive(Controller::Control ctrl, int playerNumber) const
+{
+	for (auto it = mControls.begin(); it != mControls.end(); it++ )
+	{
+		if(playerNumber == (*it)->getPlayer())
+			return (*it)->isActive(ctrl);
+	}
+	return false;
+}

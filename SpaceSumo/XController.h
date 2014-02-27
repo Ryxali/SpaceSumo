@@ -8,7 +8,7 @@
 class XController : public Controller
 {
 public:
-	XController(int controllerIndex, Config& conf);
+	XController(int controllerIndex, int playerIndex, Config& conf);
 	~XController();
 
 	bool isConnected(int controllerIndex);
