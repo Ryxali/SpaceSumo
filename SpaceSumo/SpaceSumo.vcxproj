@@ -93,6 +93,8 @@
     <ClCompile Include="ChangeStateCommand.cpp" />
     <ClCompile Include="Characters.cpp" />
     <ClCompile Include="CharacterSetupState.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="ControlList.cpp" />
     <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
@@ -137,6 +139,7 @@
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="Terra.cpp" />
     <ClCompile Include="Sumo.cpp" />
+    <ClCompile Include="XController.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +152,8 @@
     <ClInclude Include="ChangeStateCommand.h" />
     <ClInclude Include="Characters.h" />
     <ClInclude Include="CharacterSetupState.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="ControlList.h" />
     <ClInclude Include="CreateMapCommand.h" />
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
@@ -201,6 +206,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />
+    <ClInclude Include="XController.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
