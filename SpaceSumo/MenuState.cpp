@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MenuState.h"
 
+#include "ButtonSingle.h"
 #include "Button.h"
 #include <ResourceManager\RHandle.h>
 #include "GameStateList.h"
@@ -13,11 +14,11 @@ MenuState::MenuState(StateList &owner) :
 	mButtonList()
 {
 	mOwner = owner;
-	mButtonList.add(new Button(
+	mButtonList.add(new ButtonSingle(
 		SVector(200,200), 
 		new ChangeStateCommand(st::GAME_STATE, mOwner), 
 		(std::string)"res/img/UI/menu/tmp_menu"));
-	mButtonList.add(new Button(
+	mButtonList.add(new ButtonSingle(
 		SVector(200,400), 
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		(std::string)"res/img/UI/menu/tmp_menu"));
