@@ -3,9 +3,11 @@
 
 SoundQuene::SoundQuene():
 	mSounds(),
+	mCurrentSound(mSounds.begin()),
 	mDestroy(false),
-	atEnd(true),
-	mCurrentSound(mSounds.begin())
+	mHasEnded(false),
+	mIsPlaying(false),
+	mStopping(false)
 {
 	
 }
@@ -18,31 +20,33 @@ SoundQuene::~SoundQuene()
 
 bool SoundQuene::isPlaying()
 {
-	return (*mCurrentSound)->isPlaying();
+	return mIsPlaying;
 }
 
 bool SoundQuene::hasEnded()
 {
-	return atEnd;
+	return mHasEnded;
 }
 
 void SoundQuene::play()
 {
-	if( hasEnded() && !isPlaying())
-	{
-		mCurrentSound = mSounds.begin();
-		(*mCurrentSound)->play();
-		atEnd = false;
-	}
+	mCurrentSound = mSounds.begin();
+	(*mCurrentSound)->play();
+	mHasEnded = false;
+	mStopping = false;
+	mIsPlaying = true;
 }
 
 void SoundQuene::stop()
 {
-	atEnd = true;
+	mStopping = true;
 	(*mCurrentSound)->stop();
-	mCurrentSound = mSounds.begin();
 }
-
+void SoundQuene::forceStop()
+{
+	(*mCurrentSound)->forceStop();
+	mHasEnded = true;
+}
 void SoundQuene::setDestroy(bool status)
 {
 	mDestroy = status;
@@ -55,25 +59,26 @@ bool SoundQuene::getDestroy()
 
 void SoundQuene::update(GameData& gData)
 {
-	if( !hasEnded() )
+	if(!hasEnded())
 	{
-		if( mCurrentSound != mSounds.end() )
+		(*mCurrentSound)->update(gData);
+		if(mStopping)
+			(*mCurrentSound)->stop();
+
+		if((*mCurrentSound)->hasEnded())
 		{
-			mCurrentSound++;
-			
-			if( mCurrentSound == mSounds.end() )
+			++mCurrentSound;
+			if(mCurrentSound == mSounds.end())
 			{
-				mCurrentSound = mSounds.begin();
-				atEnd = true;
+				mHasEnded = true;
 			}
 			else
 			{
 				(*mCurrentSound)->play();
+				if(mStopping)
+					(*mCurrentSound)->stop();
 			}
-		}
-		else
-		{
-			atEnd = true;
+
 		}
 	}
 }

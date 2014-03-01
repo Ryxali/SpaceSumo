@@ -85,6 +85,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FinishingSound.h" />
     <ClInclude Include="LoopSound.h" />
     <ClInclude Include="Playable.h" />
     <ClInclude Include="SequentialSound.h" />
@@ -96,6 +97,7 @@
     <ClInclude Include="ResourceHandler.h" />
     <ClInclude Include="RHandle.h" />
     <ClInclude Include="SoundBufferStore.h" />
+    <ClInclude Include="soundFac.h" />
     <ClInclude Include="SoundList.h" />
     <ClInclude Include="SoundQuene.h" />
     <ClInclude Include="SSound.h" />
@@ -105,6 +107,7 @@
     <ClInclude Include="TextureStore.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FinishingSound.cpp" />
     <ClCompile Include="LoopSound.cpp" />
     <ClCompile Include="SequentialSound.cpp" />
     <ClCompile Include="Animation.cpp" />
@@ -113,6 +116,7 @@
     <ClCompile Include="ResourceHandler.cpp" />
     <ClCompile Include="RHandle.cpp" />
     <ClCompile Include="SoundBufferStore.cpp" />
+    <ClCompile Include="soundFac.cpp" />
     <ClCompile Include="SoundList.cpp" />
     <ClCompile Include="SoundQuene.cpp" />
     <ClCompile Include="SSound.cpp" />

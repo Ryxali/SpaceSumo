@@ -1,12 +1,11 @@
 #pragma once
-#include <ResourceManager\Playable.h>
+#include "Playable.h"
 
-class LoopSound : public Playable
+class FinishingSound : public Playable
 {
 public:
-	LoopSound(Playable* sound);
-	~LoopSound();
-
+	FinishingSound(Playable* sound);
+	~FinishingSound();
 	virtual bool isPlaying();
 	virtual bool hasEnded();
 	virtual void play();
@@ -15,10 +14,9 @@ public:
 	virtual void setDestroy(bool);
 	virtual bool getDestroy();
 	virtual void update(GameData&);
-
 private:
-	bool mIsPlaying;
-	bool mDestroy;
 	Playable* mSound;
+	bool mStopping;
+
 };
 

@@ -1,17 +1,18 @@
 #include "LoopSound.h"
 
 
-LoopSound::LoopSound(const SSoundBuffer& buffer):
+LoopSound::LoopSound(Playable* sound) :
 	mIsPlaying(false),
 	mDestroy(false),
-	mSound(buffer)
+	mSound(sound)
 {
-	mSound.getSound().setLoop(true);
+
 }
 
 
 LoopSound::~LoopSound()
 {
+	delete mSound;
 }
 
 bool LoopSound::isPlaying()
@@ -21,19 +22,24 @@ bool LoopSound::isPlaying()
 
 bool LoopSound::hasEnded()
 {
-	return mSound.hasEnded() || mIsPlaying;
+	return !mIsPlaying || mSound->hasEnded();
 }
 
 void LoopSound::play()
 {
 	mIsPlaying = true;
-	mSound.play();
+	mSound->play();
 }
 
 void LoopSound::stop()
 {
 	mIsPlaying = false;
-	mSound.stop();
+	mSound->stop();
+}
+
+void LoopSound::forceStop()
+{
+	stop();
 }
 
 void LoopSound::setDestroy(bool status)
@@ -48,5 +54,8 @@ bool LoopSound::getDestroy()
 
 void LoopSound::update(GameData& gData)
 {
-
+	if(mSound->hasEnded() && mIsPlaying)
+	{
+		mSound->play();
+	}
 }

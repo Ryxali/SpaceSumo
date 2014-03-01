@@ -4,6 +4,7 @@
 */
 #include "Game.h"
 #include <ResourceManager\RHandle.h>
+#include <ResourceManager\soundFac.h>
 #include <SFML\Window\Keyboard.hpp>
 #include <fstream>
 #include <string>

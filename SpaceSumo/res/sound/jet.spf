@@ -1,0 +1,11 @@
+# Sound("ref") -- A regular Sound
+# LoopSound(AnyOtherSound) -- A looping sound
+# QueueSound(AnyOtherSound0, AnyOtherSound1, ...) -- A sequence of sounds
+
+# <-- A comment
+# Examples:
+# Sound("res/sounds/foo.ogg")
+# QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
+
+
+QueueSound(LoopSound(Sound("res/sound/Main.ogg")), Sound("res/sound/freeze_break.ogg"))

@@ -343,6 +343,6 @@ void SpaceManImp::retractArms()
 void SpaceManImp::initializeSound()
 {
 	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/Start.ogg")));
-	mJetpack->add(new LoopSound(res::getSoundBuffer("res/sound/Main.ogg")));
+	mJetpack->add(new LoopSound(new SSound(res::getSoundBuffer("res/sound/Main.ogg"))));
 	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/End.ogg")));
 }
