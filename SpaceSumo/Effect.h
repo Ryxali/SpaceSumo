@@ -12,6 +12,7 @@ public:
 	~Effect();
 	Effect(const Effect &e);
 	Effect& operator=(const Effect &e);
+	//Effect& operator=(EffectImp *imp);
 	void update(sf::Keyboard::Key& push);
 	void draw(RenderList& renderList);
 	bool isAlive();
@@ -22,6 +23,7 @@ public:
 	Flag getFlag_CAN_ROTATE();
 	Flag getFlag_CAN_PUSH();
 	Flag getFlag_CAN_ACTIVATE();
+	void reset();
 	
 private:
 	EffectImp* mImp;

@@ -15,7 +15,7 @@ public:
 	virtual void draw(RenderList& renderList) = 0;
 	virtual bool isAlive() = 0;
 	virtual EntityType getType();
-	virtual Effect getEffect(SpaceManImp* owner) = 0;
+	virtual EffectImp* getEffect(SpaceManImp* owner) = 0;
 	virtual void kill() = 0;
 };
 

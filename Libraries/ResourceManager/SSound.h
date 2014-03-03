@@ -30,6 +30,7 @@ public:
 	*/
 	virtual void play();
 	virtual void stop();
+	virtual void forceStop();
 	virtual void setDestroy(bool status);
 	virtual bool getDestroy();
 	virtual void update(GameData& gData);

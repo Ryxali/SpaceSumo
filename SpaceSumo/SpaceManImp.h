@@ -46,7 +46,7 @@ public:
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
-	virtual void addEffect(Effect& effect);
+	virtual void addEffect(EffectImp* effect);
 	void addAbility(Ability*);
 	virtual bool isAlive();
 	virtual EntityType getType();

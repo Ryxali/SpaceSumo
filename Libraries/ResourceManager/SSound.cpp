@@ -67,6 +67,11 @@ void SSound::stop()
 	mSound.stop();
 }
 
+void SSound::forceStop()
+{
+	stop();
+}
+
 void SSound::setDestroy(bool status)
 {
 	mDestroy = status;

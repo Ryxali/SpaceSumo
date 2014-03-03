@@ -12,6 +12,7 @@ public:
 	virtual bool hasEnded();
 	virtual void play();
 	virtual void stop();
+	virtual void forceStop();
 	virtual void setDestroy(bool status);
 	virtual bool getDestroy();
 	virtual void update(GameData& gData);
@@ -21,8 +22,8 @@ public:
 
 private:
 	std::list<Playable*> mSounds;
-	bool mDestroy;
-	bool atEnd;
 	std::list<Playable*>::iterator mCurrentSound;
+
+	bool mIsPlaying, mHasEnded, mDestroy, mStopping;
 };
 

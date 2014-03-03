@@ -5,8 +5,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include <Common\SVector.h>
-
-#define NO_MEMORY_TRACKING
+#include <ResourceManager\soundFac.h>
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
 {
@@ -36,12 +35,7 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
-}
-
-
-Game::~Game()
-{
-
+	soundFac::createSound("res/sound/jet.spf", mGameData.soundlist)->play();
 }
 
 void Game::start()
@@ -91,6 +85,7 @@ void Game::loop()
 void Game::update(int delta)
 {
 	mStates.getCurrent().update(mGameData, delta);
+	mGameData.soundlist.update(mGameData);
 }
 
 void Game::preDraw()

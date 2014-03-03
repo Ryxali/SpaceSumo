@@ -109,8 +109,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
-	mEffects.update(mUp);
-	Effect mEffectStatus(mEffects.getStatus());
+	mEffects.update(mPush);
 
 	if(mSlowDeath)
 	{
@@ -148,10 +147,10 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mSpaceman.setAngularVelocity(0);
 	}
 
-	if(sf::Keyboard::isKeyPressed(mUp) && mEffectStatus.getFlag_CAN_MOVE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mUp) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
 		
-		//mJetpack->play();
+		mJetpack->play();
 		
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 			mDirection.getY() * ( mSpeed * fDelta )), 
@@ -183,7 +182,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// turn right
-	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
+	if(sf::Keyboard::isKeyPressed(mRight) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(1);
@@ -191,7 +190,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	//turn left
-	if(sf::Keyboard::isKeyPressed(mLeft) && mEffectStatus.getFlag_CAN_ROTATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(0);
@@ -199,7 +198,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// player push
-	if(sf::Keyboard::isKeyPressed(mPush) && mEffectStatus.getFlag_CAN_PUSH().mStatus)
+	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus)
 	{
 		mPushing = true;
 		mPushTimer.reset();
@@ -218,7 +217,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// activate ability
-	if(sf::Keyboard::isKeyPressed(mActivate) && mEffectStatus.getFlag_CAN_ACTIVATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mActivate) && mEffects.getStatus().getFlag_CAN_ACTIVATE().mStatus)
 	{
 		if(mAbility != 0)
 		{
@@ -251,7 +250,7 @@ void SpaceManImp::draw(RenderList& renderList)
 	renderList.addSprite(mJet);
 }
 
-void SpaceManImp::addEffect(Effect& effect)
+void SpaceManImp::addEffect(EffectImp* effect)
 {
 	mEffects.addEffect(effect);
 }
@@ -344,6 +343,6 @@ void SpaceManImp::retractArms()
 void SpaceManImp::initializeSound()
 {
 	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/Start.ogg")));
-	mJetpack->add(new LoopSound(res::getSoundBuffer("res/sound/Main.ogg")));
+	mJetpack->add(new LoopSound(new SSound(res::getSoundBuffer("res/sound/Main.ogg"))));
 	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/End.ogg")));
 }

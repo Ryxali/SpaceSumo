@@ -44,7 +44,7 @@ void GameState::draw(RenderList &list)
 	mGameMode->draw(list);
 	mGameMap->draw(list);
 	mData.mEntityImpList.draw(list);
-	mHud.draw(list);
+	//mHud.draw(list);
 }
 
 void GameState::cleanUp()

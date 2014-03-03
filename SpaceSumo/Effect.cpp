@@ -3,25 +3,33 @@
 #include "EffectImp.h"
 #include "RenderList.h"
 
+
 Effect::Effect(EffectImp* imp) : mImp(imp)
 {
 }
 
 Effect::~Effect()
 {
-	delete mImp;
+	if(mImp != 0) delete mImp;
 }
 
-Effect::Effect(const Effect &e) : mImp(e.mImp->clone())
+Effect::Effect(const Effect &e) : mImp(0)
 {
+	if(e.mImp != 0) mImp = e.mImp;
 }
 
 Effect& Effect::operator=(const Effect &e)
 {
+	if(mImp != 0) delete mImp;
 	mImp = e.mImp->clone();
 	return *this;
 }
-
+/*Effect& Effect::operator=(EffectImp *imp)
+{
+	if(mImp != 0) delete mImp;
+	mImp = imp;
+	return *this;
+}*/
 void Effect::update(sf::Keyboard::Key& push)
 {
 	mImp->update(push);
@@ -61,4 +69,10 @@ Flag Effect::getFlag_CAN_PUSH()
 Flag Effect::getFlag_CAN_ACTIVATE()
 {
 	return mImp->getFlag_CAN_ACTIVATE();
+}
+
+void Effect::reset()
+{
+	delete mImp;
+	mImp = 0;
 }
