@@ -9,7 +9,7 @@
 #include <ResourceManager\SSoundBuffer.h>
 #include <Common\stringH.h>
 #include <Common\Config.h>
-
+#include <ResourceManager\soundFac.h>
 
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
@@ -43,7 +43,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mPushing(false),
 	mSlowDeath(false),
 	mAlive(true),
-	mJetpack( new SoundQuene() )
+	mJetpack(soundFac::createSound("res/sound/jet.spf", data.soundlist))
 {
 	//mAnim.getSprite().setOrigin( 64 , 64 );
 	//mTurn.getSprite().setOrigin( 64 , 64 );
@@ -51,9 +51,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 
 	mSpaceman.setRotation(rotation);
 	initializeArms(data.world);
-	initializeSound();
 	mSpaceman.getBody()->SetUserData(this);
-	data.soundlist.add(mJetpack);
 }
 
 SpaceManImp::SpaceManImp(
@@ -89,11 +87,11 @@ SpaceManImp::SpaceManImp(
 	mJetOffset(mConfig.getValue<float>("jetOffset")),
 	mAnim(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
-	mJet(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 7.f)
+	mJet(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 7.f),
+	mJetpack(soundFac::createSound("res/sound/jet.spf", data.soundlist))
 {
 	mSpaceman.setRotation(playerData.getValue<float>("startingRotation"));
 	initializeArms(data.world);
-	initializeSound();
 	mSpaceman.getBody()->SetUserData(this);
 }
 
@@ -149,8 +147,10 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(sf::Keyboard::isKeyPressed(mUp) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
-		
-		mJetpack->play();
+		if(mJetpack->hasEnded())
+		{
+			mJetpack->play();
+		}
 		
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 			mDirection.getY() * ( mSpeed * fDelta )), 
@@ -178,6 +178,10 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		}
 
 		mJet.setCurrentRow(1);
+	}
+	else
+	{
+		mJetpack->stop();
 	}
 
 
@@ -338,11 +342,4 @@ void SpaceManImp::retractArms()
 	mAnim.setCurrentRow(0);
 	mLeftArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
 	mRightArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
-}
-
-void SpaceManImp::initializeSound()
-{
-	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/Start.ogg")));
-	mJetpack->add(new LoopSound(new SSound(res::getSoundBuffer("res/sound/Main.ogg"))));
-	mJetpack->add(new SSound(res::getSoundBuffer("res/sound/End.ogg")));
 }

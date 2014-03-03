@@ -64,7 +64,6 @@ private:
 
 	//helpfunctions
 	void initializeArms(b2World& world);
-	void initializeSound();
 	void extendArms();
 	void retractArms();
 
@@ -106,7 +105,7 @@ private:
 	Animation mJet;
 
 	//sounds
-	SoundQuene* mJetpack;
+	Playable* mJetpack;
 
 };
 
