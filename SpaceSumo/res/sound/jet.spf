@@ -1,5 +1,6 @@
 # Sound("ref") -- A regular Sound
 # LoopSound(AnyOtherSound) -- A looping sound
+# FinishingSound(AnyOtherSound) -- A sound that will always finish on stop
 # QueueSound(AnyOtherSound0, AnyOtherSound1, ...) -- A sequence of sounds
 
 # <-- A comment
@@ -8,4 +9,6 @@
 # QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
 
 
-QueueSound(LoopSound(Sound("res/sound/Main.ogg")), Sound("res/sound/freeze_break.ogg"))
+
+
+QueueSound(Sound("res/sound/Start.ogg"), LoopSound(Sound("res/sound/Main.ogg")), FinishingSound(Sound("res/sound/End.ogg")))

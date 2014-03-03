@@ -1,6 +1,7 @@
 #include "soundFac.h"
 #include "SSound.h"
 #include "LoopSound.h"
+#include "FinishingSound.h"
 #include "SoundQuene.h"
 #include "SoundList.h"
 #include "RHandle.h"
@@ -35,11 +36,15 @@ Playable* resolveType(std::string line)
 			{
 				return new LoopSound(resolveType(line.substr(t+1)));
 			}
+			else if(line.substr(0, t) == "FinishingSound")
+			{
+				return new FinishingSound(resolveType(line.substr(t+1)));
+			}
 			else if(line.substr(0, t) == "QueueSound")
 			{
 				++it;
 				SoundQuene* list = new SoundQuene();
-				int dpth = 0;
+ 				int dpth = 0;
 				std::string::size_type t2 = t+1;
 				while(dpth != 0 || *it != ')')
 				{
@@ -74,7 +79,7 @@ Playable* resolveType(std::string line)
 		++it;
 	}
 	SError("Couldn't resolve type!", line);
-	return new SSound(res::getSoundBuffer(line));
+	exit(1);
 }
 
 Playable* soundFac::createSound(std::string ref, SoundList &list)

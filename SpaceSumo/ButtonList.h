@@ -17,6 +17,7 @@ public:
 	void clear();
 private:
 	Button** mButtons;
+	
 	int mCurSize;
 	int mMaxSize;
 };

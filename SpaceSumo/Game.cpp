@@ -35,6 +35,7 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
+	soundFac::createSound("res/sound/jet.spf", mGameData.soundlist)->play();
 }
 
 void Game::start()
