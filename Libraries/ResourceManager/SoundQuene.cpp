@@ -5,7 +5,7 @@ SoundQuene::SoundQuene():
 	mSounds(),
 	mCurrentSound(mSounds.begin()),
 	mDestroy(false),
-	mHasEnded(false),
+	mHasEnded(true),
 	mIsPlaying(false),
 	mStopping(false)
 {
@@ -40,7 +40,8 @@ void SoundQuene::play()
 void SoundQuene::stop()
 {
 	mStopping = true;
-	(*mCurrentSound)->stop();
+	if(mCurrentSound != mSounds.end())
+		(*mCurrentSound)->stop();
 }
 void SoundQuene::forceStop()
 {

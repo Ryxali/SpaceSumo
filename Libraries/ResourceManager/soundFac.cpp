@@ -52,6 +52,18 @@ Playable* resolveType(std::string line)
 					{
 						++dpth;
 						list->add(resolveType(line.substr(t2)));
+						int itemDpth = 0;
+						while(true)
+						{
+							if(*it == '(')
+								++itemDpth;
+							if(*it == ')')
+								--itemDpth;
+							if(itemDpth == 0 || *(it-1) == ')')
+								break;
+							++it;
+							++t;
+						}
 					}
 					if(*it == ')')
 					{
@@ -70,6 +82,7 @@ Playable* resolveType(std::string line)
 					}
 					++it;
 					++t;
+					
 				}
 				return list;
 			}

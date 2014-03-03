@@ -42,8 +42,4 @@ bool FinishingSound::getDestroy()
 void FinishingSound::update(GameData& data)
 {
 	mSound->update(data);
-	if(!mSound->hasEnded() && mStopping)
-	{
-		mSound->stop();
-	}
 }
