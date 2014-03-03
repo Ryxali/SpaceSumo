@@ -24,7 +24,6 @@ public:
 	virtual void execute(int);
 
 	void setFocus();
-	void addObserver(ButtonObserver* observer);
 	
 private:
 	Animation mAnimation;
@@ -32,7 +31,5 @@ private:
 	Command* mCommand;
 	bool mHovered;
 	bool mIsPressed;
-	
-	std::vector<ButtonObserver*> mObservers;
 };
 

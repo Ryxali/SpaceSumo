@@ -17,11 +17,11 @@ MenuState::MenuState(StateList &owner) :
 	mButtonList.add(new ButtonSingle(
 		SVector(200,200), 
 		new ChangeStateCommand(st::GAME_STATE, mOwner), 
-		(std::string)"res/img/UI/menu/tmp_menu"));
+		(std::string)"res/img/UI/menu/tmp_menu"), 0, 0);
 	mButtonList.add(new ButtonSingle(
 		SVector(200,400), 
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
-		(std::string)"res/img/UI/menu/tmp_menu"));
+		(std::string)"res/img/UI/menu/tmp_menu"), 0, 1);
 }
 
 

@@ -34,11 +34,5 @@ private:
 	Command* mCommand2;
 	Command* mCommand3;
 	Command* mCommand4;
-	bool mHovered1;
-	bool mHovered2;
-	bool mHovered3;
-	bool mHovered4;
-
-	std::vector<ButtonObserver*> mObservers;
 };
 

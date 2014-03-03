@@ -70,10 +70,4 @@ void ButtonSingle::execute(int playerNumber)
 
 void ButtonSingle::setFocus()
 {
-
-}
-
-void ButtonSingle::addObserver(ButtonObserver* observer)
-{
-	mObservers.push_back(observer);
 }

@@ -5,9 +5,10 @@
 #include <Common\Config.h>
 #include "Controller.h"
 
-ButtonSelectionEffect::ButtonSelectionEffect(int playerNumber):
+ButtonSelectionEffect::ButtonSelectionEffect(int playerNumber, Button& button):
 	mAnim(res::getTexture("res/img/test_sparkle.png"), "res/conf/anim_buttonsparkle.cfg", 10.f),
-	mPlayerNumber(playerNumber)
+	mPlayerNumber(playerNumber),
+	mButton(button)
 {
 	mAnim.getSprite().setOrigin((mAnim.getSprite().getLocalBounds().width / 2),
 								 mAnim.getSprite().getLocalBounds().height / 2);
@@ -24,12 +25,28 @@ void ButtonSelectionEffect::draw(RenderList& list)
 	list.addSprite(mAnim);
 }
 
-void ButtonSelectionEffect::update(Button& button, GameData& data, int delta)
+void ButtonSelectionEffect::update(GameData& data, int delta)
 {
-	mAnim.getSprite().setPosition( button.getCenterX() , button.getCenterY() );
+	mAnim.getSprite().setPosition( mButton.getCenterX() , mButton.getCenterY() );
+
+	if(data.controlList.isActive(Controller::Control::UP, mPlayerNumber))
+	{
+	}
+
+	if(data.controlList.isActive(Controller::Control::LEFT, mPlayerNumber))
+	{
+	}
+
+	if(data.controlList.isActive(Controller::Control::DOWN, mPlayerNumber))
+	{
+	}
+
+	if(data.controlList.isActive(Controller::Control::RIGHT, mPlayerNumber))
+	{
+	}
 
 	if(data.controlList.isActive(Controller::Control::ACTIVATE, mPlayerNumber))
 	{
-		button.execute(mPlayerNumber);
+		mButton.execute(mPlayerNumber);
 	}
 }

@@ -19,8 +19,8 @@ MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world)
 		new CreateMapCommand(TERRA, map, world),
 		new ChangeStateCommand(st::FINISHED_STATE, owner)
 		),
-		"res/img/UI/gamesetup/map_terra_active")
-		);
+		"res/img/UI/gamesetup/map_terra_active"),
+		0, 0);
 }
 
 

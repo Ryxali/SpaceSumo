@@ -7,14 +7,15 @@ class ButtonSelectionEffect :
 	public ButtonObserver
 {
 public:
-	ButtonSelectionEffect(int playerNumber);
+	ButtonSelectionEffect(int playerNumber, Button& button);
 	~ButtonSelectionEffect();
 
 	virtual void draw(RenderList& list);
-	virtual void update(Button& button, GameData& data, int delta);
+	virtual void update(GameData& data, int delta);
 
 private:
 	Animation mAnim;
 	int mPlayerNumber;
+	Button& mButton;
 };
 

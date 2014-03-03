@@ -11,6 +11,6 @@ public:
 	virtual ~ButtonObserver(){}
 
 	virtual void draw(RenderList& list) = 0;
-	virtual void update(Button& button, GameData& data, int delta) = 0;
+	virtual void update(GameData& data, int delta) = 0;
 
 };

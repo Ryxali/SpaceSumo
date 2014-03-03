@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
+#include "Controller.h"
 
-class Controller;
 struct GameData;
 
 class ControlList
