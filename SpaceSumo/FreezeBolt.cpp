@@ -12,17 +12,20 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
-	mAnim(res::getTexture("res/img/powerup/freezebolt.png"), "res/img/powerup/freezebolt.cfg", 5.f)
+	mAnim(res::getTexture("res/img/powerup/freezebolt.png"), "res/img/powerup/freezebolt.cfg", 5.f),
+	mBlast( new SoundQuene())
 {
 	mBody.setRotation( mDirection.getAngle() );
 	mAnim.getSprite().setOrigin( 32 , 64 );
 	mBody.getBody()->SetUserData(this);
 	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
+	initializeSounds();
+	mBlast->play();
 }
 
 FreezeBolt::~FreezeBolt()
 {
-
+	delete mBlast;
 }
 
 void FreezeBolt::update(GameData &data, GameStateData &gData,int delta)
@@ -51,4 +54,9 @@ Effect FreezeBolt::getEffect(SpaceManImp* owner)
 void FreezeBolt::kill()
 {
 	mAlive = false;
+}
+
+void FreezeBolt::initializeSounds()
+{
+	mBlast->add( new SSound(res::getSoundBuffer("res/sound/freeze_blast.ogg")));
 }

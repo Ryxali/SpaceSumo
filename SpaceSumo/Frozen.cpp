@@ -11,13 +11,17 @@ Frozen::Frozen(SpaceManImp* owner)
 	: mIntensity(mConfig.getValue<int>("intensity")), 
 	mPrevKeyState(false),
 	mOwner(owner),
-	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
+	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f),
+	mHit( new SoundQuene())
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
+	initializeSounds();
+	mHit->play();
 }
 
 Frozen::~Frozen()
 {
+	delete mHit;
 }
 
 Frozen::Frozen(Frozen const & f) 
@@ -27,6 +31,7 @@ Frozen::Frozen(Frozen const & f)
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
+	
 }
 
 void Frozen::update(sf::Keyboard::Key& push)
@@ -76,4 +81,10 @@ Flag Frozen::getFlag_CAN_ACTIVATE()
 Flag Frozen::getFlag_CAN_PUSH()
 {
 	return Flag(Flag::CAN_PUSH, 10, false, 1);
+}
+
+void Frozen::initializeSounds()
+{
+	mHit->add( new SSound(res::getSoundBuffer("res/sound/freeze_onhit.ogg")));
+	mHit->add ( new SSound(res::getSoundBuffer("res/sound/freeze_breaking.ogg")));
 }

@@ -151,7 +151,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	if(sf::Keyboard::isKeyPressed(mUp) && mEffectStatus.getFlag_CAN_MOVE().mStatus)
 	{
 		
-		mJetpack->play();
+		//mJetpack->play();
 		
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 			mDirection.getY() * ( mSpeed * fDelta )), 

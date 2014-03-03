@@ -12,10 +12,10 @@ Terra::Terra():
 
 void Terra::update(GameData &data)
 {
-	if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
-	{
-		mSoundtrack.play();
-	}
+	//if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
+	//{
+	//	mSoundtrack.play();
+	//}
 }
 
 void Terra::draw(RenderList &list)

@@ -3,6 +3,7 @@
 #include <Common\Timer.h>
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
+#include <ResourceManager\SoundQuene.h>
 
 class SpaceManImp;
 
@@ -22,6 +23,8 @@ public:
 	virtual Flag getFlag_CAN_ACTIVATE();
 	virtual Flag getFlag_CAN_PUSH();
 
+	void initializeSounds();
+
 private:
 
 	Frozen(Frozen const &);
@@ -31,5 +34,7 @@ private:
 	bool mPrevKeyState;
 	SpaceManImp* mOwner;
 	Animation mAnim;
+
+	SoundQuene* mHit;
 };
 
