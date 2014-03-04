@@ -43,7 +43,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mPushing(false),
 	mSlowDeath(false),
 	mAlive(true),
-	mJetpack(soundFac::createSound("res/sound/jet.spf", data.soundlist))
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist))
 {
 	//mAnim.getSprite().setOrigin( 64 , 64 );
 	//mTurn.getSprite().setOrigin( 64 , 64 );
@@ -88,7 +88,7 @@ SpaceManImp::SpaceManImp(
 	mAnim(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
 	mJet(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 7.f),
-	mJetpack(soundFac::createSound("res/sound/jet.spf", data.soundlist))
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist))
 {
 	mSpaceman.setRotation(playerData.getValue<float>("startingRotation"));
 	initializeArms(data.world);
@@ -107,7 +107,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
-	mEffects.update(mPush);
+	mEffects.update(mPush, data);
 
 	if(mSlowDeath)
 	{
