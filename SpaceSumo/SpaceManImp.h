@@ -111,9 +111,11 @@ private:
 	Animation mAnim;
 	Animation mTurn;
 	Animation mJet;
-
+	Head* mHead;
+	
 	//sounds
 	Playable* mJetpack;
-	Head* mHead;
+	Playable* mTurning;
+
 };
 

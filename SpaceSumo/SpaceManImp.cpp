@@ -45,7 +45,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mPushing(false),
 	mSlowDeath(false),
 	mAlive(true),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist))
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
 {
 	//mAnim.getSprite().setOrigin( 64 , 64 );
 	//mTurn.getSprite().setOrigin( 64 , 64 );
@@ -193,15 +194,21 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(1);
+		mTurning->play();
 	}
-
-
+	
 	//turn left
 	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(0);
+		mTurning->play();
 	}	
+
+	if( !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
+	{
+		mTurning->stop();
+	}
 
 
 	// player push
