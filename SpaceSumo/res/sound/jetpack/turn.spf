@@ -11,4 +11,4 @@
 
 
 
-QueueSound(Sound("res/sound/jetpack/Turn_start.ogg"), LoopSound(FinishingSound(Sound("res/sound/jetpack/Turn_main.ogg")))
+UnyieldingSound(QueueSound(Sound("res/sound/jetpack/Turn_start.ogg"), LoopSound(FinishingSound(Sound("res/sound/jetpack/Turn_main.ogg")))))

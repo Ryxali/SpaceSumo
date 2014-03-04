@@ -15,6 +15,7 @@ CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameS
 	for(auto it = chars::Character::characters.list.begin(); it != chars::Character::characters.list.end(); ++it)
 	{
 		mChars.add(new ButtonMulti(SVector(),
+			0, 0,
 			new SelectCharacterCommand(mSpacemenData[0], *it), 
 			new SelectCharacterCommand(mSpacemenData[1], *it),
 			new SelectCharacterCommand(mSpacemenData[2], *it),
