@@ -13,6 +13,7 @@ ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world)
 {
 	mModes.add(new ButtonSingle(
 		SVector(),
+		0, 0,
 		new DualCommand
 		(
 		new CreateModeCommand(SUMO, mode, world),

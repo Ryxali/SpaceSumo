@@ -7,6 +7,7 @@
 #include "GameStateList.h"
 #include "ChangeStateCommand.h"
 #include "StateList_Main.h"
+#include "ButtonSelectionEffect.h"
 
 MenuState::MenuState(StateList &owner) : 
 	State(owner),
@@ -16,12 +17,15 @@ MenuState::MenuState(StateList &owner) :
 	mOwner = owner;
 	mButtonList.add(new ButtonSingle(
 		SVector(200,200), 
+		0, 0,
 		new ChangeStateCommand(st::GAME_STATE, mOwner), 
 		(std::string)"res/img/UI/menu/tmp_menu"));
 	mButtonList.add(new ButtonSingle(
 		SVector(200,400), 
+		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		(std::string)"res/img/UI/menu/tmp_menu"));
+	mButtonList.addObserver(new ButtonSelectionEffect(1, mButtonList.getFirst()));
 }
 
 
@@ -39,14 +43,7 @@ void MenuState::draw(RenderList &list)
 
 void MenuState::update(GameData &data, int delta)
 {
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-	{
-		mOwner.changeState(st::GAME_STATE);
-	}
-
 	mButtonList.update(data, delta);
-
 }
 
 void MenuState::open()

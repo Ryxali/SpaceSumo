@@ -52,6 +52,7 @@ void Game::loop()
 	sf::Event evt;
 	// Loop runs through all new events
 	mGameData.world.Step(delta.asSeconds(),8,3);
+	mGameData.controlList.update(mGameData);
 
 	while(mWindow.pollEvent(evt))
 	{

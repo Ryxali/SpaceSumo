@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Controller.h"
 
-bool Controller::isActive(Control ctrl) const
+bool Controller::isActive(Control& ctrl) const
 {
 	return mStatus.at(ctrl);
 }
@@ -9,4 +9,9 @@ bool Controller::isActive(Control ctrl) const
 void Controller::set(Control ctrl, bool status)
 {
 	mStatus.set(ctrl,status);
+}
+
+int Controller::getPlayer()
+{
+	return mPlayerIndex;
 }

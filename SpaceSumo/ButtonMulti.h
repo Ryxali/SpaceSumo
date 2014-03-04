@@ -14,6 +14,8 @@ class ButtonMulti : public Rectangle, public Button
 public:
 	ButtonMulti(
 		SVector position, 
+		int mapX,
+		int mapY,
 		Command *command1,
 		Command *command2,
 		Command *command3,
@@ -34,11 +36,5 @@ private:
 	Command* mCommand2;
 	Command* mCommand3;
 	Command* mCommand4;
-	bool mHovered1;
-	bool mHovered2;
-	bool mHovered3;
-	bool mHovered4;
-
-	std::vector<ButtonObserver*> mObservers;
 };
 

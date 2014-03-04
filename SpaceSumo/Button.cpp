@@ -11,3 +11,23 @@ Button::~Button()
 {
 
 }
+
+int Button::getMapX() const 
+{
+	return mMapX;
+}
+
+int Button::getMapY() const
+{
+	return mMapY;
+}
+
+void Button::setMapX(int x)
+{
+	mMapX = x;
+}
+
+void Button::setMapY(int x)
+{
+	mMapX = x;
+}

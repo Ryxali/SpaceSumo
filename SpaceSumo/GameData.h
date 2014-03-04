@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <ResourceManager\SoundList.h>
 #include "ControlList.h"
+
 struct GameData
 {
 	GameData();

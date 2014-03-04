@@ -8,7 +8,7 @@
 #include "error.h"
 Config::Config(std::string filePath, bool implicitLoad) : mConfData(), mFilePath(filePath), mFile()
 {
-	SAssert(str::contains(filePath, ".cfg"), "config file unknown format");
+	SAssert(str::contains(filePath, ".cfg"), "config file: " + filePath + " is of unknown format");
 	if(implicitLoad)
 	{
 		loadToMemory(mFilePath);

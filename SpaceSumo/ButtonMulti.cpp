@@ -4,10 +4,13 @@
 #include "GameData.h"
 #include "Command.h"
 #include <Common\error.h>
+#include "RenderList.h"
 
 
 ButtonMulti::ButtonMulti(
-	SVector position, 
+	SVector position,
+	int mapX,
+	int mapY,
 	Command *command1,
 	Command *command2,
 	Command *command3,
@@ -20,12 +23,11 @@ ButtonMulti::ButtonMulti(
 	mCommand1(command1),
 	mCommand2(command2),
 	mCommand3(command3),
-	mCommand4(command4),
-	mHovered1(false),
-	mHovered2(false),
-	mHovered3(false),
-	mHovered4(false)
+	mCommand4(command4)
 {
+	
+	mMapX = mapX;
+	mMapY = mapY;
 	mAnimation.getSprite().setPosition(mPosition.getX(), mPosition.getY());
 	setHeight(mAnimation.getSliceHeight());
 	setWidth(mAnimation.getSliceWidth());
@@ -42,31 +44,11 @@ ButtonMulti::~ButtonMulti()
 
 void ButtonMulti::update(GameData &data)
 {
-
-	//Player 1
-	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos)) 
-	{
-		mHovered1 = true;
-	}
-	else
-	{
-		mHovered1 = false;
-	}
-
-	if( mHovered1 == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
-	{
-		execute(1);
-	}
-
-	//Player2
-
-	//Player3
-
-	//Player4
 }
 
 void ButtonMulti::draw(RenderList &renderList)
 {
+	renderList.addSprite(mAnimation);
 }
 
 float ButtonMulti::getCenterX() const

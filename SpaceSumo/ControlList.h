@@ -1,7 +1,7 @@
 #pragma once
-
 #include <list>
-class Controller;
+#include "Controller.h"
+
 struct GameData;
 
 class ControlList
@@ -12,6 +12,7 @@ public:
 
 	void add(Controller* controller);
 	void update(GameData& data);
+	bool isActive(Controller::Control ctrl, int playerNumber) const;
 
 private:
 	std::list<Controller*> mControls;

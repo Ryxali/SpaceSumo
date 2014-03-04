@@ -2,10 +2,10 @@
 #include "XController.h"
 #include "GameData.h"
 
-XController::XController(int controllerIndex, Config& conf):
+XController::XController(int controllerIndex, int playerIndex, Config& conf):
 	mControllerIndex(controllerIndex)
 {
-
+		mPlayerIndex = playerIndex;
 }
 
 XController::~XController()
