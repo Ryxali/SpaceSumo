@@ -2,10 +2,17 @@
 #include "KeyboardController.h"
 #include "GameData.h"
 #include <SFML\Window\Keyboard.hpp>
+#include <Common\stringH.h>
 
-
-KeyboardController::KeyboardController()
+KeyboardController::KeyboardController(int playerindex, Config& config): 
+	mUp(str::toKey(config.getValue<std::string>("up"))),
+	mDown(str::toKey(config.getValue<std::string>("down"))),
+	mLeft(str::toKey(config.getValue<std::string>("left"))),
+	mRight(str::toKey(config.getValue<std::string>("right"))),
+	mPush(str::toKey(config.getValue<std::string>("push"))),
+	mActivate(str::toKey(config.getValue<std::string>("activate")))
 {
+	mPlayerIndex = playerindex;
 }
 
 
@@ -22,7 +29,7 @@ void KeyboardController::update(GameData& data)
 		{
 		case sf::Event::KeyPressed:
 
-			if(evt.key.code == sf::Keyboard::W) 
+			if(evt.key.code == mUp) 
 			{
 				set(UP, true);
 			}
@@ -31,7 +38,7 @@ void KeyboardController::update(GameData& data)
 				set(UP, false);
 			}
 
-			if(evt.key.code == sf::Keyboard::S) 
+			if(evt.key.code == mDown) 
 			{
 				set(DOWN, true);
 			}
@@ -40,7 +47,7 @@ void KeyboardController::update(GameData& data)
 				set(DOWN, false);
 			}
 
-			if(evt.key.code == sf::Keyboard::A) 
+			if(evt.key.code == mLeft) 
 			{
 				set(LEFT, true);
 			}
@@ -49,7 +56,7 @@ void KeyboardController::update(GameData& data)
 				set(LEFT, false);
 			}
 			
-			if(evt.key.code == sf::Keyboard::D) 
+			if(evt.key.code == mRight) 
 			{
 				set(RIGHT, true);
 			}
@@ -58,7 +65,7 @@ void KeyboardController::update(GameData& data)
 				set(RIGHT, false);
 			}
 
-			if(evt.key.code == sf::Keyboard::E) 
+			if(evt.key.code == mActivate) 
 			{
 				set(ACTIVATE, true);
 			}
@@ -67,7 +74,7 @@ void KeyboardController::update(GameData& data)
 				set(ACTIVATE, false);
 			}
 
-			if(evt.key.code == sf::Keyboard::Space) 
+			if(evt.key.code == mPush) 
 			{
 				set(PUSH,true);
 			}

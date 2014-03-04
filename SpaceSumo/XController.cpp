@@ -5,7 +5,7 @@
 XController::XController(int controllerIndex, int playerIndex, Config& conf):
 	mControllerIndex(controllerIndex)
 {
-		mPlayerIndex = playerIndex;
+	mPlayerIndex = playerIndex;
 }
 
 XController::~XController()
