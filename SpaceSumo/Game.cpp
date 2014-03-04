@@ -6,6 +6,7 @@
 #include "GameState.h"
 #include <Common\SVector.h>
 #include <ResourceManager\soundFac.h>
+#include "KeyboardController.h"
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
 {

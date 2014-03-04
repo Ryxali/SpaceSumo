@@ -14,7 +14,6 @@ ButtonSelectionEffect::ButtonSelectionEffect(int playerNumber, Button* button):
 {
 	mAnim.getSprite().setOrigin((mAnim.getSprite().getLocalBounds().width / 2),
 								 mAnim.getSprite().getLocalBounds().height / 2);
-	Config mConfig("res/conf/controlsP" + std::to_string(playerNumber) + ".cfg");
 }
 
 
