@@ -24,6 +24,7 @@ public:
 	int getPlayer();
 
 protected:
+	friend class ControlList;
 	void set(Control ctrl, bool status);
 	int mPlayerIndex;
 private:

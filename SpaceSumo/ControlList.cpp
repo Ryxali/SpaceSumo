@@ -34,3 +34,21 @@ bool ControlList::isActive(Controller::Control ctrl, int playerNumber) const
 	}
 	return false;
 }
+
+bool ControlList::isActiveReset(Controller::Control ctrl, int playerNumber)
+{
+	for (auto it = mControls.begin(); it != mControls.end(); it++ )
+	{
+		if(playerNumber == (*it)->getPlayer())
+		{
+			if ( (*it)->isActive(ctrl) )
+			{
+				(*it)->set(ctrl, false);
+				return true;
+			}
+			else
+				return false;
+		}
+	}
+	return false;
+}

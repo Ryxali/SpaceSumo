@@ -30,27 +30,27 @@ void ButtonSelectionEffect::update(GameData& data, int delta, ButtonList& owner)
 {
 	mAnim.getSprite().setPosition( mButton->getCenterX() , mButton->getCenterY() );
 
-	if(data.controlList.isActive(Controller::Control::UP, mPlayerNumber))
+	if(data.controlList.isActiveReset(Controller::Control::UP, mPlayerNumber))
 	{
 		mButton = owner.getUp(mButton->getMapX(), mButton->getMapY());
 	}
 
-	if(data.controlList.isActive(Controller::Control::LEFT, mPlayerNumber))
+	if(data.controlList.isActiveReset(Controller::Control::LEFT, mPlayerNumber))
 	{
 		mButton = owner.getLeft(mButton->getMapX(), mButton->getMapY());
 	}
 
-	if(data.controlList.isActive(Controller::Control::DOWN, mPlayerNumber))
+	if(data.controlList.isActiveReset(Controller::Control::DOWN, mPlayerNumber))
 	{
 		mButton = owner.getDown(mButton->getMapX(), mButton->getMapY());
 	}
 
-	if(data.controlList.isActive(Controller::Control::RIGHT, mPlayerNumber))
+	if(data.controlList.isActiveReset(Controller::Control::RIGHT, mPlayerNumber))
 	{
 		mButton = owner.getRight(mButton->getMapX(), mButton->getMapY());
 	}
 
-	if(data.controlList.isActive(Controller::Control::ACTIVATE, mPlayerNumber))
+	if(data.controlList.isActiveReset(Controller::Control::ACTIVATE, mPlayerNumber))
 	{
 		mButton->execute(mPlayerNumber);
 	}
