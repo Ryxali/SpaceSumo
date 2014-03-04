@@ -30,11 +30,24 @@ ButtonList::~ButtonList()
 	}
 }
 
-void ButtonList::add(Button* button, int x, int y)
+void ButtonList::add(Button* button)
 {
 	SAssert(mCurSize < mMaxSize, "index out of range");
 	mButtons[mCurSize] = button;
 	++mCurSize;
+
+	SAssert(button->getMapX() <= MAP_WIDTH 
+		&& button->getMapY() >= 0 
+		&& button->getMapX() >= 0 
+		&& button->getMapY() <= MAP_HEIGHT, 
+		"mMapX/Y is out of range");
+
+	mMap[button->getMapX()][button->getMapY()] = button;
+}
+
+void ButtonList::addObserver(ButtonObserver* observer)
+{
+	mObserverList.addObserver(observer);
 }
 
 void ButtonList::update(GameData& data, int delta)
@@ -43,6 +56,8 @@ void ButtonList::update(GameData& data, int delta)
 	{
 		mButtons[i]->update(data);
 	}
+
+	mObserverList.update(data, delta, *this);
 }
 
 void ButtonList::draw(RenderList& list)
@@ -51,6 +66,7 @@ void ButtonList::draw(RenderList& list)
 	{
 		mButtons[i]->draw(list);
 	}
+	mObserverList.draw(list);
 }
 
 void ButtonList::clear()
@@ -60,6 +76,14 @@ void ButtonList::clear()
 		delete mButtons[i];
 		mButtons[i] = 0;
 	}
+
+	mObserverList.clear();
+}
+
+Button* ButtonList::getFirst()
+{
+	SAssert(mButtons[0] != NULL, "No buttons to start on");
+	return mButtons[0];
 }
 
 Button* ButtonList::getUp(int x, int y)

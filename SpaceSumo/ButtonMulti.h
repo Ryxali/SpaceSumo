@@ -14,6 +14,8 @@ class ButtonMulti : public Rectangle, public Button
 public:
 	ButtonMulti(
 		SVector position, 
+		int mapX,
+		int mapY,
 		Command *command1,
 		Command *command2,
 		Command *command3,

@@ -5,18 +5,18 @@
 #include "GameData.h"
 #include "ButtonSingle.h"
 
-ButtonSingle::ButtonSingle(SVector position, Command *command, std::string imageFile):
+ButtonSingle::ButtonSingle(SVector position, int mapX, int mapY, Command *command, std::string imageFile):
 	mAnimation(res::getTexture(imageFile+".png"), imageFile+".cfg" , 2.f),
 	Rectangle( 1 , 1 ),
 	mPosition(position),
 	mCommand(command),
-	mHovered(false),
-	mIsPressed(false)
+	mHovered(false)
 {
+	mMapX = mapX;
+	mMapY = mapY;
 	mAnimation.getSprite().setPosition(mPosition.getX() , mPosition.getY());
 	setHeight(mAnimation.getSliceHeight());
 	setWidth(mAnimation.getSliceWidth());
-	
 }
 
 ButtonSingle::~ButtonSingle()
@@ -37,7 +37,6 @@ void ButtonSingle::update(GameData &data)
 
 	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
 	{
-		mIsPressed = true;
 		execute(1);
 	}
 }
@@ -58,16 +57,7 @@ float ButtonSingle::getCenterY() const
 	return  mPosition.getY()+getHeight()/2;
 }
 
-bool ButtonSingle::isPressed()
-{
-	return mIsPressed;
-}
-
 void ButtonSingle::execute(int playerNumber)
 {
 	mCommand->Execute();
-}
-
-void ButtonSingle::setFocus()
-{
 }

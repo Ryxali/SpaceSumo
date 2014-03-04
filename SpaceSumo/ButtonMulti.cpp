@@ -8,7 +8,9 @@
 
 
 ButtonMulti::ButtonMulti(
-	SVector position, 
+	SVector position,
+	int mapX,
+	int mapY,
 	Command *command1,
 	Command *command2,
 	Command *command3,
@@ -23,6 +25,9 @@ ButtonMulti::ButtonMulti(
 	mCommand3(command3),
 	mCommand4(command4)
 {
+	
+	mMapX = mapX;
+	mMapY = mapY;
 	mAnimation.getSprite().setPosition(mPosition.getX(), mPosition.getY());
 	setHeight(mAnimation.getSliceHeight());
 	setWidth(mAnimation.getSliceWidth());

@@ -3,6 +3,7 @@
 #include "ButtonObserver.h"
 #include "RenderList.h"
 #include "GameData.h"
+#include "ButtonList.h"
 
 
 ButtonObserverList::ButtonObserverList()
@@ -32,11 +33,11 @@ void ButtonObserverList::clear()
 	}
 }
 
-void ButtonObserverList::update(GameData& data, int delta)
+void ButtonObserverList::update(GameData& data, int delta, ButtonList& owner)
 {
 	for ( auto it = mObserverList.begin(); it < mObserverList.end(); it++)
 	{
-		(*it)->update(data, delta);
+		(*it)->update(data, delta, owner);
 	}
 }
 

@@ -3,6 +3,7 @@
 
 class ButtonObserver;
 class RenderList;
+class ButtonList;
 struct GameData;
 
 class ButtonObserverList
@@ -13,7 +14,7 @@ public:
 
 	void addObserver(ButtonObserver* observer);
 	void clear();
-	void update(GameData& data, int delta);
+	void update(GameData& data, int delta, ButtonList& owner);
 	void draw(RenderList& list);
 
 private:

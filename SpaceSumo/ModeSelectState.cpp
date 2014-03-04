@@ -13,12 +13,13 @@ ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world)
 {
 	mModes.add(new ButtonSingle(
 		SVector(),
+		0, 0,
 		new DualCommand
 		(
 		new CreateModeCommand(SUMO, mode, world),
 		new ChangeStateCommand(st::WORLD_SELECTION_STATE, owner)
 		),
-		"res/img/UI/gamesetup/mode_sumo_active"), 0 , 0);
+		"res/img/UI/gamesetup/mode_sumo_active"));
 }
 
 

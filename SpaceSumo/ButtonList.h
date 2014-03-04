@@ -11,10 +11,12 @@ class ButtonList
 public:
 	ButtonList(int size = 20);
 	~ButtonList();
-	void add(Button* button, int x, int y);
+	void add(Button* button);
+	void addObserver(ButtonObserver* observer);
 	void update(GameData& data, int delta);
 	void draw(RenderList& list);
 	void clear();
+	Button* getFirst();
 	Button* getUp(int x, int y);
 	Button* getLeft(int x, int y);
 	Button* getDown(int x, int y);
