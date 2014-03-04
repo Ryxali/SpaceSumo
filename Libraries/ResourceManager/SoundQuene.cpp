@@ -89,3 +89,19 @@ void SoundQuene::add(Playable* sound)
 	mSounds.push_back(sound);
 	mCurrentSound = mSounds.begin();
 }
+
+void SoundQuene::setRelativeToListener(bool)
+{
+	for(auto it = mSounds.begin(); it != mSounds.end(); ++it)
+	{
+		(*it)->setRelativeToListener(true);
+	}
+}
+
+void SoundQuene::setPosition(float x, float y, float z = 0)
+{
+	for(auto it = mSounds.begin(); it != mSounds.end(); ++it)
+	{
+		(*it)->setPosition(x, y, z);
+	}
+}

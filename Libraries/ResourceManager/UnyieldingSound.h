@@ -1,11 +1,12 @@
 #pragma once
 #include "Playable.h"
 
-class FinishingSound : public Playable
+class UnyieldingSound : public Playable
 {
 public:
-	FinishingSound(Playable* sound);
-	~FinishingSound();
+	UnyieldingSound(Playable*);
+	~UnyieldingSound();
+
 	virtual bool isPlaying();
 	virtual bool hasEnded();
 	virtual void play();
@@ -19,7 +20,4 @@ public:
 	virtual void setPosition(float x, float y, float z);
 private:
 	Playable* mSound;
-	bool mStopping;
-
 };
-

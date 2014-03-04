@@ -40,6 +40,9 @@ public:
 	*/
 	const sf::SoundBuffer& getSoundBuffer() const;
 	sf::Sound& getSound();
+
+	virtual void setRelativeToListener(bool);
+	virtual void setPosition(float x, float y, float z);
 private:
 	bool mDestroy;
 	SSound& operator=(const SSound &sp);

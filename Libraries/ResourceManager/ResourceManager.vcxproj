@@ -88,7 +88,6 @@
     <ClInclude Include="FinishingSound.h" />
     <ClInclude Include="LoopSound.h" />
     <ClInclude Include="Playable.h" />
-    <ClInclude Include="SequentialSound.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="SDrawable.h" />
     <ClInclude Include="Loadable.h" />
@@ -105,11 +104,11 @@
     <ClInclude Include="SSprite.h" />
     <ClInclude Include="STexture.h" />
     <ClInclude Include="TextureStore.h" />
+    <ClInclude Include="UnyieldingSound.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FinishingSound.cpp" />
     <ClCompile Include="LoopSound.cpp" />
-    <ClCompile Include="SequentialSound.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="LoadableBundle.cpp" />
     <ClCompile Include="Resource.cpp" />
@@ -124,6 +123,7 @@
     <ClCompile Include="SSprite.cpp" />
     <ClCompile Include="STexture.cpp" />
     <ClCompile Include="TextureStore.cpp" />
+    <ClCompile Include="UnyieldingSound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.vcxproj">

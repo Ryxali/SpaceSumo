@@ -16,5 +16,8 @@ public:
 	virtual void setDestroy(bool) = 0;
 	virtual bool getDestroy() = 0;
 	virtual void update(GameData&) = 0;
+
+	virtual void setRelativeToListener(bool) = 0;
+	virtual void setPosition(float x, float y, float z = 0) = 0;
 };
 

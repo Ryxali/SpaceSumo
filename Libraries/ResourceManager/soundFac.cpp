@@ -2,6 +2,7 @@
 #include "SSound.h"
 #include "LoopSound.h"
 #include "FinishingSound.h"
+#include "UnyieldingSound.h"
 #include "SoundQuene.h"
 #include "SoundList.h"
 #include "RHandle.h"
@@ -39,6 +40,10 @@ Playable* resolveType(std::string line)
 			else if(line.substr(0, t) == "FinishingSound")
 			{
 				return new FinishingSound(resolveType(line.substr(t+1)));
+			}
+			else if(line.substr(0, t) == "UninterruptableSound" ||line.substr(0, t) == "UnyieldingSound")
+			{
+				return new UnyieldingSound(resolveType(line.substr(t+1)));
 			}
 			else if(line.substr(0, t) == "QueueSound")
 			{
