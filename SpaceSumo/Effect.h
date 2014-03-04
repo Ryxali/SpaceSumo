@@ -4,6 +4,7 @@
 
 class EffectImp;
 class RenderList;
+struct GameData;
 
 class Effect
 {
@@ -13,7 +14,7 @@ public:
 	Effect(const Effect &e);
 	Effect& operator=(const Effect &e);
 	//Effect& operator=(EffectImp *imp);
-	void update(sf::Keyboard::Key& push);
+	void update(sf::Keyboard::Key& push, GameData& data);
 	void draw(RenderList& renderList);
 	bool isAlive();
 	Effect duplicate();

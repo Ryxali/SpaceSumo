@@ -2,6 +2,7 @@
 #include "Effect.h"
 #include "EffectImp.h"
 #include "RenderList.h"
+#include "GameData.h"
 
 
 Effect::Effect(EffectImp* imp) : mImp(imp)
@@ -30,9 +31,9 @@ Effect& Effect::operator=(const Effect &e)
 	mImp = imp;
 	return *this;
 }*/
-void Effect::update(sf::Keyboard::Key& push)
+void Effect::update(sf::Keyboard::Key& push, GameData& data)
 {
-	mImp->update(push);
+	mImp->update(push, data);
 }
 
 void Effect::draw(RenderList& renderList)

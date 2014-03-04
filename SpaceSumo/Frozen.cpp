@@ -4,6 +4,7 @@
 #include <SFML\Window\Keyboard.hpp>
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
+#include <ResourceManager\soundFac.h>
 
 Config Frozen::mConfig("res/conf/frozen.cfg", true);
 
@@ -12,16 +13,16 @@ Frozen::Frozen(SpaceManImp* owner)
 	mPrevKeyState(false),
 	mOwner(owner),
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f),
-	mHit( new SoundQuene())
+	mImpact(0),
+	mPunch(0),
+	mBreaking(0)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
-	initializeSounds();
-	mHit->play();
 }
 
 Frozen::~Frozen()
 {
-	delete mHit;
+
 }
 
 Frozen::Frozen(Frozen const & f) 
@@ -31,15 +32,23 @@ Frozen::Frozen(Frozen const & f)
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
-	
 }
 
-void Frozen::update(sf::Keyboard::Key& push)
+void Frozen::update(sf::Keyboard::Key& push, GameData& data)
 {
+	if(mImpact == 0 && mPunch == 0 && mBreaking == 0)
+	{
+		mImpact = soundFac::createSound("res/sound/freeze/freeze_impact.spf", data.soundlist);
+		mPunch = soundFac::createSound("res/sound/freeze/freeze_punch.spf", data.soundlist);
+		mBreaking = soundFac::createSound("res/sound/freeze/freeze_breaking.spf", data.soundlist);
+		mImpact->play();
+	}
+
 	if(sf::Keyboard::isKeyPressed(push) &! mPrevKeyState)
 	{
 		mIntensity--;
 		mPrevKeyState = true;
+		mPunch->play();
 	}
 	else if(!sf::Keyboard::isKeyPressed(push) && mPrevKeyState)
 		mPrevKeyState = false;
@@ -47,6 +56,7 @@ void Frozen::update(sf::Keyboard::Key& push)
 	if (mIntensity <= 0)
 	{
 		mIsAlive = false;
+		mBreaking->play();
 	}
 }
 
@@ -81,10 +91,4 @@ Flag Frozen::getFlag_CAN_ACTIVATE()
 Flag Frozen::getFlag_CAN_PUSH()
 {
 	return Flag(Flag::CAN_PUSH, 10, false, 1);
-}
-
-void Frozen::initializeSounds()
-{
-	mHit->add( new SSound(res::getSoundBuffer("res/sound/freeze_onhit.ogg")));
-	mHit->add ( new SSound(res::getSoundBuffer("res/sound/freeze_breaking.ogg")));
 }

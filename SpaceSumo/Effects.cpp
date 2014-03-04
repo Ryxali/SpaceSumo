@@ -17,13 +17,13 @@ Effects::~Effects()
 {
 }
 
-void Effects::update(sf::Keyboard::Key& push)
+void Effects::update(sf::Keyboard::Key& push, GameData& data)
 {
 	int totOffset = 0;
 	bool didChange = false;
 	for(int i = 0; i < mCurSize; ++i)
 	{
-		mEffectList[i]->update(push);
+		mEffectList[i]->update(push, data);
 		if(!mEffectList[i]->isAlive())
 		{
 			delete mEffectList[i];
