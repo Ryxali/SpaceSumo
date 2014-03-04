@@ -20,4 +20,3 @@ private:
 	int mPlayerNumber;
 	Button* mButton;
 };
-

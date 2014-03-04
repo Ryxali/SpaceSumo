@@ -31,6 +31,7 @@ MenuState::MenuState(StateList &owner) :
 
 MenuState::~MenuState()
 {
+	mButtonList.clear();
 }
 
 void MenuState::draw(RenderList &list)
@@ -44,19 +45,4 @@ void MenuState::draw(RenderList &list)
 void MenuState::update(GameData &data, int delta)
 {
 	mButtonList.update(data, delta);
-}
-
-void MenuState::open()
-{
-	
-}
-
-void MenuState::close()
-{
-
-}
-
-void MenuState::cleanUp()
-{
-
 }
