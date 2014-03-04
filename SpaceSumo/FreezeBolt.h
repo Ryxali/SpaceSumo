@@ -4,7 +4,7 @@
 #include <SFML\Audio\Sound.hpp>
 #include "B2Body.h"
 #include "Effecting.h"
-#include <ResourceManager\SoundQuene.h>
+#include <ResourceManager\Playable.h>
 
 class Effect;
 
@@ -20,7 +20,6 @@ public:
 	virtual bool isAlive();
 	virtual EffectImp* getEffect(SpaceManImp* owner);
 	virtual void kill();
-	void initializeSounds();
 
 private:
 
@@ -31,7 +30,7 @@ private:
 	bool mAlive;
 	Animation mAnim;
 
-	SoundQuene* mBlast;
-
+	// sounds
+	Playable* mShoot;
 };
 

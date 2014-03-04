@@ -101,6 +101,7 @@
     <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
     <ClCompile Include="MapSelectState.cpp" />
     <ClCompile Include="ModeSelectState.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="LockButtonCommand.h" />
     <ClInclude Include="MapSelectState.h" />
     <ClInclude Include="ModeSelectState.h" />

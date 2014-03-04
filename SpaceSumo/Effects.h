@@ -15,7 +15,7 @@ public:
 	~Effects();
 
 	void draw(RenderList& renderList);
-	void update(sf::Keyboard::Key& push);
+	void update(sf::Keyboard::Key& push, GameData& data);
 	void addEffect(EffectImp*);
 	
 	EffectStatus& getStatus();
