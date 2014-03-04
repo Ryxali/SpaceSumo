@@ -19,14 +19,20 @@
 #ifndef SPACESUMO_RESOURCEMANAGER_STEXTURE_INCLUDED
 #include "STexture.h"
 #endif
+#include <iostream>
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\Graphics\Texture.hpp>
 Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 	mSTex(tex),
 	mSprite(),
 	mTexVersion(0),
+	mSliceWidth(0),
+	mSliceHeight(0),
+	mRows(0),
+	mColumns(0),
 	mAnimationTimer(),
 	mCurrentRow(0),
+	mAnimTime(0),
 	mAnimUniTime(0),
 	mZ(z)
 {
@@ -50,7 +56,7 @@ Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 	{
 		setAdvancedTimeOptions(cf);
 	}
-	
+
 	if(mTexVersion != mSTex.getVersion())
 	{
 		mSprite.setTexture(getTexture());
@@ -75,7 +81,6 @@ void Animation::draw(sf::RenderWindow &win)
 	}
 	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
 	int curFrame = getCurrentFrame();
-	SAssert(curFrame == 0, "Wat");
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
 	mSprite.setTextureRect(r);
 	win.draw(mSprite);
@@ -143,7 +148,7 @@ void Animation::reevaluateSizeValues()
 void Animation::setAdvancedLengthOptions(Config &cf)
 {
 	mAnimLength = new unsigned char[mColumns];
-	for(int i = 0; i < mColumns; i++)
+	for(int i = 0; i < mRows; i++)
 	{
 		mAnimLength[i] =  (unsigned char)cf.getValue<int>(("Row_" + std::to_string(i) + "_Width"));
 	}
