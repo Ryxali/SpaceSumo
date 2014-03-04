@@ -33,61 +33,83 @@ void KeyboardController::update(GameData& data)
 			{
 				set(UP, true);
 			}
-			else
-			{
-				set(UP, false);
-			}
+			
 
 			if(evt.key.code == mDown) 
 			{
 				set(DOWN, true);
 			}
-			else
-			{
-				set(DOWN, false);
-			}
+			
 
 			if(evt.key.code == mLeft) 
 			{
 				set(LEFT, true);
 			}
-			else
-			{
-				set(LEFT, false);
-			}
+			
 			
 			if(evt.key.code == mRight) 
 			{
 				set(RIGHT, true);
 			}
-			else
-			{
-				set(RIGHT, false);
-			}
+			
 
 			if(evt.key.code == mActivate) 
 			{
 				set(ACTIVATE, true);
 			}
-			else
-			{
-				set(ACTIVATE, false);
-			}
+			
 
 			if(evt.key.code == mPush) 
 			{
 				set(PUSH,true);
 			}
-			else
+			
+			
+			data.input.add(evt);
+			
+		break;
+		
+		case sf::Event::KeyReleased:
+			if(evt.key.code == mUp) 
+			{
+				set(UP, false);
+			}
+			
+
+			if(evt.key.code == mDown) 
+			{
+				set(DOWN, false);
+			}
+			
+
+			if(evt.key.code == mLeft) 
+			{
+				set(LEFT, false);
+			}
+			
+			
+			if(evt.key.code == mRight) 
+			{
+				set(RIGHT, false);
+			}
+			
+
+			if(evt.key.code == mActivate) 
+			{
+				set(ACTIVATE, false);
+			}
+			
+
+			if(evt.key.code == mPush) 
 			{
 				set(PUSH,false);
 			}
 			
 			data.input.add(evt);
 			
-			break;
+		break;
 		
-		default:
+			default:
 			data.input.add(evt);
 			break;
 		}
