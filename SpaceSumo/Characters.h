@@ -18,6 +18,6 @@ namespace chars
 		
 		Character(std::string charDataRef);
 	};
-	void configure(SpacemanData &data, Character &chr);
+	void configure(SpacemanData &data, const Character &chr);
 	
 };

@@ -21,7 +21,7 @@ chars::Character::CList::CList() : list()
 chars::Character::CList chars::Character::characters;
 
 
-void chars::configure(SpacemanData &data, Character &chr)
+void chars::configure(SpacemanData &data, const Character &chr)
 {
 	Config cfg(chr.charDataRef);
 	data.bodyData = cfg.getValue<std::string>("bodyData");

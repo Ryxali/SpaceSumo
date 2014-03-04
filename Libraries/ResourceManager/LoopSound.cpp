@@ -59,3 +59,12 @@ void LoopSound::update(GameData& gData)
 		mSound->play();
 	}
 }
+
+void LoopSound::setRelativeToListener(bool status)
+{
+	mSound->setRelativeToListener(status);
+}
+void LoopSound::setPosition(float x, float y, float z)
+{
+	mSound->setPosition(x, y, z);
+}

@@ -5,16 +5,16 @@
 
 
 Hud::Hud() : mPool(), mNPlayers(0),
-	mHead0(Head::Position::TOP_LEFT, mPool.test),
-	mHead1(Head::Position::TOP_RIGHT, mPool.test),
-	mHead2(Head::Position::BOTTOM_LEFT, mPool.test),
-	mHead3(Head::Position::BOTTOM_RIGHT, mPool.test)
+	mHead0(Position::TOP_LEFT, &mPool.test),
+	mHead1(Position::TOP_RIGHT, &mPool.test1),
+	mHead2(Position::BOTTOM_LEFT, &mPool.test2),
+	mHead3(Position::BOTTOM_RIGHT, &mPool.test3)
 {
 	
 }
 
 
-Hud::~Hud(void)
+Hud::~Hud()
 {
 }
 

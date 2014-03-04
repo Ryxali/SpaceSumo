@@ -4,6 +4,8 @@ enum EntityType;
 struct GameStateData;
 class Ability;
 class Config;
+class Wincon;
+class Head;
 
 #include "entityimp.h"
 #include "B2Body.h"
@@ -54,6 +56,12 @@ public:
 	void slowDeath();
 	B2Body& getBody();
 
+	bool isSlowlyDying() const;
+
+	void setScore(int score);
+	void addScore(int score);
+	int getScore() const;
+	
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -106,6 +114,6 @@ private:
 
 	//sounds
 	Playable* mJetpack;
-
+	Head* mHead;
 };
 

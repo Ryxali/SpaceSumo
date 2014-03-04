@@ -10,40 +10,42 @@
 #include <Common\stringH.h>
 #include <Common\Config.h>
 #include <ResourceManager\soundFac.h>
+#include "Wincon.h"
+#include "Head.h"
 
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
-	sf::Keyboard::Key right,
-	sf::Keyboard::Key left,
-	sf::Keyboard::Key push,
-	sf::Keyboard::Key activate,
-	GameData& data, 
-	std::string bodyData,
-	std::string handData,
-	float x, float y, float32 rotation)
-	: mUp(up),
-	mRight(right),
-	mLeft(left),
-	mPush(push),
-	mActivate(activate),
-	mSpaceman(data.world , bodyData, x , y ),
-	mLeftHand(data.world, handData, x , y ),
-	mRightHand(data.world, handData, x , y ),
-	mDirection( 0.0f , -1.0f ),
-	mSpeed(mConfig.getValue<float>("speed")),
-	mAngle(0.0f),
-	mJetOffset(-37.f),
-	mPushTimer(mConfig.getValue<int>("pushCooldown")),
-	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
-	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
-	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
-	mAbility(0),
-	mPushing(false),
-	mSlowDeath(false),
-	mAlive(true),
-	mJetpack(soundFac::createSound("res/sound/jet.spf", data.soundlist))
+						 sf::Keyboard::Key right,
+						 sf::Keyboard::Key left,
+						 sf::Keyboard::Key push,
+						 sf::Keyboard::Key activate,
+						 GameData& data, 
+						 std::string bodyData,
+						 std::string handData,
+						 float x, float y, float32 rotation)
+						 : mUp(up),
+						 mRight(right),
+						 mLeft(left),
+						 mPush(push),
+						 mActivate(activate),
+						 mSpaceman(data.world , bodyData, x , y ),
+						 mLeftHand(data.world, handData, x , y ),
+						 mRightHand(data.world, handData, x , y ),
+						 mDirection( 0.0f , -1.0f ),
+						 mSpeed(mConfig.getValue<float>("speed")),
+						 mAngle(0.0f),
+						 mJetOffset(-37.f),
+						 mPushTimer(mConfig.getValue<int>("pushCooldown")),
+						 mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
+						 mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
+						 mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
+						 mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
+						 mAbility(0),
+						 mPushing(false),
+						 mSlowDeath(false),
+						 mAlive(true),
+						 mJetpack(soundFac::createSound("res/sound/jet.spf", data.soundlist))
 {
 	//mAnim.getSprite().setOrigin( 64 , 64 );
 	//mTurn.getSprite().setOrigin( 64 , 64 );
@@ -103,6 +105,7 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
+	//gData.wincon->update(data, gData, this);
 	data.soundlist.update(data);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
@@ -151,11 +154,11 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		{
 			mJetpack->play();
 		}
-		
+
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 			mDirection.getY() * ( mSpeed * fDelta )), 
 			mSpaceman.getWorldCenter(), true);
-		
+
 		//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
 		{
@@ -288,6 +291,26 @@ void SpaceManImp::slowDeath()
 {
 	mSlowDeath = true;
 	mRespawnTimer.reset();
+}
+
+bool SpaceManImp::isSlowlyDying() const
+{
+	return mSlowDeath;
+}
+
+void SpaceManImp::setScore(int score)
+{
+	mHead->setScore(score);
+}
+
+void SpaceManImp::addScore(int score)
+{
+	mHead->setScore(mHead->getScore() + score);
+}
+
+int SpaceManImp::getScore() const
+{
+	return mHead->getScore();
 }
 
 B2Body& SpaceManImp::getBody()

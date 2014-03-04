@@ -100,6 +100,7 @@
     <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="EMP.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
     <ClCompile Include="MapSelectState.cpp" />
     <ClCompile Include="ModeSelectState.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateList.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="SumoWincon.cpp" />
     <ClCompile Include="Terra.cpp" />
     <ClCompile Include="Sumo.cpp" />
     <ClCompile Include="XController.cpp" />
@@ -161,6 +163,8 @@
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="EMP.h" />
+    <ClInclude Include="EMPAbil.h" />
     <ClInclude Include="LockButtonCommand.h" />
     <ClInclude Include="MapSelectState.h" />
     <ClInclude Include="ModeSelectState.h" />
@@ -195,6 +199,7 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Mode.h" />
     <ClInclude Include="Mode_Type.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="RenderList.h" />
@@ -208,8 +213,10 @@
     <ClInclude Include="StateList_Main.h" />
     <ClInclude Include="StateList_Setup.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SumoWincon.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />
+    <ClInclude Include="Wincon.h" />
     <ClInclude Include="XController.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
