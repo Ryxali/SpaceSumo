@@ -41,13 +41,8 @@ bool ControlList::isActiveReset(Controller::Control ctrl, int playerNumber)
 	{
 		if(playerNumber == (*it)->getPlayer())
 		{
-			if ( (*it)->isActive(ctrl) )
-			{
-				(*it)->set(ctrl, false);
-				return true;
-			}
-			else
-				return false;
+			return (*it)->isActiveReset(ctrl);
+			
 		}
 	}
 	return false;

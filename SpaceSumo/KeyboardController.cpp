@@ -20,6 +20,19 @@ KeyboardController::~KeyboardController()
 {
 }
 
+bool KeyboardController::isActiveReset(Control ctrl)
+{
+	bool stat(mRStatus.at(ctrl));
+	mRStatus.set(ctrl, false);
+	return stat;
+}
+
+void KeyboardController::set(Control ctrl, bool status)
+{
+	Controller::set(ctrl, status);
+	mRStatus.set(ctrl, status);
+}
+
 void KeyboardController::update(GameData& data)
 {
 	sf::Event evt;

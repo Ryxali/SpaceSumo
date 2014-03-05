@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Controller.h"
 
-bool Controller::isActive(Control& ctrl) const
+bool Controller::isActive(Control ctrl) const
 {
 	return mStatus.at(ctrl);
 }
