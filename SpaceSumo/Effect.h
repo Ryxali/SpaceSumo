@@ -4,6 +4,7 @@
 
 class EffectImp;
 class RenderList;
+struct GameData;
 
 class Effect
 {
@@ -12,7 +13,8 @@ public:
 	~Effect();
 	Effect(const Effect &e);
 	Effect& operator=(const Effect &e);
-	void update(sf::Keyboard::Key& push);
+	//Effect& operator=(EffectImp *imp);
+	void update(sf::Keyboard::Key& push, GameData& data);
 	void draw(RenderList& renderList);
 	bool isAlive();
 	Effect duplicate();
@@ -22,6 +24,7 @@ public:
 	Flag getFlag_CAN_ROTATE();
 	Flag getFlag_CAN_PUSH();
 	Flag getFlag_CAN_ACTIVATE();
+	void reset();
 	
 private:
 	EffectImp* mImp;

@@ -1,74 +1,48 @@
 #include "stdafx.h"
 #include "MenuState.h"
+
+#include "ButtonSingle.h"
+#include "Button.h"
 #include <ResourceManager\RHandle.h>
 #include "GameStateList.h"
 #include "ChangeStateCommand.h"
 #include "StateList_Main.h"
+#include "ButtonSelectionEffect.h"
 
 MenuState::MenuState(StateList &owner) : 
 	State(owner),
 	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
 	mButtonList()
 {
-		mOwner = owner;
+	mOwner = owner;
+	mButtonList.add(new ButtonSingle(
+		SVector(200,200), 
+		0, 0,
+		new ChangeStateCommand(st::GAME_STATE, mOwner), 
+		(std::string)"res/img/UI/menu/tmp_menu"));
+	mButtonList.add(new ButtonSingle(
+		SVector(200,400), 
+		0, 1,
+		new ChangeStateCommand(st::PLAY_STATE, mOwner),
+		(std::string)"res/img/UI/menu/tmp_menu"));
+	mButtonList.addObserver(new ButtonSelectionEffect(1, mButtonList.getFirst()));
 }
+
 
 MenuState::~MenuState()
 {
+	mButtonList.clear();
 }
 
 void MenuState::draw(RenderList &list)
 {
 	list.addSprite(mBackground);
 	
-	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
-	{
-		(*it).draw(list);
-	}
+	mButtonList.draw(list);
 
 }
 
 void MenuState::update(GameData &data, int delta)
 {
-
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-	{
-		mOwner.changeState(st::GAME_STATE);
-	}
-
-	for( std::list<Button>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
-	{
-		(*it).update(data);
-		
-		/*if( (*it)->isPressed() )
-		{
-			(*it).execute();
-			break;
-		}*/
-
-	}
-
-}
-
-void MenuState::open()
-{
-	mButtonList.emplace_back(SVector(200,200), new ChangeStateCommand(st::GAME_STATE, mOwner), (std::string)"res/img/UI/menu/tmp_menu");
-	mButtonList.emplace_back(SVector(200,400), new ChangeStateCommand(st::PLAY_STATE, mOwner), (std::string)"res/img/UI/menu/tmp_menu");
-}
-
-void MenuState::close()
-{
-	mButtonList.clear();
-}
-
-void MenuState::cleanUp()
-{
-	/*for( std::list<Button*>::iterator it = mButtonList.begin(); it != mButtonList.end(); it++ )
-	{
-		if( (*it).isPressed() )
-		{
-			(*it).execute();
-			break;
-		}
-	}*/
+	mButtonList.update(data, delta);
 }

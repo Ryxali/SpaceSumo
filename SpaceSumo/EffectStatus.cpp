@@ -12,31 +12,31 @@ EffectStatus::EffectStatus()
 {
 }
 
-void EffectStatus::addFlag(Effect &effect)
+void EffectStatus::addFlag(EffectImp *effect)
 {
 	//TODO Add more flags
-	if (effect.getFlag_CAN_ROTATE().mSeverity > mFlag_CAN_ROTATE.mSeverity)
+	if (effect->getFlag_CAN_ROTATE().mSeverity > mFlag_CAN_ROTATE.mSeverity)
 	{
-		mFlag_CAN_ROTATE = effect.getFlag_CAN_ROTATE();
+		mFlag_CAN_ROTATE = effect->getFlag_CAN_ROTATE();
 	}
 
-	if (effect.getFlag_CAN_MOVE().mSeverity > mFlag_CAN_MOVE.mSeverity)
+	if (effect->getFlag_CAN_MOVE().mSeverity > mFlag_CAN_MOVE.mSeverity)
 	{
-		mFlag_CAN_MOVE = effect.getFlag_CAN_MOVE();
+		mFlag_CAN_MOVE = effect->getFlag_CAN_MOVE();
 	}
 
-	if (effect.getFlag_CAN_PUSH().mSeverity > mFlag_CAN_PUSH.mSeverity)
+	if (effect->getFlag_CAN_PUSH().mSeverity > mFlag_CAN_PUSH.mSeverity)
 	{
-		mFlag_CAN_MOVE = effect.getFlag_CAN_PUSH();
+		mFlag_CAN_MOVE = effect->getFlag_CAN_PUSH();
 	}
 
-	if (effect.getFlag_CAN_ACTIVATE().mSeverity > mFlag_CAN_ACTIVATE.mSeverity)
+	if (effect->getFlag_CAN_ACTIVATE().mSeverity > mFlag_CAN_ACTIVATE.mSeverity)
 	{
-		mFlag_CAN_MOVE = effect.getFlag_CAN_ACTIVATE();
+		mFlag_CAN_MOVE = effect->getFlag_CAN_ACTIVATE();
 	}
 }
 
-void EffectStatus::update(sf::Keyboard::Key& push)
+void EffectStatus::update(sf::Keyboard::Key& push, GameData& data)
 {
 	SAssert(false, "Don't use EffectStatus update()");
 }

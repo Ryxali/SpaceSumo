@@ -1,8 +1,12 @@
 #pragma once
-#include <vector>
-#include "Effect.h"
 
 class RenderList;
+class EffectStatus;
+
+#include <vector>
+#include "Effect.h"
+#include "EffectStatus.h"
+
 
 class Effects
 {
@@ -11,11 +15,18 @@ public:
 	~Effects();
 
 	void draw(RenderList& renderList);
-	void update(sf::Keyboard::Key& push);
-	void addEffect(Effect&);
-	Effect getStatus();
+	void update(sf::Keyboard::Key& push, GameData& data);
+	void addEffect(EffectImp*);
+	
+	EffectStatus& getStatus();
 
 private:
-	std::vector<Effect> mEffectList;
+	EffectImp** mEffectList;
+	EffectStatus mSummary;
+	static const int MAX_SIZE;
+	int mCurSize;
+
+	void evaluate();
+	void floatDown(int index);
 };
 

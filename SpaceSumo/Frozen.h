@@ -3,6 +3,7 @@
 #include <Common\Timer.h>
 #include <Common\Config.h>
 #include <ResourceManager\Animation.h>
+#include <ResourceManager\Playable.h>
 
 class SpaceManImp;
 
@@ -13,7 +14,7 @@ public:
 	Frozen(SpaceManImp* owner);
 	virtual ~Frozen();
 
-	virtual void update(sf::Keyboard::Key& push);
+	virtual void update(sf::Keyboard::Key& push, GameData& data);
 	virtual void draw(RenderList& renderList);
 	virtual EffectImp* clone();
 
@@ -31,5 +32,12 @@ private:
 	bool mPrevKeyState;
 	SpaceManImp* mOwner;
 	Animation mAnim;
+
+
+	//sounds
+	Playable* mImpact;
+	Playable* mPunch;
+	Playable* mBreaking;
+	
 };
 

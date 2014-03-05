@@ -5,7 +5,7 @@
 #include <ResourceManager\RHandle.h>
 
 LHydrogen::LHydrogen(b2World &world, std::string bodyData, float x, float y) : 
-	mAlive(true),
+	PowerUp(),
 	mBody(world, bodyData, x, y),
 	mAnim(res::getTexture("res/img/powerup/LHydrogen.png"), "res/img/powerup/LHydrogen.cfg", 3.f)
 {
@@ -43,9 +43,4 @@ Ability* LHydrogen::getAbility()
 		return p;
 	}
 
-}
-
-bool LHydrogen::isAlive()
-{
-	return mAlive;
 }

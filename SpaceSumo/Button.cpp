@@ -1,72 +1,33 @@
 #include "stdafx.h"
-#include "Button.h"
-#include <BasicShapes\putils.h>
-#include <SFML\Window\Keyboard.hpp>
-#include <ResourceManager\RHandle.h>
 #include "GameData.h"
+#include "RenderList.h"
+#include "Button.h"
 
-Button::Button(SVector position, Command *command, std::string imageFile):
-	mAnimation(res::getTexture(imageFile+".png"), imageFile+".cfg" , 2.f),
-	Rectangle( 1 , 1 ),
-	mPosition(position),
-	mCommand(command),
-	mHovered(false),
-	mIsPressed(false)
+Button::Button()
 {
-	mAnimation.getSprite().setPosition(mPosition.getX() , mPosition.getY());
-	setHeight(mAnimation.getSliceHeight());
-	setWidth(mAnimation.getSliceWidth());
-	
-}
 
+}
 Button::~Button()
 {
 
-	delete mCommand;
-
 }
 
-void Button::update(GameData &data)
+int Button::getMapX() const 
 {
-	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos)) 
-	{
-		mHovered = true;
-	}
-	else
-	{
-		mHovered = false;
-	}
-
-	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
-	{
-		mIsPressed = true;
-		execute();
-	}
-
+	return mMapX;
 }
 
-void Button::draw(RenderList& renderList)
+int Button::getMapY() const
 {
-	//mAnimation.setCurrentRow(aProperNumber);
-	renderList.addSprite(mAnimation);
+	return mMapY;
 }
 
-float Button::getCenterX() const
+void Button::setMapX(int x)
 {
-	return mPosition.getX()+getWidth()/2;
+	mMapX = x;
 }
 
-float Button::getCenterY() const
+void Button::setMapY(int x)
 {
-	return  mPosition.getY()+getHeight()/2;
-}
-
-bool Button::isPressed()
-{
-	return mIsPressed;
-}
-
-void Button::execute()
-{
-	mCommand->Execute();
+	mMapX = x;
 }

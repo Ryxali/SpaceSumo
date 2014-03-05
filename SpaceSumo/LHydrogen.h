@@ -16,11 +16,9 @@ public:
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
 	virtual Ability* getAbility();
-	virtual bool isAlive();
 
 private:
 	B2Body mBody;
 	Animation mAnim;
-	bool mAlive;
 
 };

@@ -5,8 +5,8 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include <Common\SVector.h>
-
-#define NO_MEMORY_TRACKING
+#include <ResourceManager\soundFac.h>
+#include "KeyboardController.h"
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
 {
@@ -36,11 +36,7 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
-}
-
-
-Game::~Game()
-{
+	mGameData.controlList.add( new KeyboardController(1, Config("res/conf/characters/spaceman/data_player_1.cfg")));
 
 }
 
@@ -59,6 +55,7 @@ void Game::loop()
 	sf::Event evt;
 	// Loop runs through all new events
 	mGameData.world.Step(delta.asSeconds(),8,3);
+	mGameData.controlList.update(mGameData);
 
 	while(mWindow.pollEvent(evt))
 	{
@@ -91,6 +88,7 @@ void Game::loop()
 void Game::update(int delta)
 {
 	mStates.getCurrent().update(mGameData, delta);
+	mGameData.soundlist.update(mGameData);
 }
 
 void Game::preDraw()

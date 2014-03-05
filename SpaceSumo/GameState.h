@@ -18,7 +18,7 @@ public:
 	virtual void cleanUp();
 	virtual void open();
 	virtual void close();
-	
+	void setup(Map *newMap, Mode *newMode);
 private:
 	void spacemanCreation(GameData& gameData);
 	GameStateData mData;

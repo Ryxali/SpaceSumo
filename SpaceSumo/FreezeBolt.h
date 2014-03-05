@@ -4,6 +4,7 @@
 #include <SFML\Audio\Sound.hpp>
 #include "B2Body.h"
 #include "Effecting.h"
+#include <ResourceManager\Playable.h>
 
 class Effect;
 
@@ -17,7 +18,7 @@ public:
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
-	virtual Effect getEffect(SpaceManImp* owner);
+	virtual EffectImp* getEffect(SpaceManImp* owner);
 	virtual void kill();
 
 private:
@@ -29,5 +30,7 @@ private:
 	bool mAlive;
 	Animation mAnim;
 
+	// sounds
+	Playable* mShoot;
 };
 

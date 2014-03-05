@@ -26,6 +26,6 @@ Loadable& SoundBufferStore::add(std::string ref)
 
 const SSoundBuffer& SoundBufferStore::get(std::string ref) const
 {
-	SAssert(mItems.count(ref) > 0, "No such file in store");
+	SAssert(mItems.count(ref) > 0, "No such file in store " + ref);
 	return mItems.at(ref);
 }

@@ -1,48 +1,80 @@
 #include "stdafx.h"
 #include "Effects.h"
 #include "EffectStatus.h"
+#include <Common\error.h>
+const int Effects::MAX_SIZE = 50;
 
-Effects::Effects()
+Effects::Effects() : mSummary(), mCurSize(0)
 {
+	mEffectList = new EffectImp*[MAX_SIZE];
+	for(int i = 0; i < MAX_SIZE; ++i)
+	{
+		mEffectList[i] = 0;
+	}
 }
 
 Effects::~Effects()
 {
 }
 
-void Effects::update(sf::Keyboard::Key& push)
+void Effects::update(sf::Keyboard::Key& push, GameData& data)
 {
-	for (std::vector<Effect>::iterator i = mEffectList.begin(); i != mEffectList.end();)
+	int totOffset = 0;
+	bool didChange = false;
+	for(int i = 0; i < mCurSize; ++i)
 	{
-		(*i).update(push);
-		if(!(*i).isAlive())
+		mEffectList[i]->update(push, data);
+		if(!mEffectList[i]->isAlive())
 		{
-			i = mEffectList.erase(i);
+			delete mEffectList[i];
+			mEffectList[i] = 0;
+			floatDown(i);
+			didChange = true;
 		}
-		else i++;
+	}
+	if(didChange)
+	{
+		mSummary = EffectStatus();
+		evaluate();
 	}
 }
 
 void Effects::draw(RenderList& renderList)
 {
-	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
+	for(int i = 0; i < mCurSize; i++)
 	{
-		mEffectList.at(i).draw(renderList);
+		mEffectList[i]->draw(renderList);
 	}
 }
 
-void Effects::addEffect(Effect& effect)
+void Effects::addEffect(EffectImp* effect)
 {
-	mEffectList.emplace_back(effect);
+	SAssert(mCurSize < MAX_SIZE, "index out of bounds");
+	mEffectList[mCurSize] = effect;
+	++mCurSize;
+	evaluate();
 }
 
-Effect Effects::getStatus()
+EffectStatus& Effects::getStatus()
 {
-	EffectStatus* status = new EffectStatus;
+	return mSummary;
+}
 
-	for (std::vector<Effect>::size_type i = 0; i < mEffectList.size(); i++)
+void Effects::evaluate()
+{
+	for(int i = 0; i < mCurSize; i++)
 	{
-		status->addFlag(mEffectList.at(i));
+		mSummary.addFlag(mEffectList[i]);
 	}
-	return status;
+}
+
+void Effects::floatDown(int index)
+{
+	index += 1;
+	for(;index < mCurSize; ++index)
+	{
+		mEffectList[index-1] = mEffectList[index];
+		mEffectList[index] = 0;
+	}
+	--mCurSize;
 }

@@ -16,7 +16,7 @@ class Animation : public SDrawable
 {
 public:
 	Animation(const STexture &tex, std::string animInfo, float z);
-	Animation(const Animation &anim);
+	
 	~Animation();
 	const sf::Texture& getTexture() const;
 	virtual void draw(sf::RenderWindow &win);
@@ -30,6 +30,7 @@ public:
 	unsigned short getSliceHeight();
 private:
 	Animation& operator=(const Animation& anim);
+	Animation(const Animation &anim);
 	const STexture &mSTex;
 	sf::Sprite mSprite;
 	// The version of this instance's texture

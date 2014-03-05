@@ -1,8 +1,17 @@
 #pragma once
+
+enum EntityType;
+struct GameStateData;
+class Ability;
+class Config;
+class Wincon;
+class Head;
+
 #include "entityimp.h"
 #include "B2Body.h"
 #include "Effects.h"
 #include "Debug.h"
+#include <ResourceManager\SoundQuene.h>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
@@ -12,28 +21,34 @@
 #include <Common\Timer.h>
 #include <ResourceManager\Animation.h>
 
-enum EntityType;
-struct GameStateData;
-class Ability;
+
 
 class SpaceManImp :
 	public EntityImp
 {
 public:
 	SpaceManImp(sf::Keyboard::Key up,
-				sf::Keyboard::Key right,
-				sf::Keyboard::Key left,
-				sf::Keyboard::Key push,
-				sf::Keyboard::Key activate,
-				b2World& world,
-				std::string bodyData,
-				std::string handData,
-				float x, float y, float32 rotation);
-	~SpaceManImp();
+		sf::Keyboard::Key right,
+		sf::Keyboard::Key left,
+		sf::Keyboard::Key push,
+		sf::Keyboard::Key activate,
+		GameData& data, 
+		std::string bodyData,
+		std::string handData,
+		float x, float y, float32 rotation);
+	SpaceManImp(
+		Config& playerData,
+		Config& spaceManData,
+		Config& bodyData,
+		Config& handData,
+		GameData& data
+		);
+
+		~SpaceManImp();
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
-	virtual void addEffect(Effect& effect);
+	virtual void addEffect(EffectImp* effect);
 	void addAbility(Ability*);
 	virtual bool isAlive();
 	virtual EntityType getType();
@@ -41,6 +56,12 @@ public:
 	void slowDeath();
 	B2Body& getBody();
 
+	bool isSlowlyDying() const;
+
+	void setScore(int score);
+	void addScore(int score);
+	int getScore() const;
+	
 private:
 	//Keys
 	sf::Keyboard::Key mUp;
@@ -51,7 +72,6 @@ private:
 
 	//helpfunctions
 	void initializeArms(b2World& world);
-	void initializeSound();
 	void extendArms();
 	void retractArms();
 
@@ -86,27 +106,17 @@ private:
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;
-	
+	int mJetOffset;
 	//animations
 	Animation mAnim;
 	Animation mTurn;
 	Animation mJet;
-
+	
+	Head* mHead;
+	
 	//sounds
-	sf::Sound mStartSound;
-	sf::Sound mMainSound;
-	sf::Sound mEndSound;
-	sf::Sound mStartTurnSound;
-	sf::Sound mMainTurnSound;
+	Playable* mJetpack;
+	Playable* mTurning;
 
-	//bools for sounds
-	bool mStartPress;
-	bool mStopPress;
-
-	bool mRightStart;
-	bool mRightStop;
-
-	bool mLeftStart;
-	bool mLeftStop;
 };
 

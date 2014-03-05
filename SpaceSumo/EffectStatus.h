@@ -9,8 +9,8 @@ class EffectStatus :
 {
 public:
 	EffectStatus();
-	void addFlag(Effect &effect);
-	virtual void update(sf::Keyboard::Key& push);
+	void addFlag(EffectImp* effect);
+	virtual void update(sf::Keyboard::Key& push, GameData& data);
 	virtual void draw(RenderList& renderList);
 	virtual EffectImp* clone();
 

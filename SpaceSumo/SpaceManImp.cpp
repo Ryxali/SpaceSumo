@@ -3,11 +3,15 @@
 #include "GameStateData.h"
 #include "EntityType.h"
 #include "Ability.h"
+#include <ResourceManager\LoopSound.h>
 #include <iostream>
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\SSoundBuffer.h>
-
-
+#include <Common\stringH.h>
+#include <Common\Config.h>
+#include <ResourceManager\soundFac.h>
+#include "Wincon.h"
+#include "Head.h"
 
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
@@ -16,7 +20,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	sf::Keyboard::Key left,
 	sf::Keyboard::Key push,
 	sf::Keyboard::Key activate,
-	b2World& world, std::string bodyData,
+	GameData& data, 
+	std::string bodyData,
 	std::string handData,
 	float x, float y, float32 rotation)
 	: mUp(up),
@@ -24,33 +29,72 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mLeft(left),
 	mPush(push),
 	mActivate(activate),
-	mSpaceman(world , bodyData, x , y ),
-	mLeftHand(world, handData, x , y ),
-	mRightHand(world, handData, x , y ),
+	mSpaceman(data.world , bodyData, x , y ),
+	mLeftHand(data.world, handData, x , y ),
+	mRightHand(data.world, handData, x , y ),
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
+	mJetOffset(-37.f),
 	mPushTimer(mConfig.getValue<int>("pushCooldown")),
 	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
-	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 5.f),
-	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 6.f),
+	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
+	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
 	mAbility(0),
 	mPushing(false),
 	mSlowDeath(false),
-	mRightStart(true),
-	mRightStop(false),
-	mLeftStart(true),
-	mLeftStop(false),
-	mAlive(true)
+	mAlive(true),
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
 {
-	mAnim.getSprite().setOrigin( 64 , 64 );
-	mTurn.getSprite().setOrigin( 64 , 64 );
-	mJet.getSprite().setOrigin( 32 , -37 );
+	//mAnim.getSprite().setOrigin( 64 , 64 );
+	//mTurn.getSprite().setOrigin( 64 , 64 );
+	//mJet.getSprite().setOrigin( 32 , -37 );
 
 	mSpaceman.setRotation(rotation);
-	initializeArms(world);
-	initializeSound();
+	initializeArms(data.world);
+	mSpaceman.getBody()->SetUserData(this);
+}
+
+SpaceManImp::SpaceManImp(
+	Config& playerData,
+	Config& spaceManData,
+	Config& bodyData,
+	Config& handData,
+	GameData& data)
+	: mUp(str::toKey(playerData.getValue<std::string>("up"))),
+	mRight(str::toKey(playerData.getValue<std::string>("right"))),
+	mLeft(str::toKey(playerData.getValue<std::string>("left"))),
+	mPush(str::toKey(playerData.getValue<std::string>("push"))),
+	mActivate(str::toKey(playerData.getValue<std::string>("activate"))),
+	mAlive(true),
+	mSpaceman(data.world, bodyData, playerData.getValue<float>(""), playerData.getValue<float>("")),
+	mLeftArmJoint(0),
+	mLeftArm(0),
+	mLeftHand(data.world, handData, playerData.getValue<float>(""), playerData.getValue<float>("")),
+	mLeftArmDef(),
+	mRightArmJoint(0),
+	mRightArm(0),
+	mRightHand(data.world, handData, playerData.getValue<float>(""), playerData.getValue<float>("")),
+	mRightArmDef(),
+	mPushTimer(spaceManData.getValue<int>("pushCooldown")),
+	mPushing(false),
+	mRespawnTimer(spaceManData.getValue<int>("respawnTimer")),
+	mSlowDeath(false),
+	mEffects(),
+	mAbility(0),
+	mSpeed(spaceManData.getValue<float>("speed")),
+	mDirection(SVector(0.f, -1.f)),
+	mAngle(0.f),
+	mJetOffset(mConfig.getValue<float>("jetOffset")),
+	mAnim(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 5.f),
+	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
+	mJet(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 7.f),
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist))
+{
+	mSpaceman.setRotation(playerData.getValue<float>("startingRotation"));
+	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
 }
 
@@ -62,11 +106,12 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
+	//gData.wincon->update(data, gData, this);
+	data.soundlist.update(data);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
-	mEffects.update(mPush);
-	Effect mEffectStatus(mEffects.getStatus());
+	mEffects.update(mPush, data);
 
 	if(mSlowDeath)
 	{
@@ -90,8 +135,8 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			toTheEdge.Normalize();
 
 			mSpaceman.applyLinearImpulse( b2Vec2(toTheEdge.x * ( mSpeed * fDelta ),
-										toTheEdge.y * ( mSpeed * fDelta )), 
-										mSpaceman.getWorldCenter(), true);
+				toTheEdge.y * ( mSpeed * fDelta )), 
+				mSpaceman.getWorldCenter(), true);
 			return;
 		}
 	}
@@ -104,24 +149,18 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mSpaceman.setAngularVelocity(0);
 	}
 
-	if(sf::Keyboard::isKeyPressed(mUp) && mEffectStatus.getFlag_CAN_MOVE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mUp) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
+		if(mJetpack->hasEnded())
+		{
+			mJetpack->play();
+		}
+
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
-									mDirection.getY() * ( mSpeed * fDelta )), 
-									mSpaceman.getWorldCenter(), true);
-	
-	// plays the startingsound of the jetpack
-	if( mStartPress == true)
-	{
-		mStartSound.play();
-		mMainSound.play();
+			mDirection.getY() * ( mSpeed * fDelta )), 
+			mSpaceman.getWorldCenter(), true);
 
-		mStartPress = false;
-		mStopPress = true;
-	}
-
-
-	//Speed limit
+		//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
 		{
 			mSpaceman.setLinearVelocity( b2Vec2(-mConfig.getValue<float>("speedLimit"), mSpaceman.getLinearVelocity().y));
@@ -141,83 +180,39 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		{
 			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, -mConfig.getValue<float>("speedLimit")));
 		}
-		
+
 		mJet.setCurrentRow(1);
 	}
-
-	//plays the endingsound of the jetpack
-	if(!sf::Keyboard::isKeyPressed(mUp))
+	else
 	{
-		if(mStopPress == true)
-		{
-			//mEndSound.play(); // utkommenterad pga: skapar ett litet klick
-			mMainSound.pause();
-		}
-
-		mStartPress = true;
-		mStopPress = false;
+		mJetpack->stop();
 	}
-	
+
+
 	// turn right
-	if(sf::Keyboard::isKeyPressed(mRight) && mEffectStatus.getFlag_CAN_ROTATE().mStatus == true)
+	if(sf::Keyboard::isKeyPressed(mRight) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(1);
-
-		//plays the start sound for the right turn
-		if( mRightStart == true )
-		{
-			mStartTurnSound.play();
-			mMainTurnSound.play();
-
-			mRightStart = false;
-			mRightStop = true;
-		}
+		mTurning->play();
 	}
-
-	//pauses the right-turn sound when the key is released
-	if( !sf::Keyboard::isKeyPressed(mRight) )
-	{
-		if ( mRightStop == true )
-		{
-			mMainTurnSound.pause();
-		}
-		mRightStart = true;
-		mRightStop = false;
-	}
-
-
-
+	
 	//turn left
-	if(sf::Keyboard::isKeyPressed(mLeft) && mEffectStatus.getFlag_CAN_ROTATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(0);
-		
-		//plays the start sound for the left turn
-		if( mLeftStart == true )
-		{
-			mStartTurnSound.play();
-			mMainTurnSound.play();
-
-			mLeftStart = false;
-			mLeftStop = true;
-		}
+		mTurning->play();
 	}	
 
-	//pauses the left-turn sound when the key is released
-	if( !sf::Keyboard::isKeyPressed(mLeft) )
+	if( !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
 	{
-		if ( mLeftStop == true )
-		{
-			mMainTurnSound.pause();
-		}
-		mLeftStart = true;
-		mLeftStop = false;
+		mTurning->stop();
 	}
 
+
 	// player push
-	if(sf::Keyboard::isKeyPressed(mPush) && mEffectStatus.getFlag_CAN_PUSH().mStatus)
+	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus)
 	{
 		mPushing = true;
 		mPushTimer.reset();
@@ -236,7 +231,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// activate ability
-	if(sf::Keyboard::isKeyPressed(mActivate) && mEffectStatus.getFlag_CAN_ACTIVATE().mStatus)
+	if(sf::Keyboard::isKeyPressed(mActivate) && mEffects.getStatus().getFlag_CAN_ACTIVATE().mStatus)
 	{
 		if(mAbility != 0)
 		{
@@ -250,6 +245,10 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 void SpaceManImp::draw(RenderList& renderList)
 {
+	mAnim.getSprite().setOrigin(mAnim.getSprite().getTextureRect().width/2, mAnim.getSprite().getTextureRect().height/2);
+	mTurn.getSprite().setOrigin(mTurn.getSprite().getTextureRect().width/2, mTurn.getSprite().getTextureRect().height/2);
+	mJet.getSprite().setOrigin(mJet.getSprite().getTextureRect().width/2, mJetOffset);
+
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 
@@ -265,7 +264,7 @@ void SpaceManImp::draw(RenderList& renderList)
 	renderList.addSprite(mJet);
 }
 
-void SpaceManImp::addEffect(Effect& effect)
+void SpaceManImp::addEffect(EffectImp* effect)
 {
 	mEffects.addEffect(effect);
 }
@@ -299,6 +298,26 @@ void SpaceManImp::slowDeath()
 {
 	mSlowDeath = true;
 	mRespawnTimer.reset();
+}
+
+bool SpaceManImp::isSlowlyDying() const
+{
+	return mSlowDeath;
+}
+
+void SpaceManImp::setScore(int score)
+{
+	mHead->setScore(score);
+}
+
+void SpaceManImp::addScore(int score)
+{
+	mHead->setScore(mHead->getScore() + score);
+}
+
+int SpaceManImp::getScore() const
+{
+	return mHead->getScore();
 }
 
 B2Body& SpaceManImp::getBody()
@@ -343,26 +362,14 @@ void SpaceManImp::initializeArms(b2World& world)
 
 void SpaceManImp::extendArms()
 {
-  	mAnim.setCurrentRow(1);
+	mAnim.setCurrentRow(1);
 	mLeftArmJoint->SetMotorSpeed(mConfig.getValue<float>("punchforce"));
 	mRightArmJoint->SetMotorSpeed(mConfig.getValue<float>("punchforce"));
 }
-	
+
 void SpaceManImp::retractArms()
 {
 	mAnim.setCurrentRow(0);
 	mLeftArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
 	mRightArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
-}
-
-void SpaceManImp::initializeSound()
-{
-	mStartSound.setBuffer(res::getSoundBuffer("res/sound/Start.ogg").getSoundBuffer());
-	mMainSound.setBuffer(res::getSoundBuffer("res/sound/Main.ogg").getSoundBuffer());
-	mEndSound.setBuffer(res::getSoundBuffer("res/sound/End.ogg").getSoundBuffer());
-	mMainSound.setLoop(true);
-
-	mStartTurnSound.setBuffer(res::getSoundBuffer("res/sound/Turn_start.ogg").getSoundBuffer());
-	mMainTurnSound.setBuffer(res::getSoundBuffer("res/sound/Turn_main.ogg").getSoundBuffer());
-	mMainTurnSound.setLoop(true);
 }

@@ -4,6 +4,7 @@
 */
 #include "Game.h"
 #include <ResourceManager\RHandle.h>
+#include <ResourceManager\soundFac.h>
 #include <SFML\Window\Keyboard.hpp>
 #include <fstream>
 #include <string>
@@ -18,8 +19,11 @@ void init()
 
 void run()
 {
-	Game g;
-	g.start();
+	Game *g = new Game();
+	g->start();
+	delete g;
+
+	int i = 0;
 }
 
 int main() 

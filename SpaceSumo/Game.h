@@ -7,12 +7,12 @@
 #include "GameData.h"
 #include "GameStateList.h"
 #include "ContactListener.h"
+#include "KeyboardController.h"
 
 class Game
 {
 public:
 	Game();
-	~Game();
 	void start();
 private:
 	void loop();

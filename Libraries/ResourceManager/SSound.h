@@ -30,6 +30,7 @@ public:
 	*/
 	virtual void play();
 	virtual void stop();
+	virtual void forceStop();
 	virtual void setDestroy(bool status);
 	virtual bool getDestroy();
 	virtual void update(GameData& gData);
@@ -39,6 +40,9 @@ public:
 	*/
 	const sf::SoundBuffer& getSoundBuffer() const;
 	sf::Sound& getSound();
+
+	virtual void setRelativeToListener(bool);
+	virtual void setPosition(float x, float y, float z);
 private:
 	bool mDestroy;
 	SSound& operator=(const SSound &sp);

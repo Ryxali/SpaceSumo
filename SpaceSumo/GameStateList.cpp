@@ -9,8 +9,9 @@
 GameStateList::GameStateList(GameData &data) : StateList()
 {
 	add(new MenuState(*this));
-	add(new GameState(*this, data));
-	add(new SetupState(*this, data));
+	GameState* gS = new GameState(*this, data);
+	add(gS);
+	add(new SetupState(*this, data, *gS));
 	StateList::changeState(0);
 	sync();
 }
