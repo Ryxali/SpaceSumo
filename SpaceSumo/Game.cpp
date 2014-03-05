@@ -7,6 +7,8 @@
 #include <Common\SVector.h>
 #include <ResourceManager\soundFac.h>
 #include "KeyboardController.h"
+#include "XController.h"
+
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
 {
@@ -36,7 +38,7 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
-	mGameData.controlList.add( new KeyboardController(1, Config("res/conf/characters/spaceman/data_player_1.cfg")));
+	
 
 }
 
@@ -71,6 +73,17 @@ void Game::loop()
 				close();
 				return;
 				break;
+			}
+			else if(evt.key.code == sf::Keyboard::Return)
+			{
+				mGameData.controlList.add( new KeyboardController(mGameData.nJoysticks+mGameData.nKeyboards+1, Config("res/conf/characters/spaceman/data_player_1.cfg")));
+				++mGameData.nKeyboards;
+			}
+		case sf::Event::JoystickButtonPressed:
+			if(evt.joystickButton.button == sf::Joystick::X)
+			{
+				mGameData.controlList.add(new XController(evt.joystickButton.joystickId, mGameData.nJoysticks+mGameData.nKeyboards+1, (Config("res/conf/controls/joystick_base.cfg"))));
+				++mGameData.nJoysticks;
 			}
 		default:
 			mGameData.input.add(evt);

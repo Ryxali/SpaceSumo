@@ -14,7 +14,8 @@ struct GameData
 	sf::Vector2f mPos;
 	SoundList soundlist;
 	ControlList controlList;
-
+	int nKeyboards;
+	int nJoysticks;
 private:
 	GameData(const GameData& data);
 };
