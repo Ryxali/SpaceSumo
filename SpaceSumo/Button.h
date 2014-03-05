@@ -25,5 +25,8 @@ private:
 	Command* mCommand;
 	bool mHovered;
 	bool mIsPressed;
+	bool mWasPressed;
+	int currentRow;
+
 };
 

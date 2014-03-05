@@ -11,7 +11,10 @@ Button::Button(SVector position, Command *command, std::string imageFile):
 	mPosition(position),
 	mCommand(command),
 	mHovered(false),
-	mIsPressed(false)
+	mIsPressed(false),
+	mWasPressed(false),
+	currentRow(0)
+	
 {
 	mAnimation.getSprite().setPosition(mPosition.getX() , mPosition.getY());
 	setHeight(mAnimation.getSliceHeight());
@@ -28,26 +31,46 @@ Button::~Button()
 
 void Button::update(GameData &data)
 {
-	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos)) 
+
+	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos) && !sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
 		mHovered = true;
+		currentRow = 1;
 	}
-	else
+	else if(mWasPressed == true && !sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		mWasPressed = false;
+		mHovered = false;
+		currentRow = 0;
+	}
+	else if(!sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
 		mHovered = false;
+		currentRow=0;
 	}
 
 	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
 	{
+		mWasPressed = true;
 		mIsPressed = true;
-		execute();
+		currentRow=2;
+	}
+	else
+	{
+		mIsPressed = false;
 	}
 
+	
+	if(mHovered == true && mWasPressed == true && mIsPressed == false)
+	{
+		execute();
+	}
+	
 }
 
 void Button::draw(RenderList& renderList)
 {
-	//mAnimation.setCurrentRow(aProperNumber);
+	mAnimation.setCurrentRow(currentRow);
 	renderList.addSprite(mAnimation);
 }
 

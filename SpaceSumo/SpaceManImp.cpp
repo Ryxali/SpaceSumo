@@ -30,7 +30,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mDirection( 0.0f , -1.0f ),
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
-	mPushTimer(mConfig.getValue<int>("pushCooldown")),
+	mPushCooldown(mConfig.getValue<int>("pushCooldown")),
+	mPushTimer(100),
 	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 5.f),
@@ -223,9 +224,10 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mPushTimer.reset();
 	} 
 
-	if( mPushing == true && !mPushTimer.isExpired() )
+	if( mPushing == true && mPushCooldown.isExpired())
 	{
 		extendArms();
+		mPushCooldown.setDuration(500);
 	}
 
 	if( mPushTimer.isExpired() )

@@ -76,6 +76,7 @@ private:
 	b2PrismaticJointDef mRightArmDef;
 
 	Timer mPushTimer;
+	Timer mPushCooldown;
 	bool mPushing;
 
 
