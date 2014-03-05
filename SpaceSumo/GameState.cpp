@@ -31,7 +31,7 @@ void GameState::update(GameData &data, int delta)
 
 	if(mPowerUpSpawnTimer.isExpired())
 	{
-		mData.mEntityImpList.add((entFac::createPowerUpLHydrogen(
+		mData.mEntityImpList.add((entFac::createPowerUpRandom(
 			data.world, rand()% 1519 + 200, rand()% 680 + 200)));
 			mPowerUpSpawnTimer.reset();
 	}

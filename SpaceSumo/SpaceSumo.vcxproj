@@ -101,6 +101,10 @@
     <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="EnergyTorpedo.cpp" />
+    <ClCompile Include="ETorpedoAbility.cpp" />
+    <ClCompile Include="ETorpedoPickup.cpp" />
+    <ClCompile Include="Exploded.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="EMP.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
@@ -166,6 +170,11 @@
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="EffectingCreator.h" />
+    <ClInclude Include="EnergyTorpedo.h" />
+    <ClInclude Include="ETorpedoAbility.h" />
+    <ClInclude Include="ETorpedoPickup.h" />
+    <ClInclude Include="Exploded.h" />
     <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="EMP.h" />
     <ClInclude Include="EMPAbil.h" />

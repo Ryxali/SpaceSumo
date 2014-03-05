@@ -1,21 +1,20 @@
 #pragma once
 #include "entityimp.h"
-#include "Effect.h"
 
-class SpaceManImp;
+class EffectImp;
 
-class Effecting :
+class EffectingCreator :
 	public EntityImp
 {
 public:
-	Effecting() {}
-	virtual ~Effecting();
+	EffectingCreator();
+	~EffectingCreator();
 
 	virtual void update(GameData &data, GameStateData &gData, int delta) = 0;
 	virtual void draw(RenderList& renderList) = 0;
 	virtual bool isAlive() = 0;
 	virtual EntityType getType();
-	virtual EffectImp* getEffect() = 0;
-	virtual void kill() = 0;
+	virtual EffectImp* createEffecting(SpaceManImp* owner) = 0;
+
 };
 

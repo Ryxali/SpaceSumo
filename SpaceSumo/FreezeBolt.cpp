@@ -7,7 +7,7 @@
 #include <ResourceManager\RHandle.h>
 
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world) 
-	: mSpeed(60),
+	: mSpeed(20),
 	mDirection(dir),
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
@@ -16,7 +16,7 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mShoot(0)
 {
 	mBody.setRotation( mDirection.getAngle() );
-	mAnim.getSprite().setOrigin( 32 , 64 );
+	mAnim.getSprite().setOrigin( 32 , 32 );
 	mBody.getBody()->SetUserData(this);
 	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
 }
@@ -28,13 +28,15 @@ FreezeBolt::~FreezeBolt()
 
 void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 {
+	
 	if( mShoot == 0 )
 	{
 		mShoot = soundFac::createSound("res/sound/freeze/freeze_blast.spf", data.soundlist);
 		mShoot->play();
 	}
 
-	mAnim.getSprite().setRotation( mDirection.getAngle() + 90);
+	//mAnim.getSprite().setRotation( mDirection.getAngle() + 90);
+	mAnim.getSprite().rotate(2);
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
 
 }
