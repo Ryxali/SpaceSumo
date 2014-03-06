@@ -37,6 +37,7 @@ Game::Game() :
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
 	mGameData.controlList.add( new KeyboardController(1, Config("res/conf/characters/spaceman/data_player_1.cfg")));
+	mGameData.controlList.add( new KeyboardController(2, Config("res/conf/characters/spaceman/data_player_2.cfg")));
 
 }
 

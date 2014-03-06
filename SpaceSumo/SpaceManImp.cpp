@@ -128,6 +128,9 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			mSpaceman.setAngularVelocity(0);
 			mSpaceman.setLinearVelocity(b2Vec2(0,0));
 			mSlowDeath = false;
+			delete mAbility;
+			mAbility = 0;
+			mEffects.clear();
 		}
 		else
 		{
@@ -235,7 +238,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(mAbility != 0)
 		{
-			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, gData, data.world);
+			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, SVector(mSpaceman.getLinearVelocity().x * PPM, mSpaceman.getLinearVelocity().y * PPM), gData, data.world);
 
 			delete mAbility;
 			mAbility = 0;
@@ -258,7 +261,7 @@ void SpaceManImp::draw(RenderList& renderList)
 	mJet.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mJet.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 
-	mEffects.draw(renderList);
+	mEffects.draw(renderList, this);
 	renderList.addSprite(mAnim);
 	renderList.addSprite(mTurn);
 	renderList.addSprite(mJet);

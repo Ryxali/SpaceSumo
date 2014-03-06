@@ -11,11 +11,11 @@ class Frozen :
 	public EffectImp
 {
 public:
-	Frozen(SpaceManImp* owner);
+	Frozen();
 	virtual ~Frozen();
 
 	virtual void update(sf::Keyboard::Key& push, GameData& data);
-	virtual void draw(RenderList& renderList);
+	virtual void draw(RenderList& renderList, SpaceManImp* owner);
 	virtual EffectImp* clone();
 
 	virtual Flag getFlag_CAN_ROTATE();

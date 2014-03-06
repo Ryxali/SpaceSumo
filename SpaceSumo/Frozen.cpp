@@ -8,10 +8,9 @@
 
 Config Frozen::mConfig("res/conf/frozen.cfg", true);
 
-Frozen::Frozen(SpaceManImp* owner) 
+Frozen::Frozen() 
 	: mIntensity(mConfig.getValue<int>("intensity")), 
 	mPrevKeyState(false),
-	mOwner(owner),
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f),
 	mImpact(0),
 	mPunch(0),
@@ -27,7 +26,6 @@ Frozen::~Frozen()
 
 Frozen::Frozen(Frozen const & f) 
 	: mIntensity(f.mIntensity),
-	mOwner(f.mOwner),
 	mPrevKeyState(f.mPrevKeyState),
 	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
 {
@@ -66,10 +64,10 @@ void Frozen::update(sf::Keyboard::Key& push, GameData& data)
 	}
 }
 
-void Frozen::draw(RenderList& renderList)
+void Frozen::draw(RenderList& renderList, SpaceManImp* owner)
 {
-	mAnim.getSprite().setRotation( mOwner->getBody().getAngle() * 57 );
-	mAnim.getSprite().setPosition( mOwner->getBody().getWorldCenter().x*30, mOwner->getBody().getWorldCenter().y*30);
+	mAnim.getSprite().setRotation( owner->getBody().getAngle() * 57 );
+	mAnim.getSprite().setPosition( owner->getBody().getWorldCenter().x*30, owner->getBody().getWorldCenter().y*30);
 
 	renderList.addSprite(mAnim);
 }
