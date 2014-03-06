@@ -4,6 +4,7 @@
 #include "EntityType.h"
 #include "SpaceManImp.h"
 #include "Effecting.h"
+#include "EnergyTorpedo.h"
 
 
 ContactListener::ContactListener()
@@ -73,6 +74,20 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 			break;
 		}
 		break;
+
+		case PROJECTILE:
+		switch(static_cast<EntityImp*>( userDataB )->getType())
+		{
+		case PLAYER:
+			
+			static_cast<EnergyTorpedo*>(userDataA)->kill();
+
+			break;
+		default:
+			break;
+		}
+		break;
+
 
 	case PLAYER :
 		switch(static_cast<EntityImp*>( userDataB )->getType())

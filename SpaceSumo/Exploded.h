@@ -3,6 +3,7 @@
 #include <ResourceManager\Animation.h>
 #include <Common\Timer.h>
 
+
 class SpaceManImp;
 
 class Exploded :
@@ -25,10 +26,11 @@ private:
 
 	Exploded(Exploded const &);
 	Timer mEffectTimer;
+	SpaceManImp* mOwner;
+	bool mBlown;
 
 
 	bool mPrevKeyState;
-	SpaceManImp* mOwner;
 	Animation mAnim;
 };
 

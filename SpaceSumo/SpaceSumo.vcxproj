@@ -170,7 +170,6 @@
     <ClInclude Include="CreateModeCommand.h" />
     <ClInclude Include="DualCommand.h" />
     <ClInclude Include="Button.h" />
-    <ClInclude Include="EffectingCreator.h" />
     <ClInclude Include="EnergyTorpedo.h" />
     <ClInclude Include="ETorpedoAbility.h" />
     <ClInclude Include="ETorpedoPickup.h" />

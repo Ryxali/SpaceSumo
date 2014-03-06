@@ -28,6 +28,12 @@ EnergyTorpedo::~EnergyTorpedo()
 void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 {
 	mAnim.getSprite().setPosition(mBody.getPosition().x*PPM , mBody.getPosition().y*PPM );
+
+	if( mAlive == false )
+	{
+		gsData.mEntityImpList.add( new Explosion( mWorld, mBody.getPosition().x*PPM, mBody.getPosition().y*PPM ));
+	}
+
 }
 
 void EnergyTorpedo::draw(RenderList& list)
@@ -35,14 +41,14 @@ void EnergyTorpedo::draw(RenderList& list)
 	list.addSprite(mAnim);
 }
 
+EntityType EnergyTorpedo::getType()
+{
+	return EntityType::PROJECTILE;
+}
+
 bool EnergyTorpedo::isAlive()
 {
 	return mAlive;
-}
-
-Effecting* EnergyTorpedo::createEffecting()
-{
-	return new Explosion(mWorld, mPosition.getX(), mPosition.getY() );
 }
 
 void EnergyTorpedo::kill()

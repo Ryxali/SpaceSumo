@@ -4,6 +4,7 @@
 #include "GameStateData.h"
 #include <ResourceManager\Animation.h>
 #include "B2Body.h"
+#include <Common\Timer.h>
 
 class SpaceManImp;
 
@@ -21,10 +22,10 @@ public:
 	virtual void kill();
 
 private:
-
-
 	B2Body mBody;
 	bool mAlive;
+	bool mDying;
 	Animation mAnim;
+	Timer mDuration;
 };
 
