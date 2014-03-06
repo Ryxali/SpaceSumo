@@ -1,8 +1,8 @@
 #pragma once
 #include "entityimp.h"
-#include "Effect.h"
 
 class SpaceManImp;
+class EffectImp;
 
 class Effecting :
 	public EntityImp

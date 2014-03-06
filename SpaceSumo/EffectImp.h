@@ -3,6 +3,7 @@
 #include <SFML\Window\Keyboard.hpp>
 
 class RenderList;
+class SpaceManImp;
 struct GameData;
 class SpaceManImp;
 

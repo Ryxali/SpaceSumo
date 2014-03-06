@@ -12,7 +12,7 @@ class FreezeBolt :
 	public Effecting
 {
 public:
-	FreezeBolt(SVector pos, SVector dir, b2World& world);
+	FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projectileSpeed);
 	~FreezeBolt();
 
 	virtual void update(GameData &data, GameStateData &gData,int delta);

@@ -27,12 +27,12 @@ void EffectStatus::addFlag(EffectImp *effect)
 
 	if (effect->getFlag_CAN_PUSH().mSeverity > mFlag_CAN_PUSH.mSeverity)
 	{
-		mFlag_CAN_MOVE = effect->getFlag_CAN_PUSH();
+		mFlag_CAN_PUSH = effect->getFlag_CAN_PUSH();
 	}
 
 	if (effect->getFlag_CAN_ACTIVATE().mSeverity > mFlag_CAN_ACTIVATE.mSeverity)
 	{
-		mFlag_CAN_MOVE = effect->getFlag_CAN_ACTIVATE();
+		mFlag_CAN_ACTIVATE = effect->getFlag_CAN_ACTIVATE();
 	}
 }
 
@@ -41,7 +41,7 @@ void EffectStatus::update(sf::Keyboard::Key& push, GameData& data)
 	SAssert(false, "Don't use EffectStatus update()");
 }
 
-void EffectStatus::draw(RenderList& renderList)
+void EffectStatus::draw(RenderList& renderList, SpaceManImp* owner)
 {
 	SAssert(false, "Don't use EffectStatus draw()");
 }

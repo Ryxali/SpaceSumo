@@ -39,11 +39,11 @@ void Effects::update(sf::Keyboard::Key& push, GameData& data)
 	}
 }
 
-void Effects::draw(RenderList& renderList)
+void Effects::draw(RenderList& renderList, SpaceManImp* owner)
 {
 	for(int i = 0; i < mCurSize; i++)
 	{
-		mEffectList[i]->draw(renderList);
+		mEffectList[i]->draw(renderList, owner);
 	}
 }
 
@@ -53,6 +53,19 @@ void Effects::addEffect(EffectImp* effect)
 	mEffectList[mCurSize] = effect;
 	++mCurSize;
 	evaluate();
+}
+
+void Effects::clear()
+{
+	for(int i = 0; i < mCurSize; ++i)
+	{
+		delete mEffectList[i];
+		mEffectList[i] = 0;
+		floatDown(i);
+
+		mSummary = EffectStatus();
+		evaluate();
+	}
 }
 
 EffectStatus& Effects::getStatus()

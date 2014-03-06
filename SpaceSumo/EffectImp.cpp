@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EffectImp.h"
+#include "SpaceManImp.h"
 
 EffectImp::~EffectImp()
 {
