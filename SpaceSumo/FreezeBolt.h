@@ -23,12 +23,13 @@ public:
 
 private:
 
-	float mSpeed;
+	float mProjSpeed;
 	SVector mDirection;
 	float mAngle;
 	B2Body mBody;
 	bool mAlive;
 	Animation mAnim;
+	b2Vec2 mSpeed;
 
 	// sounds
 	Playable* mShoot;
