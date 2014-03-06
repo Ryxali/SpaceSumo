@@ -4,6 +4,9 @@
 #include <Common\Config.h>
 #include "LHydrogen.h"
 #include <Common\stringH.h>
+#include "ETorpedoPickup.h"
+#include <cstdlib>
+
 EntityImp* entFac::createSpaceMan(
 	std::string conf, GameData& data,
 	std::string bodyData, std::string handData,
@@ -46,7 +49,29 @@ EntityImp* entFac::createPowerUpLHydrogen(b2World& world, float x, float y)
 	return new LHydrogen(world, bodyData, x, y);
 }
 
-EntityImp* entFac::createPowerUpRandom(std::string conf, b2World& world, float x, float y)
+EntityImp* entFac::createPowerUpEnergyTorpedo(b2World& world, float x, float y)
 {
-	return new LHydrogen(world, conf, x, y);
+	std::string bodyData("res/conf/powerUpBody.cfg");
+	return new ETorpedoPickup(world, bodyData, x, y);
+}
+
+
+EntityImp* entFac::createPowerUpRandom(b2World& world, float x, float y)
+{
+	std::string bodyData("res/conf/powerUpBody.cfg");
+	int rand_val = rand() % 2;
+	switch ( rand_val )
+	{
+	case 0:
+		return new LHydrogen(world, bodyData, x, y);
+	break;
+		
+	case 1:
+		return new ETorpedoPickup(world, bodyData, x, y);
+	break;
+
+	default:
+
+	break;
+	}
 }

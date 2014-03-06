@@ -14,5 +14,7 @@ namespace entFac
 
 	EntityImp* createPowerUpLHydrogen(b2World& world, float x, float y);
 
-	EntityImp* createPowerUpRandom(std::string conf, b2World& world, float x, float y);
+	EntityImp* createPowerUpEnergyTorpedo(b2World& world, float x, float y);
+
+	EntityImp* createPowerUpRandom(b2World& world, float x, float y);
 };

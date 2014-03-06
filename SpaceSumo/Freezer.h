@@ -10,7 +10,7 @@ public:
 	~Freezer();
 
 	virtual void activate(SVector pos, SVector dir, GameStateData& data, b2World& world);
-	void initializeSounds();
+
 private:
 	static Config mConfig;
 	int mIntensity;
