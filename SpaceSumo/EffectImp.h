@@ -4,6 +4,7 @@
 
 class RenderList;
 struct GameData;
+class SpaceManImp;
 
 class EffectImp
 {
@@ -11,7 +12,7 @@ public:
 	virtual ~EffectImp();
 
 	virtual void update(sf::Keyboard::Key& push, GameData& data) = 0;
-	virtual void draw(RenderList& renderList) = 0;
+	virtual void draw(RenderList& renderList, SpaceManImp* owner) = 0;
 	virtual bool isAlive();
 	virtual EffectImp* clone() = 0;
 	

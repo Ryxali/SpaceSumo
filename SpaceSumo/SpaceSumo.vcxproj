@@ -105,6 +105,7 @@
     <ClCompile Include="ETorpedoAbility.cpp" />
     <ClCompile Include="ETorpedoPickup.cpp" />
     <ClCompile Include="Exploded.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="EMP.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="ETorpedoAbility.h" />
     <ClInclude Include="ETorpedoPickup.h" />
     <ClInclude Include="Exploded.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="EMP.h" />
     <ClInclude Include="EMPAbil.h" />

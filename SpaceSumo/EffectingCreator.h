@@ -1,6 +1,8 @@
 #pragma once
 #include "entityimp.h"
 
+class SpaceManImp;
+
 class EffectImp;
 
 class EffectingCreator :

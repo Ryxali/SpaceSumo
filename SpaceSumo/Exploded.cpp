@@ -3,9 +3,8 @@
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
 
-Exploded::Exploded(SpaceManImp* owner):
+Exploded::Exploded():
 	mPrevKeyState(false),
-	mOwner(owner),
 	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/effect.png"), "res/img/PowerUp/EnergyTorpedo/energyeffect.cfg", 7.f),
 	mEffectTimer(2000)
 {
@@ -15,7 +14,6 @@ Exploded::Exploded(SpaceManImp* owner):
 
 Exploded::Exploded(Exploded const& f):
 	mPrevKeyState(f.mPrevKeyState),
-	mOwner(f.mOwner),
 	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/effect.png"), "res/img/PowerUp/EnergyTorpedo/energyeffect.cfg", 7.f),
 	mEffectTimer(2000)
 {
@@ -37,17 +35,17 @@ void Exploded::update(sf::Keyboard::Key& push, GameData& data)
 
 }
 
-void Exploded::draw(RenderList& list)
+void Exploded::draw(RenderList& list, SpaceManImp* owner)
 {
-	mAnim.getSprite().setRotation( mOwner->getBody().getAngle() * 57 );
-	mAnim.getSprite().setPosition( mOwner->getBody().getWorldCenter().x*30, mOwner->getBody().getWorldCenter().y*30);
+	mAnim.getSprite().setRotation( owner->getBody().getAngle() * 57 );
+	mAnim.getSprite().setPosition( owner->getBody().getWorldCenter().x*30, mOwner->getBody().getWorldCenter().y*30);
 	
 	list.addSprite(mAnim);
 }
 
 EffectImp* Exploded::clone()
 {
-	return new Exploded(*this);
+	return new Exploded();
 }
 
 Flag Exploded::getFlag_CAN_ROTATE()

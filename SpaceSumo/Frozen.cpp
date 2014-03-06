@@ -76,7 +76,7 @@ void Frozen::draw(RenderList& renderList)
 // TODO This causes memory leaks somewhere. Copy constructor needs a fix
 EffectImp* Frozen::clone()
 {
-	return new Frozen(*this);
+	return new Frozen();
 }
 
 Flag Frozen::getFlag_CAN_ROTATE()

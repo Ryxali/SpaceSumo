@@ -9,11 +9,11 @@ class Exploded :
 	public EffectImp
 {
 public:
-	Exploded(SpaceManImp* owner);
+	Exploded();
 	virtual ~Exploded();
 
 	virtual void update(sf::Keyboard::Key& push, GameData& data);
-	virtual void draw(RenderList& list);
+	virtual void draw(RenderList& list, SpaceManImp* owner);
 	virtual EffectImp* clone();
 
 	virtual Flag getFlag_CAN_ROTATE();
