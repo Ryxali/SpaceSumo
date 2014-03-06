@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Explosion.h"
 #include <ResourceManager\RHandle.h>
 #include "Exploded.h"

@@ -15,16 +15,18 @@ public:
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
-	virtual EffectImp* createEffecting();
+	virtual Effecting* createEffecting();
 	virtual void kill();
 
 private:
 	bool mAlive;
 	SVector mDirection;
+	SVector mPosition;
 	float mSpeed;
 	float mAngle;
 	
 	B2Body mBody;
+	b2World& mWorld;
 	Animation mAnim;
 };
 

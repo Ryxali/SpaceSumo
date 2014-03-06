@@ -18,7 +18,7 @@ public:
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
-	virtual EffectImp* getEffect(SpaceManImp* owner);
+	virtual EffectImp* getEffect();
 	virtual void kill();
 
 private:

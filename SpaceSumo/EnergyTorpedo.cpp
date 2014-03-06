@@ -2,13 +2,16 @@
 #include "EnergyTorpedo.h"
 #include <ResourceManager\RHandle.h>
 #include "Exploded.h"
+#include "Explosion.h"
 
 
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
 	mSpeed(60),
 	mDirection(dir),
+	mPosition(position),
 	mAngle(0),
 	mBody(world, "res/conf/energyTorpedo.cfg", position.getX(), position.getY()),
+	mWorld(world),
 	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/energytorpedo.png"), "res/img/PowerUp/EnergyTorpedo/energytorpedo.cfg", 5.f)
 {
 	mAnim.getSprite().setOrigin( 32 , 32 );
@@ -37,9 +40,9 @@ bool EnergyTorpedo::isAlive()
 	return mAlive;
 }
 
-EffectImp* EnergyTorpedo::createEffecting()
+Effecting* EnergyTorpedo::createEffecting()
 {
-	return 0;
+	return new Explosion(mWorld, mPosition.getX(), mPosition.getY() );
 }
 
 void EnergyTorpedo::kill()

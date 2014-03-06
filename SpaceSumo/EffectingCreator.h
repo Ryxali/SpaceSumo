@@ -5,6 +5,7 @@ class SpaceManImp;
 
 class EffectImp;
 class SpaceManImp;
+class Effecting;
 
 class EffectingCreator :
 	public EntityImp
@@ -17,7 +18,7 @@ public:
 	virtual void draw(RenderList& renderList) = 0;
 	virtual bool isAlive() = 0;
 	virtual EntityType getType();
-	virtual EffectImp* createEffecting(SpaceManImp* owner) = 0;
+	virtual Effecting* createEffecting(SpaceManImp* owner) = 0;
 
 };
 
