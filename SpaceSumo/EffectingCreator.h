@@ -2,6 +2,7 @@
 #include "entityimp.h"
 
 class EffectImp;
+class SpaceManImp;
 
 class EffectingCreator :
 	public EntityImp
