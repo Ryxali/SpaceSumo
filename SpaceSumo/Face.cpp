@@ -3,6 +3,7 @@
 #include <ResourceManager\RHandle.h>
 #include <Common\error.h>
 #include "RenderList.h"
+#include "Position.h"
 //const unsigned char Face::IDLE = 0;
 //const unsigned char Face::PLEASED = 1;
 //const unsigned char Face::ANGRY = 2;
@@ -38,21 +39,42 @@ void Face::changeMood(Mood mood)
 	}
 }
 
-void Face::draw(RenderList &list, const sf::Vector2f &pos, bool flipped)
+void Face::draw(RenderList &list, const Position &pos, bool flipped)
 {
-	if(flipped) 
+	switch(pos)
 	{
-		mFaces.getSprite().setScale(-1, 1);
-	}
-	else
-	{
+	case TOP_LEFT:
+		mFaces.getSprite().setPosition(0, 0);
+		mFaces.getSprite().setOrigin(0, 0);
 		mFaces.getSprite().setScale(1, 1);
+		break;
+	case TOP_RIGHT:
+		mFaces.getSprite().setPosition(WINDOW_SIZE.x, 0);
+		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width, 0);
+		//mFaces.getSprite().setScale(-1, 1);
+		break;
+	case BOTTOM_LEFT:
+		mFaces.getSprite().setPosition(0, WINDOW_SIZE.y);
+		mFaces.getSprite().setOrigin(0, mFaces.getSprite().getGlobalBounds().height);
+		//mFaces.getSprite().setScale(1, 1);
+		break;
+	case BOTTOM_RIGHT:
+		mFaces.getSprite().setPosition(WINDOW_SIZE.x, WINDOW_SIZE.y);
+		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width, mFaces.getSprite().getGlobalBounds().height);
+		//mFaces.getSprite().setScale(-1, 1);
+		break;
 	}
-	mFaces.getSprite().setPosition(pos);
+
 	list.addSprite(mFaces);
 }
 
-FacePool::FacePool() : test("res/img/UI/test")
+void Face::setOrigin(int x, int y)
+{
+	mOrigin.x = x;
+	mOrigin.y = y;
+}
+
+FacePool::FacePool() : test("res/img/UI/test"), test1("res/img/UI/test"), test2("res/img/UI/test"), test3("res/img/UI/test")
 {
 
 }

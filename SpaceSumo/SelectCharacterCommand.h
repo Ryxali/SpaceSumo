@@ -8,10 +8,11 @@ namespace chars
 class SelectCharacterCommand : public Command
 {
 public:
-	SelectCharacterCommand(SpacemanData &data, chars::Character &character);
+	SelectCharacterCommand(SpacemanData &data, const chars::Character &character);
 	~SelectCharacterCommand();
+	virtual void Execute();
 private:
 	SpacemanData &mData;
-	chars::Character &mChar;
+	const chars::Character &mChar;
 };
 

@@ -1,0 +1,45 @@
+#pragma once
+#include <BasicShapes\Rectangle.h>
+#include <Common\SVector.h>
+#include <SFML\Window\Mouse.hpp>
+<<<<<<< HEAD
+#include "GameData.h"
+#include "RenderList.h"
+
+=======
+#include "Command.h"
+#include "RenderList.h"
+#include <ResourceManager\Animation.h>
+struct GameData;
+>>>>>>> dev_NL
+class Button : public Rectangle
+{
+public:
+	Button(SVector position, Command *command,
+		std::string imageFile);
+	~Button();
+<<<<<<< HEAD
+	virtual float getCenterX();
+	virtual float getCenterY();
+	virtual float getWidth() = 0;
+	virtual float getHeight() = 0;
+	bool hasBeenClicked();
+	void update(sf::Mouse &mouse);
+	void draw(RenderList &list);
+=======
+	void update(GameData &data);
+	void draw(RenderList &renderList);
+	virtual float getCenterX() const;
+	virtual float getCenterY() const;
+	bool isPressed();
+	void execute();
+	
+>>>>>>> dev_NL
+private:
+	Animation mAnimation;
+	SVector mPosition;
+	Command* mCommand;
+	bool mHovered;
+	bool mIsPressed;
+};
+

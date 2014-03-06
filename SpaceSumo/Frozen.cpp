@@ -48,7 +48,12 @@ void Frozen::update(sf::Keyboard::Key& push, GameData& data)
 	{
 		mIntensity--;
 		mPrevKeyState = true;
-		mPunch->play();
+		
+		if( mIntensity > 1 )
+		{
+			mPunch->play(); //otherwise it will sound shitty
+		}
+
 	}
 	else if(!sf::Keyboard::isKeyPressed(push) && mPrevKeyState)
 		mPrevKeyState = false;
@@ -56,6 +61,7 @@ void Frozen::update(sf::Keyboard::Key& push, GameData& data)
 	if (mIntensity <= 0)
 	{
 		mIsAlive = false;
+		mPunch->stop();
 		mBreaking->play();
 	}
 }

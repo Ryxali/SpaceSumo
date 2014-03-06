@@ -10,6 +10,8 @@
 #include <Common\stringH.h>
 #include <Common\Config.h>
 #include <ResourceManager\soundFac.h>
+#include "Wincon.h"
+#include "Head.h"
 
 Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
 
@@ -43,7 +45,8 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mPushing(false),
 	mSlowDeath(false),
 	mAlive(true),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist))
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
 {
 	//mAnim.getSprite().setOrigin( 64 , 64 );
 	//mTurn.getSprite().setOrigin( 64 , 64 );
@@ -103,6 +106,7 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
+	//gData.wincon->update(data, gData, this);
 	data.soundlist.update(data);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
@@ -151,11 +155,11 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		{
 			mJetpack->play();
 		}
-		
+
 		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
 			mDirection.getY() * ( mSpeed * fDelta )), 
 			mSpaceman.getWorldCenter(), true);
-		
+
 		//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
 		{
@@ -190,15 +194,21 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(1);
+		mTurning->play();
 	}
-
-
+	
 	//turn left
 	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
 		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
 		mTurn.setCurrentRow(0);
+		mTurning->play();
 	}	
+
+	if( !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
+	{
+		mTurning->stop();
+	}
 
 
 	// player push
@@ -288,6 +298,26 @@ void SpaceManImp::slowDeath()
 {
 	mSlowDeath = true;
 	mRespawnTimer.reset();
+}
+
+bool SpaceManImp::isSlowlyDying() const
+{
+	return mSlowDeath;
+}
+
+void SpaceManImp::setScore(int score)
+{
+	mHead->setScore(score);
+}
+
+void SpaceManImp::addScore(int score)
+{
+	mHead->setScore(mHead->getScore() + score);
+}
+
+int SpaceManImp::getScore() const
+{
+	return mHead->getScore();
 }
 
 B2Body& SpaceManImp::getBody()

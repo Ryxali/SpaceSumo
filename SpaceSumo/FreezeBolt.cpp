@@ -7,7 +7,7 @@
 #include <ResourceManager\RHandle.h>
 
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world) 
-	: mSpeed(20),
+	: mSpeed(60),
 	mDirection(dir),
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),

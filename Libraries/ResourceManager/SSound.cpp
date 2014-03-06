@@ -9,12 +9,12 @@
 #endif
 SSound::SSound(const SSoundBuffer &sb) : mSound(), mSBuf(sb), mSoundBufVersion(0)
 {
-	
+
 }
 
 SSound::SSound(const SSound &sound) : mSound(sound.mSound), mSBuf(sound.mSBuf), mSoundBufVersion(sound.mSoundBufVersion)
 {
-	
+
 }
 
 SSound::~SSound()
@@ -85,7 +85,7 @@ bool SSound::getDestroy()
 
 void SSound::update(GameData& gData)
 {
- 
+
 }
 
 const sf::SoundBuffer& SSound::getSoundBuffer() const
@@ -97,4 +97,13 @@ const sf::SoundBuffer& SSound::getSoundBuffer() const
 sf::Sound& SSound::getSound()
 {
 	return mSound;
+}
+
+void SSound::setRelativeToListener(bool state)
+{
+	mSound.setRelativeToListener(state);
+}
+void SSound::setPosition(float x, float y, float z)
+{
+	mSound.setPosition(x, y, z);
 }

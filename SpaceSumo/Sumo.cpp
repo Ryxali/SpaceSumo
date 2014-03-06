@@ -3,6 +3,8 @@
 #include <ResourceManager\RHandle.h>
 #include "RenderList.h"
 #include "GameData.h"
+#include "GameStateData.h"
+
 Sumo::Sumo(b2World& world) : Mode(), mTest(res::getTexture("res/img/Map_Barrier/Laser_Long.png"), 0.f), mZone(world)
 {
 	addSupportedMapType(Map_Type::TERRA);

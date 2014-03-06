@@ -19,6 +19,8 @@ public:
 	
 	void add(Playable* sound);
 
+	virtual void setRelativeToListener(bool);
+	virtual void setPosition(float x, float y, float z);
 
 private:
 	std::list<Playable*> mSounds;

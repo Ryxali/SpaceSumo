@@ -4,7 +4,7 @@
 #include <SFML\System\Vector2.hpp>
 
 class RenderList;
-
+enum Position;
 class Face
 {
 public:
@@ -21,18 +21,22 @@ public:
 	~Face();
 
 	void changeMood(Mood mood);
-	void draw(RenderList &list, const sf::Vector2f &pos, bool flipped);
+	void draw(RenderList &list, const Position &pos, bool flipped);
+	void setOrigin(int x, int y);
 private:
 	Face(const Face& face);
 	Face& operator=(const Face& face);
 	Animation mFaces;
-	
+	sf::Vector2f mOrigin;
 };
 
 struct FacePool
 {
 	FacePool();
 	Face test;
+	Face test1;
+	Face test2;
+	Face test3;
 private:
 	FacePool(const FacePool& fPool);
 	FacePool& operator=(const FacePool& fPool);
