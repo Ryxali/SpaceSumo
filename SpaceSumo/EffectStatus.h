@@ -11,7 +11,7 @@ public:
 	EffectStatus();
 	void addFlag(EffectImp* effect);
 	virtual void update(sf::Keyboard::Key& push, GameData& data);
-	virtual void draw(RenderList& renderList);
+	virtual void draw(RenderList& renderList, SpaceManImp* owner);
 	virtual EffectImp* clone();
 
 	//TODO Add more flags

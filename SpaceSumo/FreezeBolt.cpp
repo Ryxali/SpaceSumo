@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "FreezeBolt.h"
 #include "EntityType.h"
-#include "Effect.h"
 #include "Frozen.h"
 #include <ResourceManager\soundFac.h>
 #include <ResourceManager\RHandle.h>
 
-FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world) 
-	: mSpeed(60),
+FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projSpeed) 
+	: mSpeed(projSpeed),
 	mDirection(dir),
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
@@ -19,6 +18,7 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, b2World& world)
 	mAnim.getSprite().setOrigin( 32 , 64 );
 	mBody.getBody()->SetUserData(this);
 	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
+	mSpeed += userSpeed.getX() * dir.getX() + userSpeed.getY() * dir.getY();
 }
 
 FreezeBolt::~FreezeBolt()
@@ -49,9 +49,9 @@ bool FreezeBolt::isAlive()
 	return mAlive;
 }
 
-EffectImp* FreezeBolt::getEffect(SpaceManImp* owner)
+EffectImp* FreezeBolt::getEffect()
 {
-	return new Frozen(owner);
+	return new Frozen();
 }
 
 void FreezeBolt::kill()
