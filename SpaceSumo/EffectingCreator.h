@@ -4,6 +4,7 @@
 class SpaceManImp;
 
 class EffectImp;
+class SpaceManImp;
 
 class EffectingCreator :
 	public EntityImp
