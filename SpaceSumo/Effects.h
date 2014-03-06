@@ -2,7 +2,7 @@
 
 class RenderList;
 class EffectStatus;
-
+class Controller;
 #include <vector>
 #include "Effect.h"
 #include "EffectStatus.h"
@@ -15,7 +15,7 @@ public:
 	~Effects();
 
 	void draw(RenderList& renderList);
-	void update(sf::Keyboard::Key& push, GameData& data);
+	void update(Controller& pController, GameData& data);
 	void addEffect(EffectImp*);
 	
 	EffectStatus& getStatus();

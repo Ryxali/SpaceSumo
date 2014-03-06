@@ -2,11 +2,19 @@
 #include "XController.h"
 #include "GameData.h"
 #include <Common\XboxButtons.h>
-
+#include <iostream>
+#include <Common\stringH.h>
 
 
 XController::XController(int controllerIndex, int playerIndex, Config& conf):
-	mControllerIndex(controllerIndex)
+	mControllerIndex(controllerIndex),
+	mUp(str::toXboxKey(conf.getValue<std::string>("up"))),
+	mDown(str::toXboxKey(conf.getValue<std::string>("down"))),
+	mLeft(str::toXboxKey(conf.getValue<std::string>("left"))),
+	mRight(str::toXboxKey(conf.getValue<std::string>("right"))),
+	mActivate(str::toXboxKey(conf.getValue<std::string>("activate"))),
+	mPush(str::toXboxKey(conf.getValue<std::string>("push"))),
+	mRepeatTime(conf.getValue<int>("repeatTime"))
 {
 	for(int i = 0; i < MAX_SIZE; ++i)
 	{
@@ -21,19 +29,19 @@ XController::~XController()
 
 bool XController::isActiveReset(Control ctrl)
 {
-	int i = mTimers[ctrl].getElapsedTime().asMilliseconds();
 	if(mStatus.at(ctrl))
 	{
-		if(mTimers[ctrl].getElapsedTime().asMilliseconds() > 500)
+		if(mActiveR[ctrl])
+		{
+			mActiveR.set(ctrl, false);
+			mTimers[ctrl].restart();
+			return true;
+		}
+		else if(mTimers[ctrl].getElapsedTime().asMilliseconds() > mRepeatTime)
 		{
 			mTimers[ctrl].restart();
 			return true;
 		}
-	}
-	else
-	{
-		mTimers[ctrl].restart();
-		int i = mTimers[ctrl].getElapsedTime().asMilliseconds();
 	}
 	return false;
 }
@@ -63,57 +71,18 @@ void XController::update(GameData& data)
 
 			if(evt.joystickButton.joystickId == mControllerIndex)
 			{
-				/*if(evt.joystickButton.button == 0) // A
-				{
-					set(UP, true);
-				}
-				else
-				{
-					set(UP, false);
-				}
-
-				if(evt.joystickButton.button == 1) // B
+				if(evt.joystickButton.button == mActivate) // A
 				{
 					set(ACTIVATE, true);
 				}
-				else
-				{
-					set(ACTIVATE, false);
-				}
 
-				if(evt.joystickButton.button == 2) // X
+				if(evt.joystickButton.button == mPush) // B
 				{
-					set(PUSH,true);
-				}
-				else
-				{
-					set(PUSH,false);
-				}*/
-				break;
-			}
-			
-
-		case sf::Event::JoystickMoved:
-			if(evt.joystickMove.joystickId == mControllerIndex)
-			{
-				sf::Xbox::getAnalogEvent(evt.joystickMove, cs);
-				if(cs.leftStick.statusY == sf::Xbox::ControllerStatus::NEGATIVE)
-				{
-					set(UP, true);
-					set(DOWN, false);
-				}
-				else if(cs.leftStick.statusY == sf::Xbox::ControllerStatus::NEGATIVE)
-				{
-					set(UP, false);
-					set(DOWN, true);
-				}
-				else if(cs.leftStick.statusY == sf::Xbox::ControllerStatus::IDLE)
-				{
-					set(UP, false);
-					set(DOWN, false);
+					set(PUSH, true);
 				}
 				break;
 			}
+
 			/*if(evt.joystickMove.axis == sf::Joystick::Y) // left stick horizontal
 			{
 
@@ -157,9 +126,37 @@ void XController::update(GameData& data)
 			}
 
 			break;*/
+		case sf::Event::JoystickButtonReleased:
+			if(evt.joystickButton.joystickId == mControllerIndex)
+			{
+				if(evt.joystickButton.button == mActivate) // A
+				{
+					set(ACTIVATE, false);
+				}
+
+				if(evt.joystickButton.button == mPush) // B
+				{
+					set(PUSH, false);
+				}
+				break;
+			}
+			break;
 		default:
 			data.input.add(evt);
 			break;
 		}
 	}
+
+	set(UP, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mUp) < -30);
+	set(DOWN, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mDown) > 30);
+	set(LEFT, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mLeft) < -30);
+	set(RIGHT, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mRight) > 30);
+}
+
+
+void XController::set(Control ctrl, bool status)
+{
+	if(isActive(ctrl) != status)
+		mActiveR.set(ctrl, status);
+	Controller::set(ctrl, status);
 }

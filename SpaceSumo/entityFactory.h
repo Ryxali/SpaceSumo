@@ -1,16 +1,20 @@
 #pragma once
+
+struct GameData;
+struct SpacemanData;
+class EntityImp;
+
 #include <string>
 #include <Box2D\Box2D.h>
-#include "GameData.h"
+#include <Common\SVector.h>
 
-class EntityImp;
 
 namespace entFac
 {
 	EntityImp* createSpaceMan(std::string keyConf, GameData& data,
 		std::string bodyData, std::string handData,
 		float x, float y, float32 rotation);
-	EntityImp* createSpaceMan(std::string playerConf, std::string bodyConf, std::string handConf, GameData& data);
+	EntityImp* createSpaceMan(SpacemanData& sData, GameData& gData, int playerIndex, SVector pos, float startRotation);
 
 	EntityImp* createPowerUpLHydrogen(b2World& world, float x, float y);
 

@@ -4,19 +4,23 @@ class StateList;
 struct GameData;
 #include "ButtonList.h"
 #include "State.h"
+#include "StateList.h"
 #include <vector>
 #include "SpacemanData.h"
 
-class CharacterSetupState : public State
+class CharacterSetupState : public State , public StateList
 {
 public:
 	CharacterSetupState(StateList &owner, GameData &data, GameState &gameState);
 	~CharacterSetupState();
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
+	virtual void changeState(st::State_Type index);
 private:
 	ButtonList mChars;
 	SpacemanData mSpacemenData[4];
 	GameState &mGameState;
+	GameData &mGData;
+
 };
 

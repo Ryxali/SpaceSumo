@@ -95,6 +95,7 @@
     <ClCompile Include="ButtonSelectionEffect.cpp" />
     <ClCompile Include="ChangeStateCommand.cpp" />
     <ClCompile Include="Characters.cpp" />
+    <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterSetupState.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="ControlList.cpp" />
@@ -134,10 +135,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Mode.cpp" />
+    <ClCompile Include="PlayerReadyToggleCommand.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RenderList.cpp" />
     <ClCompile Include="SelectCharacterCommand.cpp" />
     <ClCompile Include="SetupState.cpp" />
+    <ClCompile Include="SetWeightClassCommand.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateList.cpp" />
@@ -145,6 +148,7 @@
     <ClCompile Include="SumoWincon.cpp" />
     <ClCompile Include="Terra.cpp" />
     <ClCompile Include="Sumo.cpp" />
+    <ClCompile Include="WeightSelectionState.cpp" />
     <ClCompile Include="XController.cpp" />
     <ClCompile Include="Zone.cpp" />
   </ItemGroup>
@@ -159,7 +163,10 @@
     <ClInclude Include="ButtonSelectionEffect.h" />
     <ClInclude Include="ChangeStateCommand.h" />
     <ClInclude Include="Characters.h" />
+    <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterSetupState.h" />
+    <ClInclude Include="PlayerReadyToggleCommand.h" />
+    <ClInclude Include="StateList_CSelect.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="ControlList.h" />
     <ClInclude Include="CreateMapCommand.h" />
@@ -210,6 +217,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SelectCharacterCommand.h" />
     <ClInclude Include="SetupState.h" />
+    <ClInclude Include="SetWeightClassCommand.h" />
     <ClInclude Include="SpacemanData.h" />
     <ClInclude Include="SpaceManImp.h" />
     <ClInclude Include="State.h" />
@@ -220,6 +228,7 @@
     <ClInclude Include="SumoWincon.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />
+    <ClInclude Include="WeightSelectionState.h" />
     <ClInclude Include="Wincon.h" />
     <ClInclude Include="XController.h" />
     <ClInclude Include="Zone.h" />

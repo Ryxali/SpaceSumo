@@ -3,6 +3,7 @@
 #include "GameData.h"
 #include <SFML\Window\Keyboard.hpp>
 #include <Common\stringH.h>
+#include <iostream>
 
 KeyboardController::KeyboardController(int playerindex, Config& config): 
 	mUp(str::toKey(config.getValue<std::string>("up"))),
@@ -41,7 +42,6 @@ void KeyboardController::update(GameData& data)
 		switch (evt.type)
 		{
 		case sf::Event::KeyPressed:
-
 			if(evt.key.code == mUp) 
 			{
 				set(UP, true);

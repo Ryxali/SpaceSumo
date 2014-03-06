@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include "EntityType.h"
 #include <Common\error.h>
+#include "SpacemanData.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) 
 	: State(owner), mData(),
@@ -86,7 +87,12 @@ void GameState::setup(Map *newMap, Mode *newMode)
 
 void GameState::spacemanCreation(GameData& gameData)
 {
-	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData,  "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
-	mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
+	//mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP1.cfg", gameData,  "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 800.f, 500.f, 0.f)));
+	//mData.mEntityImpList.add((entFac::createSpaceMan("res/conf/controlsP2.cfg", gameData, "res/conf/spaceman.cfg", "res/conf/hands.cfg" , 300.f, 300.f, 240.f)));
 }
 
+void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
+{
+	mData.mEntityImpList.add(entFac::createSpaceMan(sData[0], gData, 1, (400, 400), 30));
+	//mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, 1, (400, 400), 30));
+}

@@ -14,7 +14,7 @@ public:
 	Frozen(SpaceManImp* owner);
 	virtual ~Frozen();
 
-	virtual void update(sf::Keyboard::Key& push, GameData& data);
+	virtual void update(Controller& controls, GameData& data);
 	virtual void draw(RenderList& renderList);
 	virtual EffectImp* clone();
 

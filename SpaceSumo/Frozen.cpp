@@ -5,7 +5,7 @@
 #include "SpaceManImp.h"
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\soundFac.h>
-
+#include "Controller.h"
 Config Frozen::mConfig("res/conf/frozen.cfg", true);
 
 Frozen::Frozen(SpaceManImp* owner) 
@@ -34,7 +34,7 @@ Frozen::Frozen(Frozen const & f)
 	mAnim.getSprite().setOrigin( 64 , 64 );
 }
 
-void Frozen::update(sf::Keyboard::Key& push, GameData& data)
+void Frozen::update(Controller& controls, GameData& data)
 {
 	if(mImpact == 0 && mPunch == 0 && mBreaking == 0)
 	{
@@ -44,7 +44,7 @@ void Frozen::update(sf::Keyboard::Key& push, GameData& data)
 		mImpact->play();
 	}
 
-	if(sf::Keyboard::isKeyPressed(push) &! mPrevKeyState)
+	if(controls.isActive(Controller::PUSH) &! mPrevKeyState)
 	{
 		mIntensity--;
 		mPrevKeyState = true;
@@ -55,7 +55,7 @@ void Frozen::update(sf::Keyboard::Key& push, GameData& data)
 		}
 
 	}
-	else if(!sf::Keyboard::isKeyPressed(push) && mPrevKeyState)
+	else if(!controls.isActive(Controller::PUSH) && mPrevKeyState)
 		mPrevKeyState = false;
 
 	if (mIntensity <= 0)

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ControlList.h"
 #include "Controller.h"
-
+#include <Common\error.h>
 ControlList::ControlList()
 {
 }
@@ -46,4 +46,14 @@ bool ControlList::isActiveReset(Controller::Control ctrl, int playerNumber)
 		}
 	}
 	return false;
+}
+
+Controller& ControlList::get(int index)
+{
+	for ( auto it = mControls.begin(); it != mControls.end(); ++it)
+	{
+		if(index == (*it)->getPlayer())
+			return **it;
+	}
+	SError("No such index", "Player not found!");
 }

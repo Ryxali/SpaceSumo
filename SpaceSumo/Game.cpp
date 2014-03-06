@@ -39,7 +39,8 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
-	
+	mWindow.setKeyRepeatEnabled(false);
+
 
 }
 
@@ -99,6 +100,7 @@ void Game::loop()
 	preDraw();
 	draw();
 	cleanUp();
+	mGameData.input.clear();
 }
 
 void Game::update(int delta)

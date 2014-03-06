@@ -14,9 +14,12 @@ public:
 	virtual bool isActiveReset(Control ctrl);
 	bool isConnected(int controllerIndex);
 	virtual void update(GameData& data);
-
+	virtual void set(Control, bool);
 private:
 	int mControllerIndex;
 	std::vector<sf::Clock> mTimers;
+	std::bitset<MAX_SIZE> mActiveR;
+	int mUp, mDown, mRight, mLeft, mPush, mActivate;
+	int mRepeatTime;
 };
 

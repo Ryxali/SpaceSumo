@@ -14,7 +14,7 @@ public:
 	void update(GameData& data);
 	bool isActive(Controller::Control ctrl, int playerNumber) const;
 	bool isActiveReset(Controller::Control ctrl, int playerNumber);
-
+	Controller& get(int index);
 private:
 	std::list<Controller*> mControls;
 };

@@ -17,6 +17,13 @@ res/img/UI/gamesetup/mode_sumo_active.png
 res/img/UI/gamesetup/mode_sumo_gray.png
 res/img/test_sparkle.png
 res/img/UI/menu/tmp_menu.png
+res/img/UI/menu/weightSelection/weight_class_0.png
+res/img/UI/menu/weightSelection/weight_class_1.png
+res/img/UI/menu/weightSelection/weight_class_2.png
+res/img/UI/menu/weightSelection/weight_class_3.png
+res/img/entity/spaceman/p1/Smoke.png
+res/img/entity/spaceman/p1/Jet.png
+res/img/entity/spaceman/p1/Body.png
 res/sound/jetpack/End.ogg
 res/sound/jetpack/Main.ogg
 res/sound/jetpack/Start.ogg

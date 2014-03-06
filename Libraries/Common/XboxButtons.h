@@ -61,6 +61,12 @@ namespace sf
 
 		};
 		void getAnalogEvent(const sf::Event::JoystickMoveEvent &evt, ControllerStatus &status);
+		static const sf::Joystick::Axis LEFT_STICK_Y = sf::Joystick::Axis::Y;
+		static const sf::Joystick::Axis LEFT_STICK_X = sf::Joystick::Axis::X;
+		static const sf::Joystick::Axis RIGHT_STICK_X = sf::Joystick::Axis::U;
+		static const sf::Joystick::Axis RIGHT_STICK_Y = sf::Joystick::Axis::R;
+		// < 0 = Left Trigger, > 0 = Right Trigger
+		static const sf::Joystick::Axis TRIGGERS = sf::Joystick::Axis::Z;
 		
 		/*struct Stick
 		{
