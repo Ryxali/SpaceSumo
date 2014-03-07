@@ -18,10 +18,21 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& wor
 	mBody.setRotation( mDirection.getAngle() );
 	mAnim.getSprite().setOrigin( 32 , 64 );
 	mBody.getBody()->SetUserData(this);
-	mSpeed = (
-		b2Vec2(userSpeed.getX() / PPM, userSpeed.getY() / PPM));
+	float dot = (( userSpeed.getX() * mDirection.getX() + userSpeed.getY() * mDirection.getY()));
+	mSpeed = ( b2Vec2( dot * mDirection.getX() , dot * mDirection.getY()));
 
+	mSpeed = ( b2Vec2 ( mSpeed.x / PPM + mDirection.getX() * mProjSpeed, mSpeed.y / PPM + mDirection.getY() * mProjSpeed ));
 
+	while (mSpeed.Length() < 10 )
+	{
+		mSpeed = b2Vec2(mSpeed.x + mDirection.getX() / PPM, mSpeed.y + mDirection.getY() / PPM);
+	}
+
+	mBody.setLinearVelocity( mSpeed );
+
+	
+	//mSpeed.Normalize();
+	//userSpeed.normalize();
 
 /*		b2Vec2((((float32)userSpeed.getX() * (float32)((mDirection.getX() < 0) ? mDirection.getX()*-1 : mDirection.getX())) + ((float32)mDirection.getX() * (float32)mProjSpeed)) / PPM,
 		(((float32)userSpeed.getY() * (float32)((mDirection.getY() < 0) ? mDirection.getY()*-1 : mDirection.getY())) + ((float32)mDirection.getY() * (float32)mProjSpeed)) / PPM )); */
@@ -35,7 +46,8 @@ FreezeBolt::~FreezeBolt()
 void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 {
 
-	mBody.setLinearVelocity(b2Vec2(mProjSpeed * mDirection.getX() + mSpeed.x, mProjSpeed * mDirection.getY() + mSpeed.y ));
+	
+		//b2Vec2(mProjSpeed * mDirection.getX() + mSpeed.x, mProjSpeed * mDirection.getY() + mSpeed.y ));
 
 	if( mShoot == 0 )
 	{
@@ -45,7 +57,6 @@ void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 
 	mAnim.getSprite().setRotation( mDirection.getAngle() + 90);
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
-
 }
 
 void FreezeBolt::draw(RenderList& renderList)
