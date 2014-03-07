@@ -7,7 +7,7 @@
 ETorpedoPickup::ETorpedoPickup(b2World& world, std::string bodyData, float x, float y) :
 	PowerUp(),
 	mBody(world, bodyData, x, y),
-	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/powerup.png"), "res/img/powerup/EnergyTorpedo/energytorpedo.cfg", 5.f)
+	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/powerup.png"), "res/img/powerup/EnergyTorpedo/energytorpedo_pickup.cfg", 5.f)
 {
 	mBody.getBody()->SetUserData(this);
 	mAnim.getSprite().setOrigin( 32 , 32 );

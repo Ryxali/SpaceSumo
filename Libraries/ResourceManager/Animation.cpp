@@ -84,6 +84,7 @@ void Animation::draw(sf::RenderWindow &win)
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
 	mSprite.setTextureRect(r);
 	win.draw(mSprite);
+
 }
 
 float Animation::getZ() const

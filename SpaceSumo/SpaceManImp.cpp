@@ -12,6 +12,7 @@
 #include <ResourceManager\soundFac.h>
 #include "Wincon.h"
 #include "Head.h"
+#include <iostream>
 
 /*
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,

@@ -6,7 +6,7 @@
 
 
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
-	mSpeed(60),
+	mSpeed(30),
 	mDirection(dir),
 	mPosition(position),
 	mAngle(0),
@@ -38,6 +38,7 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 
 void EnergyTorpedo::draw(RenderList& list)
 {
+	
 	list.addSprite(mAnim);
 }
 

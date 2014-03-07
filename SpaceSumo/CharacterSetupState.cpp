@@ -18,7 +18,7 @@ CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameS
 
 	}
 	add(new AddPlayersState(*this));
-	add(new WeightSelectionState(*this, mSpacemenData));
+	add(new WeightSelectionState(*this, mSpacemenData, data));
 	StateList::changeState(0);
 	sync();
 
