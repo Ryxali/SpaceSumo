@@ -1,18 +1,20 @@
 #pragma once
-#include "Flag.h"
-#include <SFML\Window\Keyboard.hpp>
 
+class Controller;
 class RenderList;
 class SpaceManImp;
 struct GameData;
 class SpaceManImp;
+
+#include "Flag.h"
+#include <SFML\Window\Keyboard.hpp>
 
 class EffectImp
 {
 public:
 	virtual ~EffectImp();
 
-	virtual void update(sf::Keyboard::Key& push, GameData& data) = 0;
+	virtual void update(Controller& controls, GameData& data) = 0;
 	virtual void draw(RenderList& renderList, SpaceManImp* owner) = 0;
 	virtual bool isAlive();
 	virtual EffectImp* clone() = 0;

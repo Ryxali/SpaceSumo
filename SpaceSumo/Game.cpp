@@ -7,6 +7,9 @@
 #include <Common\SVector.h>
 #include <ResourceManager\soundFac.h>
 #include "KeyboardController.h"
+#include "XController.h"
+#include <Common/XboxButtons.h>
+#include <iostream>
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
 {
@@ -36,8 +39,8 @@ Game::Game() :
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
-	mGameData.controlList.add( new KeyboardController(1, Config("res/conf/characters/spaceman/data_player_1.cfg")));
-	mGameData.controlList.add( new KeyboardController(2, Config("res/conf/characters/spaceman/data_player_2.cfg")));
+	mWindow.setKeyRepeatEnabled(false);
+
 
 }
 
@@ -56,8 +59,6 @@ void Game::loop()
 	sf::Event evt;
 	// Loop runs through all new events
 	mGameData.world.Step(delta.asSeconds(),8,3);
-	mGameData.controlList.update(mGameData);
-
 	while(mWindow.pollEvent(evt))
 	{
 		switch(evt.type)
@@ -67,7 +68,7 @@ void Game::loop()
 			return;
 			break;
 		case sf::Event::KeyPressed:
-			if(evt.key.code == sf::Keyboard::Escape || evt.key.code == sf::Keyboard::R) 
+			if(evt.key.code == sf::Keyboard::Escape) 
 			{
 				close();
 				return;
@@ -80,10 +81,12 @@ void Game::loop()
 	}
 	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition(mWindow) * (mView.getSize()/(sf::Vector2f)mWindow.getSize());
 	mWindow.clear(sf::Color::White);
+	mGameData.controlList.update(mGameData);
 	update(delta.asMilliseconds());
 	preDraw();
 	draw();
 	cleanUp();
+	mGameData.input.clear();
 }
 
 void Game::update(int delta)

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <algorithm>
 #include "error.h"
+#include "XboxButtons.h"
 std::string& str::purge(std::string &str, char token)
 {
 	for(std::string::iterator it = str.begin(); it != str.end(); ++it)
@@ -215,4 +216,38 @@ sf::Keyboard::Key str::toKey(std::string keyName)
 		return sf::Keyboard::Return;
 	}
 	SError("Unknown Key", "Couldn't find char value for key: " + keyName);
+}
+
+int str::toXboxKey(char chr)
+{
+	str::toUpperCase(chr);
+	switch(chr)
+	{
+	case 'A':
+		return sf::Xbox::A;
+	case 'B':
+		return sf::Xbox::B;
+	case 'X':
+		return sf::Xbox::X;
+	case 'Y':
+		return sf::Xbox::Y;
+	default:
+		SError("Unknown key", "Couldn't translate key value: " + chr);
+	}
+}
+int str::toXboxKey(std::string keyName)
+{
+	str::toUpperCase(keyName);
+	if(keyName.size() == 1)
+		return toXboxKey(keyName[0]);
+	if(keyName == "LEFT_STICK_Y")
+		return sf::Xbox::LEFT_STICK_Y;
+	if(keyName == "LEFT_STICK_X")
+		return sf::Xbox::LEFT_STICK_X;
+	if(keyName == "RIGHT_STICK_Y")
+		return sf::Xbox::RIGHT_STICK_Y;
+	if(keyName == "RIGHT_STICK_X")
+		return sf::Xbox::RIGHT_STICK_X;
+	if(keyName == "TRIGGERS")
+		return sf::Xbox::TRIGGERS;
 }

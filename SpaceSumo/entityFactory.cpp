@@ -7,6 +7,9 @@
 #include "ETorpedoPickup.h"
 #include <cstdlib>
 
+#include "GameData.h"
+#include "SpacemanData.h"
+
 EntityImp* entFac::createSpaceMan(
 	std::string conf, GameData& data,
 	std::string bodyData, std::string handData,
@@ -15,20 +18,19 @@ EntityImp* entFac::createSpaceMan(
 	Config config("res/conf/spaceman.cfg");
 	Config controls(conf);
 		
-	return new SpaceManImp(
+	return 0;/*new SpaceManImp(
 		str::toKey(controls.getValue<std::string>("up")), 
 		str::toKey(controls.getValue<std::string>("right")), 
 		str::toKey(controls.getValue<std::string>("left")), 
 		str::toKey(controls.getValue<std::string>("push")),
 		str::toKey(controls.getValue<std::string>("activate")),
-		data, bodyData, handData,  x, y, rotation);
+		data, bodyData, handData,  x, y, rotation);*/
 }
 
-EntityImp* entFac::createSpaceMan(std::string playerConf, std::string bodyConf, std::string handConf, GameData& data)
+EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, int playerIndex, SVector pos, float startRotation)
 {
-	Config pConf(playerConf);
 	
-	return new SpaceManImp(
+	/*return new SpaceManImp(
 		str::toKey(pConf.getValue<std::string>("up")), 
 		str::toKey(pConf.getValue<std::string>("right")), 
 		str::toKey(pConf.getValue<std::string>("left")), 
@@ -40,7 +42,15 @@ EntityImp* entFac::createSpaceMan(std::string playerConf, std::string bodyConf, 
 		pConf.getValue<int>("startingX"),
 		pConf.getValue<int>("startingY"),
 		pConf.getValue<float>("startingRotation")
-		);
+		);*/
+	return new SpaceManImp(
+		gData.controlList.get(playerIndex),
+		pos, startRotation,
+		Config("res/conf/characters/spaceman/visual_data_1.cfg"),
+		Config(sData.bodyData),
+		Config(sData.handData),
+		gData);
+
 }
 
 EntityImp* entFac::createPowerUpLHydrogen(b2World& world, float x, float y)

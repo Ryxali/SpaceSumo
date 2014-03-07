@@ -3,12 +3,15 @@
 #include "GameData.h"
 #include <SFML\Window\Keyboard.hpp>
 #include <Common\stringH.h>
+#include <iostream>
 
 KeyboardController::KeyboardController(int playerindex, Config& config): 
 	mUp(str::toKey(config.getValue<std::string>("up"))),
 	mDown(str::toKey(config.getValue<std::string>("down"))),
 	mLeft(str::toKey(config.getValue<std::string>("left"))),
 	mRight(str::toKey(config.getValue<std::string>("right"))),
+	mEnter(str::toKey(config.getValue<std::string>("enter"))),
+	mForward(str::toKey(config.getValue<std::string>("forward"))),
 	mPush(str::toKey(config.getValue<std::string>("push"))),
 	mActivate(str::toKey(config.getValue<std::string>("activate")))
 {
@@ -20,6 +23,19 @@ KeyboardController::~KeyboardController()
 {
 }
 
+bool KeyboardController::isActiveReset(Control ctrl)
+{
+	bool stat(mRStatus.at(ctrl));
+	mRStatus.set(ctrl, false);
+	return stat;
+}
+
+void KeyboardController::set(Control ctrl, bool status)
+{
+	Controller::set(ctrl, status);
+	mRStatus.set(ctrl, status);
+}
+
 void KeyboardController::update(GameData& data)
 {
 	sf::Event evt;
@@ -28,7 +44,6 @@ void KeyboardController::update(GameData& data)
 		switch (evt.type)
 		{
 		case sf::Event::KeyPressed:
-
 			if(evt.key.code == mUp) 
 			{
 				set(UP, true);
@@ -52,6 +67,15 @@ void KeyboardController::update(GameData& data)
 				set(RIGHT, true);
 			}
 			
+			if(evt.key.code == mEnter) 
+			{
+				set(ENTER, true);
+			}
+
+			if(evt.key.code == mForward) 
+			{
+				set(FORWARD, true);
+			}
 
 			if(evt.key.code == mActivate) 
 			{
@@ -61,7 +85,7 @@ void KeyboardController::update(GameData& data)
 
 			if(evt.key.code == mPush) 
 			{
-				set(PUSH,true);
+				set(PUSH, true);
 			}
 			
 			
@@ -93,6 +117,15 @@ void KeyboardController::update(GameData& data)
 				set(RIGHT, false);
 			}
 			
+			if(evt.key.code == mEnter) 
+			{
+				set(ENTER, false);
+			}
+
+			if(evt.key.code == mForward) 
+			{
+				set(FORWARD, false);
+			}
 
 			if(evt.key.code == mActivate) 
 			{

@@ -7,15 +7,29 @@ struct GameData;
 class ControlList
 {
 public:
+	enum Player
+	{
+		PLAYER_1, PLAYER_2, PLAYER_3, PLAYER_4, ANY
+	};
+	enum Control_Type
+	{
+		KEYBOARD, JOYSTICK
+	};
 	ControlList();
 	~ControlList();
 
-	void add(Controller* controller);
+	void add(Control_Type controlType);
 	void update(GameData& data);
-	bool isActive(Controller::Control ctrl, int playerNumber) const;
-	bool isActiveReset(Controller::Control ctrl, int playerNumber);
-
+	bool isActive(Player playerNumber);
+	bool isActive(Controller::Control ctrl, Player playerNumber) const;
+	bool isActiveReset(Controller::Control ctrl, Player playerNumber);
+	int getNActivePlayers() const;
+	Controller& get(int index);
 private:
-	std::list<Controller*> mControls;
+	Controller* mControls[4];
+	Controller* mControlPool[8];
+	int mNKeyboards;
+	int mNJoysticks;
+	int mNPlayers;
 };
 

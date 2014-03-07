@@ -13,40 +13,39 @@
 #include "Wincon.h"
 #include "Head.h"
 
-Config SpaceManImp::mConfig("res/conf/spaceman.cfg", true);
-
+/*
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
-	sf::Keyboard::Key right,
-	sf::Keyboard::Key left,
-	sf::Keyboard::Key push,
-	sf::Keyboard::Key activate,
-	GameData& data, 
-	std::string bodyData,
-	std::string handData,
-	float x, float y, float32 rotation)
-	: mUp(up),
-	mRight(right),
-	mLeft(left),
-	mPush(push),
-	mActivate(activate),
-	mSpaceman(data.world , bodyData, x , y ),
-	mLeftHand(data.world, handData, x , y ),
-	mRightHand(data.world, handData, x , y ),
-	mDirection( 0.0f , -1.0f ),
-	mSpeed(mConfig.getValue<float>("speed")),
-	mAngle(0.0f),
-	mJetOffset(-37.f),
-	mPushTimer(mConfig.getValue<int>("pushCooldown")),
-	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
-	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
-	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
-	mAbility(0),
-	mPushing(false),
-	mSlowDeath(false),
-	mAlive(true),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
-	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
+						 sf::Keyboard::Key right,
+						 sf::Keyboard::Key left,
+						 sf::Keyboard::Key push,
+						 sf::Keyboard::Key activate,
+						 GameData& data, 
+						 std::string bodyData,
+						 std::string handData,
+						 float x, float y, float32 rotation)
+						 : mUp(up),
+						 mRight(right),
+						 mLeft(left),
+						 mPush(push),
+						 mActivate(activate),
+						 mSpaceman(data.world , bodyData, x , y ),
+						 mLeftHand(data.world, handData, x , y ),
+						 mRightHand(data.world, handData, x , y ),
+						 mDirection( 0.0f , -1.0f ),
+						 mSpeed(mConfig.getValue<float>("speed")),
+						 mAngle(0.0f),
+						 mJetOffset(-37.f),
+						 mPushTimer(mConfig.getValue<int>("pushCooldown")),
+						 mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
+						 mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
+						 mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
+						 mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
+						 mAbility(0),
+						 mPushing(false),
+						 mSlowDeath(false),
+						 mAlive(true),
+						 mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+						 mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
 {
 	//mAnim.getSprite().setOrigin( 64 , 64 );
 	//mTurn.getSprite().setOrigin( 64 , 64 );
@@ -55,45 +54,48 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpaceman.setRotation(rotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
-}
+}*/
 
 SpaceManImp::SpaceManImp(
-	Config& playerData,
-	Config& spaceManData,
+	Controller& controls,
+	SVector pos,
+	float startRotation,
+	Config& visualData,
 	Config& bodyData,
 	Config& handData,
-	GameData& data)
-	: mUp(str::toKey(playerData.getValue<std::string>("up"))),
-	mRight(str::toKey(playerData.getValue<std::string>("right"))),
-	mLeft(str::toKey(playerData.getValue<std::string>("left"))),
-	mPush(str::toKey(playerData.getValue<std::string>("push"))),
-	mActivate(str::toKey(playerData.getValue<std::string>("activate"))),
+	GameData& data) :
+	mControls(controls),
 	mAlive(true),
-	mSpaceman(data.world, bodyData, playerData.getValue<float>(""), playerData.getValue<float>("")),
+	mSpaceman(data.world, bodyData, pos.getX(), pos.getY()),
 	mLeftArmJoint(0),
 	mLeftArm(0),
-	mLeftHand(data.world, handData, playerData.getValue<float>(""), playerData.getValue<float>("")),
+	mLeftHand(data.world, handData, pos.getX(), pos.getY()),
 	mLeftArmDef(),
 	mRightArmJoint(0),
 	mRightArm(0),
-	mRightHand(data.world, handData, playerData.getValue<float>(""), playerData.getValue<float>("")),
+	mRightHand(data.world, handData, pos.getX(), pos.getY()),
 	mRightArmDef(),
-	mPushTimer(spaceManData.getValue<int>("pushCooldown")),
+	mSpeedLimit(bodyData.getValue<float>("speedLimit")),
+	mRotationSpeed(bodyData.getValue<float>("rotationSpeed")),
+	mFixedRotation(bodyData.getValue<bool>("fixedRotation")),
+	mPunchForce(bodyData.getValue<int>("punchForce")),
+	mPushTimer(bodyData.getValue<int>("pushCooldown")),
 	mPushing(false),
-	mRespawnTimer(spaceManData.getValue<int>("respawnTimer")),
+	mRespawnTimer(bodyData.getValue<int>("respawnTimer")),
 	mSlowDeath(false),
 	mEffects(),
 	mAbility(0),
-	mSpeed(spaceManData.getValue<float>("speed")),
+	mSpeed(bodyData.getValue<float>("speed")),
 	mDirection(SVector(0.f, -1.f)),
 	mAngle(0.f),
-	mJetOffset(mConfig.getValue<float>("jetOffset")),
-	mAnim(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 5.f),
-	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
-	mJet(res::getTexture(playerData.getValue<std::string>("")+".png"), playerData.getValue<std::string>("")+".cfg", 7.f),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist))
+	mJetOffset(bodyData.getValue<float>("jetOffset")),
+	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
+	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
+	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
 {
-	mSpaceman.setRotation(playerData.getValue<float>("startingRotation"));
+	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
 }
@@ -107,11 +109,10 @@ SpaceManImp::~SpaceManImp()
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
 	//gData.wincon->update(data, gData, this);
-	data.soundlist.update(data);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
-	mEffects.update(mPush, data);
+	mEffects.update(mControls, data);
 
 	if(mSlowDeath)
 	{
@@ -147,12 +148,12 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	mTurn.setCurrentRow(2);
 	mJet.setCurrentRow(0);
 
-	if(mConfig.getValue<bool>("fixedRotation") && !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
+	if(mFixedRotation && !mControls.isActive(Controller::RIGHT) && !mControls.isActive(Controller::LEFT))
 	{
 		mSpaceman.setAngularVelocity(0);
 	}
 
-	if(sf::Keyboard::isKeyPressed(mUp) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
+	if(mControls.isActive(Controller::FORWARD) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
 		if(mJetpack->hasEnded())
 		{
@@ -164,24 +165,24 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			mSpaceman.getWorldCenter(), true);
 
 		//Speed limit
-		if(mSpaceman.getLinearVelocity().x < -mConfig.getValue<float>("speedLimit"))
+		if(mSpaceman.getLinearVelocity().x < -mSpeedLimit)
 		{
-			mSpaceman.setLinearVelocity( b2Vec2(-mConfig.getValue<float>("speedLimit"), mSpaceman.getLinearVelocity().y));
+			mSpaceman.setLinearVelocity( b2Vec2(-mSpeedLimit, mSpaceman.getLinearVelocity().y));
 		}
 
-		if(mSpaceman.getLinearVelocity().x > mConfig.getValue<float>("speedLimit"))
+		if(mSpaceman.getLinearVelocity().x >mSpeedLimit)
 		{
-			mSpaceman.setLinearVelocity( b2Vec2(mConfig.getValue<float>("speedLimit"), mSpaceman.getLinearVelocity().y));
+			mSpaceman.setLinearVelocity( b2Vec2(mSpeedLimit, mSpaceman.getLinearVelocity().y));
 		}
 
-		if(mSpaceman.getLinearVelocity().y > mConfig.getValue<float>("speedLimit"))
+		if(mSpaceman.getLinearVelocity().y > mSpeedLimit)
 		{
-			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, mConfig.getValue<float>("speedLimit")));
+			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, mSpeedLimit));
 		}
 
-		if(mSpaceman.getLinearVelocity().y < -mConfig.getValue<float>("speedLimit"))
+		if(mSpaceman.getLinearVelocity().y < -mSpeedLimit)
 		{
-			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, -mConfig.getValue<float>("speedLimit")));
+			mSpaceman.setLinearVelocity(b2Vec2(mSpaceman.getLinearVelocity().x, -mSpeedLimit));
 		}
 
 		mJet.setCurrentRow(1);
@@ -193,29 +194,29 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// turn right
-	if(sf::Keyboard::isKeyPressed(mRight) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
+	if(mControls.isActive(Controller::RIGHT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
 	{
-		mSpaceman.applyAngularImpulse( mConfig.getValue<float>("rotationspeed") * fDelta , true);
+		mSpaceman.applyAngularImpulse( mRotationSpeed * fDelta , true);
 		mTurn.setCurrentRow(1);
 		mTurning->play();
 	}
-	
+
 	//turn left
-	if(sf::Keyboard::isKeyPressed(mLeft) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
+	if(mControls.isActive(Controller::LEFT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
-		mSpaceman.applyAngularImpulse( - mConfig.getValue<float>("rotationspeed") * fDelta , true);
+		mSpaceman.applyAngularImpulse( - mRotationSpeed * fDelta , true);
 		mTurn.setCurrentRow(0);
 		mTurning->play();
 	}	
 
-	if( !sf::Keyboard::isKeyPressed(mRight) && !sf::Keyboard::isKeyPressed(mLeft))
+	if( !mControls.isActive(Controller::RIGHT) && !mControls.isActive(Controller::LEFT))
 	{
 		mTurning->stop();
 	}
 
 
 	// player push
-	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus)
+	if(mControls.isActive(Controller::PUSH) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus)
 	{
 		mPushing = true;
 		mPushTimer.reset();
@@ -234,7 +235,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// activate ability
-	if(sf::Keyboard::isKeyPressed(mActivate) && mEffects.getStatus().getFlag_CAN_ACTIVATE().mStatus)
+	if(mControls.isActive(Controller::ACTIVATE) && mEffects.getStatus().getFlag_CAN_ACTIVATE().mStatus)
 	{
 		if(mAbility != 0)
 		{
@@ -366,13 +367,14 @@ void SpaceManImp::initializeArms(b2World& world)
 void SpaceManImp::extendArms()
 {
 	mAnim.setCurrentRow(1);
-	mLeftArmJoint->SetMotorSpeed(mConfig.getValue<float>("punchforce"));
-	mRightArmJoint->SetMotorSpeed(mConfig.getValue<float>("punchforce"));
+	mLeftArmJoint->SetMotorSpeed(mPunchForce);
+	mRightArmJoint->SetMotorSpeed(mPunchForce);
 }
 
 void SpaceManImp::retractArms()
 {
 	mAnim.setCurrentRow(0);
-	mLeftArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
-	mRightArmJoint->SetMotorSpeed(-mConfig.getValue<float>("punchforce"));
+	mLeftArmJoint->SetMotorSpeed(-mPunchForce);
+	mRightArmJoint->SetMotorSpeed(-mPunchForce);
+
 }

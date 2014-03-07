@@ -6,6 +6,7 @@ class Ability;
 class Config;
 class Wincon;
 class Head;
+class Controller;
 
 #include "entityimp.h"
 #include "B2Body.h"
@@ -27,7 +28,7 @@ class SpaceManImp :
 	public EntityImp
 {
 public:
-	SpaceManImp(sf::Keyboard::Key up,
+	/*SpaceManImp(sf::Keyboard::Key up,
 		sf::Keyboard::Key right,
 		sf::Keyboard::Key left,
 		sf::Keyboard::Key push,
@@ -35,10 +36,12 @@ public:
 		GameData& data, 
 		std::string bodyData,
 		std::string handData,
-		float x, float y, float32 rotation);
+		float x, float y, float32 rotation);*/
 	SpaceManImp(
-		Config& playerData,
-		Config& spaceManData,
+		Controller& controls,
+		SVector pos,
+		float startRotation,
+		Config& visualData,
 		Config& bodyData,
 		Config& handData,
 		GameData& data
@@ -63,20 +66,13 @@ public:
 	int getScore() const;
 	
 private:
-	//Keys
-	sf::Keyboard::Key mUp;
-	sf::Keyboard::Key mRight;
-	sf::Keyboard::Key mLeft;
-	sf::Keyboard::Key mPush;
-	sf::Keyboard::Key mActivate;
+	Controller& mControls;
 
 	//helpfunctions
 	void initializeArms(b2World& world);
 	void extendArms();
 	void retractArms();
 
-	//config
-	static Config mConfig;
 	SVector mSpawnpoint;
 	bool mAlive;
 
@@ -94,6 +90,9 @@ private:
 	b2PrismaticJoint* mRightArm;
 	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
+
+	float mSpeedLimit, mRotationSpeed, mPunchForce;
+	bool mFixedRotation;
 
 	Timer mPushTimer;
 	bool mPushing;
@@ -118,5 +117,6 @@ private:
 	Playable* mJetpack;
 	Playable* mTurning;
 
+	
 };
 

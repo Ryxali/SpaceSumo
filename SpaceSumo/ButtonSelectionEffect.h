@@ -9,7 +9,7 @@ class ButtonSelectionEffect :
 	public ButtonObserver
 {
 public:
-	ButtonSelectionEffect(int playerNumber, Button* button);
+	ButtonSelectionEffect(ControlList::Player playerNumber, Button* button);
 	~ButtonSelectionEffect();
 
 	virtual void draw(RenderList& list);
@@ -17,6 +17,6 @@ public:
 
 private:
 	Animation mAnim;
-	int mPlayerNumber;
+	ControlList::Player mPlayerNumber;
 	Button* mButton;
 };

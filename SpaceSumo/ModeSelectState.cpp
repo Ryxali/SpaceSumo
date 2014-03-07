@@ -8,6 +8,8 @@
 #include "ChangeStateCommand.h"
 #include "StateList_Setup.h"
 #include "Mode_Type.h"
+#include "ButtonSelectionEffect.h"
+
 ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world) 
 	: State(owner), mModes()
 {
@@ -20,6 +22,7 @@ ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world)
 		new ChangeStateCommand(st::WORLD_SELECTION_STATE, owner)
 		),
 		"res/img/UI/gamesetup/mode_sumo_active"));
+	mModes.addObserver(new ButtonSelectionEffect(ControlList::ANY, mModes.getFirst()));
 }
 
 
