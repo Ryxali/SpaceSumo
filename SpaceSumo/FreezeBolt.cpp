@@ -29,13 +29,6 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& wor
 	}
 
 	mBody.setLinearVelocity( mSpeed );
-
-	
-	//mSpeed.Normalize();
-	//userSpeed.normalize();
-
-/*		b2Vec2((((float32)userSpeed.getX() * (float32)((mDirection.getX() < 0) ? mDirection.getX()*-1 : mDirection.getX())) + ((float32)mDirection.getX() * (float32)mProjSpeed)) / PPM,
-		(((float32)userSpeed.getY() * (float32)((mDirection.getY() < 0) ? mDirection.getY()*-1 : mDirection.getY())) + ((float32)mDirection.getY() * (float32)mProjSpeed)) / PPM )); */
 }
 
 FreezeBolt::~FreezeBolt()
@@ -45,10 +38,6 @@ FreezeBolt::~FreezeBolt()
 
 void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 {
-
-	
-		//b2Vec2(mProjSpeed * mDirection.getX() + mSpeed.x, mProjSpeed * mDirection.getY() + mSpeed.y ));
-
 	if( mShoot == 0 )
 	{
 		mShoot = soundFac::createSound("res/sound/freeze/freeze_blast.spf", data.soundlist);
