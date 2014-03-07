@@ -14,7 +14,8 @@ public:
 	void setNPlayers(unsigned char nPlayers);
 	void draw(RenderList &list);
 private:
-	FacePool mPool;
+	FacePool mFacePool;
+	Head::UIPool mUIPool;
 	unsigned char mNPlayers;
 	Head mHead0;
 	Head mHead1;
