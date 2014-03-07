@@ -18,7 +18,7 @@ SSprite::SSprite(const STexture &tex, float z) : mSprite(), mSTex(tex), mTexVers
 	
 }
 
-SSprite::SSprite(const SSprite &sp) : mSprite(), mSTex(sp.mSTex), mTexVersion(0)
+SSprite::SSprite(const SSprite &sp) : mSprite(), mSTex(sp.mSTex), mTexVersion(0), mZ(sp.mZ)
 {
 
 }

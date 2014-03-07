@@ -44,23 +44,23 @@ void Face::draw(RenderList &list, const Position &pos, bool flipped)
 	switch(pos)
 	{
 	case TOP_LEFT:
-		mFaces.getSprite().setPosition(0, 0);
-		mFaces.getSprite().setOrigin(0, 0);
+		mFaces.getSprite().setPosition(75, 75);
+		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		mFaces.getSprite().setScale(1, 1);
 		break;
 	case TOP_RIGHT:
-		mFaces.getSprite().setPosition(WINDOW_SIZE.x, 0);
-		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width, 0);
+		mFaces.getSprite().setPosition(WINDOW_SIZE.x - 75, 75);
+		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		//mFaces.getSprite().setScale(-1, 1);
 		break;
 	case BOTTOM_LEFT:
-		mFaces.getSprite().setPosition(0, WINDOW_SIZE.y);
-		mFaces.getSprite().setOrigin(0, mFaces.getSprite().getGlobalBounds().height);
+		mFaces.getSprite().setPosition(75, WINDOW_SIZE.y - 75);
+		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		//mFaces.getSprite().setScale(1, 1);
 		break;
 	case BOTTOM_RIGHT:
-		mFaces.getSprite().setPosition(WINDOW_SIZE.x, WINDOW_SIZE.y);
-		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width, mFaces.getSprite().getGlobalBounds().height);
+		mFaces.getSprite().setPosition(WINDOW_SIZE.x - 75, WINDOW_SIZE.y - 75);
+		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		//mFaces.getSprite().setScale(-1, 1);
 		break;
 	}
