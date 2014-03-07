@@ -35,7 +35,7 @@ void EffectStatus::addFlag(EffectImp *effect)
 	}
 }
 
-void EffectStatus::update(sf::Keyboard::Key& push, GameData& data)
+void EffectStatus::update(Controller& controls, GameData& data)
 {
 	SAssert(false, "Don't use EffectStatus update()");
 }

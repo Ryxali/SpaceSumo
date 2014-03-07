@@ -93,6 +93,7 @@
     <ClInclude Include="SVector.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="XboxButtons.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="stringH.cpp" />
     <ClCompile Include="SVector.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="XboxButtons.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BasicShapes\BasicShapes.vcxproj">

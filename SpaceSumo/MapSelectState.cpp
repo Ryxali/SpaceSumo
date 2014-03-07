@@ -8,6 +8,7 @@
 #include "ChangeStateCommand.h"
 #include "Map_Type.h"
 #include "StateList_Setup.h"
+#include "ButtonSelectionEffect.h"
 
 MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world) 
 	: State(owner), mMaps()
@@ -21,6 +22,7 @@ MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world)
 		new ChangeStateCommand(st::FINISHED_STATE, owner)
 		),
 		"res/img/UI/gamesetup/map_terra_active"));
+	mMaps.addObserver(new ButtonSelectionEffect(ControlList::ANY, mMaps.getFirst()));
 }
 
 

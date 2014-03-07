@@ -94,6 +94,8 @@ namespace str
 	// TODO add string functionality
 	sf::Keyboard::Key toKey(char chr);
 	sf::Keyboard::Key toKey(std::string keyName);
+	int toXboxKey(char chr);
+	int toXboxKey(std::string keyName);
 }
 
 

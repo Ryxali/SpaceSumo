@@ -2,6 +2,7 @@
 #include "Effects.h"
 #include "EffectStatus.h"
 #include <Common\error.h>
+#include "Controller.h"
 const int Effects::MAX_SIZE = 50;
 
 Effects::Effects() : mSummary(), mCurSize(0)
@@ -17,13 +18,13 @@ Effects::~Effects()
 {
 }
 
-void Effects::update(sf::Keyboard::Key& push, GameData& data)
+void Effects::update(Controller& pController, GameData& data)
 {
 	int totOffset = 0;
 	bool didChange = false;
 	for(int i = 0; i < mCurSize; ++i)
 	{
-		mEffectList[i]->update(push, data);
+		mEffectList[i]->update(pController, data);
 		if(!mEffectList[i]->isAlive())
 		{
 			delete mEffectList[i];

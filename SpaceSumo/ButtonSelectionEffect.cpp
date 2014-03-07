@@ -7,7 +7,7 @@
 #include <string>
 #include "ButtonList.h"
 
-ButtonSelectionEffect::ButtonSelectionEffect(int playerNumber, Button* button):
+ButtonSelectionEffect::ButtonSelectionEffect(ControlList::Player playerNumber, Button* button):
 	mAnim(res::getTexture("res/img/test_sparkle.png"), "res/conf/anim_buttonsparkle.cfg", 10.f),
 	mPlayerNumber(playerNumber),
 	mButton(button)
@@ -50,8 +50,8 @@ void ButtonSelectionEffect::update(GameData& data, int delta, ButtonList& owner)
 		mButton = owner.getRight(mButton->getMapX(), mButton->getMapY());
 	}
 
-	if(data.controlList.isActiveReset(Controller::Control::ACTIVATE, mPlayerNumber))
+	if(data.controlList.isActiveReset(Controller::Control::ENTER, mPlayerNumber))
 	{
-		mButton->execute(mPlayerNumber);
+		mButton->execute(mPlayerNumber+1);
 	}
 }

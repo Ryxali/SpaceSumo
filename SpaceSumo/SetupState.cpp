@@ -46,9 +46,8 @@ void SetupState::changeState(st::State_Type index)
 		StateList::changeState(1);
 		break;
 	case st::FINISHED_STATE:
-		//StateList::changeState(2);
 		mGState.setup(mMap, mMode);
-		mOwner.changeState(st::MODE_SELECTION_STATE);
+		mOwner.changeState((st::State_Type)3);
 		break;
 	default:
 		SError("Unknown index", "Index not in switch!");
