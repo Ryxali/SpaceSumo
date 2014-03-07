@@ -1,0 +1,37 @@
+#pragma once
+
+class RenderList;
+class EffectStatus;
+class Controller;
+#include <vector>
+#include "EffectStatus.h"
+
+
+class Effects
+{
+public:
+	Effects();
+	~Effects();
+
+<<<<<<< HEAD
+	void draw(RenderList& renderList, SpaceManImp* owner);
+	void update(sf::Keyboard::Key& push, GameData& data);
+=======
+	void draw(RenderList& renderList);
+	void update(Controller& pController, GameData& data);
+>>>>>>> dev_NL
+	void addEffect(EffectImp*);
+	void clear();
+	
+	EffectStatus& getStatus();
+
+private:
+	EffectImp** mEffectList;
+	EffectStatus mSummary;
+	static const int MAX_SIZE;
+	int mCurSize;
+
+	void evaluate();
+	void floatDown(int index);
+};
+
