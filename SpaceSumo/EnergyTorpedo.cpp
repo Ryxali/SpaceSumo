@@ -6,7 +6,7 @@
 
 
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
-	mSpeed(60),
+	mSpeed(40),
 	mDirection(dir),
 	mPosition(position),
 	mAngle(0),

@@ -11,7 +11,7 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& wor
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
-	mAnim(res::getTexture("res/img/powerup/freezebolt.png"), "res/img/powerup/freezebolt.cfg", 5.f),
+	mAnim(res::getTexture("res/img/powerup/FreezeBolt/freezebolt.png"), "res/img/powerup/FreezeBolt/freezebolt.cfg", 5.f),
 	mShoot(0)
 {
 	mBody.setRotation( mDirection.getAngle() );

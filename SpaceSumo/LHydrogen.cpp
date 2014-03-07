@@ -7,7 +7,7 @@
 LHydrogen::LHydrogen(b2World &world, std::string bodyData, float x, float y) : 
 	PowerUp(),
 	mBody(world, bodyData, x, y),
-	mAnim(res::getTexture("res/img/powerup/LHydrogen.png"), "res/img/powerup/LHydrogen.cfg", 3.f)
+	mAnim(res::getTexture("res/img/powerup/FreezeBolt/LHydrogen.png"), "res/img/powerup/FreezeBolt/LHydrogen.cfg", 3.f)
 {
 	mBody.getBody()->SetUserData(this);
 	mAnim.getSprite().setOrigin(32, 32);
