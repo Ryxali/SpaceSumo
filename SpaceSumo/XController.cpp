@@ -12,6 +12,8 @@ XController::XController(int controllerIndex, int playerIndex, Config& conf):
 	mDown(str::toXboxKey(conf.getValue<std::string>("down"))),
 	mLeft(str::toXboxKey(conf.getValue<std::string>("left"))),
 	mRight(str::toXboxKey(conf.getValue<std::string>("right"))),
+	mEnter(str::toXboxKey(conf.getValue<std::string>("enter"))),
+	mForward(str::toXboxKey(conf.getValue<std::string>("forward"))),
 	mActivate(str::toXboxKey(conf.getValue<std::string>("activate"))),
 	mPush(str::toXboxKey(conf.getValue<std::string>("push"))),
 	mRepeatTime(conf.getValue<int>("repeatTime"))
@@ -60,11 +62,10 @@ bool XController::isConnected( int controllerIndex )
 
 void XController::update(GameData& data)
 {
-
+	
 	sf::Event evt;
 	while(data.input.pop_front(evt))
 	{
-		sf::Xbox::ControllerStatus cs;
 		switch (evt.type)
 		{
 		case sf::Event::JoystickButtonPressed:
@@ -74,13 +75,27 @@ void XController::update(GameData& data)
 				if(evt.joystickButton.button == mActivate) // A
 				{
 					set(ACTIVATE, true);
+					break;
 				}
 
 				if(evt.joystickButton.button == mPush) // B
 				{
 					set(PUSH, true);
+					break;
 				}
-				break;
+
+				if(evt.joystickButton.button == mEnter) // B
+				{
+					set(ENTER, true);
+					break;
+				}
+
+				if(evt.joystickButton.button == mForward) // B
+				{
+					set(FORWARD, true);
+					break;
+				}
+				
 			}
 
 			/*if(evt.joystickMove.axis == sf::Joystick::Y) // left stick horizontal
@@ -126,31 +141,44 @@ void XController::update(GameData& data)
 			}
 
 			break;*/
+	
 		case sf::Event::JoystickButtonReleased:
 			if(evt.joystickButton.joystickId == mControllerIndex)
 			{
 				if(evt.joystickButton.button == mActivate) // A
 				{
 					set(ACTIVATE, false);
+					break;
 				}
 
 				if(evt.joystickButton.button == mPush) // B
 				{
 					set(PUSH, false);
+					break;
 				}
-				break;
+
+				if(evt.joystickButton.button == mEnter) // B
+				{
+					set(ENTER, false);
+					break;
+				}
+
+				if(evt.joystickButton.button == mForward) // B
+				{
+					set(FORWARD, false);
+					break;
+				}
 			}
-			break;
 		default:
 			data.input.add(evt);
 			break;
-		}
+		
 	}
 
 	set(UP, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mUp) < -30);
 	set(DOWN, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mDown) > 30);
 	set(LEFT, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mLeft) < -30);
-	set(RIGHT, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mRight) > 30);
+	set(RIGHT, sf::Joystick::getAxisPosition(mControllerIndex, (sf::Joystick::Axis)mRight) > 30);}
 }
 
 

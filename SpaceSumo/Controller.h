@@ -11,12 +11,15 @@ public:
 		DOWN,
 		RIGHT,
 		LEFT,
+		ENTER,
+		FORWARD,
 		PUSH,
 		ACTIVATE,
 		MAX_SIZE
 	};
+	
 
-	Controller(){}
+	Controller();
 	~Controller(){}
 
 	bool isActive(Control ctrl) const;
@@ -24,6 +27,7 @@ public:
 	virtual void update(GameData& data) = 0;
 	int getPlayer();
 
+	void setPlayer(int index);
 protected:
 	friend class ControlList;
 	virtual void set(Control ctrl, bool status);

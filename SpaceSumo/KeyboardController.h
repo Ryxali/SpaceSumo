@@ -16,7 +16,7 @@ public:
 protected:
 	virtual void set(Control ctrl, bool status);
 private:
-	sf::Keyboard::Key mUp, mDown, mLeft, mRight, mPush, mActivate;
+	sf::Keyboard::Key mUp, mDown, mLeft, mRight, mEnter, mForward, mPush, mActivate;
 	std::bitset<MAX_SIZE> mRStatus;
 };
 

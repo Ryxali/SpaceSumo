@@ -22,7 +22,7 @@ MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world)
 		new ChangeStateCommand(st::FINISHED_STATE, owner)
 		),
 		"res/img/UI/gamesetup/map_terra_active"));
-	mMaps.addObserver(new ButtonSelectionEffect(1, mMaps.getFirst()));
+	mMaps.addObserver(new ButtonSelectionEffect(ControlList::ANY, mMaps.getFirst()));
 }
 
 

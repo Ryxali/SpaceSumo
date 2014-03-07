@@ -11,7 +11,7 @@ class Effect
 public:
 	Effect(EffectImp*);
 	~Effect();
-	Effect(const Effect &e);
+	
 	Effect& operator=(const Effect &e);
 	//Effect& operator=(EffectImp *imp);
 	void update(sf::Keyboard::Key& push, GameData& data);
@@ -25,8 +25,8 @@ public:
 	Flag getFlag_CAN_PUSH();
 	Flag getFlag_CAN_ACTIVATE();
 	void reset();
-	
 private:
+	Effect(const Effect &e);
 	EffectImp* mImp;
 };
 

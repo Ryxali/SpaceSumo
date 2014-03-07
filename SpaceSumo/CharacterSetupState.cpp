@@ -5,8 +5,10 @@
 #include "SelectCharacterCommand.h"
 #include "Characters.h"
 #include "WeightSelectionState.h"
+#include "AddPlayersState.h"
 #include "StateList_CSelect.h"
 #include "GameState.h"
+#include <Common\error.h>
 CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameState &gameState) 
 	: State(owner), StateList(), mSpacemenData(), mGameState(gameState), mGData(data), mChars()
 {
@@ -15,6 +17,7 @@ CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameS
 		mSpacemenData[i].spaceData = "res/conf/characters/spaceman/data_player_" + std::to_string(i+1) + ".cfg";
 
 	}
+	add(new AddPlayersState(*this));
 	add(new WeightSelectionState(*this, mSpacemenData));
 	StateList::changeState(0);
 	sync();
@@ -44,6 +47,7 @@ void CharacterSetupState::draw(RenderList &list)
 
 void CharacterSetupState::update(GameData &data, int delta)
 {
+	sync();
 	getCurrent().update(data, delta);
 	//mChars.update(data, delta);
 }
@@ -52,12 +56,17 @@ void CharacterSetupState::changeState(st::State_Type index)
 {
 	switch(index)
 	{
-	case st::WEIGHT_SELECT_STATE:
+	case st::CONTROLS_SETUP_STATE:
 		StateList::changeState(0);
+		break;
+	case st::WEIGHT_SELECT_STATE:
+		StateList::changeState(1);
 		break;
 	case st::FINISHED_STATE:
 		mGameState.setup(mSpacemenData, mGData);
 		mOwner.changeState((st::State_Type)1);
 		break;
+	default:
+		SError("Unkown State", "State not in switch");
 	}
 }

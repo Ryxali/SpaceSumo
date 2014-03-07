@@ -74,20 +74,6 @@ void Game::loop()
 				return;
 				break;
 			}
-			else if(evt.key.code == sf::Keyboard::Return)
-			{
-				mGameData.controlList.add( new KeyboardController(mGameData.nJoysticks+mGameData.nKeyboards+1, Config("res/conf/controls/keyboard_" + std::to_string(mGameData.nKeyboards+1) + ".cfg")));
-				++mGameData.nKeyboards;
-				break;
-			}
-			
-		case sf::Event::JoystickButtonPressed:
-			if(evt.joystickButton.button == sf::Xbox::START)
-			{
-				mGameData.controlList.add(new XController(evt.joystickButton.joystickId, mGameData.nJoysticks+mGameData.nKeyboards+1, (Config("res/conf/controls/joystick_base.cfg"))));
-				++mGameData.nJoysticks;
-				break;
-			}
 		default:
 			mGameData.input.add(evt);
 			break;

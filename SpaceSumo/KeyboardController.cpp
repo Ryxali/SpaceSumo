@@ -10,6 +10,8 @@ KeyboardController::KeyboardController(int playerindex, Config& config):
 	mDown(str::toKey(config.getValue<std::string>("down"))),
 	mLeft(str::toKey(config.getValue<std::string>("left"))),
 	mRight(str::toKey(config.getValue<std::string>("right"))),
+	mEnter(str::toKey(config.getValue<std::string>("enter"))),
+	mForward(str::toKey(config.getValue<std::string>("forward"))),
 	mPush(str::toKey(config.getValue<std::string>("push"))),
 	mActivate(str::toKey(config.getValue<std::string>("activate")))
 {
@@ -65,6 +67,15 @@ void KeyboardController::update(GameData& data)
 				set(RIGHT, true);
 			}
 			
+			if(evt.key.code == mEnter) 
+			{
+				set(ENTER, true);
+			}
+
+			if(evt.key.code == mForward) 
+			{
+				set(FORWARD, true);
+			}
 
 			if(evt.key.code == mActivate) 
 			{
@@ -74,7 +85,7 @@ void KeyboardController::update(GameData& data)
 
 			if(evt.key.code == mPush) 
 			{
-				set(PUSH,true);
+				set(PUSH, true);
 			}
 			
 			
@@ -106,6 +117,15 @@ void KeyboardController::update(GameData& data)
 				set(RIGHT, false);
 			}
 			
+			if(evt.key.code == mEnter) 
+			{
+				set(ENTER, false);
+			}
+
+			if(evt.key.code == mForward) 
+			{
+				set(FORWARD, false);
+			}
 
 			if(evt.key.code == mActivate) 
 			{

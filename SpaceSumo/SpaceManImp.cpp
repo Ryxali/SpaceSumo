@@ -150,7 +150,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mSpaceman.setAngularVelocity(0);
 	}
 
-	if(mControls.isActive(Controller::UP) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
+	if(mControls.isActive(Controller::FORWARD) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
 		if(mJetpack->hasEnded())
 		{

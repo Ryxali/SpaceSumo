@@ -33,7 +33,7 @@ Effect& Effect::operator=(const Effect &e)
 }*/
 void Effect::update(sf::Keyboard::Key& push, GameData& data)
 {
-	mImp->update(push, data);
+	//mImp->update(push, data);
 }
 
 void Effect::draw(RenderList& renderList)

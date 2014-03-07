@@ -25,7 +25,7 @@ MenuState::MenuState(StateList &owner) :
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		(std::string)"res/img/UI/menu/tmp_menu"));
-	mButtonList.addObserver(new ButtonSelectionEffect(1, mButtonList.getFirst()));
+	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst()));
 }
 
 

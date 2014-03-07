@@ -22,7 +22,7 @@ ModeSelectState::ModeSelectState(StateList &owner, Mode *&mode, b2World &world)
 		new ChangeStateCommand(st::WORLD_SELECTION_STATE, owner)
 		),
 		"res/img/UI/gamesetup/mode_sumo_active"));
-	mModes.addObserver(new ButtonSelectionEffect(1, mModes.getFirst()));
+	mModes.addObserver(new ButtonSelectionEffect(ControlList::ANY, mModes.getFirst()));
 }
 
 

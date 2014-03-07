@@ -48,10 +48,10 @@ WeightSelectionState::WeightSelectionState(StateList &owner, SpacemanData (&mSpa
 			("res/img/UI/menu/weightSelection/weight_class_" + std::to_string(x))));
 		++x;
 	}
-	mWeightClasses.addObserver(new ButtonSelectionEffect(0, mWeightClasses.getFirst()));
-	mWeightClasses.addObserver(new ButtonSelectionEffect(1, mWeightClasses.getFirst()));
-	mWeightClasses.addObserver(new ButtonSelectionEffect(2, mWeightClasses.getFirst()));
-	mWeightClasses.addObserver(new ButtonSelectionEffect(3, mWeightClasses.getFirst()));
+	mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_1, mWeightClasses.getFirst()));
+	mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_2, mWeightClasses.getFirst()));
+	mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_3, mWeightClasses.getFirst()));
+	mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_4, mWeightClasses.getFirst()));
 }
 
 void WeightSelectionState::draw(RenderList &list)
@@ -62,7 +62,7 @@ void WeightSelectionState::draw(RenderList &list)
 void WeightSelectionState::update(GameData &data, int delta)
 {
 	mWeightClasses.update(data, delta);
-	if(mPlayerReadyStatus[0])
+	if(mPlayerReadyStatus[0] && mPlayerReadyStatus[1] && mPlayerReadyStatus[2] && mPlayerReadyStatus[3])
 		mOwner.changeState(st::FINISHED_STATE);
 }
 

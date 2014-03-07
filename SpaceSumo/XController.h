@@ -16,10 +16,12 @@ public:
 	virtual void update(GameData& data);
 	virtual void set(Control, bool);
 private:
+	XController(const XController &xC);
+	XController& operator=(const XController &xc);
 	int mControllerIndex;
 	std::vector<sf::Clock> mTimers;
 	std::bitset<MAX_SIZE> mActiveR;
-	int mUp, mDown, mRight, mLeft, mPush, mActivate;
+	int mUp, mDown, mRight, mLeft, mEnter, mForward, mPush, mActivate;
 	int mRepeatTime;
 };
 
