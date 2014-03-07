@@ -30,6 +30,15 @@ res/img/UI/menu/next.png
 res/img/entity/spaceman/p1/Smoke.png
 res/img/entity/spaceman/p1/Jet.png
 res/img/entity/spaceman/p1/Body.png
+res/img/entity/spaceman/p2/Smoke.png
+res/img/entity/spaceman/p2/Jet.png
+res/img/entity/spaceman/p2/Body.png
+res/img/entity/spaceman/p3/Smoke.png
+res/img/entity/spaceman/p3/Jet.png
+res/img/entity/spaceman/p3/Body.png
+res/img/entity/spaceman/p4/Smoke.png
+res/img/entity/spaceman/p4/Jet.png
+res/img/entity/spaceman/p4/Body.png
 res/sound/jetpack/End.ogg
 res/sound/jetpack/Main.ogg
 res/sound/jetpack/Start.ogg

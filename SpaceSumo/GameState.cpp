@@ -101,25 +101,31 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[0], gData, ControlList::PLAYER_1, SVector(600, 400), 30));
 		}
+		if(gData.controlList.getNActivePlayers() == 1)
+			break;
 		p = ControlList::PLAYER_2;
 	case ControlList::PLAYER_2:
 		if(gData.controlList.isActive(p))
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, ControlList::PLAYER_2, SVector(1200, 400), 30));
 		}
+		if(gData.controlList.getNActivePlayers() == 2)
+			break;
 		p = ControlList::PLAYER_3;
 	case ControlList::PLAYER_3:
 		if(gData.controlList.isActive(p))
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[2], gData, ControlList::PLAYER_3, SVector(600, 600), 30));
 		}
+		if(gData.controlList.getNActivePlayers() == 3)
+			break;
 		p = ControlList::PLAYER_3;
 	case ControlList::PLAYER_4:
 		if(gData.controlList.isActive(p))
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[3], gData, ControlList::PLAYER_4, SVector(1200, 600), 30));
 		}
-		p = ControlList::PLAYER_3;
+		break;
 	}
 	//mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, 1, (400, 400), 30));
 }
