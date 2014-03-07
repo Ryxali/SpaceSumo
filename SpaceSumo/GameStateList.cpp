@@ -4,6 +4,7 @@
 #include "MenuState.h"
 #include "GameState.h"
 #include "SetupState.h"
+#include "CharacterSetupState.h"
 #include "StateList_Main.h"
 
 GameStateList::GameStateList(GameData &data) : StateList()
@@ -12,6 +13,7 @@ GameStateList::GameStateList(GameData &data) : StateList()
 	GameState* gS = new GameState(*this, data);
 	add(gS);
 	add(new SetupState(*this, data, *gS));
+	add(new CharacterSetupState(*this, data, *gS));
 	StateList::changeState(0);
 	sync();
 }
@@ -33,6 +35,9 @@ void GameStateList::changeState(st::State_Type index)
 		break;
 	case st::PLAY_STATE:
 		StateList::changeState(2);
+		break;
+	case st::C_SELECT_STATE:
+		StateList::changeState(3);
 		break;
 	default:
 		SError("Unknown index", "State_Type not in switch!")

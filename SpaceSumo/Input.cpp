@@ -33,6 +33,11 @@ bool Input::pop_front(sf::Event &evt)
 
 void Input::clear()
 {
+	
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	{
+		int i = 5;
+	}
 	while(!mEvts.empty())
 		mEvts.pop();
 }

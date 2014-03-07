@@ -2,7 +2,7 @@
 
 class RenderList;
 class EffectStatus;
-
+class Controller;
 #include <vector>
 #include "EffectStatus.h"
 
@@ -14,7 +14,7 @@ public:
 	~Effects();
 
 	void draw(RenderList& renderList, SpaceManImp* owner);
-	void update(sf::Keyboard::Key& push, GameData& data);
+	void update(Controller& pController, GameData& data);
 	void addEffect(EffectImp*);
 	void clear();
 	

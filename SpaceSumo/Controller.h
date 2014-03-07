@@ -11,23 +11,30 @@ public:
 		DOWN,
 		RIGHT,
 		LEFT,
+		ENTER,
+		FORWARD,
 		PUSH,
 		ACTIVATE,
 		MAX_SIZE
 	};
+	
 
-	Controller(){}
+	Controller();
 	~Controller(){}
 
-	bool isActive(Control &ctrl) const;
+	bool isActive(Control ctrl) const;
+	virtual bool isActiveReset(Control ctrl) = 0;
 	virtual void update(GameData& data) = 0;
 	int getPlayer();
 
+	void setPlayer(int index);
 protected:
 	friend class ControlList;
-	void set(Control ctrl, bool status);
+	virtual void set(Control ctrl, bool status);
 	int mPlayerIndex;
-private:
 	std::bitset<MAX_SIZE> mStatus;
+	
+private:
+	
 };
 

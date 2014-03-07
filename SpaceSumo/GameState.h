@@ -1,6 +1,7 @@
 #pragma once
 class Mode;
 class Map;
+struct SpacemanData;
 #include "State.h"
 #include <ResourceManager\SSprite.h>
 #include "GameStateData.h"
@@ -19,6 +20,7 @@ public:
 	virtual void open();
 	virtual void close();
 	void setup(Map *newMap, Mode *newMode);
+	void setup(SpacemanData (&sData)[4], GameData &gData);
 private:
 	void spacemanCreation(GameData& gameData);
 	GameStateData mData;

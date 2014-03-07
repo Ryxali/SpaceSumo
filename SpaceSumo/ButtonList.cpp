@@ -92,14 +92,14 @@ Button* ButtonList::getUp(int x, int y)
 	y--;
 	if ( y < 0)
 	{
-		y = MAP_HEIGHT;
+		y = MAP_HEIGHT-1;
 	}
 	while (mMap[x][y] == 0)
 	{
 		y--;
 		if ( y < 0)
 		{
-			y = MAP_HEIGHT;
+			y = MAP_HEIGHT-1;
 		}
 	}
 
@@ -110,14 +110,14 @@ Button* ButtonList::getLeft(int x, int y)
 	x--;
 	if ( x < 0)
 	{
-		x = MAP_WIDTH;
+		x = MAP_WIDTH-1;
 	}
 	while (mMap[x][y] == 0)
 	{
 		x--;
 		if ( x < 0)
 		{
-			x = MAP_WIDTH;
+			x = MAP_WIDTH-1;
 		}
 	}
 
@@ -126,14 +126,14 @@ Button* ButtonList::getLeft(int x, int y)
 Button* ButtonList::getDown(int x, int y)
 {
 	y++;
-	if ( y > MAP_HEIGHT)
+	if ( y > MAP_HEIGHT-1)
 	{
 		y = 0;
 	}
 	while (mMap[x][y] == 0)
 	{
 		y++;
-		if ( y > MAP_HEIGHT)
+		if ( y > MAP_HEIGHT-1)
 		{
 			y = 0;
 		}
@@ -144,14 +144,14 @@ Button* ButtonList::getDown(int x, int y)
 Button* ButtonList::getRight(int x, int y)
 {
 	x++;
-	if ( x > MAP_WIDTH)
+	if ( x > MAP_WIDTH-1)
 	{
 		x = 0;
 	}
 	while (mMap[x][y] == 0)
 	{
 		x++;
-		if ( x > MAP_WIDTH)
+		if ( x > MAP_WIDTH-1)
 		{
 			x = 0;
 		}
