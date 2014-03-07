@@ -55,6 +55,7 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpaceman.setRotation(rotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
+	mAnim.setCurrentRow(0);
 }
 
 SpaceManImp::SpaceManImp(

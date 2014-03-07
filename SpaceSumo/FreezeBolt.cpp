@@ -4,9 +4,10 @@
 #include "Frozen.h"
 #include <ResourceManager\soundFac.h>
 #include <ResourceManager\RHandle.h>
+#include "consts.h"
 
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projSpeed) 
-	: mSpeed(projSpeed),
+	: mProjSpeed(projSpeed),
 	mDirection(dir),
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
@@ -17,8 +18,17 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& wor
 	mBody.setRotation( mDirection.getAngle() );
 	mAnim.getSprite().setOrigin( 32 , 32 );
 	mBody.getBody()->SetUserData(this);
-	mBody.setLinearVelocity(b2Vec2(mDirection.getX() * mSpeed, mDirection.getY() * mSpeed));
-	mSpeed += userSpeed.getX() * dir.getX() + userSpeed.getY() * dir.getY();
+	float dot = (( userSpeed.getX() * mDirection.getX() + userSpeed.getY() * mDirection.getY()));
+	mSpeed = ( b2Vec2( dot * mDirection.getX() , dot * mDirection.getY()));
+
+	mSpeed = ( b2Vec2 ( mSpeed.x / PPM + mDirection.getX() * mProjSpeed, mSpeed.y / PPM + mDirection.getY() * mProjSpeed ));
+
+	while (mSpeed.Length() < 10 )
+	{
+		mSpeed = b2Vec2(mSpeed.x + mDirection.getX() / PPM, mSpeed.y + mDirection.getY() / PPM);
+	}
+
+	mBody.setLinearVelocity( mSpeed );
 }
 
 FreezeBolt::~FreezeBolt()
@@ -38,7 +48,6 @@ void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 	//mAnim.getSprite().setRotation( mDirection.getAngle() + 90);
 	mAnim.getSprite().rotate(2);
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
-
 }
 
 void FreezeBolt::draw(RenderList& renderList)
