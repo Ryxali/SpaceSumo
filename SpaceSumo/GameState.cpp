@@ -23,6 +23,9 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	Config c("res/conf/mode/sumo/zone.cfg");
 	mPSpawnMaxX = c.getValue<int>("ZoneWidth");
 	mPSpawnMaxY = c.getValue<int>("ZoneHeight");
+	mMusic.openFromFile("res/music/terra/terra.ogg");
+	mMusic.setLoop(true);
+	//mMusic.play();
 }
 GameState::~GameState()
 {
@@ -76,6 +79,8 @@ void GameState::close()
 	delete mGameMap;*/
 	mGameMode = 0;
 	mGameMap = 0;
+
+	mMusic.stop();
 }
 
 void GameState::setup(Map *newMap, Mode *newMode)

@@ -5,6 +5,7 @@
 #include <ResourceManager\Animation.h>
 #include "B2Body.h"
 #include <Common\Timer.h>
+#include <ResourceManager\Playable.h>
 
 class SpaceManImp;
 
@@ -27,5 +28,6 @@ private:
 	bool mDying;
 	Animation mAnim;
 	Timer mDuration;
+	Playable* mBlast;
 };
 
