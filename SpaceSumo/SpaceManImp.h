@@ -95,8 +95,9 @@ private:
 	B2Body mRightHand;
 	b2PrismaticJointDef mRightArmDef;
 
-	Timer mPushTimer;
-	bool mPushing;
+	Timer mPushDuration;
+	Timer mPushCooldown;
+	bool mPushed;
 
 
 	Timer mRespawnTimer;

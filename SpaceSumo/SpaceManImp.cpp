@@ -36,13 +36,14 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
 	mJetOffset(-37.f),
-	mPushTimer(mConfig.getValue<int>("pushCooldown")),
+	mPushDuration(mConfig.getValue<int>("pushDuration")),
+	mPushCooldown(mConfig.getValue<int>("pushCooldown")),
 	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
 	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
 	mAbility(0),
-	mPushing(false),
+	mPushed(false),
 	mSlowDeath(false),
 	mAlive(true),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
@@ -78,8 +79,9 @@ SpaceManImp::SpaceManImp(
 	mRightArm(0),
 	mRightHand(data.world, handData, playerData.getValue<float>(""), playerData.getValue<float>("")),
 	mRightArmDef(),
-	mPushTimer(spaceManData.getValue<int>("pushCooldown")),
-	mPushing(false),
+	mPushDuration(mConfig.getValue<int>("pushDuration")),
+	mPushCooldown(mConfig.getValue<int>("pushCooldown")),
+	mPushed(false),
 	mRespawnTimer(spaceManData.getValue<int>("respawnTimer")),
 	mSlowDeath(false),
 	mEffects(),
@@ -212,22 +214,20 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// player push
-	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus)
+	if(mPushDuration.isExpired() && mPushed == true)
 	{
-		mPushing = true;
-		mPushTimer.reset();
-	} 
-
-	if( mPushing == true && !mPushTimer.isExpired() )
-	{
-		extendArms();
-	}
-
-	if( mPushTimer.isExpired() )
-	{
+		mPushed = false;
+		mPushCooldown.reset();
 		retractArms();
-		mPushing = false;
 	}
+
+
+	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus && mPushCooldown.isExpired())
+	{
+		mPushed = true;
+		mPushDuration.reset();
+		extendArms();
+	} 
 
 
 	// activate ability
