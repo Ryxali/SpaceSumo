@@ -10,7 +10,10 @@ ButtonSingle::ButtonSingle(SVector position, int mapX, int mapY, Command *comman
 	Rectangle( 1 , 1 ),
 	mPosition(position),
 	mCommand(command),
-	mHovered(false)
+	mHovered(false),
+	mStillHovered(false),
+	mWasPressed(false),
+	currentRow(0)
 {
 	mMapX = mapX;
 	mMapY = mapY;
@@ -26,17 +29,32 @@ ButtonSingle::~ButtonSingle()
 
 void ButtonSingle::update(GameData &data)
 {
-	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos)) 
+	if(mAnimation.getSprite().getGlobalBounds().contains(data.mPos) && !sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) 
 	{
 		mHovered = true;
+		mStillHovered = true;
+		currentRow = 1;
+	}
+	else if(!sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		mHovered = false;
+		mWasPressed = false;
+		currentRow = 0;
 	}
 	else
 	{
-		mHovered = false;
+		mStillHovered = false;
 	}
 
-	if( mHovered == true && ( sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return)))
+	if(mHovered == true && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
+		mWasPressed = true;
+		currentRow = 2;
+	}
+
+	if(mStillHovered == true && mWasPressed == true && !sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		currentRow = 2;
 		execute(1);
 	}
 }
@@ -44,6 +62,7 @@ void ButtonSingle::update(GameData &data)
 void ButtonSingle::draw(RenderList& renderList)
 {
 	//mAnimation.setCurrentRow(aProperNumber);
+	mAnimation.setCurrentRow(currentRow);
 	renderList.addSprite(mAnimation);
 }
 

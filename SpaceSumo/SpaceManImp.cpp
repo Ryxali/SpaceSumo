@@ -214,15 +214,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// player push
-	if(mPushDuration.isExpired() && mPushed == true)
+	if(mPushed == true && mPushDuration.isExpired())
 	{
 		mPushed = false;
 		mPushCooldown.reset();
 		retractArms();
 	}
 
-
-	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus && mPushCooldown.isExpired())
+	if(sf::Keyboard::isKeyPressed(mPush) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus && mPushed == false && mPushCooldown.isExpired())
 	{
 		mPushed = true;
 		mPushDuration.reset();
