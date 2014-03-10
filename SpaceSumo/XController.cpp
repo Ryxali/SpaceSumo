@@ -72,30 +72,31 @@ void XController::update(GameData& data)
 
 			if(evt.joystickButton.joystickId == mControllerIndex)
 			{
+				bool breakmaybe = false;
 				if(evt.joystickButton.button == mActivate) // A
 				{
 					set(ACTIVATE, true);
-					break;
+					breakmaybe = true;
 				}
 
 				if(evt.joystickButton.button == mPush) // B
 				{
 					set(PUSH, true);
-					break;
+					breakmaybe = true;
 				}
 
 				if(evt.joystickButton.button == mEnter) // B
 				{
 					set(ENTER, true);
-					break;
+					breakmaybe = true;
 				}
 
 				if(evt.joystickButton.button == mForward) // B
 				{
 					set(FORWARD, true);
-					break;
+					breakmaybe = true;
 				}
-				
+				if(breakmaybe)break;
 			}
 
 			/*if(evt.joystickMove.axis == sf::Joystick::Y) // left stick horizontal
@@ -145,29 +146,31 @@ void XController::update(GameData& data)
 		case sf::Event::JoystickButtonReleased:
 			if(evt.joystickButton.joystickId == mControllerIndex)
 			{
+				bool breakmaybe = false;
 				if(evt.joystickButton.button == mActivate) // A
 				{
 					set(ACTIVATE, false);
-					break;
+					breakmaybe = true;
 				}
 
 				if(evt.joystickButton.button == mPush) // B
 				{
 					set(PUSH, false);
-					break;
+					breakmaybe = true;
 				}
 
 				if(evt.joystickButton.button == mEnter) // B
 				{
 					set(ENTER, false);
-					break;
+					breakmaybe = true;
 				}
 
 				if(evt.joystickButton.button == mForward) // B
 				{
 					set(FORWARD, false);
-					break;
+					breakmaybe = true;
 				}
+				if(breakmaybe)break;
 			}
 		default:
 			data.input.add(evt);

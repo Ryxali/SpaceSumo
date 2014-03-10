@@ -4,7 +4,6 @@ class RenderList;
 class EffectStatus;
 class Controller;
 #include <vector>
-#include "Effect.h"
 #include "EffectStatus.h"
 
 
@@ -14,9 +13,10 @@ public:
 	Effects();
 	~Effects();
 
-	void draw(RenderList& renderList);
+	void draw(RenderList& renderList, SpaceManImp* owner);
 	void update(Controller& pController, GameData& data);
 	void addEffect(EffectImp*);
+	void clear();
 	
 	EffectStatus& getStatus();
 

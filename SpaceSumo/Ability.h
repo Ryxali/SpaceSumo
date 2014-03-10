@@ -9,6 +9,6 @@ class Ability
 public:
 	~Ability();
 
-	virtual void activate(SVector pos, SVector dir, GameStateData& data, b2World& world) = 0;
+	virtual void activate(SVector pos, SVector dir, SVector userSpeed, GameStateData& data, b2World& world) = 0;
 };
 

@@ -12,23 +12,24 @@ class FreezeBolt :
 	public Effecting
 {
 public:
-	FreezeBolt(SVector pos, SVector dir, b2World& world);
+	FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projectileSpeed);
 	~FreezeBolt();
 
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
-	virtual EffectImp* getEffect(SpaceManImp* owner);
+	virtual EffectImp* getEffect();
 	virtual void kill();
 
 private:
 
-	float mSpeed;
+	float mProjSpeed;
 	SVector mDirection;
 	float mAngle;
 	B2Body mBody;
 	bool mAlive;
 	Animation mAnim;
+	b2Vec2 mSpeed;
 
 	// sounds
 	Playable* mShoot;

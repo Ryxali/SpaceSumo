@@ -4,12 +4,11 @@
 #include "Face.h"
 #include "RenderList.h"
 #include <ResourceManager\RHandle.h>
-
+#include <ResourceManager\STexture.h>
 #include <SFML\Window\Keyboard.hpp>
 
-Head::Head(Position pos, Face* face) : mFace(face), mBar(res::getTexture("res/img/UI/corner1.png"), 9.f), mScore(0), mPos(pos)
+Head::Head(Position pos, SSprite texture, Face* face) : mFace(face), mBar(texture), mScore(0), mPos(pos)
 {
-
 }
 
 
@@ -75,4 +74,13 @@ void Head::setScore(int score)
 int Head::getScore() const
 {
 	return mScore;
+}
+
+Head::UIPool::UIPool()
+	: TLeft(res::getTexture("res/img/UI/hud/cornerblue.png"), 9), 
+	TRight(res::getTexture("res/img/UI/hud/cornerred.png"), 9), 
+	BLeft(res::getTexture("res/img/UI/hud/cornergreen.png"), 9), 
+	BRight(res::getTexture("res/img/UI/hud/corneryellow.png"), 9)
+{
+
 }

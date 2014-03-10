@@ -15,9 +15,11 @@ Freezer::~Freezer()
 {
 }
 
-void Freezer::activate(SVector pos, SVector dir, GameStateData& data, b2World& world)
+void Freezer::activate(SVector pos, SVector dir, SVector userSpeed, GameStateData& data, b2World& world)
 {
-	data.mEntityImpList.add(new FreezeBolt(SVector(pos.getX() + (dir.getX() * 70), pos.getY() + (dir.getY() * 70)), 
-		dir, 
-		world));
+	data.mEntityImpList.add(new FreezeBolt( SVector(pos.getX() + (dir.getX() * 110), pos.getY() + (dir.getY() * 110)), //70 is the magic constant for offset
+		dir,
+		userSpeed,
+		world,
+		mSpeed));
 }

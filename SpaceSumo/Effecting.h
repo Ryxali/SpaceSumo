@@ -1,8 +1,8 @@
 #pragma once
 #include "entityimp.h"
-#include "Effect.h"
 
 class SpaceManImp;
+class EffectImp;
 
 class Effecting :
 	public EntityImp
@@ -15,7 +15,7 @@ public:
 	virtual void draw(RenderList& renderList) = 0;
 	virtual bool isAlive() = 0;
 	virtual EntityType getType();
-	virtual EffectImp* getEffect(SpaceManImp* owner) = 0;
+	virtual EffectImp* getEffect() = 0;
 	virtual void kill() = 0;
 };
 

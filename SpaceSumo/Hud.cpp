@@ -4,11 +4,11 @@
 #include <Common\error.h>
 
 
-Hud::Hud() : mPool(), mNPlayers(0),
-	mHead0(Position::TOP_LEFT, &mPool.test),
-	mHead1(Position::TOP_RIGHT, &mPool.test1),
-	mHead2(Position::BOTTOM_LEFT, &mPool.test2),
-	mHead3(Position::BOTTOM_RIGHT, &mPool.test3)
+Hud::Hud() : mFacePool(), mUIPool(), mNPlayers(0),
+	mHead0(Position::TOP_LEFT, mUIPool.TLeft, &mFacePool.test),
+	mHead1(Position::TOP_RIGHT, mUIPool.TRight, &mFacePool.test1),
+	mHead2(Position::BOTTOM_LEFT, mUIPool.BLeft, &mFacePool.test2),
+	mHead3(Position::BOTTOM_RIGHT, mUIPool.BRight, &mFacePool.test3)
 {
 	
 }

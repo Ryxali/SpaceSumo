@@ -3,12 +3,13 @@
 #include <ResourceManager\SSprite.h>
 #include "Face.h"
 #include "Position.h"
+#include <ResourceManager\STexture.h>
 class RenderList;
 class Head
 {
 public:
-	
-	Head(Position pos, Face* face = 0);
+
+	Head(Position pos, SSprite texture, Face* face = 0);
 	~Head();
 
 	void draw(RenderList &list);
@@ -17,6 +18,20 @@ public:
 
 	void setScore(int score);
 	int getScore() const;
+
+	struct UIPool
+	{
+		UIPool();
+		SSprite TLeft;
+		SSprite TRight;
+		SSprite BLeft;
+		SSprite BRight;
+	private:
+
+		UIPool(const UIPool& fPool);
+		UIPool& operator=(const UIPool& fPool);
+	};
+
 private:
 	Head(const Head& head);
 	Head& operator=(const Head& head);
