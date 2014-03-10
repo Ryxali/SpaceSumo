@@ -15,3 +15,4 @@ public:
 	virtual void update(GameData& data, int delta, ButtonList& owner) = 0;
 
 };
+
