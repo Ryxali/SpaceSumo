@@ -99,6 +99,8 @@ SpaceManImp::SpaceManImp(
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
+	mSpaceman.setAngularVelocity(0);
+	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
 }
 
 

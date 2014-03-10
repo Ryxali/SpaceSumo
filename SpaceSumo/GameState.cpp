@@ -20,6 +20,9 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	mHud(), 
 	mPowerUpSpawnTimer(8000)
 {
+	Config c("res/conf/mode/sumo/zone.cfg");
+	mPSpawnMaxX = c.getValue<int>("ZoneWidth");
+	mPSpawnMaxY = c.getValue<int>("ZoneHeight");
 }
 GameState::~GameState()
 {
@@ -33,7 +36,7 @@ void GameState::update(GameData &data, int delta)
 	if(mPowerUpSpawnTimer.isExpired())
 	{
 		mData.mEntityImpList.add((entFac::createPowerUpRandom(
-			data.world, rand()% 1519 + 200, rand()% 680 + 200)));
+			data.world, rand()% (mPSpawnMaxX - 128) + WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + WINDOW_SIZE.y - mPSpawnMaxY)));
 			mPowerUpSpawnTimer.reset();
 	}
 

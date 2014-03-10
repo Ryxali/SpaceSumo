@@ -2,7 +2,7 @@
 #include "State.h"
 #include "StateList.h"
 #include "GameData.h"
-#define NO_MEMORY_TRACKING
+
 State::State(StateList &owner) : mOwner(owner)
 {
 }

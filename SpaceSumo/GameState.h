@@ -29,4 +29,5 @@ private:
 	Map* mGameMap;
 	Hud mHud;
 	Timer mPowerUpSpawnTimer;
+	int mPSpawnMaxX, mPSpawnMaxY;
 };

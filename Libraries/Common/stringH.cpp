@@ -215,6 +215,10 @@ sf::Keyboard::Key str::toKey(std::string keyName)
 	{
 		return sf::Keyboard::Return;
 	}
+	if(keyName == "BACKSPACE")
+	{
+		return sf::Keyboard::BackSpace;
+	}
 	SError("Unknown Key", "Couldn't find char value for key: " + keyName);
 }
 
