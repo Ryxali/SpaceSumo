@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "EffectImp.h"
 
+EffectImp::EffectImp() : mIsAlive(true)
+{
+
+}
+
 EffectImp::~EffectImp()
 {
 }
