@@ -30,7 +30,7 @@ Exploded::~Exploded()
 }
 
 
-void Exploded::update(sf::Keyboard::Key& push, GameData& data)
+void Exploded::update(Controller& controls, GameData& data)
 {
 	if(mOwner != 0 )
 	{

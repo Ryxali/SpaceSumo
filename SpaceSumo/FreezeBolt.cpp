@@ -7,8 +7,7 @@
 #include "consts.h"
 
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projSpeed) 
-	: mProjSpeed(projSpeed),
-	mDirection(dir),
+	: mDirection(dir),
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
@@ -18,10 +17,11 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& wor
 	mBody.setRotation( mDirection.getAngle() );
 	mAnim.getSprite().setOrigin( 32 , 32 );
 	mBody.getBody()->SetUserData(this);
+
 	float dot = (( userSpeed.getX() * mDirection.getX() + userSpeed.getY() * mDirection.getY()));
 	mSpeed = ( b2Vec2( dot * mDirection.getX() , dot * mDirection.getY()));
 
-	mSpeed = ( b2Vec2 ( mSpeed.x / PPM + mDirection.getX() * mProjSpeed, mSpeed.y / PPM + mDirection.getY() * mProjSpeed ));
+	mSpeed = ( b2Vec2 ( mSpeed.x / PPM + mDirection.getX() * projSpeed, mSpeed.y / PPM + mDirection.getY() * projSpeed ));
 
 	while (mSpeed.Length() < 10 )
 	{

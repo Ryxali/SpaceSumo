@@ -3,10 +3,11 @@
 #include <ResourceManager\RHandle.h>
 #include "Exploded.h"
 #include "Explosion.h"
+#include "consts.h"
 
 
-EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
-	mSpeed(60),
+EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
+	mSpeed(),
 	mDirection(dir),
 	mPosition(position),
 	mAngle(0),
@@ -17,7 +18,18 @@ EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
 	mAnim.getSprite().setOrigin( 32 , 32 );
 	mBody.setRotation( mAngle );
 	mBody.getBody()->SetUserData(this);
-	mBody.setLinearVelocity(b2Vec2(mDirection.getX()*mSpeed , mDirection.getY()*mSpeed ));
+
+	float dot = (( userSpeed.getX() * mDirection.getX() + userSpeed.getY() * mDirection.getY()));
+	mSpeed = ( b2Vec2( dot * mDirection.getX() , dot * mDirection.getY()));
+
+	mSpeed = ( b2Vec2 ( mSpeed.x / PPM + mDirection.getX() * projSpeed, mSpeed.y / PPM + mDirection.getY() * projSpeed ));
+
+	while (mSpeed.Length() < 10 )
+	{
+		mSpeed = b2Vec2(mSpeed.x + mDirection.getX() / PPM, mSpeed.y + mDirection.getY() / PPM);
+	}
+
+	mBody.setLinearVelocity( mSpeed );
 }
 
 
