@@ -10,6 +10,7 @@ public:
 	virtual void activate(SVector pos, SVector dir, SVector userSpeed, GameStateData& data, b2World& world);
 
 private:
+	float mSpeed;
 
 };
 
