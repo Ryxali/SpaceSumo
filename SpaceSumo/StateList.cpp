@@ -12,10 +12,12 @@ StateList::StateList() : mStates(), mCurState(0), mNextState(0)
 
 StateList::~StateList()
 {
-	while(mStates.begin() != mStates.end())
+	std::vector<State*>::iterator it = mStates.begin();
+	while(it != mStates.end())
 	{
-		delete mStates.back();
-		mStates.pop_back();
+		// TODO proper delete
+		// delete *it;
+		it = mStates.erase(it);
 	}
 }
 

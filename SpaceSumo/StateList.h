@@ -13,7 +13,7 @@ private:
 	friend class State;
 public:
 	StateList();
-	~StateList();
+	virtual ~StateList();
 	
 	virtual void changeState(st::State_Type index) = 0;
 	State &getCurrent();

@@ -26,7 +26,7 @@ ButtonList::~ButtonList()
 {
 	for(int i = 0; i < mCurSize; ++i)
 	{
-		delete mButtons[i];
+		//delete mButtons[i];
 	}
 	delete mButtons;
 }
@@ -77,6 +77,7 @@ void ButtonList::clear()
 		delete mButtons[i];
 		mButtons[i] = 0;
 	}
+	mCurSize = 0;
 
 	mObserverList.clear();
 }

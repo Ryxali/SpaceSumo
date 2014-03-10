@@ -2,6 +2,11 @@
 #include "EffectImp.h"
 #include "SpaceManImp.h"
 
+EffectImp::EffectImp() : mIsAlive(true)
+{
+
+}
+
 EffectImp::~EffectImp()
 {
 }
