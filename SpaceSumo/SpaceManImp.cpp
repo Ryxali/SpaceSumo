@@ -303,6 +303,9 @@ void SpaceManImp::slowDeath()
 {
 	mSlowDeath = true;
 	mRespawnTimer.reset();
+	mJet.setCurrentRow(0);
+	mTurn.setCurrentRow(0);
+	mJetpack->stop();
 }
 
 bool SpaceManImp::isSlowlyDying() const

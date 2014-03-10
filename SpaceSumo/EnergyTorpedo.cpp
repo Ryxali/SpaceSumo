@@ -3,6 +3,7 @@
 #include <ResourceManager\RHandle.h>
 #include "Exploded.h"
 #include "Explosion.h"
+#include <ResourceManager\soundFac.h>
 
 
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
@@ -12,7 +13,9 @@ EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
 	mAngle(0),
 	mBody(world, "res/conf/energyTorpedo.cfg", position.getX(), position.getY()),
 	mWorld(world),
-	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/energytorpedo.png"), "res/img/PowerUp/EnergyTorpedo/energytorpedo.cfg", 5.f)
+	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/energytorpedo.png"), "res/img/PowerUp/EnergyTorpedo/energytorpedo.cfg", 5.f),
+	mShoot(0),
+	mTravelling(0)
 {
 	mAnim.getSprite().setOrigin( 32 , 32 );
 	mBody.setRotation( mAngle );
@@ -27,11 +30,27 @@ EnergyTorpedo::~EnergyTorpedo()
 
 void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 {
+	if( mShoot == 0 && mTravelling == 0)
+	{
+		mTravelling = soundFac::createSound("res/sound/energy_torpedo/torpedo_travelling.spf" , data.soundlist );
+		mShoot = soundFac::createSound("res/sound/energy_torpedo/torpedo_launch.spf", data.soundlist);
+		mShoot->play();
+		mTravelling->play();
+	}
+		
+	//deletes the projectile if it's outside the map
+	if( (mBody.getPosition().x*PPM < -200 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 200) ||
+		(mBody.getPosition().y*PPM < -200 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 200))
+	{
+		mAlive = false;
+	}
+
 	mAnim.getSprite().setPosition(mBody.getPosition().x*PPM , mBody.getPosition().y*PPM );
 
 	if( mAlive == false )
 	{
 		gsData.mEntityImpList.add( new Explosion( mWorld, mBody.getPosition().x*PPM, mBody.getPosition().y*PPM ));
+		mTravelling->stop();
 	}
 
 }

@@ -7,6 +7,7 @@ struct SpacemanData;
 #include "GameStateData.h"
 #include "Hud.h"
 #include <Common\Timer.h>
+#include <SFML/Audio/Music.hpp>
 
 
 class GameState : public State
@@ -29,4 +30,5 @@ private:
 	Map* mGameMap;
 	Hud mHud;
 	Timer mPowerUpSpawnTimer;
+	sf::Music mMusic;
 };

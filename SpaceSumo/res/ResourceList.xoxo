@@ -52,3 +52,7 @@ res/sound/freeze/freeze_blast.ogg
 res/sound/freeze/freeze_break.ogg
 res/sound/freeze/freeze_breaking.ogg
 res/sound/freeze/freeze_onhit.ogg
+res/sound/freeze/freeze_travelling.ogg
+res/sound/energy_torpedo/blast.ogg
+res/sound/energy_torpedo/launch.ogg
+res/sound/energy_torpedo/travelling.ogg

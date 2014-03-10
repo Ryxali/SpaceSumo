@@ -33,5 +33,6 @@ private:
 
 	// sounds
 	Playable* mShoot;
+	Playable* mTravelling;
 };
 
