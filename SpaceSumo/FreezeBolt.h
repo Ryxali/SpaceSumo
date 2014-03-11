@@ -23,7 +23,6 @@ public:
 
 private:
 
-	float mProjSpeed;
 	SVector mDirection;
 	float mAngle;
 	B2Body mBody;

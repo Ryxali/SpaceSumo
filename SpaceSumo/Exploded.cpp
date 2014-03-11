@@ -30,7 +30,11 @@ Exploded::~Exploded()
 }
 
 
+<<<<<<< HEAD
 void Exploded::update(Controller& controller, GameData& data)
+=======
+void Exploded::update(Controller& controls, GameData& data)
+>>>>>>> dev_LA
 {
 	if(mOwner != 0 )
 	{
