@@ -16,22 +16,17 @@ MenuState::MenuState(StateList &owner) :
 {
 	mOwner = owner;
 	mButtonList.add(new ButtonSingle(
-		SVector(200,200), 
-		0, 0,
-		new ChangeStateCommand(st::GAME_STATE, mOwner), 
-		(std::string)"res/img/UI/menu/tmp_menu"));
-	mButtonList.add(new ButtonSingle(
 		SVector(200,400), 
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
-		(std::string)"res/img/UI/menu/tmp_menu"));
+		(std::string)"res/img/UI/menu/main/play"));
 	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst()));
 }
 
 
 MenuState::~MenuState()
 {
-	mButtonList.clear();
+
 }
 
 void MenuState::draw(RenderList &list)

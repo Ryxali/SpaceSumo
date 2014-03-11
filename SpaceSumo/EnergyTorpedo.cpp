@@ -3,19 +3,16 @@
 #include <ResourceManager\RHandle.h>
 #include "Exploded.h"
 #include "Explosion.h"
-<<<<<<< HEAD
-#include <ResourceManager\soundFac.h>
-
-
-EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
-	mSpeed(30),
-=======
 #include "consts.h"
+#include <ResourceManager\soundFac.h>
 
 
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
 	mSpeed(),
->>>>>>> dev_LA
+
+
+EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
+	mSpeed(),
 	mDirection(dir),
 	mPosition(position),
 	mAngle(0),
@@ -56,7 +53,7 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 		mShoot->play();
 		mTravelling->play();
 	}
-		
+
 	//deletes the projectile if it's outside the map
 	if( (mBody.getPosition().x*PPM < -200 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 200) ||
 		(mBody.getPosition().y*PPM < -200 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 200))
@@ -76,7 +73,7 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 
 void EnergyTorpedo::draw(RenderList& list)
 {
-	
+
 	list.addSprite(mAnim);
 }
 
@@ -93,5 +90,5 @@ bool EnergyTorpedo::isAlive()
 void EnergyTorpedo::kill()
 {
 	mAlive = false;
-	
+
 }
