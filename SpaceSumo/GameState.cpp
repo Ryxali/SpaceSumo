@@ -20,6 +20,12 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	mHud(), 
 	mPowerUpSpawnTimer(8000)
 {
+	Config c("res/conf/mode/sumo/zone.cfg");
+	mPSpawnMaxX = c.getValue<int>("ZoneWidth");
+	mPSpawnMaxY = c.getValue<int>("ZoneHeight");
+	mMusic.openFromFile("res/music/terra/terra.ogg");
+	mMusic.setLoop(true);
+	//mMusic.play();
 }
 GameState::~GameState()
 {
@@ -33,7 +39,7 @@ void GameState::update(GameData &data, int delta)
 	if(mPowerUpSpawnTimer.isExpired())
 	{
 		mData.mEntityImpList.add((entFac::createPowerUpRandom(
-			data.world, rand()% 1519 + 200, rand()% 680 + 200)));
+			data.world, rand()% (mPSpawnMaxX - 128) + WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + WINDOW_SIZE.y - mPSpawnMaxY)));
 			mPowerUpSpawnTimer.reset();
 	}
 
@@ -73,6 +79,8 @@ void GameState::close()
 	delete mGameMap;*/
 	mGameMode = 0;
 	mGameMap = 0;
+
+	mMusic.stop();
 }
 
 void GameState::setup(Map *newMap, Mode *newMode)
@@ -101,25 +109,31 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[0], gData, ControlList::PLAYER_1, SVector(600, 400), 30));
 		}
+		if(gData.controlList.getNActivePlayers() == 1)
+			break;
 		p = ControlList::PLAYER_2;
 	case ControlList::PLAYER_2:
 		if(gData.controlList.isActive(p))
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, ControlList::PLAYER_2, SVector(1200, 400), 30));
 		}
+		if(gData.controlList.getNActivePlayers() == 2)
+			break;
 		p = ControlList::PLAYER_3;
 	case ControlList::PLAYER_3:
 		if(gData.controlList.isActive(p))
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[2], gData, ControlList::PLAYER_3, SVector(600, 600), 30));
 		}
+		if(gData.controlList.getNActivePlayers() == 3)
+			break;
 		p = ControlList::PLAYER_3;
 	case ControlList::PLAYER_4:
 		if(gData.controlList.isActive(p))
 		{
 			mData.mEntityImpList.add(entFac::createSpaceMan(sData[3], gData, ControlList::PLAYER_4, SVector(1200, 600), 30));
 		}
-		p = ControlList::PLAYER_3;
+		break;
 	}
 	//mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, 1, (400, 400), 30));
 }

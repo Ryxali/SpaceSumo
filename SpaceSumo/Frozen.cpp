@@ -11,7 +11,7 @@ Config Frozen::mConfig("res/conf/frozen.cfg", true);
 Frozen::Frozen() : 
 	mIntensity(mConfig.getValue<int>("intensity")),
 	mPrevKeyState(false),
-	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f),
+	mAnim(res::getTexture("res/img/powerup/FreezeBolt/frozen.png"), "res/img/powerup/FreezeBolt/frozen.cfg", 10.f),
 	mImpact(0),
 	mPunch(0),
 	mBreaking(0)

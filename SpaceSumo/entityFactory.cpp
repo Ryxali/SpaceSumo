@@ -47,7 +47,7 @@ EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, int play
 	return new SpaceManImp(
 		gData.controlList.get(playerIndex),
 		pos, startRotation,
-		Config("res/conf/characters/spaceman/visual_data_1.cfg"),
+		Config("res/conf/characters/spaceman/visual_data_"+std::to_string(playerIndex+1)+".cfg"),
 		Config(sData.bodyData),
 		Config(sData.handData),
 		gData);

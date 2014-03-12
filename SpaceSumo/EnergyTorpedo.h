@@ -4,6 +4,8 @@
 #include <ResourceManager\Animation.h>
 #include  "B2Body.h"
 #include "EntityType.h"
+#include <ResourceManager\Playable.h>
+
 
 
 class EnergyTorpedo :
@@ -29,5 +31,9 @@ private:
 	B2Body mBody;
 	b2World& mWorld;
 	Animation mAnim;
+
+	// sounds
+	Playable* mShoot;
+	Playable* mTravelling;
 };
 

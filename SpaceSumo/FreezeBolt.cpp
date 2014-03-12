@@ -11,8 +11,9 @@ FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& wor
 	mAngle(0),
 	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
-	mAnim(res::getTexture("res/img/powerup/freezebolt.png"), "res/img/powerup/freezebolt.cfg", 5.f),
-	mShoot(0)
+	mAnim(res::getTexture("res/img/powerup/FreezeBolt/freezebolt.png"), "res/img/powerup/FreezeBolt/freezebolt.cfg", 5.f),
+	mShoot(0),
+	mTravelling(0)
 {
 	mBody.setRotation( mDirection.getAngle() );
 	mAnim.getSprite().setOrigin( 32 , 32 );
@@ -39,15 +40,25 @@ FreezeBolt::~FreezeBolt()
 void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 {
 	
-	if( mShoot == 0 )
+	if( mShoot == 0 && mTravelling == 0)
 	{
 		mShoot = soundFac::createSound("res/sound/freeze/freeze_blast.spf", data.soundlist);
+		mTravelling = soundFac::createSound("res/sound/freeze/freeze_travelling.spf", data.soundlist);
 		mShoot->play();
+		mTravelling->play();
 	}
 
-	//mAnim.getSprite().setRotation( mDirection.getAngle() + 90);
 	mAnim.getSprite().rotate(2);
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
+
+	//deletes the projectile if it's outside the map
+	if( (mBody.getPosition().x*PPM < -200 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 200) || 
+		(mBody.getPosition().y*PPM < -200 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 200))
+	{
+		mAlive = false;
+		mTravelling->stop();
+	}
+
 }
 
 void FreezeBolt::draw(RenderList& renderList)
@@ -68,4 +79,5 @@ EffectImp* FreezeBolt::getEffect()
 void FreezeBolt::kill()
 {
 	mAlive = false;
+	mTravelling->stop();
 }

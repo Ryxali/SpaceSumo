@@ -28,6 +28,7 @@ public:
 	void setCurrentRow(unsigned char row);
 	unsigned short getSliceWidth();
 	unsigned short getSliceHeight();
+	int getCurrentFrame();
 private:
 	Animation& operator=(const Animation& anim);
 	Animation(const Animation &anim);
@@ -45,7 +46,7 @@ private:
 	unsigned char* mAnimLength;
 	unsigned short * mAnimTime;
 	unsigned short mAnimUniTime;
-	int getCurrentFrame();
+	
 	float mZ;
 	void reevaluateSizeValues();
 	void setAdvancedLengthOptions(Config &cf);

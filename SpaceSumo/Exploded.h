@@ -13,7 +13,8 @@ public:
 	Exploded();
 	virtual ~Exploded();
 
-	virtual void update(Controller& controls, GameData& data);
+	virtual void update(Controller& controller, GameData& data);
+
 	virtual void draw(RenderList& list, SpaceManImp* owner);
 	virtual EffectImp* clone();
 

@@ -1,0 +1,8 @@
+#Freezer config file
+
+intensity = 1
+<<<<<<< HEAD
+speed = 20.0
+=======
+speed = 30
+>>>>>>> dev_AO
