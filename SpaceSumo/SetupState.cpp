@@ -8,7 +8,7 @@
 #include "GameState.h"
 
 SetupState::SetupState(StateList &owner, GameData &data, GameState &gState) :
-	State(owner), StateList(), mBackground(res::getTexture("res/img/MenuBackground.png"), 0),
+	State(owner), StateList(), mBackground(res::getTexture("res/img/UI/menu/gamesetup/background.png"), 0),
 	mGState(gState)
 {
 	add(new ModeSelectState(*this, mMode, data.world));
@@ -26,7 +26,10 @@ SetupState::~SetupState()
 void SetupState::draw(RenderList &list)
 {
 	list.addSprite(mBackground);
-	getCurrent().draw(list);
+	for (auto it = mStates.begin(); it != mStates.end(); ++it)
+	{
+		(*it)->draw(list);
+	}
 }
 
 void SetupState::update(GameData &data, int delta)

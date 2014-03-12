@@ -196,12 +196,19 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		mJetpack->stop();
 	}
-
+	
 
 	// turn right
 	if(mControls.isActive(Controller::RIGHT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
 	{
-		mSpaceman.applyAngularImpulse( mRotationSpeed * fDelta , true);
+		if(mFixedRotation)
+		{
+			mSpaceman.setAngularVelocity(mRotationSpeed);
+		}
+		else
+		{
+			mSpaceman.applyAngularImpulse( mRotationSpeed * fDelta , true);
+		}
 		mTurn.setCurrentRow(1);
 		mTurning->play();
 	}
@@ -209,7 +216,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	//turn left
 	if(mControls.isActive(Controller::LEFT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
-		mSpaceman.applyAngularImpulse( - mRotationSpeed * fDelta , true);
+		if(mFixedRotation)
+		{
+			mSpaceman.setAngularVelocity(-mRotationSpeed);
+		}
+		else
+		{
+			mSpaceman.applyAngularImpulse(-mRotationSpeed * fDelta , true);
+		}
 		mTurn.setCurrentRow(0);
 		mTurning->play();
 	}	

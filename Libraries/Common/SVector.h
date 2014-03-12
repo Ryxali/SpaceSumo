@@ -102,25 +102,25 @@ public:
 inline SVector operator/(SVector &v0, float v) {
 	return SVector(v0.getX()/v, v0.getY()/v);
 }
-inline SVector operator/(const SVector &v0, SVector &v1) {
+inline SVector operator/(const SVector &v0, const SVector &v1) {
 	return SVector(v0.getX()/v1.getX(), v0.getY()/v1.getY());
 }
 inline SVector operator+(const SVector &v0, float v) {
 	return SVector(v0.getX()+v, v0.getY()+v);
 }
-inline SVector operator+(const SVector &v0, SVector &v1) {
+inline SVector operator+(const SVector &v0, const SVector &v1) {
 	return SVector(v0.getX()+v1.getX(), v0.getY()+v1.getY());
 }
 inline SVector operator*(SVector &v0, float v) {
 	return SVector(v0.getX()*v, v0.getY()*v);
 }
-inline SVector operator*(const SVector &v0, SVector &v1) {
+inline SVector operator*(const SVector &v0, const SVector &v1) {
 	return SVector(v0.getX()*v1.getX(), v0.getY()*v1.getY());
 }
 inline SVector operator-(const SVector &v0, float v) {
 	return SVector(v0.getX()-v, v0.getY()-v);
 }
-inline SVector operator-(const SVector &v0, SVector &v1) {
+inline SVector operator-(const SVector &v0, const SVector &v1) {
 	return SVector(v0.getX()-v1.getX(), v0.getY()-v1.getY());
 }
 

@@ -63,6 +63,9 @@ Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 		reevaluateSizeValues();
 		mTexVersion = mSTex.getVersion();
 	}
+	int curFrame = getCurrentFrame();
+	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
+	mSprite.setTextureRect(r);
 }
 
 const sf::Texture &Animation::getTexture() const
