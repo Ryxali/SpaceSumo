@@ -4,7 +4,6 @@
 
 EffectImp::EffectImp() : mIsAlive(true)
 {
-
 }
 
 EffectImp::~EffectImp()
