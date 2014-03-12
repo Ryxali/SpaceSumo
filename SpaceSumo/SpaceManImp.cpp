@@ -99,6 +99,7 @@ SpaceManImp::SpaceManImp(
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
+	mJetpack->setRelativeToListener(true);
 }
 
 

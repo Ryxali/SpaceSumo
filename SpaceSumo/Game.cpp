@@ -9,6 +9,7 @@
 #include "KeyboardController.h"
 #include "XController.h"
 #include <Common/XboxButtons.h>
+#include <SFML/Audio/Listener.hpp>
 #include <iostream>
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
@@ -38,7 +39,7 @@ Game::Game() :
 	mWindow.setFramerateLimit(160);
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
-	mGameData.world.SetContactListener(&mListener);
+	//mGameData.world.SetContactListener(&mListener);
 	mWindow.setKeyRepeatEnabled(false);
 
 
@@ -46,6 +47,7 @@ Game::Game() :
 
 void Game::start()
 {
+	sf::Listener::setPosition( sf::Vector3f(WINDOW_SIZE.x/2, WINDOW_SIZE.y/2 , 0) );
 	while(mWindow.isOpen())
 	{
 		loop();
