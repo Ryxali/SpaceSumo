@@ -94,10 +94,10 @@ private:
 	float mSpeedLimit, mRotationSpeed, mPunchForce;
 	bool mFixedRotation;
 
-	Timer mPushTimer;
-	bool mPushing;
-
-
+	//imer mPushTimer;
+	Timer mPushDuration;
+	Timer mPushCooldown;
+	bool mPushed;
 	Timer mRespawnTimer;
 	bool mSlowDeath;
 	Effects mEffects;

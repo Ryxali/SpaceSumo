@@ -27,5 +27,8 @@ private:
 	SVector mPosition;
 	Command* mCommand;
 	bool mHovered;
+	bool mWasPressed;
+	bool mStillHovered;
+	int currentRow;
 };
 

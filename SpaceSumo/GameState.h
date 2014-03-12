@@ -31,4 +31,5 @@ private:
 	Hud mHud;
 	Timer mPowerUpSpawnTimer;
 	sf::Music mMusic;
+	int mPSpawnMaxX, mPSpawnMaxY;
 };

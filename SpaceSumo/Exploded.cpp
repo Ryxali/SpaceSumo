@@ -29,7 +29,6 @@ Exploded::~Exploded()
 	
 }
 
-
 void Exploded::update(Controller& controller, GameData& data)
 {
 	if(mOwner != 0 )

@@ -3,11 +3,16 @@
 #include <ResourceManager\RHandle.h>
 #include "Exploded.h"
 #include "Explosion.h"
+#include "consts.h"
 #include <ResourceManager\soundFac.h>
 
 
-EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
-	mSpeed(30),
+EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
+	mSpeed(),
+
+
+EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
+	mSpeed(),
 	mDirection(dir),
 	mPosition(position),
 	mAngle(0),
@@ -20,7 +25,18 @@ EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, b2World& world):
 	mAnim.getSprite().setOrigin( 32 , 32 );
 	mBody.setRotation( mAngle );
 	mBody.getBody()->SetUserData(this);
-	mBody.setLinearVelocity(b2Vec2(mDirection.getX()*mSpeed , mDirection.getY()*mSpeed ));
+
+	float dot = (( userSpeed.getX() * mDirection.getX() + userSpeed.getY() * mDirection.getY()));
+	mSpeed = ( b2Vec2( dot * mDirection.getX() , dot * mDirection.getY()));
+
+	mSpeed = ( b2Vec2 ( mSpeed.x / PPM + mDirection.getX() * projSpeed, mSpeed.y / PPM + mDirection.getY() * projSpeed ));
+
+	while (mSpeed.Length() < 10 )
+	{
+		mSpeed = b2Vec2(mSpeed.x + mDirection.getX() / PPM, mSpeed.y + mDirection.getY() / PPM);
+	}
+
+	mBody.setLinearVelocity( mSpeed );
 }
 
 
@@ -37,7 +53,7 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 		mShoot->play();
 		mTravelling->play();
 	}
-		
+
 	//deletes the projectile if it's outside the map
 	if( (mBody.getPosition().x*PPM < -200 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 200) ||
 		(mBody.getPosition().y*PPM < -200 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 200))
@@ -57,7 +73,7 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 
 void EnergyTorpedo::draw(RenderList& list)
 {
-	
+
 	list.addSprite(mAnim);
 }
 
@@ -74,5 +90,5 @@ bool EnergyTorpedo::isAlive()
 void EnergyTorpedo::kill()
 {
 	mAlive = false;
-	
+
 }

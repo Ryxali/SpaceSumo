@@ -12,7 +12,7 @@ class EnergyTorpedo :
 	public EntityImp
 {
 public:
-	EnergyTorpedo(SVector position, SVector dir, b2World& world);
+	EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed);
 	~EnergyTorpedo();
 
 	virtual void update(GameData &data, GameStateData &gData,int delta);
@@ -25,7 +25,7 @@ private:
 	bool mAlive;
 	SVector mDirection;
 	SVector mPosition;
-	float mSpeed;
+	b2Vec2 mSpeed;
 	float mAngle;
 	
 	B2Body mBody;

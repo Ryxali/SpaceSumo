@@ -12,6 +12,7 @@ class SpaceManImp;
 class EffectImp
 {
 public:
+	EffectImp();
 	virtual ~EffectImp();
 
 	virtual void update(Controller& controls, GameData& data) = 0;

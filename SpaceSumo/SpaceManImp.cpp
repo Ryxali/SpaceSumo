@@ -36,13 +36,14 @@ SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
 	mSpeed(mConfig.getValue<float>("speed")),
 	mAngle(0.0f),
 	mJetOffset(-37.f),
-	mPushTimer(mConfig.getValue<int>("pushCooldown")),
+	mPushDuration(mConfig.getValue<int>("pushDuration")),
+	mPushCooldown(mConfig.getValue<int>("pushCooldown")),
 	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
 	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
 	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
 	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
 	mAbility(0),
-	mPushing(false),
+	mPushed(false),
 	mSlowDeath(false),
 	mAlive(true),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
@@ -80,9 +81,10 @@ SpaceManImp::SpaceManImp(
 	mRotationSpeed(bodyData.getValue<float>("rotationSpeed")),
 	mFixedRotation(bodyData.getValue<bool>("fixedRotation")),
 	mPunchForce(bodyData.getValue<int>("punchForce")),
-	mPushTimer(bodyData.getValue<int>("pushCooldown")),
-	mPushing(false),
 	mRespawnTimer(bodyData.getValue<int>("respawnTimer")),
+	mPushDuration(bodyData.getValue<int>("pushDuration")),
+	mPushCooldown(bodyData.getValue<int>("pushCooldown")),
+	mPushed(false),
 	mSlowDeath(false),
 	mEffects(),
 	mAbility(0),
@@ -100,6 +102,8 @@ SpaceManImp::SpaceManImp(
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
 	mJetpack->setRelativeToListener(true);
+	mSpaceman.setAngularVelocity(0);
+	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
 }
 
 
@@ -218,22 +222,19 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 
 	// player push
-	if(mControls.isActive(Controller::PUSH) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus)
+	if(mPushed == true && mPushDuration.isExpired())
 	{
-		mPushing = true;
-		mPushTimer.reset();
-	} 
-
-	if( mPushing == true && !mPushTimer.isExpired() )
-	{
-		extendArms();
-	}
-
-	if( mPushTimer.isExpired() )
-	{
+		mPushed = false;
+		mPushCooldown.reset();
 		retractArms();
-		mPushing = false;
 	}
+
+	if(mControls.isActive(Controller::PUSH) && mEffects.getStatus().getFlag_CAN_PUSH().mStatus && mPushed == false && mPushCooldown.isExpired())
+	{
+		mPushed = true;
+		mPushDuration.reset();
+		extendArms();
+	} 
 
 
 	// activate ability

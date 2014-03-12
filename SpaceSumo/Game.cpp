@@ -36,7 +36,7 @@ Game::Game() :
 	mGameData(),
 	mStates(mGameData)
 {
-	mWindow.setFramerateLimit(160);
+	mWindow.setFramerateLimit(mConfig.getValue<int>("fpscap"));
 	mWindow.setVerticalSyncEnabled(mConfig.getValue<bool>("vsync"));
 	mWindow.setView(mView);
 	//mGameData.world.SetContactListener(&mListener);
@@ -57,10 +57,12 @@ void Game::start()
 
 void Game::loop()
 {
-	sf::Time delta = mDeltaClock.restart();
+	float delta = mDeltaClock.restart().asMilliseconds();
+	//if(delta > 50)
+		//delta = 50;
 	sf::Event evt;
 	// Loop runs through all new events
-	mGameData.world.Step(delta.asSeconds(),8,3);
+	mGameData.world.Step(delta/1000.f, 8, 3 );
 	while(mWindow.pollEvent(evt))
 	{
 		switch(evt.type)
@@ -84,7 +86,7 @@ void Game::loop()
 	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition(mWindow) * (mView.getSize()/(sf::Vector2f)mWindow.getSize());
 	mWindow.clear(sf::Color::White);
 	mGameData.controlList.update(mGameData);
-	update(delta.asMilliseconds());
+	update(delta   );
 	preDraw();
 	draw();
 	cleanUp();
