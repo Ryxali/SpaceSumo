@@ -42,11 +42,22 @@ void FreezeBolt::update(GameData &data, GameStateData &gData, int delta)
 	
 	if( mShoot == 0 && mTravelling == 0)
 	{
-		mShoot = soundFac::createSound("res/sound/freeze/freeze_blast.spf", data.soundlist);
+		
 		mTravelling = soundFac::createSound("res/sound/freeze/freeze_travelling.spf", data.soundlist);
+		mTravelling->setRelativeToListener(false);
+		mTravelling->setAttenuation(ATTENUATION);
+		mTravelling->setPosition(mBody.getPosition().x*PPM , mBody.getPosition().y*PPM, 0 );
+
+		mShoot = soundFac::createSound("res/sound/freeze/freeze_blast.spf", data.soundlist);
+		mShoot->setRelativeToListener(false);
+		mShoot->setAttenuation(ATTENUATION);
+		mShoot->setPosition(mBody.getPosition().x*PPM , mBody.getPosition().y*PPM, 0 );
+
 		mShoot->play();
 		mTravelling->play();
 	}
+
+	mTravelling->setPosition(mBody.getPosition().x*PPM , mBody.getPosition().y*PPM, 0 );
 
 	mAnim.getSprite().rotate(2);
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);

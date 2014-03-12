@@ -70,7 +70,7 @@ EntityImp* entFac::createPowerUpRandom(b2World& world, float x, float y)
 {
 	std::string bodyData("res/conf/powerUpBody.cfg");
 	int rand_val = rand() % 2;
-	switch ( rand_val )
+	switch ( 0 )
 	{
 	case 0:
 		return new LHydrogen(world, bodyData, x, y);

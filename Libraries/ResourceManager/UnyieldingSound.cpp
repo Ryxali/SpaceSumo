@@ -47,6 +47,12 @@ void UnyieldingSound::setRelativeToListener(bool status)
 {
 	mSound->setRelativeToListener(status);
 }
+
+void UnyieldingSound::setAttenuation(float atten)
+{
+	mSound->setAttenuation(atten);
+}
+
 void UnyieldingSound::setPosition(float x, float y, float z)
 {
 	mSound->setPosition(x, y, z);

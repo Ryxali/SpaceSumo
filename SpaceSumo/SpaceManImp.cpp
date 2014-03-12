@@ -101,9 +101,11 @@ SpaceManImp::SpaceManImp(
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
-	mJetpack->setRelativeToListener(true);
 	mSpaceman.setAngularVelocity(0);
 	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
+
+	mJetpack->setRelativeToListener(false);
+	mJetpack->setAttenuation(ATTENUATION);
 }
 
 
@@ -119,6 +121,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
 	mEffects.update(mControls, data);
+	mJetpack->setPosition(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().x*PPM, 0);
 
 	if(mSlowDeath)
 	{
@@ -248,6 +251,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			mAbility = 0;
 		}
 	}
+
 }
 
 void SpaceManImp::draw(RenderList& renderList)

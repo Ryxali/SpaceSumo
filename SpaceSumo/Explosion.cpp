@@ -29,6 +29,9 @@ void Explosion::update(GameData& data, GameStateData& gsData, int delta)
 	if( mBlast == 0 )
 	{
 		mBlast = soundFac::createSound("res/sound/energy_torpedo/torpedo_blast.spf", data.soundlist );
+		mBlast->setRelativeToListener(false);
+		mBlast->setAttenuation(ATTENUATION);
+		mBlast->setPosition(mBody.getPosition().x*PPM, mBody.getPosition().y*PPM, 0 );
 		mBlast->play();
 	}
 

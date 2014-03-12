@@ -64,6 +64,13 @@ void LoopSound::setRelativeToListener(bool status)
 {
 	mSound->setRelativeToListener(status);
 }
+
+void LoopSound::setAttenuation(float atten)
+{
+	mSound->setAttenuation(atten);
+}
+
+
 void LoopSound::setPosition(float x, float y, float z)
 {
 	mSound->setPosition(x, y, z);
