@@ -9,7 +9,7 @@
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projSpeed) 
 	: mDirection(dir),
 	mAngle(0),
-	mBody(world, "res/conf/freezeBolt.cfg", pos.getX(), pos.getY()),
+	mBody(world, "res/conf/powerup/freezebolt.cfg", pos.getX(), pos.getY()),
 	mAlive(true),
 	mAnim(res::getTexture("res/img/powerup/FreezeBolt/freezebolt.png"), "res/img/powerup/FreezeBolt/freezebolt.cfg", 5.f),
 	mShoot(0),

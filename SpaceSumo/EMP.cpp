@@ -6,7 +6,7 @@
 EMP::EMP(b2World &world, std::string bodyData, float x, float y) :
 	PowerUp(),
 	mBody(world,bodyData, x, y),
-	mAnim(res::getTexture("res/img/powerup/LHydrogen.png"), "res/img/powerup/LHydrogen.cfg", 3.f)
+	mAnim(res::getTexture("res/img/PowerUp/EMP/EMP.png"), "res/img/PowerUp/EMP/EMP.cfg", 3.f)
 {
 	mBody.getBody()->SetUserData(this);
 	mAnim.getSprite().setOrigin(32, 32);
@@ -27,8 +27,10 @@ Ability* EMP::getAbility()
 {
 	if(mAlive)
 	{
+		Config config("res/conf/powerup/emp.cfg");
+
 		mAlive = false;
-		return new EMPAbil(2000);
+		return new EMPAbil(config.getValue<int>("duration"));
 
 	}
 	else

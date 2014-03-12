@@ -6,7 +6,7 @@
 
 ETorpedoAbility::ETorpedoAbility()
 {
-	Config config("res/conf/freezer.cfg");
+	Config config("res/conf/powerup/ETorpedo.cfg");
 	mSpeed = config.getValue<float>("speed");
 }
 
@@ -21,6 +21,6 @@ void ETorpedoAbility::activate(SVector pos, SVector dir, SVector userSpeed, Game
 		dir,
 		userSpeed,
 		world,
-		mSpeed));
+		(int)mSpeed));
 }
 

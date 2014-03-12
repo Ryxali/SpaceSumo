@@ -4,6 +4,8 @@
 #include "EntityType.h"
 #include "SpaceManImp.h"
 #include "EMPEffect.h"
+#include <ResourceManager\Playable.h>
+#include <ResourceManager\soundFac.h>
 
 EMPAbil::EMPAbil(int miliseconds) : mTimer(miliseconds)
 {
@@ -23,6 +25,14 @@ void EMPAbil::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 		{
 			static_cast<SpaceManImp*>(*it)->addEffect( new EMPEffect(mTimer) );
 		}
+
+		if((*it)->getType() == PLAYER)
+		{
+			static_cast<SpaceManImp*>(*it)->addEffect( new EMPEffect(mTimer) );
+		}
 	}
+
+	Playable* launch = soundFac::createSound("res/sound/EMP/launch.spf", data.gameData.soundlist);
+	launch->play();
 }
 

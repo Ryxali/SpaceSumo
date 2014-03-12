@@ -6,7 +6,7 @@
 
 EMPEffect::EMPEffect(int timer) 
 	: mTimer(timer),
-	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
+	mAnim(res::getTexture("res/img/PowerUp/EMP/EMP.png"), "res/img/PowerUp/EMP/EMP.cfg", 10.f)
 {
 	mAnim.getSprite().setOrigin( 64 , 64 );
 }
@@ -18,7 +18,7 @@ EMPEffect::~EMPEffect()
 
 EMPEffect::EMPEffect(EMPEffect const & e)
 	: mTimer(e.mTimer),
-	mAnim(res::getTexture("res/img/powerup/frozen.png"), "res/img/powerup/frozen.cfg", 10.f)
+	mAnim(res::getTexture("res/img/PowerUp/EMP/EMP.png"), "res/img/PowerUp/EMP/EMP.cfg", 10.f)
 {
 
 }

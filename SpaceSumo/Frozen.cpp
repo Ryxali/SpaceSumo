@@ -6,7 +6,7 @@
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\soundFac.h>
 #include "Controller.h"
-Config Frozen::mConfig("res/conf/frozen.cfg", true);
+Config Frozen::mConfig("res/conf/powerup/frozen.cfg", true);
 
 Frozen::Frozen() : 
 	mIntensity(mConfig.getValue<int>("intensity")),

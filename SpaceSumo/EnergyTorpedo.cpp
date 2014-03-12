@@ -6,11 +6,6 @@
 #include "consts.h"
 #include <ResourceManager\soundFac.h>
 
-
-EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
-	mSpeed(),
-
-
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
 	mSpeed(),
 	mDirection(dir),

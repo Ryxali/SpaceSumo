@@ -13,7 +13,7 @@
 #include "SpacemanData.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) 
-	: State(owner), mData(),
+	: State(owner), mData(gameData),
 	mGameData(gameData),
 	mGameMode(0),
 	mGameMap(0),
