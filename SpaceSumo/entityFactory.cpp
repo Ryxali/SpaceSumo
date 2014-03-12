@@ -6,6 +6,7 @@
 #include <Common\stringH.h>
 #include "ETorpedoPickup.h"
 #include <cstdlib>
+#include "EMP.h"
 
 #include "GameData.h"
 #include "SpacemanData.h"
@@ -65,11 +66,16 @@ EntityImp* entFac::createPowerUpEnergyTorpedo(b2World& world, float x, float y)
 	return new ETorpedoPickup(world, bodyData, x, y);
 }
 
+EntityImp* createPowerUpEMP(b2World& world, float x, float y)
+{
+	std::string bodyData("res/conf/powerUpBody.cfg");
+	return new EMP(world, bodyData, x, y);
+}
 
 EntityImp* entFac::createPowerUpRandom(b2World& world, float x, float y)
 {
 	std::string bodyData("res/conf/powerUpBody.cfg");
-	int rand_val = rand() % 2;
+	int rand_val = rand() % 3;
 	switch ( rand_val )
 	{
 	case 0:
@@ -78,6 +84,10 @@ EntityImp* entFac::createPowerUpRandom(b2World& world, float x, float y)
 		
 	case 1:
 		return new ETorpedoPickup(world, bodyData, x, y);
+	break;
+
+	case 2:
+		return new EMP(world, bodyData, x, y);
 	break;
 
 	default:

@@ -32,3 +32,8 @@ void Timer::setDuration(int miliseconds)
 {
 	mDuration = miliseconds;
 }
+
+int Timer::getDuration()
+{
+	return mDuration;
+}

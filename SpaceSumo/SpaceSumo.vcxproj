@@ -103,6 +103,8 @@
     <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
     <ClCompile Include="DualCommand.cpp" />
+    <ClCompile Include="EMPAbil.cpp" />
+    <ClCompile Include="EMPEffect.cpp" />
     <ClCompile Include="EnergyTorpedo.cpp" />
     <ClCompile Include="ETorpedoAbility.cpp" />
     <ClCompile Include="ETorpedoPickup.cpp" />
@@ -171,6 +173,7 @@
     <ClInclude Include="Characters.h" />
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterSetupState.h" />
+    <ClInclude Include="EMPEffect.h" />
     <ClInclude Include="PlayerReadyToggleCommand.h" />
     <ClInclude Include="StateList_CSelect.h" />
     <ClInclude Include="Controller.h" />

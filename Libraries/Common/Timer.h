@@ -12,6 +12,7 @@ public:
 	bool isExpired();
 	void reset();
 	void setDuration(int miliseconds);
+	int getDuration();
 
 private:
 	static sf::Clock mClock;

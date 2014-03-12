@@ -20,5 +20,7 @@ namespace entFac
 
 	EntityImp* createPowerUpEnergyTorpedo(b2World& world, float x, float y);
 
+	EntityImp* createPowerUpEMP(b2World& world, float x, float y);
+
 	EntityImp* createPowerUpRandom(b2World& world, float x, float y);
 };

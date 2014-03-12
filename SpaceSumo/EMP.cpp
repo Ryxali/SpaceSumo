@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EMP.h"
 #include <ResourceManager\RHandle.h>
+#include "EMPAbil.h"
 
 EMP::EMP(b2World &world, std::string bodyData, float x, float y) :
 	PowerUp(),
@@ -27,7 +28,7 @@ Ability* EMP::getAbility()
 	if(mAlive)
 	{
 		mAlive = false;
-		// TODO ... new ..
+		return new EMPAbil(2000);
 
 	}
 	else
