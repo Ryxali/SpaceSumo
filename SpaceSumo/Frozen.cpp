@@ -36,9 +36,9 @@ void Frozen::update(Controller& controls, GameData& data)
 {
 	if(mImpact == 0 && mPunch == 0 && mBreaking == 0)
 	{
-		mImpact = soundFac::createSound("res/sound/freeze/freeze_impact.spf", data.soundlist);
-		mPunch = soundFac::createSound("res/sound/freeze/freeze_punch.spf", data.soundlist);
-		mBreaking = soundFac::createSound("res/sound/freeze/freeze_breaking.spf", data.soundlist);
+		mImpact = soundFac::createSound("res/sound/freeze/freeze_impact.spf");
+		mPunch = soundFac::createSound("res/sound/freeze/freeze_punch.spf");
+		mBreaking = soundFac::createSound("res/sound/freeze/freeze_breaking.spf");
 
 		mImpact->setRelativeToListener(false);
 		mImpact->setAttenuation(ATTENUATION);

@@ -37,7 +37,7 @@ void EMPAbil::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 		}
 	}
 
-	Playable* launch = soundFac::createSound("res/sound/EMP/launch.spf", data.gameData.soundlist);
+	Playable* launch = soundFac::createSound("res/sound/EMP/launch.spf");
 	launch->play();
 }
 

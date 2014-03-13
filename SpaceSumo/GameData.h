@@ -12,7 +12,6 @@ struct GameData
 	b2World world;
 	Input input;
 	sf::Vector2f mPos;
-	SoundList soundlist;
 	ControlList controlList;
 	int nKeyboards;
 	int nJoysticks;

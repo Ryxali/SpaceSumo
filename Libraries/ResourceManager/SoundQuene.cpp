@@ -58,11 +58,11 @@ bool SoundQuene::getDestroy()
 	return mDestroy;
 }
 
-void SoundQuene::update(GameData& gData)
+void SoundQuene::update()
 {
 	if(!hasEnded())
 	{
-		(*mCurrentSound)->update(gData);
+		(*mCurrentSound)->update();
 		if(mStopping)
 			(*mCurrentSound)->stop();
 

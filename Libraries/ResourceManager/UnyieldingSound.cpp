@@ -38,9 +38,9 @@ bool UnyieldingSound::getDestroy()
 {
 	return mSound->getDestroy();
 }
-void UnyieldingSound::update(GameData& data)
+void UnyieldingSound::update()
 {
-	mSound->update(data);
+	mSound->update();
 }
 
 void UnyieldingSound::setRelativeToListener(bool status)

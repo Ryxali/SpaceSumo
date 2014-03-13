@@ -1,8 +1,12 @@
 #include "SoundList.h"
 
 
-SoundList::SoundList()
+SoundList::SoundList() : mLocked(false), mCurSize(0)
 {
+	for(int i = 0; i < MAX_SIZE; ++i)
+	{
+		mStack[i] = 0;
+	}
 }
 
 
@@ -12,14 +16,18 @@ SoundList::~SoundList()
 
 void SoundList::add(Playable* playable)
 {
-	mPlayables.push_back(playable);
+	while(mLocked);
+	mStack[mCurSize] = playable;
+	++mCurSize;
+	//mPlayables.push_back(playable);
 }
 
-void SoundList::update(GameData& gData)
+void SoundList::update()
 {
+	
 	for(auto it = mPlayables.begin(); it != mPlayables.end(); )
 	{
-		(*it)->update(gData);
+		(*it)->update();
 		if( (*it)->hasEnded() && (*it)->getDestroy() == true )
 		{
 			delete *it;
@@ -31,4 +39,12 @@ void SoundList::update(GameData& gData)
 		}
 
 	}
+	mLocked = true;
+	for(int i = 0; i < mCurSize; ++i)
+	{
+		mPlayables.push_back(mStack[i]);
+		mStack[i] = 0;
+	}
+	mCurSize = 0;
+	mLocked = false;
 }

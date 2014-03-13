@@ -82,7 +82,7 @@ bool SSound::getDestroy()
 }
 
 
-void SSound::update(GameData& gData)
+void SSound::update()
 {
 
 }

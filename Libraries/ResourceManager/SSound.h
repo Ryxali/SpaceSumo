@@ -33,7 +33,7 @@ public:
 	virtual void forceStop();
 	virtual void setDestroy(bool status);
 	virtual bool getDestroy();
-	virtual void update(GameData& gData);
+	virtual void update();
 	/*
 		Get the sound buffer of this Sound
 		returns: const sf::SoundBuffer& - a reference to this sound's sound buffer 

@@ -96,7 +96,7 @@ SpaceManImp::SpaceManImp(
 	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
 	mHead(head),
 	mLives(5)
 {
@@ -118,7 +118,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
 	if( mJetpack == 0)
 	{
-		mJetpack = soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist );
+		mJetpack = soundFac::createSound("res/sound/jetpack/jet.spf");
 		mJetpack->setRelativeToListener(false);
 		mJetpack->setAttenuation(ATTENUATION);
 

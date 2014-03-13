@@ -39,9 +39,9 @@ bool FinishingSound::getDestroy()
 {
 	return mSound->getDestroy();
 }
-void FinishingSound::update(GameData& data)
+void FinishingSound::update()
 {
-	mSound->update(data);
+	mSound->update();
 }
 
 void FinishingSound::setRelativeToListener(bool status)

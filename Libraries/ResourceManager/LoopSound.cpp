@@ -52,7 +52,7 @@ bool LoopSound::getDestroy()
 	return mDestroy;
 }
 
-void LoopSound::update(GameData& gData)
+void LoopSound::update()
 {
 	if(mSound->hasEnded() && mIsPlaying)
 	{

@@ -46,8 +46,8 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 {
 	if( mShoot == 0 && mTravelling == 0)
 	{
-		mTravelling = soundFac::createSound("res/sound/energy_torpedo/torpedo_travelling.spf" , data.soundlist );
-		mShoot = soundFac::createSound("res/sound/energy_torpedo/torpedo_launch.spf", data.soundlist);
+		mTravelling = soundFac::createSound("res/sound/energy_torpedo/torpedo_travelling.spf");
+		mShoot = soundFac::createSound("res/sound/energy_torpedo/torpedo_launch.spf");
 
 		mShoot->setRelativeToListener(false);
 		mShoot->setAttenuation(ATTENUATION);

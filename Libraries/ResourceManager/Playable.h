@@ -15,7 +15,7 @@ public:
 	virtual void forceStop() = 0;
 	virtual void setDestroy(bool) = 0;
 	virtual bool getDestroy() = 0;
-	virtual void update(GameData&) = 0;
+	virtual void update() = 0;
 
 	virtual void setRelativeToListener(bool) = 0;
 	virtual void setAttenuation(float) = 0;

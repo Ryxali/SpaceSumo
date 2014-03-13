@@ -12,5 +12,5 @@ namespace soundFac
 		param: ref - reference to the .spf file
 		returns: Playable* - a pointer to the sound object created.
 	*/
-	Playable* createSound(std::string ref, SoundList &list);
+	Playable* createSound(std::string ref);
 }

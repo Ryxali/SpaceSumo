@@ -4,8 +4,7 @@
 GameData::GameData() : 
 	gravity(0,0), 
 	world(gravity), 
-	input(), 
-	soundlist(), 
+	input(),
 	controlList(),
 	nKeyboards(0),
 	nJoysticks(0)

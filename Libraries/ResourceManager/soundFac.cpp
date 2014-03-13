@@ -7,10 +7,51 @@
 #include "SoundList.h"
 #include "RHandle.h"
 
+
+#include <SFML\System\Thread.hpp>
 #include <Common\stringH.h>
 #include <vector>
 #include <fstream>
 #include <Common\error.h>
+
+class SoundManager
+{
+public:
+	SoundManager();
+	~SoundManager();
+	void add(Playable*);
+	bool mRunning;
+	SoundList mSoundList;
+	void stop();
+private:
+	sf::Thread mThread;
+};
+static SoundManager soundManager;
+
+static void run()
+{
+	while(soundManager.mRunning)
+	{
+		soundManager.mSoundList.update();
+	}
+}
+
+SoundManager::SoundManager() : mSoundList(), mThread(&run), mRunning(true)
+{
+	mThread.launch();
+}
+SoundManager::~SoundManager()
+{
+	mRunning = false;
+}
+void SoundManager::add(Playable* p)
+{
+	mSoundList.add(p);
+}
+
+
+
+
 
 Playable* resolveType(std::string line)
 {
@@ -49,7 +90,7 @@ Playable* resolveType(std::string line)
 			{
 				++it;
 				SoundQuene* list = new SoundQuene();
- 				int dpth = 0;
+				int dpth = 0;
 				std::string::size_type t2 = t+1;
 				while(dpth != 0 || *it != ')')
 				{
@@ -87,7 +128,7 @@ Playable* resolveType(std::string line)
 					}
 					++it;
 					++t;
-					
+
 				}
 				return list;
 			}
@@ -100,14 +141,14 @@ Playable* resolveType(std::string line)
 	exit(1);
 }
 
-Playable* soundFac::createSound(std::string ref, SoundList &list)
+Playable* soundFac::createSound(std::string ref)
 {
 	std::ifstream stream(ref);
 	std::string tot = "";
 	std::string line;
 	while(std::getline(stream, line))
 	{
-		
+
 		if(line.size() != 0 && (line[0] != '#' && line[0] != ' '))
 		{
 			tot += line;
@@ -115,6 +156,8 @@ Playable* soundFac::createSound(std::string ref, SoundList &list)
 	}
 	SAssert(line != "", "Couldn't resolve sound data - " + ref);
 	Playable* p = resolveType(tot);
-	list.add(p);
+	soundManager.add(p);
+
+
 	return p;
 }

@@ -15,7 +15,7 @@ public:
 	virtual void forceStop();
 	virtual void setDestroy(bool status);
 	virtual bool getDestroy();
-	virtual void update(GameData& gData);
+	virtual void update();
 	
 	void add(Playable* sound);
 

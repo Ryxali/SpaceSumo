@@ -14,7 +14,7 @@ void Terra::update(GameData &data)
 {
 	if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
 	{
-		mSoundtrack.play();
+		//mSoundtrack.play();
 	}
 }
 
