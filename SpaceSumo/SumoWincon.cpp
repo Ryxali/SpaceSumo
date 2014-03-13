@@ -14,7 +14,9 @@ SumoWincon::~SumoWincon()
 void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp* subject)
 {
 	if(subject->isSlowlyDying())
-		subject->addScore(-5);
+	{
+		subject->decreaseLives();
+	}
 }
 
 void SumoWincon::draw(RenderList &list)

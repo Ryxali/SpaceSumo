@@ -39,8 +39,24 @@ void Frozen::update(Controller& controls, GameData& data)
 		mImpact = soundFac::createSound("res/sound/freeze/freeze_impact.spf", data.soundlist);
 		mPunch = soundFac::createSound("res/sound/freeze/freeze_punch.spf", data.soundlist);
 		mBreaking = soundFac::createSound("res/sound/freeze/freeze_breaking.spf", data.soundlist);
+
+		mImpact->setRelativeToListener(false);
+		mImpact->setAttenuation(ATTENUATION);
+		mImpact->setPosition(mAnim.getSprite().getPosition().x , mAnim.getSprite().getPosition().y, 0 );
+
+		mPunch->setRelativeToListener(false);
+		mPunch->setAttenuation(ATTENUATION);
+		mPunch->setPosition(mAnim.getSprite().getPosition().x , mAnim.getSprite().getPosition().y, 0 );
+
+		mBreaking->setRelativeToListener(false);
+		mBreaking->setAttenuation(ATTENUATION);
+		mBreaking->setPosition(mAnim.getSprite().getPosition().x , mAnim.getSprite().getPosition().y, 0 );
+
 		mImpact->play();
 	}
+
+	mBreaking->setPosition(mAnim.getSprite().getPosition().x , mAnim.getSprite().getPosition().y, 0 );
+	mPunch->setPosition(mAnim.getSprite().getPosition().x , mAnim.getSprite().getPosition().y, 0 );
 
 	if(controls.isActive(Controller::PUSH) &! mPrevKeyState)
 	{

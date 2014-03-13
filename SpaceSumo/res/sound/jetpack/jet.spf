@@ -9,6 +9,4 @@
 # QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
 
 
-
-
 LoopSound(Sound("res/sound/jetpack/Main.ogg"))

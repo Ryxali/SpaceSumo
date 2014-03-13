@@ -64,8 +64,8 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 
 
 	//deletes the projectile if it's outside the map
-	if( (mBody.getPosition().x*PPM < -200 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 200) ||
-		(mBody.getPosition().y*PPM < -200 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 200))
+	if( (mBody.getPosition().x*PPM < -1800 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 1800) ||
+		(mBody.getPosition().y*PPM < -1800 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 1800))
 	{
 		mAlive = false;
 	}

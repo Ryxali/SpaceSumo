@@ -12,7 +12,6 @@ class Controller;
 #include "B2Body.h"
 #include "Effects.h"
 #include "Debug.h"
-#include <ResourceManager\SoundQuene.h>
 #include <SFML\Window.hpp>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
@@ -21,6 +20,7 @@ class Controller;
 #include <Common\Config.h>
 #include <Common\Timer.h>
 #include <ResourceManager\Animation.h>
+#include <ResourceManager\Playable.h>
 
 
 
@@ -61,9 +61,11 @@ public:
 
 	bool isSlowlyDying() const;
 
-	void setScore(int score);
-	void addScore(int score);
-	int getScore() const;
+	// poitsystem
+
+	int mLives;
+	void decreaseLives();
+	
 	
 private:
 	Controller& mControls;
@@ -79,13 +81,11 @@ private:
 	//Spaceman stuff
 	B2Body mSpaceman;
 
-	// left hand
 	b2PrismaticJoint* mLeftArmJoint;
 	b2PrismaticJoint* mLeftArm;
 	B2Body mLeftHand;
 	b2PrismaticJointDef mLeftArmDef;
 
-	//right hand
 	b2PrismaticJoint* mRightArmJoint;
 	b2PrismaticJoint* mRightArm;
 	B2Body mRightHand;
@@ -94,7 +94,7 @@ private:
 	float mSpeedLimit, mRotationSpeed, mPunchForce;
 	bool mFixedRotation;
 
-	//imer mPushTimer;
+	// push
 	Timer mPushDuration;
 	Timer mPushCooldown;
 	bool mPushed;
@@ -106,6 +106,7 @@ private:
 	SVector mDirection;
 	float mAngle;
 	int mJetOffset;
+	
 	//animations
 	Animation mAnim;
 	Animation mTurn;
@@ -115,8 +116,5 @@ private:
 	
 	//sounds
 	Playable* mJetpack;
-	Playable* mTurning;
-
-	
 };
 

@@ -8,6 +8,7 @@ struct SpacemanData;
 #include "Hud.h"
 #include <Common\Timer.h>
 #include <SFML/Audio/Music.hpp>
+#include "SumoWincon.h"
 
 
 class GameState : public State
@@ -32,4 +33,6 @@ private:
 	Timer mPowerUpSpawnTimer;
 	sf::Music mMusic;
 	int mPSpawnMaxX, mPSpawnMaxY;
+
+	SumoWincon mSumoWincon;
 };

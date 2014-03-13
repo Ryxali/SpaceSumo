@@ -3,7 +3,6 @@
 #include "GameStateData.h"
 #include "EntityType.h"
 #include "Ability.h"
-#include <ResourceManager\LoopSound.h>
 #include <iostream>
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\SSoundBuffer.h>
@@ -95,17 +94,14 @@ SpaceManImp::SpaceManImp(
 	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
-	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
+	mJetpack(0),
+	mLives(5)
 {
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
 	mSpaceman.setAngularVelocity(0);
 	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
-
-	mJetpack->setRelativeToListener(false);
-	mJetpack->setAttenuation(ATTENUATION);
 }
 
 
@@ -116,19 +112,28 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
+	if( mJetpack == 0)
+	{
+		mJetpack = soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist );
+		mJetpack->setRelativeToListener(false);
+		mJetpack->setAttenuation(ATTENUATION);
+
+
+	}
+
+	mJetpack->setPosition (mSpaceman.getPosition().x*PPM , mSpaceman.getPosition().y*PPM , 0 );
+
 	//gData.wincon->update(data, gData, this);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
 	mEffects.update(mControls, data);
-	mJetpack->setPosition(mSpaceman.getPosition().x*PPM, mSpaceman.getPosition().x*PPM, 0);
 
 	if(mSlowDeath)
 	{
 
-		if(mRespawnTimer.isExpired())
+		if(mRespawnTimer.isExpired() && mLives > 0 )
 		{
-
 			//TODO Some kind of better spawn
 			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
 			mLeftHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
@@ -164,14 +169,16 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(mControls.isActive(Controller::FORWARD) && mEffects.getStatus().getFlag_CAN_MOVE().mStatus)
 	{
-		if(mJetpack->hasEnded())
+		
+
+		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
+		mDirection.getY() * ( mSpeed * fDelta )), 
+		mSpaceman.getWorldCenter(), true);
+		
+		if(mJetpack->hasEnded() )
 		{
 			mJetpack->play();
 		}
-
-		mSpaceman.applyLinearImpulse( b2Vec2(mDirection.getX() * ( mSpeed * fDelta ),
-			mDirection.getY() * ( mSpeed * fDelta )), 
-			mSpaceman.getWorldCenter(), true);
 
 		//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mSpeedLimit)
@@ -201,13 +208,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mJetpack->stop();
 	}
 
+	
 
 	// turn right
 	if(mControls.isActive(Controller::RIGHT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
 	{
 		mSpaceman.applyAngularImpulse( mRotationSpeed * fDelta , true);
 		mTurn.setCurrentRow(1);
-		mTurning->play();
+		
 	}
 
 	//turn left
@@ -215,12 +223,12 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		mSpaceman.applyAngularImpulse( - mRotationSpeed * fDelta , true);
 		mTurn.setCurrentRow(0);
-		mTurning->play();
+		
 	}	
 
 	if( !mControls.isActive(Controller::RIGHT) && !mControls.isActive(Controller::LEFT))
 	{
-		mTurning->stop();
+		//mTurning->stop();
 	}
 
 
@@ -319,20 +327,6 @@ bool SpaceManImp::isSlowlyDying() const
 	return mSlowDeath;
 }
 
-void SpaceManImp::setScore(int score)
-{
-	mHead->setScore(score);
-}
-
-void SpaceManImp::addScore(int score)
-{
-	mHead->setScore(mHead->getScore() + score);
-}
-
-int SpaceManImp::getScore() const
-{
-	return mHead->getScore();
-}
 
 B2Body& SpaceManImp::getBody()
 {
@@ -387,4 +381,9 @@ void SpaceManImp::retractArms()
 	mLeftArmJoint->SetMotorSpeed(-mPunchForce);
 	mRightArmJoint->SetMotorSpeed(-mPunchForce);
 
+}
+
+void SpaceManImp::decreaseLives()
+{
+	mLives--;
 }
