@@ -33,11 +33,12 @@ MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world)
 		0, iterations,
 		new DualCommand
 		(
-		new CreateMapCommand(TERRA, map, world),
+		new CreateMapCommand(MINING_COLONY, map, world),
 		new ChangeStateCommand(st::FINISHED_STATE, owner)
 		),
-		"res/img/UI/menu/gamesetup/map_terra",
+		"res/img/UI/menu/gamesetup/map_miningcolony",
 		"res/img/UI/menu/gamesetup/map_highlight"));
+
 	mMaps.addObserver(new ButtonSelectionEffect(ControlList::ANY, mMaps.getFirst(), "res/img/UI/menu/gamesetup/map_highlight"));
 }
 

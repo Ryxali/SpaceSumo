@@ -77,7 +77,9 @@ void GameState::close()
 {
 	mData.mEntityImpList.clear();
 	/*delete mGameMode;
-	delete mGameMap;*/
+	delete mGameMap; */
+
+	mGameMap->close();
 	mGameMode = 0;
 	mGameMap = 0;
 

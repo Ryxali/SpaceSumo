@@ -1,5 +1,5 @@
 res/img/Anim.png
-res/img/Terra_BG.png
+res/img/maps/terra/Terra_BG.png
 res/img/Map_Barrier/Laser_Long.png
 res/img/Map_Barrier/Laser_Thick.png
 res/img/face1.png
@@ -16,8 +16,15 @@ res/img/PowerUp/EnergyTorpedo/effect.png
 res/img/PowerUp/EnergyTorpedo/explosion.png
 res/img/PowerUp/EMP/EMP.png
 res/img/MenuBackground.png
+res/img/maps/miningcolony/MiningColony_BG.png
 res/img/test_sparkle.png
 res/img/UI/menu/tmp_menu.png
+res/img/UI/menu/gamesetup/map_highlight.png
+res/img/UI/menu/gamesetup/mode_highlight.png
+res/img/UI/menu/gamesetup/background.png
+res/img/UI/menu/gamesetup/mode_sumo.png
+res/img/UI/menu/gamesetup/map_terra.png
+res/img/UI/menu/gamesetup/map_miningcolony.png
 res/img/UI/hud/cornerblue.png
 res/img/UI/hud/cornerred.png
 res/img/UI/hud/cornergreen.png
@@ -25,11 +32,6 @@ res/img/UI/hud/corneryellow.png
 res/img/UI/hud/face_akila.png
 res/img/UI/hud/test.png
 res/img/UI/menu/main/play.png
-res/img/UI/menu/gamesetup/background.png
-res/img/UI/menu/gamesetup/map_highlight.png
-res/img/UI/menu/gamesetup/mode_highlight.png
-res/img/UI/menu/gamesetup/map_terra.png
-res/img/UI/menu/gamesetup/mode_sumo.png
 res/img/UI/menu/weightSelection/weight_class_0.png
 res/img/UI/menu/weightSelection/weight_class_1.png
 res/img/UI/menu/weightSelection/weight_class_2.png

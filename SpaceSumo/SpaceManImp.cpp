@@ -97,9 +97,7 @@ SpaceManImp::SpaceManImp(
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
-	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist)),
 	mHead(head),
-	mJetpack(0),
 	mLives(5)
 {
 	mHead.getFace().setSprite(headTexRef+".png");
@@ -346,19 +344,15 @@ bool SpaceManImp::isSlowlyDying() const
 	return mSlowDeath;
 }
 
-void SpaceManImp::setScore(int score)
-{
-	mHead.setScore(score);
-}
-
 B2Body& SpaceManImp::getBody()
 {
-	mHead.setScore(mHead.getScore() + score);
+	return mSpaceman;
 }
 
 void SpaceManImp::clean(GameData& data)
 {
-	return mHead.getScore();
+	delete mAbility;
+	mAbility = 0;
 }
 
 Ability* SpaceManImp::getAbility() const
