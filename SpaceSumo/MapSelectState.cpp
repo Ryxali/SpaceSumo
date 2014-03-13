@@ -22,6 +22,17 @@ MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world)
 		new ChangeStateCommand(st::FINISHED_STATE, owner)
 		),
 		"res/img/UI/gamesetup/map_terra_active"));
+
+	mMaps.add(new ButtonSingle(
+		SVector(300, 500),
+		0, 1,
+		new DualCommand
+		(
+		new CreateMapCommand(MINING_COLONY, map, world),
+		new ChangeStateCommand(st::FINISHED_STATE, owner)
+		),
+		"res/img/UI/gamesetup/map_terra_active")); //TODO Change to Mining colony
+
 	mMaps.addObserver(new ButtonSelectionEffect(ControlList::ANY, mMaps.getFirst()));
 }
 

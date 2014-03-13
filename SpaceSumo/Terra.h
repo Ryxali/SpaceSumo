@@ -10,6 +10,7 @@ public:
 	virtual void update(GameData &data);
 	virtual void draw(RenderList &list);
 	virtual void init(GameData &data);
+	virtual void close();
 
 private:
 	SSprite mBackground;

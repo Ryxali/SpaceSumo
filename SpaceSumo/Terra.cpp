@@ -4,7 +4,7 @@
 #include "RenderList.h"
 
 Terra::Terra():
-	mBackground(res::getTexture("res/img/Terra_BG.png"), -1.f),
+	mBackground(res::getTexture("res/img/maps/terra/Terra_BG.png"), -1.f),
 	mSoundtrack()
 {
 	mSoundtrack.openFromFile("res/music/terra/terra.ogg");
@@ -12,10 +12,10 @@ Terra::Terra():
 
 void Terra::update(GameData &data)
 {
-	//if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
-	//{
-	//	mSoundtrack.play();
-	//}
+	if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
+	{
+		mSoundtrack.play();
+	}
 }
 
 void Terra::draw(RenderList &list)
@@ -25,5 +25,10 @@ void Terra::draw(RenderList &list)
 
 void Terra::init(GameData &data)
 {
-	res::loadResource("res/img/Terra_BG.png");
+	res::loadResource("res/img/maps/terra/Terra_BG.png");
+}
+
+void Terra::close()
+{
+	mSoundtrack.stop();
 }

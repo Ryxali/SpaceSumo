@@ -1,5 +1,5 @@
 res/img/Anim.png
-res/img/Terra_BG.png
+res/img/maps/terra/Terra_BG.png
 res/img/Map_Barrier/Laser_Long.png
 res/img/Map_Barrier/Laser_Thick.png
 res/img/face1.png
@@ -16,6 +16,7 @@ res/img/PowerUp/EnergyTorpedo/effect.png
 res/img/PowerUp/EnergyTorpedo/explosion.png
 res/img/PowerUp/EMP/EMP.png
 res/img/MenuBackground.png
+res/img/maps/miningcolony/MiningColony_BG.png
 res/img/UI/gamesetup/map_terra_active.png
 res/img/UI/gamesetup/map_terra_gray.png
 res/img/UI/gamesetup/mode_sumo_active.png

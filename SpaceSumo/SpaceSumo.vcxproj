@@ -114,6 +114,7 @@
     <ClCompile Include="EMP.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
     <ClCompile Include="MapSelectState.cpp" />
+    <ClCompile Include="MiningColony.cpp" />
     <ClCompile Include="ModeSelectState.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="ContactListener.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterSetupState.h" />
     <ClInclude Include="EMPEffect.h" />
+    <ClInclude Include="MiningColony.h" />
     <ClInclude Include="PlayerReadyToggleCommand.h" />
     <ClInclude Include="StateList_CSelect.h" />
     <ClInclude Include="Controller.h" />

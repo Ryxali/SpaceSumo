@@ -20,6 +20,7 @@ MenuState::MenuState(StateList &owner) :
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		(std::string)"res/img/UI/menu/main/play"));
+
 	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst()));
 }
 
