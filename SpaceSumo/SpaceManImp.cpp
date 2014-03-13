@@ -64,7 +64,9 @@ SpaceManImp::SpaceManImp(
 	Config& visualData,
 	Config& bodyData,
 	Config& handData,
-	GameData& data) :
+	GameData& data,
+	Head& head,
+	std::string headTexRef) :
 	mControls(controls),
 	mAlive(true),
 	mSpaceman(data.world, bodyData, pos.getX(), pos.getY()),
@@ -94,9 +96,13 @@ SpaceManImp::SpaceManImp(
 	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist)),
+	mHead(head),
 	mJetpack(0),
 	mLives(5)
 {
+	mHead.getFace().setSprite(headTexRef+".png");
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
@@ -207,13 +213,19 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		mJetpack->stop();
 	}
-
 	
 
 	// turn right
 	if(mControls.isActive(Controller::RIGHT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus == true)
 	{
-		mSpaceman.applyAngularImpulse( mRotationSpeed * fDelta , true);
+		if(mFixedRotation)
+		{
+			mSpaceman.setAngularVelocity(mRotationSpeed);
+		}
+		else
+		{
+			mSpaceman.applyAngularImpulse( mRotationSpeed * fDelta , true);
+		}
 		mTurn.setCurrentRow(1);
 		
 	}
@@ -221,7 +233,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	//turn left
 	if(mControls.isActive(Controller::LEFT) && mEffects.getStatus().getFlag_CAN_ROTATE().mStatus)
 	{
-		mSpaceman.applyAngularImpulse( - mRotationSpeed * fDelta , true);
+		if(mFixedRotation)
+		{
+			mSpaceman.setAngularVelocity(-mRotationSpeed);
+		}
+		else
+		{
+			mSpaceman.applyAngularImpulse(-mRotationSpeed * fDelta , true);
+		}
 		mTurn.setCurrentRow(0);
 		
 	}	
@@ -327,16 +346,19 @@ bool SpaceManImp::isSlowlyDying() const
 	return mSlowDeath;
 }
 
+void SpaceManImp::setScore(int score)
+{
+	mHead.setScore(score);
+}
 
 B2Body& SpaceManImp::getBody()
 {
-	return mSpaceman;
+	mHead.setScore(mHead.getScore() + score);
 }
 
 void SpaceManImp::clean(GameData& data)
 {
-	delete mAbility;
-	mAbility = 0;
+	return mHead.getScore();
 }
 
 Ability* SpaceManImp::getAbility() const

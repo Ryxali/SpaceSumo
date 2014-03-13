@@ -13,16 +13,32 @@
 MapSelectState::MapSelectState(StateList &owner, Map *&map, b2World &world) 
 	: State(owner), mMaps()
 {
+	Config cfg("res/img/UI/menu/gamesetup/map_positioning.cfg");
+	SVector startPos(cfg.getValue<int>("StartX"), cfg.getValue<int>("StartY"));
+	SVector offset(cfg.getValue<int>("OffsetX"), cfg.getValue<int>("OffsetY"));
+	int iterations(0);
 	mMaps.add(new ButtonSingle(
-		SVector(300, 300),
-		0, 0,
+		startPos + offset * iterations,
+		0, iterations,
 		new DualCommand
 		(
 		new CreateMapCommand(TERRA, map, world),
 		new ChangeStateCommand(st::FINISHED_STATE, owner)
 		),
-		"res/img/UI/gamesetup/map_terra_active"));
-	mMaps.addObserver(new ButtonSelectionEffect(ControlList::ANY, mMaps.getFirst()));
+		"res/img/UI/menu/gamesetup/map_terra",
+		"res/img/UI/menu/gamesetup/map_highlight"));
+	++iterations;
+	mMaps.add(new ButtonSingle(
+		startPos + offset * iterations,
+		0, iterations,
+		new DualCommand
+		(
+		new CreateMapCommand(TERRA, map, world),
+		new ChangeStateCommand(st::FINISHED_STATE, owner)
+		),
+		"res/img/UI/menu/gamesetup/map_terra",
+		"res/img/UI/menu/gamesetup/map_highlight"));
+	mMaps.addObserver(new ButtonSelectionEffect(ControlList::ANY, mMaps.getFirst(), "res/img/UI/menu/gamesetup/map_highlight"));
 }
 
 

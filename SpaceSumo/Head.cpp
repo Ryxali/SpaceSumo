@@ -66,6 +66,11 @@ void Head::setFace(Face* face)
 	mFace = face;
 }
 
+Face& Head::getFace()
+{
+	return *mFace;
+}
+
 void Head::setScore(int score)
 {
 	mScore = score;

@@ -44,3 +44,17 @@ void Hud::draw(RenderList &list)
 		SError("Unknown error", "Nondescript");
 	};
 }
+
+Head& Hud::getHead(int index)
+{
+	if(index == 0)
+		return mHead0;
+	if(index == 1)
+		return mHead1;
+	if(index == 2)
+		return mHead2;
+	if(index == 3)
+		return mHead3;
+	SError("Invalid index", "Index: [" + std::to_string(index) + "] is out of range!");
+	return mHead0;
+}

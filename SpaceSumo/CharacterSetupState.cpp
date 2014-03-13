@@ -3,6 +3,7 @@
 #include "Button.h"
 #include "ButtonMulti.h"
 #include "SelectCharacterCommand.h"
+#include "CharacterSelectionState.h"
 #include "Characters.h"
 #include "WeightSelectionState.h"
 #include "AddPlayersState.h"
@@ -19,6 +20,7 @@ CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameS
 	}
 	add(new AddPlayersState(*this));
 	add(new WeightSelectionState(*this, mSpacemenData, data));
+	add(new CharacterSelectionState(*this, mSpacemenData));
 	StateList::changeState(0);
 	sync();
 
@@ -61,6 +63,9 @@ void CharacterSetupState::changeState(st::State_Type index)
 		break;
 	case st::WEIGHT_SELECT_STATE:
 		StateList::changeState(1);
+		break;
+	case st::CHARACTER_SELECT_STATE:
+		StateList::changeState(2);
 		break;
 	case st::FINISHED_STATE:
 		mGameState.setup(mSpacemenData, mGData);

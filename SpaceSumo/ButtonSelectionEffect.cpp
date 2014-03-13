@@ -7,8 +7,8 @@
 #include <string>
 #include "ButtonList.h"
 
-ButtonSelectionEffect::ButtonSelectionEffect(ControlList::Player playerNumber, Button* button):
-	mAnim(res::getTexture("res/img/test_sparkle.png"), "res/conf/anim_buttonsparkle.cfg", 10.f),
+ButtonSelectionEffect::ButtonSelectionEffect(ControlList::Player playerNumber, Button* button, std::string effectRef):
+	mAnim(res::getTexture(effectRef+".png"), effectRef+".cfg", 10.f),
 	mPlayerNumber(playerNumber),
 	mButton(button)
 {

@@ -3,6 +3,7 @@
 struct GameData;
 struct SpacemanData;
 class EntityImp;
+class Head;
 
 #include <string>
 #include <Box2D\Box2D.h>
@@ -15,7 +16,7 @@ namespace entFac
 	EntityImp* createSpaceMan(std::string keyConf, GameData& data,
 		std::string bodyData, std::string handData,
 		float x, float y, float32 rotation);
-	EntityImp* createSpaceMan(SpacemanData& sData, GameData& gData, int playerIndex, SVector pos, float startRotation);
+	EntityImp* createSpaceMan(SpacemanData& sData, GameData& gData, Head& head, int playerIndex, SVector pos, float startRotation);
 
 	EntityImp* createPowerUpLHydrogen(b2World& world, float x, float y);
 

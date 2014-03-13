@@ -32,12 +32,7 @@ void Config::loadToMemory(std::string file)
 		std::size_t comment = line.find('#', 0);
 		if(comment == std::string::npos)
 		{
-			if(str::contains(line, ".cfg")) 
-			{
-				loadToMemory(file);
-			}
-			else
-			{
+			
 				//Removes Spaces
 				std::string::size_type space = line.find(' ');
 				while (std::string::npos != space)
@@ -55,7 +50,7 @@ void Config::loadToMemory(std::string file)
 					{
 						mConfData.emplace(key, value);
 					}
-				}
+				
 			}
 		}
 	}

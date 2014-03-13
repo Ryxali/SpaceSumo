@@ -14,6 +14,7 @@ public:
 
 	void draw(RenderList &list);
 	void setFace(Face* face);
+	Face& getFace();
 	void changeMood(Face::Mood mood);
 
 	void setScore(int score);

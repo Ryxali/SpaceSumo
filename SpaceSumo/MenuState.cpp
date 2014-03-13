@@ -19,8 +19,9 @@ MenuState::MenuState(StateList &owner) :
 		SVector(200,400), 
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
-		(std::string)"res/img/UI/menu/main/play"));
-	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst()));
+		"res/img/UI/menu/main/play",
+		"res/img/UI/menu/gamesetup/map_highlight"));
+	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst(), "res/img/UI/menu/gamesetup/mode_highlight"));
 }
 
 

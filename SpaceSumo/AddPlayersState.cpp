@@ -19,8 +19,9 @@ AddPlayersState::AddPlayersState(StateList &owner) : State(owner), mButtons(),
 		SVector(WINDOW_SIZE.x-200, WINDOW_SIZE.y-300),
 		1, 1,
 		new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner),
-		"res/img/UI/menu/next"));
-	mButtons.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtons.getFirst()));
+		"res/img/UI/menu/next",
+		"res/img/UI/menu/gamesetup/map_highlight"));
+	mButtons.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtons.getFirst(), "res/img/UI/menu/gamesetup/mode_highlight"));
 }
 
 
