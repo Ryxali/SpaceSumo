@@ -97,7 +97,7 @@ SpaceManImp::SpaceManImp(
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
-	mHead(head),
+	mHead(head),                       
 	mLives(5)
 {
 	mHead.getFace().setSprite(headTexRef+".png");
