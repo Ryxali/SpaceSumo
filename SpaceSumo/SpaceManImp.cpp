@@ -334,6 +334,17 @@ B2Body& SpaceManImp::getBody()
 	return mSpaceman;
 }
 
+void SpaceManImp::clean(GameData& data)
+{
+	delete mAbility;
+	mAbility = 0;
+}
+
+Ability* SpaceManImp::getAbility() const
+{
+	return mAbility;
+}
+
 void SpaceManImp::initializeArms(b2World& world)
 {
 	// Left arm

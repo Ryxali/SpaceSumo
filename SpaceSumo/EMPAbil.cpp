@@ -6,6 +6,7 @@
 #include "EMPEffect.h"
 #include <ResourceManager\Playable.h>
 #include <ResourceManager\soundFac.h>
+#include "PowerUp.h"
 
 EMPAbil::EMPAbil(int miliseconds) : mTimer(miliseconds)
 {
@@ -23,12 +24,16 @@ void EMPAbil::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 	{
 		if((*it)->getType() == PLAYER)
 		{
+			if(static_cast<SpaceManImp*>(*it)->getAbility() != this)
+			{
+				(*it)->clean(data.gameData);
+			}
 			static_cast<SpaceManImp*>(*it)->addEffect( new EMPEffect(mTimer) );
 		}
 
-		if((*it)->getType() == PLAYER)
+		if((*it)->getType() == POWER_UP)
 		{
-			static_cast<SpaceManImp*>(*it)->addEffect( new EMPEffect(mTimer) );
+			static_cast<PowerUp*>(*it)->kill();
 		}
 	}
 

@@ -58,6 +58,8 @@ public:
 	bool isAbilityFree();
 	void slowDeath();
 	B2Body& getBody();
+	virtual void clean(GameData& data);
+	virtual Ability* getAbility() const;
 
 	bool isSlowlyDying() const;
 

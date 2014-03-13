@@ -19,6 +19,7 @@ public:
 	virtual Ability* getAbility() = 0;
 	virtual EntityType getType();
 	virtual bool isAlive();
+	void kill();
 
 protected:
 	PowerUp();

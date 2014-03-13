@@ -25,3 +25,8 @@ bool PowerUp::isAlive()
 
 	return mAlive;
 }
+
+void PowerUp::kill()
+{
+	mAlive = false;
+}
