@@ -13,6 +13,7 @@ public:
 
 	void setNPlayers(unsigned char nPlayers);
 	void draw(RenderList &list);
+	Head& getHead(int index);
 private:
 	FacePool mFacePool;
 	Head::UIPool mUIPool;

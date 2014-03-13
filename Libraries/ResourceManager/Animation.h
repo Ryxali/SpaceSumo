@@ -29,10 +29,11 @@ public:
 	unsigned short getSliceWidth();
 	unsigned short getSliceHeight();
 	int getCurrentFrame();
+	void setSprite(std::string ref);
 private:
 	Animation& operator=(const Animation& anim);
 	Animation(const Animation &anim);
-	const STexture &mSTex;
+	const STexture *mSTex;
 	sf::Sprite mSprite;
 	// The version of this instance's texture
 	unsigned short mTexVersion;

@@ -22,8 +22,10 @@
 #include <iostream>
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML\Graphics\Texture.hpp>
+#include "RHandle.h"
+
 Animation::Animation(const STexture &tex, std::string animInfo, float z) :
-	mSTex(tex),
+	mSTex(&tex),
 	mSprite(),
 	mTexVersion(0),
 	mSliceWidth(0),
@@ -57,11 +59,11 @@ Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 		setAdvancedTimeOptions(cf);
 	}
 
-	if(mTexVersion != mSTex.getVersion())
+	if(mTexVersion != mSTex->getVersion())
 	{
 		mSprite.setTexture(getTexture());
 		reevaluateSizeValues();
-		mTexVersion = mSTex.getVersion();
+		mTexVersion = mSTex->getVersion();
 	}
 	int curFrame = getCurrentFrame();
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
@@ -70,19 +72,19 @@ Animation::Animation(const STexture &tex, std::string animInfo, float z) :
 
 const sf::Texture &Animation::getTexture() const
 {
-	SAssert(mSTex.isLoaded(), "You need to load the texture before using. " + mSTex.getRef());
-	return mSTex.getTexture();
+	SAssert(mSTex->isLoaded(), "You need to load the texture before using. " + mSTex->getRef());
+	return mSTex->getTexture();
 }
 
 void Animation::draw(sf::RenderWindow &win)
 {
-	if(mTexVersion != mSTex.getVersion())
+	if(mTexVersion != mSTex->getVersion())
 	{
 		mSprite.setTexture(getTexture());
 		reevaluateSizeValues();
-		mTexVersion = mSTex.getVersion();
+		mTexVersion = mSTex->getVersion();
 	}
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
+	SAssert(mSTex->isLoaded(), "The texture isn't loaded. " + mSTex->getRef());
 	int curFrame = getCurrentFrame();
 	sf::IntRect r(sf::IntRect(curFrame*mSliceWidth, mCurrentRow*mSliceHeight, mSliceWidth, mSliceHeight));
 	mSprite.setTextureRect(r);
@@ -138,6 +140,12 @@ int Animation::getCurrentFrame()
 void Animation::setCurrentRow(unsigned char row)
 {
 	mCurrentRow = row;
+}
+
+void Animation::setSprite(std::string ref)
+{
+	mSTex = &res::getTexture(ref);
+	mTexVersion = 0;
 }
 
 void Animation::reevaluateSizeValues()

@@ -27,7 +27,7 @@ EntityImp* entFac::createSpaceMan(
 		data, bodyData, handData,  x, y, rotation);*/
 }
 
-EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, int playerIndex, SVector pos, float startRotation)
+EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, Head& head, int playerIndex, SVector pos, float startRotation)
 {
 	
 	/*return new SpaceManImp(
@@ -49,7 +49,9 @@ EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, int play
 		Config("res/conf/characters/spaceman/visual_data_"+std::to_string(playerIndex+1)+".cfg"),
 		Config(sData.bodyData),
 		Config(sData.handData),
-		gData);
+		gData,
+		head,
+		sData.headRef);
 
 }
 

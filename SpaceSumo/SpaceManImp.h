@@ -44,7 +44,9 @@ public:
 		Config& visualData,
 		Config& bodyData,
 		Config& handData,
-		GameData& data
+		GameData& data,
+		Head& head,
+		std::string headTexRef
 		);
 
 		~SpaceManImp();
@@ -111,7 +113,7 @@ private:
 	Animation mTurn;
 	Animation mJet;
 	
-	Head* mHead;
+	Head& mHead;
 	
 	//sounds
 	Playable* mJetpack;

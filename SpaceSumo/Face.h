@@ -23,6 +23,7 @@ public:
 	void changeMood(Mood mood);
 	void draw(RenderList &list, const Position &pos, bool flipped);
 	void setOrigin(int x, int y);
+	void setSprite(std::string ref);
 private:
 	Face(const Face& face);
 	Face& operator=(const Face& face);

@@ -65,7 +65,9 @@ SpaceManImp::SpaceManImp(
 	Config& visualData,
 	Config& bodyData,
 	Config& handData,
-	GameData& data) :
+	GameData& data,
+	Head& head,
+	std::string headTexRef) :
 	mControls(controls),
 	mAlive(true),
 	mSpaceman(data.world, bodyData, pos.getX(), pos.getY()),
@@ -96,8 +98,10 @@ SpaceManImp::SpaceManImp(
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
-	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
+	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist)),
+	mHead(head)
 {
+	mHead.getFace().setSprite(headTexRef+".png");
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
@@ -330,17 +334,17 @@ bool SpaceManImp::isSlowlyDying() const
 
 void SpaceManImp::setScore(int score)
 {
-	mHead->setScore(score);
+	mHead.setScore(score);
 }
 
 void SpaceManImp::addScore(int score)
 {
-	mHead->setScore(mHead->getScore() + score);
+	mHead.setScore(mHead.getScore() + score);
 }
 
 int SpaceManImp::getScore() const
 {
-	return mHead->getScore();
+	return mHead.getScore();
 }
 
 B2Body& SpaceManImp::getBody()

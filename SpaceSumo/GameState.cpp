@@ -107,7 +107,7 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 	case ControlList::PLAYER_1:
 		if(gData.controlList.isActive(p))
 		{
-			mData.mEntityImpList.add(entFac::createSpaceMan(sData[0], gData, ControlList::PLAYER_1, SVector(600, 400), 30));
+			mData.mEntityImpList.add(entFac::createSpaceMan(sData[0], gData, mHud.getHead(0), ControlList::PLAYER_1, SVector(600, 400), 30));
 		}
 		if(gData.controlList.getNActivePlayers() == 1)
 			break;
@@ -115,7 +115,7 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 	case ControlList::PLAYER_2:
 		if(gData.controlList.isActive(p))
 		{
-			mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, ControlList::PLAYER_2, SVector(1200, 400), 30));
+			mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, mHud.getHead(1), ControlList::PLAYER_2, SVector(1200, 400), 30));
 		}
 		if(gData.controlList.getNActivePlayers() == 2)
 			break;
@@ -123,7 +123,7 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 	case ControlList::PLAYER_3:
 		if(gData.controlList.isActive(p))
 		{
-			mData.mEntityImpList.add(entFac::createSpaceMan(sData[2], gData, ControlList::PLAYER_3, SVector(600, 600), 30));
+			mData.mEntityImpList.add(entFac::createSpaceMan(sData[2], gData, mHud.getHead(2), ControlList::PLAYER_3, SVector(600, 600), 30));
 		}
 		if(gData.controlList.getNActivePlayers() == 3)
 			break;
@@ -131,7 +131,7 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 	case ControlList::PLAYER_4:
 		if(gData.controlList.isActive(p))
 		{
-			mData.mEntityImpList.add(entFac::createSpaceMan(sData[3], gData, ControlList::PLAYER_4, SVector(1200, 600), 30));
+			mData.mEntityImpList.add(entFac::createSpaceMan(sData[3], gData, mHud.getHead(3), ControlList::PLAYER_4, SVector(1200, 600), 30));
 		}
 		break;
 	}

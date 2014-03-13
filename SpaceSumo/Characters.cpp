@@ -24,8 +24,8 @@ chars::Character::CList chars::Character::characters;
 void chars::configure(SpacemanData &data, const Character &chr)
 {
 	Config cfg(chr.charDataRef);
-	data.bodyData = cfg.getValue<std::string>("bodyData");
-	data.handData = cfg.getValue<std::string>("handData");
+	//data.bodyData = cfg.getValue<std::string>("bodyData");
+	//data.handData = cfg.getValue<std::string>("handData");
 	data.headRef = cfg.getValue<std::string>("headRef");
 }
 
