@@ -7,6 +7,7 @@ class EntityImp;
 #include <string>
 #include <Box2D\Box2D.h>
 #include <Common\SVector.h>
+#include <Common\Config.h>
 
 
 namespace entFac

@@ -254,4 +254,7 @@ int str::toXboxKey(std::string keyName)
 		return sf::Xbox::RIGHT_STICK_X;
 	if(keyName == "TRIGGERS")
 		return sf::Xbox::TRIGGERS;
+
+	SError("Unknown key", "Couldn't translate key value: " + keyName);
+	return 0;
 }

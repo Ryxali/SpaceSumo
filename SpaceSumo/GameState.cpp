@@ -39,7 +39,7 @@ void GameState::update(GameData &data, int delta)
 	if(mPowerUpSpawnTimer.isExpired())
 	{
 		mData.mEntityImpList.add((entFac::createPowerUpRandom(
-			data.world, rand()% (mPSpawnMaxX - 128) + WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + WINDOW_SIZE.y - mPSpawnMaxY)));
+			data.world, rand()% (mPSpawnMaxX - 128) + (float)WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + (float)WINDOW_SIZE.y - mPSpawnMaxY)));
 			mPowerUpSpawnTimer.reset();
 	}
 

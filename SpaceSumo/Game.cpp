@@ -55,7 +55,7 @@ void Game::start()
 
 void Game::loop()
 {
-	float delta = mDeltaClock.restart().asMilliseconds();
+	int delta = (int)mDeltaClock.restart().asMilliseconds();
 	//if(delta > 50)
 		//delta = 50;
 	sf::Event evt;
@@ -84,7 +84,7 @@ void Game::loop()
 	mGameData.mPos = (sf::Vector2f)sf::Mouse::getPosition(mWindow) * (mView.getSize()/(sf::Vector2f)mWindow.getSize());
 	mWindow.clear(sf::Color::White);
 	mGameData.controlList.update(mGameData);
-	update(delta   );
+	update(delta);
 	preDraw();
 	draw();
 	cleanUp();

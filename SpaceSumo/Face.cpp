@@ -49,17 +49,17 @@ void Face::draw(RenderList &list, const Position &pos, bool flipped)
 		mFaces.getSprite().setScale(1, 1);
 		break;
 	case TOP_RIGHT:
-		mFaces.getSprite().setPosition(WINDOW_SIZE.x - 75, 75);
+		mFaces.getSprite().setPosition((float)WINDOW_SIZE.x - 75, 75);
 		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		//mFaces.getSprite().setScale(-1, 1);
 		break;
 	case BOTTOM_LEFT:
-		mFaces.getSprite().setPosition(75, WINDOW_SIZE.y - 75);
+		mFaces.getSprite().setPosition(75, (float)WINDOW_SIZE.y - 75);
 		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		//mFaces.getSprite().setScale(1, 1);
 		break;
 	case BOTTOM_RIGHT:
-		mFaces.getSprite().setPosition(WINDOW_SIZE.x - 75, WINDOW_SIZE.y - 75);
+		mFaces.getSprite().setPosition((float)WINDOW_SIZE.x - 75, (float)WINDOW_SIZE.y - 75);
 		mFaces.getSprite().setOrigin(mFaces.getSprite().getGlobalBounds().width / 2, mFaces.getSprite().getGlobalBounds().height / 2);
 		//mFaces.getSprite().setScale(-1, 1);
 		break;
@@ -70,8 +70,8 @@ void Face::draw(RenderList &list, const Position &pos, bool flipped)
 
 void Face::setOrigin(int x, int y)
 {
-	mOrigin.x = x;
-	mOrigin.y = y;
+	mOrigin.x = (float)x;
+	mOrigin.y = (float)y;
 }
 
 FacePool::FacePool() : test("res/img/UI/test"), test1("res/img/UI/test"), test2("res/img/UI/test"), test3("res/img/UI/test")

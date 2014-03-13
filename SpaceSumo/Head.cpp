@@ -22,22 +22,22 @@ void Head::draw(RenderList &list)
 	{
 	case TOP_LEFT:
 		mFlipped = false;
-		mBar.getSprite().setPosition(0, 0);
-		mBar.getSprite().setOrigin(0, 0);
+		mBar.getSprite().setPosition(0.f, 0.f);
+		mBar.getSprite().setOrigin(0.f, 0.f);
 		break;
 	case TOP_RIGHT:
 		mFlipped = true;
-		mBar.getSprite().setPosition(WINDOW_SIZE.x, 0);
-		mBar.getSprite().setOrigin(mBar.getSprite().getGlobalBounds().width, 0);
+		mBar.getSprite().setPosition((float)WINDOW_SIZE.x, 0.f);
+		mBar.getSprite().setOrigin(mBar.getSprite().getGlobalBounds().width, 0.f);
 		break;
 	case BOTTOM_LEFT:
 		mFlipped = false;
-		mBar.getSprite().setPosition(0, WINDOW_SIZE.y);
-		mBar.getSprite().setOrigin(0, mBar.getSprite().getGlobalBounds().height);
+		mBar.getSprite().setPosition(0.f, (float)WINDOW_SIZE.y);
+		mBar.getSprite().setOrigin(0.f, mBar.getSprite().getGlobalBounds().height);
 		break;
 	case BOTTOM_RIGHT:
 		mFlipped = true;
-		mBar.getSprite().setPosition(WINDOW_SIZE.x, WINDOW_SIZE.y);
+		mBar.getSprite().setPosition((float)WINDOW_SIZE.x, (float)WINDOW_SIZE.y);
 		mBar.getSprite().setOrigin(mBar.getSprite().getGlobalBounds().width, mBar.getSprite().getGlobalBounds().height);
 		break;
 	default:

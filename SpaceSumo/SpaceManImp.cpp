@@ -80,7 +80,7 @@ SpaceManImp::SpaceManImp(
 	mSpeedLimit(bodyData.getValue<float>("speedLimit")),
 	mRotationSpeed(bodyData.getValue<float>("rotationSpeed")),
 	mFixedRotation(bodyData.getValue<bool>("fixedRotation")),
-	mPunchForce(bodyData.getValue<int>("punchForce")),
+	mPunchForce(bodyData.getValue<float>("punchForce")),
 	mRespawnTimer(bodyData.getValue<int>("respawnTimer")),
 	mPushDuration(bodyData.getValue<int>("pushDuration")),
 	mPushCooldown(bodyData.getValue<int>("pushCooldown")),
@@ -91,7 +91,7 @@ SpaceManImp::SpaceManImp(
 	mSpeed(bodyData.getValue<float>("speed")),
 	mDirection(SVector(0.f, -1.f)),
 	mAngle(0.f),
-	mJetOffset(bodyData.getValue<float>("jetOffset")),
+	mJetOffset(bodyData.getValue<int>("jetOffset")),
 	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
@@ -251,9 +251,9 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 void SpaceManImp::draw(RenderList& renderList)
 {
-	mAnim.getSprite().setOrigin(mAnim.getSprite().getTextureRect().width/2, mAnim.getSprite().getTextureRect().height/2);
-	mTurn.getSprite().setOrigin(mTurn.getSprite().getTextureRect().width/2, mTurn.getSprite().getTextureRect().height/2);
-	mJet.getSprite().setOrigin(mJet.getSprite().getTextureRect().width/2, mJetOffset);
+	mAnim.getSprite().setOrigin((float)mAnim.getSprite().getTextureRect().width/2, (float)mAnim.getSprite().getTextureRect().height/2);
+	mTurn.getSprite().setOrigin((float)mTurn.getSprite().getTextureRect().width/2, (float)mTurn.getSprite().getTextureRect().height/2);
+	mJet.getSprite().setOrigin((float)mJet.getSprite().getTextureRect().width/2, (float)mJetOffset);
 
 	mAnim.getSprite().setRotation( mSpaceman.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);

@@ -26,7 +26,7 @@ WeightSelectionState::WeightSelectionState(StateList &owner, SpacemanData (&mSpa
 	while(std::getline(ifs, s))
 	{
 		mWeightClasses.add(new ButtonMulti(
-			SVector(x*200, 300),
+			SVector((float)x*200.f, 300.f),
 			x,
 			0,
 			new DualCommand(

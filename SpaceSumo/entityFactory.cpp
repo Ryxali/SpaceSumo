@@ -7,9 +7,12 @@
 #include "ETorpedoPickup.h"
 #include <cstdlib>
 #include "EMP.h"
+#include <Common\error.h>
 
 #include "GameData.h"
 #include "SpacemanData.h"
+
+static Config spawnRates("res/conf/powerup/spawnRates.cfg");
 
 EntityImp* entFac::createSpaceMan(
 	std::string conf, GameData& data,
@@ -75,23 +78,33 @@ EntityImp* createPowerUpEMP(b2World& world, float x, float y)
 EntityImp* entFac::createPowerUpRandom(b2World& world, float x, float y)
 {
 	std::string bodyData("res/conf/powerUpBody.cfg");
-	int rand_val = rand() % 3;
-	switch ( rand_val )
+	int totalChance = spawnRates.getValue<int>("LHydrogen") +
+		spawnRates.getValue<int>("EnergyTorpedo") + 
+		spawnRates.getValue<int>("EMP");
+	int previous = 0;
+	int rand_val = rand() % totalChance;
+	
+	if(rand_val < spawnRates.getValue<int>("LHydrogen"))
 	{
-	case 0:
 		return new LHydrogen(world, bodyData, x, y);
-	break;
-		
-	case 1:
-		return new ETorpedoPickup(world, bodyData, x, y);
-	break;
-
-	case 2:
-		return new EMP(world, bodyData, x, y);
-	break;
-
-	default:
-
-	break;
 	}
+	else
+		previous += spawnRates.getValue<int>("LHydrogen");
+		
+	if(rand_val < previous + spawnRates.getValue<int>("EnergyTorpedo"))
+	{
+		return new ETorpedoPickup(world, bodyData, x, y);
+	}
+	else
+		previous += spawnRates.getValue<int>("EnergyTorpedo");
+
+	if(rand_val < previous + spawnRates.getValue<int>("EMP"))
+	{
+		return new EMP(world, bodyData, x, y);
+	}
+	else 
+		previous += spawnRates.getValue<int>("EMP");
+
+	SError("Random value out of bounds", "The Randomization value for powerup spawn is not in the desired range" + rand_val);
+	return 0;
 }
