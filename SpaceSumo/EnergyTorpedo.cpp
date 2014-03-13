@@ -6,6 +6,7 @@
 #include "consts.h"
 #include <ResourceManager\soundFac.h>
 
+
 EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b2World& world, int projSpeed):
 	mSpeed(),
 	mDirection(dir),
@@ -32,6 +33,8 @@ EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b
 	}
 
 	mBody.setLinearVelocity( mSpeed );
+
+	
 }
 
 
@@ -45,13 +48,24 @@ void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 	{
 		mTravelling = soundFac::createSound("res/sound/energy_torpedo/torpedo_travelling.spf" , data.soundlist );
 		mShoot = soundFac::createSound("res/sound/energy_torpedo/torpedo_launch.spf", data.soundlist);
+
+		mShoot->setRelativeToListener(false);
+		mShoot->setAttenuation(ATTENUATION);
+		mShoot->setPosition(mPosition.getX(), mPosition.getY(), 0 );
+
+		mTravelling->setRelativeToListener(false);
+		mTravelling->setAttenuation(ATTENUATION);
+
 		mShoot->play();
 		mTravelling->play();
 	}
 
+	mTravelling->setPosition(mBody.getPosition().x*PPM, mBody.getPosition().y*PPM, 0 );
+
+
 	//deletes the projectile if it's outside the map
-	if( (mBody.getPosition().x*PPM < -200 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 200) ||
-		(mBody.getPosition().y*PPM < -200 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 200))
+	if( (mBody.getPosition().x*PPM < -1800 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 1800) ||
+		(mBody.getPosition().y*PPM < -1800 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 1800))
 	{
 		mAlive = false;
 	}

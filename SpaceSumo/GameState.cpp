@@ -12,6 +12,7 @@
 #include <Common\error.h>
 #include "SpacemanData.h"
 
+
 GameState::GameState(StateList &owner, GameData& gameData) 
 	: State(owner), mData(gameData),
 	mGameData(gameData),

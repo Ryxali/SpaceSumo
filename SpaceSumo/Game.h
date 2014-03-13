@@ -8,6 +8,7 @@
 #include "GameStateList.h"
 #include "ContactListener.h"
 #include "KeyboardController.h"
+#include <SFML/Audio/Listener.hpp>
 
 class Game
 {
@@ -29,6 +30,7 @@ private:
 	RenderList mRenderList;
 	sf::Clock mDeltaClock;
 	ContactListener mListener;
+	
 	
 };
 

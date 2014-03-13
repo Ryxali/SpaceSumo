@@ -17,6 +17,7 @@ public:
 	virtual void update(GameData&);
 
 	virtual void setRelativeToListener(bool);
+	virtual void setAttenuation(float);
 	virtual void setPosition(float x, float y, float z);
 private:
 	Playable* mSound;

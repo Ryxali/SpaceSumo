@@ -9,6 +9,7 @@
 #include "KeyboardController.h"
 #include "XController.h"
 #include <Common/XboxButtons.h>
+
 #include <iostream>
 
 sf::Vector2f operator/(const sf::Vector2f &v0, const sf::Vector2f &v1)
@@ -40,14 +41,18 @@ Game::Game() :
 	mWindow.setView(mView);
 	mGameData.world.SetContactListener(&mListener);
 	mWindow.setKeyRepeatEnabled(false);
-
-
+	sf::Listener::setPosition( WINDOW_SIZE.x/2 , WINDOW_SIZE.y/2 , 2 );
+	//sf::Listener::setDirection( 0 , 0 , 1 );
+	sf::Listener::setGlobalVolume(100);
 }
 
 void Game::start()
 {
+	
+	
 	while(mWindow.isOpen())
 	{
+		
 		loop();
 	}
 	

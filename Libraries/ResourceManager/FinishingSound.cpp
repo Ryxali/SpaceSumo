@@ -49,6 +49,11 @@ void FinishingSound::setRelativeToListener(bool status)
 	mSound->setRelativeToListener(status);
 }
 
+void FinishingSound::setAttenuation(float atten)
+{
+	mSound->setAttenuation(atten);
+}
+
 void FinishingSound::setPosition(float x, float y, float z = 0)
 {
 	mSound->setPosition(x, y, z);

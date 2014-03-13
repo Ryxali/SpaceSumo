@@ -6,3 +6,4 @@ static const float PPM = 30.f;
 static const float DEGREES_TO_RADIANS = 0.0174532925f;
 static const float RADIAN_TO_DEGREES = 57.2957795f;
 static const float PI = 3.1415927f;
+static const float ATTENUATION = 0.0005;
