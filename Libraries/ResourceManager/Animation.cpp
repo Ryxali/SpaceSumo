@@ -134,7 +134,9 @@ int Animation::getCurrentFrame()
 	{
 		timeElapsed = ( mAnimationTimer.restart().asMilliseconds())%getCurAnimTime();
 	}
-	return (int)( (timeElapsed) / (((getCurAnimTime()) * getCurAnimLength() )));
+	unsigned short cat(getCurAnimTime());
+	unsigned short cal(getCurAnimLength());
+	return (int)( (timeElapsed) / (((cat) / cal )));
 }
 
 void Animation::setCurrentRow(unsigned char row)

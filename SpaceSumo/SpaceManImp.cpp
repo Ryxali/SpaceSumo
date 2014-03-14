@@ -100,7 +100,7 @@ SpaceManImp::SpaceManImp(
 	mHead(head),                       
 	mLives(5)
 {
-	mHead.getFace().setSprite(headTexRef+".png");
+	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
