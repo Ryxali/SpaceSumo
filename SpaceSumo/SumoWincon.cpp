@@ -1,21 +1,24 @@
 #include "stdafx.h"
 #include "SumoWincon.h"
 #include "SpaceManImp.h"
+#include "EntityImp.h"
 
 SumoWincon::SumoWincon()
 {
 }
 
-
 SumoWincon::~SumoWincon()
 {
 }
 
-void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp* subject)
+void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpacemen)[4])
 {
-	if(subject->isSlowlyDying())
+	for( int i = 0; i < 3; i++)
 	{
-		subject->decreaseLives();
+		if( (*mSpacemen)->respawning() )
+		{
+			(*mSpacemen)->decreaseLives();
+		}
 	}
 }
 

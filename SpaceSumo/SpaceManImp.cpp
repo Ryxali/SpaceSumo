@@ -74,6 +74,10 @@ SpaceManImp::SpaceManImp(
 	mLeftArm(0),
 	mLeftHand(data.world, handData, pos.getX(), pos.getY()),
 	mLeftArmDef(),
+	mMiddleArmJoint(0),
+	mMiddleArm(0),
+	mMiddleHand(data.world, handData, pos.getX(), pos.getY()),
+	mMiddleArmDef(),
 	mRightArmJoint(0),
 	mRightArm(0),
 	mRightHand(data.world, handData, pos.getX(), pos.getY()),
@@ -98,7 +102,8 @@ SpaceManImp::SpaceManImp(
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
 	mHead(head),
-	mLives(5)
+	mLives(10),
+	mRespawning(false)
 {
 	mHead.getFace().setSprite(headTexRef+".png");
 	mSpaceman.setRotation(startRotation);
@@ -127,16 +132,19 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	mJetpack->setPosition (mSpaceman.getPosition().x*PPM , mSpaceman.getPosition().y*PPM , 0 );
 
+	std::cout << mLives << std::endl;
+
 	//gData.wincon->update(data, gData, this);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
 	mEffects.update(mControls, data);
+	mHead.setScore(mLives);
 
 	if(mSlowDeath)
 	{
 
-		if(mRespawnTimer.isExpired() && mLives > 0 )
+		if( mRespawnTimer.isExpired() && mLives > 0)
 		{
 			//TODO Some kind of better spawn
 			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
@@ -150,6 +158,8 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			delete mAbility;
 			mAbility = 0;
 			mEffects.clear();
+
+			mRespawning = true;
 		}
 		else
 		{
@@ -344,6 +354,21 @@ bool SpaceManImp::isSlowlyDying() const
 	return mSlowDeath;
 }
 
+bool SpaceManImp::respawning()
+{
+	if( mRespawning )
+	{
+		mRespawning = false;
+		
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
 B2Body& SpaceManImp::getBody()
 {
 	return mSpaceman;
@@ -378,6 +403,22 @@ void SpaceManImp::initializeArms(b2World& world)
 	mLeftArmDef.motorSpeed = 0;
 	mLeftArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mLeftArmDef);
 
+	// Middle arm
+	mMiddleArmDef.bodyA = mMiddleHand.getBody();
+	mMiddleArmDef.bodyB = mSpaceman.getBody();
+	mMiddleArmDef.collideConnected = false;
+	mMiddleArmDef.localAxisA.Set( 0 , 1 );
+	mMiddleArmDef.localAxisA.Normalize();
+	mMiddleArmDef.localAnchorA.Set( 0 , 0 );
+	mMiddleArmDef.localAnchorB.Set( 0, 0 );
+	mMiddleArmDef.enableLimit = true;
+	mMiddleArmDef.lowerTranslation = 0;
+	mMiddleArmDef.upperTranslation = 2;
+	mMiddleArmDef.enableMotor = true;
+	mMiddleArmDef.maxMotorForce = 300;
+	mMiddleArmDef.motorSpeed = 0;
+	mMiddleArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mMiddleArmDef);
+	
 	// right hand
 	mRightArmDef.bodyA = mRightHand.getBody();
 	mRightArmDef.bodyB = mSpaceman.getBody();
@@ -400,6 +441,7 @@ void SpaceManImp::extendArms()
 	mAnim.setCurrentRow(1);
 	mLeftArmJoint->SetMotorSpeed(mPunchForce);
 	mRightArmJoint->SetMotorSpeed(mPunchForce);
+	mMiddleArmJoint->SetMotorSpeed(mPunchForce);
 }
 
 void SpaceManImp::retractArms()
@@ -407,7 +449,7 @@ void SpaceManImp::retractArms()
 	mAnim.setCurrentRow(0);
 	mLeftArmJoint->SetMotorSpeed(-mPunchForce);
 	mRightArmJoint->SetMotorSpeed(-mPunchForce);
-
+	mMiddleArmJoint->SetMotorSpeed(-mPunchForce);
 }
 
 void SpaceManImp::decreaseLives()
