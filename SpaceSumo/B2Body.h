@@ -13,11 +13,16 @@ struct B2Body
 public:
 	B2Body(b2World &world , std::string configFile,
 		float x, float y );
+	B2Body(b2World &world , std::string configFile,
+		float x, float y, float scale );
+
 	B2Body(b2World &world , Config &config,
 		float x, float y );
+	B2Body::B2Body( b2World &world , Config &config,
+			   float x, float y, float scale );
 	~B2Body();
 	
-	void initBody(b2World& world, Config &config);
+	
 
 	//getfunctions
 	const b2Vec2 getLinearVelocity();
@@ -36,6 +41,9 @@ public:
 
 private:
 	B2Body(const B2Body& b2b);
+
+	void initBody(b2World& world, Config &config, float scale);
+
 	SVector mSpawnpoint;
 
 	b2Body* mBody;

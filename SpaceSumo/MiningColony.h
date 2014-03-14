@@ -3,6 +3,7 @@
 #include <ResourceManager\SSprite.h>
 #include <SFML\Audio\Music.hpp>
 #include <Common\Timer.h>
+#include <Common\Config.h>
 
 class MiningColony :
 	public Map

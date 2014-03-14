@@ -5,7 +5,6 @@
 #include "UnyieldingSound.h"
 #include "SoundQuene.h"
 #include "SoundList.h"
-#include "Music.h"
 #include "RHandle.h"
 
 
@@ -66,7 +65,7 @@ Playable* resolveType(std::string line)
 			{
 				++it;
 				++t;
-				std::string f("");
+				std::string f;
 				while(*it != ')')
 				{
 					f += *it;
@@ -86,19 +85,6 @@ Playable* resolveType(std::string line)
 			else if(line.substr(0, t) == "UninterruptableSound" ||line.substr(0, t) == "UnyieldingSound")
 			{
 				return new UnyieldingSound(resolveType(line.substr(t+1)));
-			}
-			else if(line.substr(0, t) == "Music")
-			{
-				++it;
-				++t;
-				std::string f;
-				while(*it != ')')
-				{
-					f += *it;
-					++it;
-					++t;
-				}
-				return new Music(str::purge(f,'"'));
 			}
 			else if(line.substr(0, t) == "QueueSound")
 			{
@@ -162,8 +148,13 @@ Playable* soundFac::createSound(std::string ref)
 	std::string line;
 	while(std::getline(stream, line))
 	{
+<<<<<<< HEAD
 
+		if(line.size() != 0 && (line[0] != '#' && line[0] != ' '))
+=======
+		
 		if(line.size() != 0 && (line[0] != '#'))
+>>>>>>> dev_NL
 		{
 			tot += line;
 		}

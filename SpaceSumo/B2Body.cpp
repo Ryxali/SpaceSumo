@@ -10,13 +10,29 @@ B2Body::B2Body(b2World &world , std::string configFile,
 			   : mSpawnpoint( x , y )
 {
 	Config cfg(configFile);
-	initBody(world, cfg);
+	initBody(world, cfg, 1);
 }
+
+B2Body::B2Body(b2World &world , std::string configFile,
+			   float x, float y, float scale)
+			   : mSpawnpoint( x , y )
+{
+	Config cfg(configFile);
+	initBody(world, cfg, scale);
+}
+
 B2Body::B2Body(b2World &world , Config &config,
 			   float x, float y )
 			   : mSpawnpoint(x, y)
 {
-	initBody(world, config);
+	initBody(world, config, 1);
+}
+
+B2Body::B2Body( b2World &world , Config &config,
+			   float x, float y, float scale )
+			   : mSpawnpoint(x, y)
+{
+	initBody(world, config, scale);
 }
 
 B2Body::~B2Body()
@@ -82,8 +98,7 @@ void B2Body::setRotation(float32 angle)
 	mBody->SetTransform( mBody->GetPosition() , DEGREES_TO_RADIANS * angle );
 }
 
-
-void B2Body::initBody(b2World& world, Config &config)
+void B2Body::initBody(b2World& world, Config &config, float scale)
 {
 
 	b2Shape* bodyShape;
@@ -95,13 +110,13 @@ void B2Body::initBody(b2World& world, Config &config)
 	if(config.getValue<std::string>("shape") == "rectangle")
 	{
 		bodyShape = new b2PolygonShape();
-		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(config.getValue<int>("sizeX")/PPM, config.getValue<int>("sizeY")/PPM);
+		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(config.getValue<int>("sizeX") * scale / PPM, config.getValue<int>("sizeY") * scale / PPM);
 		mBodyFix.shape = bodyShape;
 	}
 	else
 	{
 		bodyShape = new b2CircleShape();
-		static_cast<b2CircleShape*>(bodyShape)->m_radius = config.getValue<float>("radius")/PPM;
+		static_cast<b2CircleShape*>(bodyShape)->m_radius = config.getValue<float>("radius") * scale / PPM;
 		mBodyFix.shape = bodyShape;
 	}
 	mBodyFix.density = config.getValue<float>("density");
