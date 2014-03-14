@@ -35,4 +35,6 @@ private:
 	int mPSpawnMaxX, mPSpawnMaxY;
 
 	SumoWincon mSumoWincon;
+	
+	SpaceManImp* mSpacemen[4];
 };

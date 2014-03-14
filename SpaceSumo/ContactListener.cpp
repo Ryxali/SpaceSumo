@@ -75,11 +75,11 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 		}
 		break;
 
-		case PROJECTILE:
+	case PROJECTILE:
 		switch(static_cast<EntityImp*>( userDataB )->getType())
 		{
 		case PLAYER:
-			
+
 			static_cast<EnergyTorpedo*>(userDataA)->kill();
 
 			break;

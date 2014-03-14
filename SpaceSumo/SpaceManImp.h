@@ -64,6 +64,7 @@ public:
 	virtual Ability* getAbility() const;
 
 	bool isSlowlyDying() const;
+	bool respawning();
 
 	// poitsystem
 
@@ -81,6 +82,8 @@ private:
 
 	SVector mSpawnpoint;
 	bool mAlive;
+	bool mSlowDeath;
+	bool mRespawning;
 
 	//Spaceman stuff
 	B2Body mSpaceman;
@@ -89,6 +92,11 @@ private:
 	b2PrismaticJoint* mLeftArm;
 	B2Body mLeftHand;
 	b2PrismaticJointDef mLeftArmDef;
+
+	b2PrismaticJoint* mMiddleArmJoint;
+	b2PrismaticJoint* mMiddleArm;
+	B2Body mMiddleHand;
+	b2PrismaticJointDef mMiddleArmDef;
 
 	b2PrismaticJoint* mRightArmJoint;
 	b2PrismaticJoint* mRightArm;
@@ -102,10 +110,12 @@ private:
 	Timer mPushDuration;
 	Timer mPushCooldown;
 	bool mPushed;
+	
 	Timer mRespawnTimer;
-	bool mSlowDeath;
+	
 	Effects mEffects;
 	Ability* mAbility;
+	
 	float mSpeed;
 	SVector mDirection;
 	float mAngle;
