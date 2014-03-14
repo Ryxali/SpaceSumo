@@ -44,7 +44,7 @@ void GameState::update(GameData &data, int delta)
 			mPowerUpSpawnTimer.reset();
 	}
 
-	mGameMap->update(data);
+	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
 }
 void GameState::draw(RenderList &list)

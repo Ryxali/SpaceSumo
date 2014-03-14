@@ -10,7 +10,7 @@ Terra::Terra():
 	mSoundtrack.openFromFile("res/music/terra/terra.ogg");
 }
 
-void Terra::update(GameData &data)
+void Terra::update(GameStateData &gData, int delta)
 {
 	if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
 	{

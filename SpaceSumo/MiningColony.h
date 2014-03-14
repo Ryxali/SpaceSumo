@@ -10,7 +10,7 @@ class MiningColony :
 public:
 	MiningColony();
 
-	virtual void update(GameData &data);
+	virtual void update(GameStateData &data, int delta);
 	virtual void draw(RenderList &list);
 	virtual void init(GameData &data);
 	virtual void close();
