@@ -74,9 +74,10 @@ void Face::setOrigin(int x, int y)
 	mOrigin.y = (float)y;
 }
 
-void Face::setSprite(std::string ref)
+void Face::setPersona(std::string ref)
 {
-	mFaces.setSprite(ref);
+	//TODO add soundstuff
+	mFaces.setSprite(ref+".png");
 }
 
 FacePool::FacePool() : test("res/img/UI/test"), test1("res/img/UI/test"), test2("res/img/UI/test"), test3("res/img/UI/test")

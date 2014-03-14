@@ -101,11 +101,11 @@ SpaceManImp::SpaceManImp(
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
-	mHead(head),
+	mHead(head),                       
 	mLives(10),
 	mRespawning(false)
 {
-	mHead.getFace().setSprite(headTexRef+".png");
+	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
 	initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);

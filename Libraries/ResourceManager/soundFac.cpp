@@ -149,7 +149,7 @@ Playable* soundFac::createSound(std::string ref)
 	while(std::getline(stream, line))
 	{
 
-		if(line.size() != 0 && (line[0] != '#' && line[0] != ' '))
+		if(line.size() != 0 && (line[0] != '#'))
 		{
 			tot += line;
 		}
