@@ -7,21 +7,17 @@
 
 Exploded::Exploded():
 	mPrevKeyState(false),
-	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/effect.png"), "res/img/PowerUp/EnergyTorpedo/energyeffect.cfg", 7.f),
 	mEffectTimer(1000),
 	mOwner(0),
 	mBlown(false)
 {
-	mAnim.getSprite().setOrigin( 32 , 32 );
 }
 
 
 Exploded::Exploded(Exploded const& f):
 	mPrevKeyState(f.mPrevKeyState),
-	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/effect.png"), "res/img/PowerUp/EnergyTorpedo/energyeffect.cfg", 7.f),
 	mEffectTimer(1000)
 {
-	mAnim.getSprite().setOrigin( 0 , 0 );
 }
 
 Exploded::~Exploded()
@@ -54,11 +50,6 @@ void Exploded::draw(RenderList& list, SpaceManImp* owner)
 	{
 		mOwner = owner;
 	}
-
-	mAnim.getSprite().setRotation( owner->getBody().getAngle() * 57 );
-	mAnim.getSprite().setPosition( owner->getBody().getWorldCenter().x*30, owner->getBody().getWorldCenter().y*30);
-	
-	list.addSprite(mAnim);
 }
 
 EffectImp* Exploded::clone()

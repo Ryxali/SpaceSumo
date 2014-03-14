@@ -11,7 +11,7 @@ Explosion::Explosion(b2World& world, float x, float y):
 	mAlive(true),
 	mDying(false),
 	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/explosion.png"), "res/img/PowerUp/EnergyTorpedo/explosion.cfg", 10.f),
-	mDuration(1000),
+	mDuration(600),
 	mBlast(0)
 {
 	mAnim.getSprite().setOrigin( mAnim.getSprite().getGlobalBounds().height/2 , mAnim.getSprite().getGlobalBounds().width/2 );

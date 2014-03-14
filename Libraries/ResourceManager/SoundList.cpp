@@ -39,12 +39,15 @@ void SoundList::update()
 		}
 
 	}
-	mLocked = true;
-	for(int i = 0; i < mCurSize; ++i)
+	if(mCurSize > 0)
 	{
-		mPlayables.push_back(mStack[i]);
-		mStack[i] = 0;
+		mLocked = true;
+		for(int i = 0; i < mCurSize; ++i)
+		{
+			mPlayables.push_back(mStack[i]);
+			mStack[i] = 0;
+		}
+		mCurSize = 0;
+		mLocked = false;
 	}
-	mCurSize = 0;
-	mLocked = false;
 }
