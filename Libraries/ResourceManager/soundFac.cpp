@@ -6,6 +6,7 @@
 #include "SoundQuene.h"
 #include "SoundList.h"
 #include "Music.h"
+#include "Pause.h"
 #include "RHandle.h"
 
 
@@ -23,7 +24,6 @@ public:
 	void add(Playable*);
 	bool mRunning;
 	SoundList mSoundList;
-	void stop();
 private:
 	sf::Thread mThread;
 };
@@ -35,6 +35,7 @@ static void run()
 	{
 		soundManager.mSoundList.update();
 	}
+
 }
 
 SoundManager::SoundManager() : mSoundList(), mThread(&run), mRunning(true)
@@ -44,6 +45,7 @@ SoundManager::SoundManager() : mSoundList(), mThread(&run), mRunning(true)
 SoundManager::~SoundManager()
 {
 	mRunning = false;
+	mThread.wait();
 }
 void SoundManager::add(Playable* p)
 {
@@ -74,6 +76,19 @@ Playable* resolveType(std::string line)
 					++t;
 				}
 				return new SSound(res::getSoundBuffer(str::purge(f,'"')));
+			}
+			else if(line.substr(0, t) == "Pause")
+			{
+				++it;
+				++t;
+				std::string f;
+				while(*it != ')')
+				{
+					f += *it;
+					++it;
+					++t;
+				}
+				return new Pause(std::stoi(str::purge(f, ' ')));
 			}
 			else if(line.substr(0, t) == "LoopSound")
 			{

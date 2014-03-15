@@ -88,6 +88,7 @@
     <ClInclude Include="FinishingSound.h" />
     <ClInclude Include="LoopSound.h" />
     <ClInclude Include="Music.h" />
+    <ClInclude Include="Pause.h" />
     <ClInclude Include="Playable.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="SDrawable.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="LoadableBundle.cpp" />
     <ClCompile Include="Music.cpp" />
+    <ClCompile Include="Pause.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceHandler.cpp" />
     <ClCompile Include="RHandle.cpp" />
