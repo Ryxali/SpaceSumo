@@ -4,21 +4,19 @@
 #include "RenderList.h"
 #include "GameStateData.h"
 #include "Asteroid.h"
+#include <ResourceManager\soundFac.h>
 
 MiningColony::MiningColony() : 
 	mBackground(res::getTexture("res/img/maps/miningcolony/MiningColony_BG.png"), -1.f),
-	mSoundtrack(),
+	mSoundtrack(soundFac::createSound("res/music/MiningColony/miningColony.spf")),
 	mAsteroidTimer(0)
 {
-	mSoundtrack.openFromFile("res/music/MiningColony/miningColony.ogg");
+
 }
 
 void MiningColony::update(GameStateData &data, int delta)
 {
-	if(mSoundtrack.getStatus() != sf::Music::Status::Playing)
-	{
-		//mSoundtrack.play();
-	}
+	mSoundtrack->play();
 
 	if(mAsteroidTimer.isExpired())
 	{
@@ -59,5 +57,5 @@ void MiningColony::init(GameData &data)
 
 void MiningColony::close()
 {
-	mSoundtrack.stop();
+	//mSoundtrack->stop();
 }

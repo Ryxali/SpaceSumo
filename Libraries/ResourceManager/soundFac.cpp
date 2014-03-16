@@ -167,7 +167,7 @@ Playable* resolveType(std::string line)
 		++it;
 	}
 	SError("Couldn't resolve type!", line);
-	exit(1);
+	return 0;
 }
 
 Playable* soundFac::createSound(std::string ref)

@@ -1,0 +1,14 @@
+# Sound("ref") -- A regular Sound
+# LoopSound(AnyOtherSound) -- A looping sound
+# FinishingSound(AnyOtherSound) -- A sound that will always finish on stop
+# QueueSound(AnyOtherSound0, AnyOtherSound1, ...) -- A sequence of sounds
+# Pause(aNumberInMillis) -- A pause for a set number of milliseconds
+# <-- A comment
+# Examples:
+# Sound("res/sounds/foo.ogg")
+# QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
+
+
+
+
+UninterruptableSound(QueueSound(Music("res/music/miningColony/miningColony.ogg")))
