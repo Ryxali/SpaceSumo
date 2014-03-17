@@ -47,6 +47,8 @@ EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, Head& he
 		pConf.getValue<int>("startingY"),
 		pConf.getValue<float>("startingRotation")
 		);*/
+		
+		
 	return new SpaceManImp(
 		gData.controlList.get(playerIndex),
 		pos, startRotation,
