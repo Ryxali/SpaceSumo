@@ -68,7 +68,6 @@ public:
 
 	// poitsystem
 
-	int mLives;
 	void decreaseLives();
 	
 	

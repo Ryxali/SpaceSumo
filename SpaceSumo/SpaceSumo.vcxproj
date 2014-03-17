@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="Ability.cpp" />
     <ClCompile Include="AddPlayersState.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="B2Body.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonMulti.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="SelectCharacterCommand.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="SetWeightClassCommand.cpp" />
+    <ClCompile Include="SpaceJunk.cpp" />
     <ClCompile Include="SpaceManImp.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateList.cpp" />
@@ -163,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Ability.h" />
     <ClInclude Include="AddPlayersState.h" />
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="B2Body.h" />
     <ClInclude Include="ButtonMulti.h" />
     <ClInclude Include="ButtonObserverList.h" />
@@ -177,6 +180,7 @@
     <ClInclude Include="EMPEffect.h" />
     <ClInclude Include="MiningColony.h" />
     <ClInclude Include="PlayerReadyToggleCommand.h" />
+    <ClInclude Include="SpaceJunk.h" />
     <ClInclude Include="StateList_CSelect.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="ControlList.h" />

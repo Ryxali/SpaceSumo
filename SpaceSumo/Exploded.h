@@ -32,6 +32,5 @@ private:
 
 
 	bool mPrevKeyState;
-	Animation mAnim;
 };
 

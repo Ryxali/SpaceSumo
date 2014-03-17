@@ -69,8 +69,6 @@ SpaceManImp::SpaceManImp(
 	std::string headTexRef) :
 	mControls(controls),
 	mAlive(true),
-	x(pos.getX()),
-	y(pos.getY()),
 	mSpaceman(data.world, bodyData, pos.getX(), pos.getY()),
 	mLeftArmJoint(0),
 	mLeftArm(0),
@@ -102,9 +100,16 @@ SpaceManImp::SpaceManImp(
 	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
+<<<<<<< HEAD
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
-	mHead(head),                       
+	mHead(head),
+	mLives(10),
 	mRespawning(false)
+=======
+	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
+	mHead(head),                       
+	mLives(5)
+>>>>>>> dev_NL
 {
 	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
@@ -133,35 +138,25 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	mJetpack->setPosition (mSpaceman.getPosition().x*PPM , mSpaceman.getPosition().y*PPM , 0 );
 
+	std::cout << mLives << std::endl;
+
+	//gData.wincon->update(data, gData, this);
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
 	mEffects.update(mControls, data);
+	mHead.setScore(mLives);
 
 	if(mSlowDeath)
 	{
 
-		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
+		if( mRespawnTimer.isExpired() && mLives > 0)
 		{
 			//TODO Some kind of better spawn
-			/*
-			// vector.x å y /PPM om i meterform
-			mSpaceman.getBody()->SetTransform(b2Vec2((float32)spawnPos.x, (float32)spawnPos.y), 0);
-			mLeftHand.getBody()->SetTransform(b2Vec2((float32)spawnPos.x, (float32)spawnPos.y), 0);
-			mRightHand.getBody()->SetTransform(b2Vec2((float32)spawnPos.x, (float32)spawnPos.y), 0);
-			*/
-			
-			// vector.x å y /PPM om i meterform
-			mSpaceman.getBody()->SetTransform(b2Vec2((float32)x/PPM, (float32)y/PPM), 0);
-			mLeftHand.getBody()->SetTransform(b2Vec2((float32)x/PPM, (float32)y/PPM), 0);
-			mRightHand.getBody()->SetTransform(b2Vec2((float32)x/PPM, (float32)y/PPM), 0);
-			
-			/*mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
+			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
 			mLeftHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
-			mMiddleHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);			
 			mRightHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
-			mLeftHand.setLinearVelocity(b2Vec2(0,0));*/
-			mMiddleHand.setLinearVelocity(b2Vec2(0,0));
+			mLeftHand.setLinearVelocity(b2Vec2(0,0));
 			mRightHand.setLinearVelocity(b2Vec2(0,0));
 			mSpaceman.setAngularVelocity(0);
 			mSpaceman.setLinearVelocity(b2Vec2(0,0));
@@ -169,7 +164,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			delete mAbility;
 			mAbility = 0;
 			mEffects.clear();
-			
+
 			mRespawning = true;
 		}
 		else
@@ -465,5 +460,5 @@ void SpaceManImp::retractArms()
 
 void SpaceManImp::decreaseLives()
 {
-	mHead.decreaseLives();
+	mLives--;
 }

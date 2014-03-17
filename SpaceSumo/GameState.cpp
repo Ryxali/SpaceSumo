@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "SpaceManImp.h"
 #include "GameState.h"
 #include "entityFactory.h"
 #include <ResourceManager\RHandle.h>
@@ -19,7 +20,8 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	mGameMode(0),
 	mGameMap(0),
 	mHud(), 
-	mPowerUpSpawnTimer(8000)
+	mPowerUpSpawnTimer(8000),
+	mSpacemen()
 {
 	Config c("res/conf/mode/sumo/zone.cfg");
 	mPSpawnMaxX = c.getValue<int>("ZoneWidth");
@@ -27,6 +29,13 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	mMusic.openFromFile("res/music/terra/terra.ogg");
 	mMusic.setLoop(true);
 	//mMusic.play();
+
+	for(int i = 0; i < 4 ; i++ )
+	{
+		mSpacemen[i] = 0;
+	}
+
+
 }
 GameState::~GameState()
 {
@@ -46,7 +55,7 @@ void GameState::update(GameData &data, int delta)
 			mPowerUpSpawnTimer.reset();
 	}
 
-	mGameMap->update(data);
+	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
 }
 

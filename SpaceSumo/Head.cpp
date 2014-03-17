@@ -6,9 +6,19 @@
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\STexture.h>
 #include <SFML\Window\Keyboard.hpp>
+#include <ResourceManager\RHandle.h>
 
-Head::Head(Position pos, SSprite texture, Face* face) : mFace(face), mBar(texture), mScore(0), mPos(pos)
+#include <iostream>
+
+Head::Head(Position pos, const STexture& texture, Face* face) 
+	: mFace(face), 
+	mBar(texture, 20.f), 
+	mScore(10), 
+	mPos(pos),
+	mTens(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/cornerblue.cfg", 10.f),
+	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/cornerblue.cfg", 10.f)
 {
+
 }
 
 
@@ -81,11 +91,8 @@ int Head::getScore() const
 	return mScore;
 }
 
-Head::UIPool::UIPool()
-	: TLeft(res::getTexture("res/img/UI/hud/cornerblue.png"), 9), 
-	TRight(res::getTexture("res/img/UI/hud/cornerred.png"), 9), 
-	BLeft(res::getTexture("res/img/UI/hud/cornergreen.png"), 9), 
-	BRight(res::getTexture("res/img/UI/hud/corneryellow.png"), 9)
+void Head::decreaseLives()
 {
-
+	mScore--;
+	std::cout << mScore << std::endl;
 }

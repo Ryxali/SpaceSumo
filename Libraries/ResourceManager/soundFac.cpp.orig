@@ -5,8 +5,6 @@
 #include "UnyieldingSound.h"
 #include "SoundQuene.h"
 #include "SoundList.h"
-#include "Music.h"
-#include "Pause.h"
 #include "RHandle.h"
 
 
@@ -24,6 +22,7 @@ public:
 	void add(Playable*);
 	bool mRunning;
 	SoundList mSoundList;
+	void stop();
 private:
 	sf::Thread mThread;
 };
@@ -35,7 +34,6 @@ static void run()
 	{
 		soundManager.mSoundList.update();
 	}
-
 }
 
 SoundManager::SoundManager() : mSoundList(), mThread(&run), mRunning(true)
@@ -45,7 +43,6 @@ SoundManager::SoundManager() : mSoundList(), mThread(&run), mRunning(true)
 SoundManager::~SoundManager()
 {
 	mRunning = false;
-	mThread.wait();
 }
 void SoundManager::add(Playable* p)
 {
@@ -68,19 +65,6 @@ Playable* resolveType(std::string line)
 			{
 				++it;
 				++t;
-				std::string f("");
-				while(*it != ')')
-				{
-					f += *it;
-					++it;
-					++t;
-				}
-				return new SSound(res::getSoundBuffer(str::purge(f,'"')));
-			}
-			else if(line.substr(0, t) == "Pause")
-			{
-				++it;
-				++t;
 				std::string f;
 				while(*it != ')')
 				{
@@ -88,7 +72,7 @@ Playable* resolveType(std::string line)
 					++it;
 					++t;
 				}
-				return new Pause(std::stoi(str::purge(f, ' ')));
+				return new SSound(res::getSoundBuffer(str::purge(f,'"')));
 			}
 			else if(line.substr(0, t) == "LoopSound")
 			{
@@ -101,19 +85,6 @@ Playable* resolveType(std::string line)
 			else if(line.substr(0, t) == "UninterruptableSound" ||line.substr(0, t) == "UnyieldingSound")
 			{
 				return new UnyieldingSound(resolveType(line.substr(t+1)));
-			}
-			else if(line.substr(0, t) == "Music")
-			{
-				++it;
-				++t;
-				std::string f;
-				while(*it != ')')
-				{
-					f += *it;
-					++it;
-					++t;
-				}
-				return new Music(str::purge(f,'"'));
 			}
 			else if(line.substr(0, t) == "QueueSound")
 			{
@@ -167,7 +138,7 @@ Playable* resolveType(std::string line)
 		++it;
 	}
 	SError("Couldn't resolve type!", line);
-	return 0;
+	exit(1);
 }
 
 Playable* soundFac::createSound(std::string ref)
@@ -177,8 +148,13 @@ Playable* soundFac::createSound(std::string ref)
 	std::string line;
 	while(std::getline(stream, line))
 	{
+<<<<<<< HEAD
 
+		if(line.size() != 0 && (line[0] != '#' && line[0] != ' '))
+=======
+		
 		if(line.size() != 0 && (line[0] != '#'))
+>>>>>>> dev_NL
 		{
 			tot += line;
 		}

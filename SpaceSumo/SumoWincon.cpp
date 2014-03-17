@@ -13,11 +13,14 @@ SumoWincon::~SumoWincon()
 
 void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpacemen)[4])
 {
-	for( int i = 0; i < 3; i++)
+	for( int i = 0; i < 4; i++)
 	{
-		if( (*mSpacemen)->respawning() )
+		if( mSpacemen[i] != 0 )
 		{
-			(*mSpacemen)->decreaseLives();
+			if( mSpacemen[i]->respawning() )
+			{
+				mSpacemen[i]->decreaseLives();
+			}
 		}
 	}
 }
