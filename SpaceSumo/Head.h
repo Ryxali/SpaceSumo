@@ -4,7 +4,6 @@
 #include "Face.h"
 #include "Position.h"
 #include <ResourceManager\STexture.h>
-#include <ResourceManager\Playable.h>
 #include <ResourceManager\Animation.h>
 
 class RenderList;
