@@ -12,7 +12,7 @@
 #include "EntityType.h"
 #include <Common\error.h>
 #include "SpacemanData.h"
-
+#include <iostream>
 
 GameState::GameState(StateList &owner, GameData& gameData) 
 	: State(owner), mData(gameData),
@@ -45,18 +45,17 @@ GameState::~GameState()
 void GameState::update(GameData &data, int delta)
 {
 	mData.mEntityImpList.update(data, mData, delta);
-
 	mSumoWincon.update(data, mData, mSpacemen);
-
 	if(mPowerUpSpawnTimer.isExpired())
 	{
 		mData.mEntityImpList.add((entFac::createPowerUpRandom(
 			data.world, rand()% (mPSpawnMaxX - 128) + (float)WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + (float)WINDOW_SIZE.y - mPSpawnMaxY)));
-			mPowerUpSpawnTimer.reset();
+		mPowerUpSpawnTimer.reset();
 	}
-
 	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
+
+	std::cout <<mMouse.getPosition().x << " " << mMouse.getPosition().y << std::endl;
 }
 
 void GameState::draw(RenderList &list)
@@ -77,9 +76,9 @@ void GameState::open()
 	SAssert(mGameMode != 0 && mGameMap != 0, "Game data not set!");
 	spacemanCreation(mGameData);
 	/*if(mGameMode != 0)
-		delete mGameMode;
+	delete mGameMode;
 	if(mGameMap != 0)
-		delete mGameMap;
+	delete mGameMap;
 	mGameMode = new Sumo(mGameData.world);
 	mGameMap = new Terra();*/
 	mHud.setNPlayers(3);
@@ -116,50 +115,31 @@ void GameState::spacemanCreation(GameData& gameData)
 
 void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 {
-	ControlList::Player p = ControlList::PLAYER_1;
-	switch(p)
+	EntityImp* spaceman4 = 0;
+	EntityImp* spaceman3 = 0;
+	EntityImp* spaceman2 = 0;
+	EntityImp* spaceman1 = 0;
+	switch(gData.controlList.getNActivePlayers())
 	{
-	case ControlList::PLAYER_1:
-		if(gData.controlList.isActive(p))
-		{
-			EntityImp* spaceman1 = entFac::createSpaceMan(sData[0], gData, mHud.getHead(0), ControlList::PLAYER_1, SVector(200, 400), 30);
-			mData.mEntityImpList.add(spaceman1);
-			mSpacemen[0] = (SpaceManImp*)(spaceman1);
-		}
-		if(gData.controlList.getNActivePlayers() == 1)
-			break;
-		
-		p = ControlList::PLAYER_2;
-	case ControlList::PLAYER_2:
-		if(gData.controlList.isActive(p))
-		{
-			EntityImp* spaceman2 = entFac::createSpaceMan(sData[1], gData, mHud.getHead(1), ControlList::PLAYER_2, SVector(300, 400), 30);
-			mData.mEntityImpList.add(spaceman2);
-			mSpacemen[1] = (SpaceManImp*)(spaceman2);
-		}
-		if(gData.controlList.getNActivePlayers() == 2)
-			break;
-		
-		p = ControlList::PLAYER_3;
-	case ControlList::PLAYER_3:
-		if(gData.controlList.isActive(p))
-		{
-			EntityImp* spaceman3 = entFac::createSpaceMan(sData[2], gData, mHud.getHead(2), ControlList::PLAYER_3, SVector(400, 400), 30);
-			mData.mEntityImpList.add(spaceman3);
-			mSpacemen[2] = (SpaceManImp*)(spaceman3);
-		}
-		if(gData.controlList.getNActivePlayers() == 3)
-			break;
-		
-		p = ControlList::PLAYER_4;
-	case ControlList::PLAYER_4:
-		if(gData.controlList.isActive(p))
-		{
-			EntityImp* spaceman4 = entFac::createSpaceMan(sData[3], gData, mHud.getHead(3), ControlList::PLAYER_4, SVector(500, 400), 30);
-			mData.mEntityImpList.add(spaceman4);
-			mSpacemen[3] = (SpaceManImp*)(spaceman4);
-		}
+	case 4:
+		spaceman4 = entFac::createSpaceMan(sData[3], gData, mHud.getHead(3), ControlList::PLAYER_4, SVector(500, 400), 30);
+		mData.mEntityImpList.add(spaceman4);
+		mSpacemen[3] = (SpaceManImp*)(spaceman4);
+	case 3:
+		spaceman3 = entFac::createSpaceMan(sData[2], gData, mHud.getHead(2), ControlList::PLAYER_3, SVector(400, 400), 30);
+		mData.mEntityImpList.add(spaceman3);
+		mSpacemen[2] = (SpaceManImp*)(spaceman3);
+	case 2:
+		spaceman2 = entFac::createSpaceMan(sData[1], gData, mHud.getHead(1), ControlList::PLAYER_2, SVector(300, 400), 30);
+		mData.mEntityImpList.add(spaceman2);
+		mSpacemen[1] = (SpaceManImp*)(spaceman2);
+	case 1:
+		spaceman1 = entFac::createSpaceMan(sData[0], gData, mHud.getHead(0), ControlList::PLAYER_1, SVector(200, 400), 30);
+		mData.mEntityImpList.add(spaceman1);
+		mSpacemen[0] = (SpaceManImp*)(spaceman1);
 		break;
+
+
 	}
 	//mData.mEntityImpList.add(entFac::createSpaceMan(sData[1], gData, 1, (400, 400), 30));
 }

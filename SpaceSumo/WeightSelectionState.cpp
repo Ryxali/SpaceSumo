@@ -69,13 +69,10 @@ void WeightSelectionState::update(GameData &data, int delta)
 		{
 		case 4:
 			mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_4, mWeightClasses.getFirst(), "res/img/UI/menu/gamesetup/map_highlight"));
-			--i;
 		case 3:
 			mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_3, mWeightClasses.getFirst(), "res/img/UI/menu/gamesetup/map_highlight"));
-			--i;
 		case 2:
 			mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_2, mWeightClasses.getFirst(), "res/img/UI/menu/gamesetup/map_highlight"));
-			--i;
 		case 1:
 			mWeightClasses.addObserver(new ButtonSelectionEffect(ControlList::PLAYER_1, mWeightClasses.getFirst(), "res/img/UI/menu/gamesetup/map_highlight"));
 			break;

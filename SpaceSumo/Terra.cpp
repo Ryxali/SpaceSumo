@@ -28,5 +28,5 @@ void Terra::init(GameData &data)
 
 void Terra::close()
 {
-	mSoundtrack->stop();
+	//mSoundtrack->stop();
 }

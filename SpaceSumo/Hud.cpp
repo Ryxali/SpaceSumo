@@ -5,11 +5,11 @@
 #include <ResourceManager\RHandle.h>
 
 
-Hud::Hud() : mFacePool(), mNPlayers(0),
-	mHead0(Position::TOP_LEFT, res::getTexture("res/img/UI/hud/cornerblue.png"), &mFacePool.test),
-	mHead1(Position::TOP_RIGHT, res::getTexture("res/img/UI/hud/cornerred.png"), &mFacePool.test1),
-	mHead2(Position::BOTTOM_LEFT, res::getTexture("res/img/UI/hud/cornergreen.png"), &mFacePool.test2),
-	mHead3(Position::BOTTOM_RIGHT, res::getTexture("res/img/UI/hud/corneryellow.png"), &mFacePool.test3)
+Hud::Hud() : mNPlayers(0),
+	mHead0(Position::TOP_LEFT, res::getTexture("res/img/UI/hud/cornerblue.png")),
+	mHead1(Position::TOP_RIGHT, res::getTexture("res/img/UI/hud/cornerred.png")),
+	mHead2(Position::BOTTOM_LEFT, res::getTexture("res/img/UI/hud/cornergreen.png")),
+	mHead3(Position::BOTTOM_RIGHT, res::getTexture("res/img/UI/hud/corneryellow.png"))
 {
 	
 }

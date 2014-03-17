@@ -10,7 +10,8 @@
 //const unsigned char Face::ANGRY = 2;
 //const unsigned char Face::ASHAMED = 3;
 
-Face::Face(std::string faceImg) : mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f)
+Face::Face(std::string faceImg) 
+	: mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f)
 {
 }
 
@@ -79,9 +80,4 @@ void Face::setPersona(std::string ref)
 {
 	//TODO add soundstuff
 	mFaces.setSprite(ref+".png");
-}
-
-FacePool::FacePool() : test("res/img/UI/test"), test1("res/img/UI/test"), test2("res/img/UI/test"), test3("res/img/UI/test")
-{
-
 }

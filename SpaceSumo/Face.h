@@ -31,14 +31,3 @@ private:
 	sf::Vector2f mOrigin;
 };
 
-struct FacePool
-{
-	FacePool();
-	Face test;
-	Face test1;
-	Face test2;
-	Face test3;
-private:
-	FacePool(const FacePool& fPool);
-	FacePool& operator=(const FacePool& fPool);
-};

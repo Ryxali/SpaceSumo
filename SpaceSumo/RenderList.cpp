@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RenderList.h"
 #include <ResourceManager\SDrawable.h>
-
+#include <iostream>
 static bool compareZ(const SDrawable* d0, const SDrawable* d1)
 {
 	return d0->getZ() < d1->getZ();

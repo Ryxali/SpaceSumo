@@ -66,6 +66,8 @@ void Game::loop()
 	sf::Event evt;
 	// Loop runs through all new events
 	mGameData.world.Step(delta/1000.f, 8, 3 );
+
+
 	while(mWindow.pollEvent(evt))
 	{
 		switch(evt.type)
@@ -93,6 +95,7 @@ void Game::loop()
 	preDraw();
 	draw();
 	cleanUp();
+
 	mGameData.input.clear();
 }
 

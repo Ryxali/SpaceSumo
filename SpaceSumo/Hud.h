@@ -15,7 +15,6 @@ public:
 	void draw(RenderList &list);
 	Head& getHead(int index);
 private:
-	FacePool mFacePool;
 	unsigned char mNPlayers;
 	Head mHead0;
 	Head mHead1;

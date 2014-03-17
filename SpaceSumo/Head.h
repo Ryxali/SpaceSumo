@@ -11,11 +11,10 @@ class Head
 {
 public:
 
-	Head(Position pos, const STexture& texture, Face* face = 0);
+	Head(Position pos, const STexture& texture);
 	~Head();
 
 	void draw(RenderList &list);
-	void setFace(Face* face);
 	Face& getFace();
 	void changeMood(Face::Mood mood);
 
@@ -26,9 +25,7 @@ public:
 private:
 	Head(const Head& head);
 	Head& operator=(const Head& head);
-	Face *mFace;
-	//sf::Vector2f mPos;
-	//sf::Vector2f mOrigin;
+	Face mFace;
 	bool mFlipped;
 	SSprite mBar;
 	Position mPos;

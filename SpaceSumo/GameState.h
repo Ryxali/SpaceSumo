@@ -9,6 +9,7 @@ struct SpacemanData;
 #include <Common\Timer.h>
 #include <SFML/Audio/Music.hpp>
 #include "SumoWincon.h"
+#include <SFML\Window\Mouse.hpp>
 
 
 class GameState : public State
@@ -37,4 +38,6 @@ private:
 	SumoWincon mSumoWincon;
 	
 	SpaceManImp* mSpacemen[4];
+
+	sf::Mouse mMouse;
 };
