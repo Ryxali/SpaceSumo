@@ -18,6 +18,7 @@ private:
 	int mCurSize;
 
 	std::vector<Playable*> mPlayables;
-	bool mLocked;
+	bool mLocked_owner;
+	bool mLocked_client;
 };
 

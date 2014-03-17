@@ -38,7 +38,7 @@ static void run()
 
 }
 
-SoundManager::SoundManager() : mSoundList(), mThread(&run), mRunning(true)
+SoundManager::SoundManager() : mSoundList(), mThread(run), mRunning(true)
 {
 	mThread.launch();
 }
