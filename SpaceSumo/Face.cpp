@@ -19,7 +19,7 @@ VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
 {
 	mLines = new Playable*[mSize];
 	int i = 0;
-	for(auto it = lines.begin(); it != lines.end; ++it, ++i)
+	for(auto it = lines.begin(); it != lines.end(); ++it, ++i)
 	{
 		mLines[i] = soundFac::createSound(*it);
 	}
@@ -30,7 +30,7 @@ Playable* VoiceLines::get(int line)
 	return mLines[line];
 }
 
-Face::Face(std::string faceImg) : mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f), mVoiceLines(0)
+Face::Face(std::string faceImg) : mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f), mVoiceLines(0), mCurrentClip(0)
 {
 }
 
@@ -132,7 +132,7 @@ void readVoiceFiles(std::vector<std::string> &mLines, std::string xoxoRef)
 void Face::setPersona(std::string ref)
 {
 	//TODO add soundstuff
-	Config cfg(ref);
+	Config cfg(ref+".cfg");
 	mVoiceLines = new VoiceLines*[8];
 	for(int i = 0; i < 8; ++i)
 	{

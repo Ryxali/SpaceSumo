@@ -12,6 +12,7 @@ struct GameData;
 #include <string>
 #include <ResourceManager\Animation.h>
 #include <SFML\System\Vector2.hpp>
+#include <vector>
 
 class VoiceLines
 {

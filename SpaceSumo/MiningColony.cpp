@@ -5,6 +5,7 @@
 #include "GameStateData.h"
 #include "Asteroid.h"
 #include <ResourceManager\soundFac.h>
+#include <iostream>
 
 static Config mConfig("res/conf/maps/miningcolony/main.cfg");
 

@@ -12,6 +12,7 @@
 #include "Wincon.h"
 #include "Head.h"
 #include <iostream>
+#include "Character_status.h"
 
 /*
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
@@ -343,6 +344,7 @@ bool SpaceManImp::isAbilityFree()
 
 void SpaceManImp::slowDeath()
 {
+	mHead.getFace().trigger(status::DEATH);
 	mSlowDeath = true;
 	mRespawnTimer.reset();
 	mJet.setCurrentRow(0);
