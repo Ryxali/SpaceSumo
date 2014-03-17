@@ -68,7 +68,7 @@ Playable* resolveType(std::string line)
 			{
 				++it;
 				++t;
-				std::string f;
+				std::string f("");
 				while(*it != ')')
 				{
 					f += *it;

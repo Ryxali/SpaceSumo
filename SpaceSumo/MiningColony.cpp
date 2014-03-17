@@ -6,6 +6,8 @@
 #include "Asteroid.h"
 #include <ResourceManager\soundFac.h>
 
+static Config mConfig("res/conf/maps/miningcolony/main.cfg");
+
 MiningColony::MiningColony() : 
 	mBackground(res::getTexture("res/img/maps/miningcolony/MiningColony_BG.png"), -1.f),
 	mSoundtrack(soundFac::createSound("res/music/MiningColony/miningColony.spf")),
@@ -22,17 +24,28 @@ void MiningColony::update(GameStateData &data, int delta)
 	{
 		//TODO Spawn Asteroid
 
+		float r3 = mConfig.getValue<float>("minScale") + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(mConfig.getValue<float>("maxScale") - mConfig.getValue<float>("minScale"))));
+		
+
+
 		int direction = rand() % 4;
 		switch (direction)
 		{
 		case 0:
-			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % 1920 / PPM, rand() % 1080 / PPM), b2Vec2((rand() % 5 - 5),-(rand() % 5 + 3)), data.gameData));
+			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % mConfig.getValue<int>("sideSpeed") - 20, rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed")), b2Vec2(rand() % 1920, - 800), data.gameData, r3, mConfig.getValue<float>("speedMultiplier") ));
+			std::cout << "Above!" << std::endl;
 			break;
 		case 1:
+			data.mEntityImpList.add(new Asteroid(b2Vec2(-(rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed")), rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20), b2Vec2(1920 + 800, rand() % 1080), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));
+			std::cout << "Right!" << std::endl;
 			break;
-		case 2:
+		case 2:			
+			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20, -(rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed"))), b2Vec2(rand() % 1920, 1080 + 800), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));
+			std::cout << "Below!" << std::endl;
 			break;
-		case 3:
+		case 3:			
+			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed"), rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20), b2Vec2(0 - 800, rand() % 1080), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));
+			std::cout << "Left!" << std::endl;
 			break;
 
 		default:

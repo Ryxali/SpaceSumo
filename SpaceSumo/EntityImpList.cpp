@@ -5,7 +5,8 @@
 EntityImpList::EntityImpList():
 	mImpList()
 {
-
+	mImpList.resize(20);
+	mImpList.clear();
 }
 
 
@@ -41,14 +42,17 @@ void EntityImpList::clear()
 {
 	for (std::list<EntityImp*>::iterator it = mImpList.begin(); it != mImpList.end();)
 	{
-		if(!(*it)->isAlive())
+		if(*it != 0)
 		{
-			delete *it;
-			it = mImpList.erase(it);
-		}
-		else
-		{
-			it++;
+			if(!(*it)->isAlive())
+			{
+				delete *it;
+				it = mImpList.erase(it);
+			}
+			else
+			{
+				it++;
+			}
 		}
 
 	}
