@@ -6,10 +6,13 @@
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\STexture.h>
 #include <SFML\Window\Keyboard.hpp>
+<<<<<<< HEAD
 #include <ResourceManager\RHandle.h>
-#include "Character_status.h"
 
 #include <iostream>
+=======
+#include "Character_status.h"
+>>>>>>> dev_NL
 
 Head::Head(Position pos, const STexture& texture) 
 	: mFace("res/img/UI/test"), 
@@ -30,7 +33,7 @@ Head::~Head()
 
 void Head::update(GameData& data, int delta, std::vector<Playable*>& voiceList)
 {
-	mFace.update(data, delta, voiceList);
+	mFace->update(data, delta, voiceList);
 }
 
 void Head::draw(RenderList &list)

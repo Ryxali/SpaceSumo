@@ -14,6 +14,10 @@
 //const unsigned char Face::ANGRY = 2;
 //const unsigned char Face::ASHAMED = 3;
 
+<<<<<<< HEAD
+Face::Face(std::string faceImg) 
+	: mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f)
+=======
 
 
 VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
@@ -25,19 +29,17 @@ VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
 		mLines[i] = soundFac::createSound(*it);
 	}
 }
-
-
 Playable* VoiceLines::get(int line)
 {
 	SAssert(line < mSize && mSize > 0, "index out of bounds!");
 	return mLines[line];
 }
 
-Face::Face(std::string faceImg) 
-	: mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f), mVoiceLines(0), mCurrentClip(0)
+Face::Face(std::string faceImg) : mFaces(res::getTexture(faceImg + ".png"), "res/img/UI/hud/face_base.cfg", 10.f), mVoiceLines(0), mCurrentClip(0)
+>>>>>>> dev_NL
 {
-	
 }
+
 
 Face::~Face()
 {
