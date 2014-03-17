@@ -1,4 +1,5 @@
 #pragma once
+class Playable;
 #include "map.h"
 #include <ResourceManager\SSprite.h>
 #include <SFML\Audio\Music.hpp>
@@ -18,7 +19,7 @@ public:
 
 private:
 	SSprite mBackground;
-	sf::Music mSoundtrack;
+	Playable* mSoundtrack;
 
 	Timer mAsteroidTimer;
 };
