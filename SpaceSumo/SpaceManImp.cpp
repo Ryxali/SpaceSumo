@@ -102,7 +102,6 @@ SpaceManImp::SpaceManImp(
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
 	mHead(head),                       
-	mLives(10),
 	mRespawning(false)
 {
 	mHead.getFace().setPersona(headTexRef);
@@ -132,18 +131,15 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	mJetpack->setPosition (mSpaceman.getPosition().x*PPM , mSpaceman.getPosition().y*PPM , 0 );
 
-	std::cout << mLives << std::endl;
-
 	float fDelta = (float)delta/1000;
 	mDirection.rotateRad(mSpaceman.getAngle() - mAngle);
 	mAngle = mSpaceman.getAngle();
 	mEffects.update(mControls, data);
-	mHead.setScore(mLives);
 
 	if(mSlowDeath)
 	{
 
-		if( mRespawnTimer.isExpired() && mLives > 0)
+		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
 		{
 			//TODO Some kind of better spawn
 			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
@@ -455,5 +451,5 @@ void SpaceManImp::retractArms()
 
 void SpaceManImp::decreaseLives()
 {
-	mLives--;
+	mHead.decreaseLives();
 }

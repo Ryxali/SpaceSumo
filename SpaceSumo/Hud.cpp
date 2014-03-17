@@ -2,13 +2,14 @@
 #include "Hud.h"
 #include "RenderList.h"
 #include <Common\error.h>
+#include <ResourceManager\RHandle.h>
 
 
-Hud::Hud() : mFacePool(), mUIPool(), mNPlayers(0),
-	mHead0(Position::TOP_LEFT, mUIPool.TLeft, &mFacePool.test),
-	mHead1(Position::TOP_RIGHT, mUIPool.TRight, &mFacePool.test1),
-	mHead2(Position::BOTTOM_LEFT, mUIPool.BLeft, &mFacePool.test2),
-	mHead3(Position::BOTTOM_RIGHT, mUIPool.BRight, &mFacePool.test3)
+Hud::Hud() : mFacePool(), mNPlayers(0),
+	mHead0(Position::TOP_LEFT, res::getTexture("res/img/UI/hud/cornerblue.png"), &mFacePool.test),
+	mHead1(Position::TOP_RIGHT, res::getTexture("res/img/UI/hud/cornerred.png"), &mFacePool.test1),
+	mHead2(Position::BOTTOM_LEFT, res::getTexture("res/img/UI/hud/cornergreen.png"), &mFacePool.test2),
+	mHead3(Position::BOTTOM_RIGHT, res::getTexture("res/img/UI/hud/corneryellow.png"), &mFacePool.test3)
 {
 	
 }

@@ -4,12 +4,15 @@
 #include "Face.h"
 #include "Position.h"
 #include <ResourceManager\STexture.h>
+#include <ResourceManager\Playable.h>
+#include <ResourceManager\Animation.h>
+
 class RenderList;
 class Head
 {
 public:
 
-	Head(Position pos, SSprite texture, Face* face = 0);
+	Head(Position pos, const STexture& texture, Face* face = 0);
 	~Head();
 
 	void draw(RenderList &list);
@@ -19,19 +22,7 @@ public:
 
 	void setScore(int score);
 	int getScore() const;
-
-	struct UIPool
-	{
-		UIPool();
-		SSprite TLeft;
-		SSprite TRight;
-		SSprite BLeft;
-		SSprite BRight;
-	private:
-
-		UIPool(const UIPool& fPool);
-		UIPool& operator=(const UIPool& fPool);
-	};
+	void decreaseLives();
 
 private:
 	Head(const Head& head);
@@ -43,5 +34,8 @@ private:
 	SSprite mBar;
 	Position mPos;
 	int mScore;
+
+	Animation mTens;
+	Animation mSingulars;
 };
 

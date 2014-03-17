@@ -16,7 +16,6 @@ public:
 	Head& getHead(int index);
 private:
 	FacePool mFacePool;
-	Head::UIPool mUIPool;
 	unsigned char mNPlayers;
 	Head mHead0;
 	Head mHead1;
