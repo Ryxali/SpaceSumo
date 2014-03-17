@@ -132,7 +132,7 @@ private:
 
 	
 	//test skit
-	float32 x;
-	float32 y;
+	float32 mSpawnX;
+	float32 mSpawnY;
 };
 

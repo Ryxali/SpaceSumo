@@ -1,0 +1,19 @@
+# Main Config file
+
+# Graphics settings
+#----------------------------
+# Fullscreen wants a number!!
+# 8 = Fullscreen
+# 7 = Windowed
+# 0 = Borderless window
+fullscreen = 7
+<<<<<<< HEAD
+screenWidth = 800
+screenHeight = 640
+vsync = true
+=======
+screenWidth = 1920
+screenHeight = 1080
+vsync = false
+>>>>>>> dev
+fpscap = 60
