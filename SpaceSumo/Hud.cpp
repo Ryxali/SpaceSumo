@@ -8,7 +8,8 @@ Hud::Hud() : mFacePool(), mUIPool(), mNPlayers(0),
 	mHead0(Position::TOP_LEFT, mUIPool.TLeft, &mFacePool.test),
 	mHead1(Position::TOP_RIGHT, mUIPool.TRight, &mFacePool.test1),
 	mHead2(Position::BOTTOM_LEFT, mUIPool.BLeft, &mFacePool.test2),
-	mHead3(Position::BOTTOM_RIGHT, mUIPool.BRight, &mFacePool.test3)
+	mHead3(Position::BOTTOM_RIGHT, mUIPool.BRight, &mFacePool.test3),
+	mCurrentVoice(0)
 {
 	
 }
@@ -21,6 +22,12 @@ Hud::~Hud()
 void Hud::setNPlayers(unsigned char nPlayers)
 {
 	mNPlayers = nPlayers;
+}
+void Hud::update(GameData& data, int delta)
+{
+	std::vector<Playable*> mRequestedSounds;
+	mHead0.update(data, delta, mRequestedSounds);
+
 }
 
 void Hud::draw(RenderList &list)

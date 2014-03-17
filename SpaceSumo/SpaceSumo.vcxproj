@@ -247,6 +247,7 @@
     <ClInclude Include="SumoWincon.h" />
     <ClInclude Include="Terra.h" />
     <ClInclude Include="Sumo.h" />
+    <ClInclude Include="Character_status.h" />
     <ClInclude Include="WeightSelectionState.h" />
     <ClInclude Include="Wincon.h" />
     <ClInclude Include="XController.h" />

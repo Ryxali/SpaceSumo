@@ -4,19 +4,26 @@
 #include "Face.h"
 #include "Position.h"
 #include <ResourceManager\STexture.h>
+
 class RenderList;
+
+namespace status
+{
+	enum Event;
+}
+
 class Head
 {
 public:
 
 	Head(Position pos, SSprite texture, Face* face = 0);
 	~Head();
-
+	void update(GameData&, int, std::vector<Playable*>&);
 	void draw(RenderList &list);
 	void setFace(Face* face);
 	Face& getFace();
 	void changeMood(Face::Mood mood);
-
+	
 	void setScore(int score);
 	int getScore() const;
 

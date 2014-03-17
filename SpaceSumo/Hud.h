@@ -12,6 +12,7 @@ public:
 	~Hud();
 
 	void setNPlayers(unsigned char nPlayers);
+	void update(GameData&, int delta);
 	void draw(RenderList &list);
 	Head& getHead(int index);
 private:
@@ -22,5 +23,6 @@ private:
 	Head mHead1;
 	Head mHead2;
 	Head mHead3;
+	Playable* mCurrentVoice;
 };
 
