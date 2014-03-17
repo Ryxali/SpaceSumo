@@ -6,9 +6,17 @@
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\STexture.h>
 #include <SFML\Window\Keyboard.hpp>
+#include <ResourceManager\RHandle.h>
 
-Head::Head(Position pos, SSprite texture, Face* face) : mFace(face), mBar(texture), mScore(0), mPos(pos)
+Head::Head(Position pos, SSprite texture, Face* face) 
+	: mFace(face), 
+	mBar(texture), 
+	mScore(10), 
+	mPos(pos),
+	mTens(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/numbers.cfg", 9.f),
+	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/numbers.cfg", 9.f)
 {
+
 }
 
 

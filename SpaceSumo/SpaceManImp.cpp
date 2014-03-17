@@ -102,7 +102,6 @@ SpaceManImp::SpaceManImp(
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
 	mHead(head),                       
-	mLives(10),
 	mRespawning(false)
 {
 	mHead.getFace().setPersona(headTexRef);
@@ -455,5 +454,4 @@ void SpaceManImp::retractArms()
 
 void SpaceManImp::decreaseLives()
 {
-	mLives--;
 }
