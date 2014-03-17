@@ -7,6 +7,7 @@
 #include <ResourceManager\STexture.h>
 #include <SFML\Window\Keyboard.hpp>
 #include <ResourceManager\RHandle.h>
+#include "Character_status.h"
 
 #include <iostream>
 
@@ -25,6 +26,11 @@ Head::Head(Position pos, const STexture& texture)
 
 Head::~Head()
 {
+}
+
+void Head::update(GameData& data, int delta, std::vector<Playable*>& voiceList)
+{
+	mFace->update(data, delta, voiceList);
 }
 
 void Head::draw(RenderList &list)
@@ -93,6 +99,8 @@ void Head::changeMood(Face::Mood mood)
 {
 	mFace.changeMood(mood);
 }
+
+
 
 Face& Head::getFace()
 {

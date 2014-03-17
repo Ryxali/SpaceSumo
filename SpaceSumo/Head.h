@@ -7,17 +7,23 @@
 #include <ResourceManager\Animation.h>
 
 class RenderList;
+
+namespace status
+{
+	enum Event;
+}
+
 class Head
 {
 public:
 
 	Head(Position pos, const STexture& texture);
 	~Head();
-
+	void update(GameData&, int, std::vector<Playable*>&);
 	void draw(RenderList &list);
 	Face& getFace();
 	void changeMood(Face::Mood mood);
-
+	
 	void setScore(int score);
 	int getScore() const;
 	void decreaseLives();

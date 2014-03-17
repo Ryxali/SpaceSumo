@@ -52,6 +52,7 @@ void GameState::update(GameData &data, int delta)
 			data.world, rand()% (mPSpawnMaxX - 128) + (float)WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + (float)WINDOW_SIZE.y - mPSpawnMaxY)));
 		mPowerUpSpawnTimer.reset();
 	}
+	mHud.update(data, delta);
 	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
 

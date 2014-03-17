@@ -4,10 +4,10 @@
 #include "RenderList.h"
 #include "GameStateData.h"
 #include "Asteroid.h"
+#include <ResourceManager\soundFac.h>
 #include <iostream>
 
 static Config mConfig("res/conf/maps/miningcolony/main.cfg");
-#include <ResourceManager\soundFac.h>
 
 MiningColony::MiningColony() : 
 	mBackground(res::getTexture("res/img/maps/miningcolony/MiningColony_BG.png"), -1.f),
