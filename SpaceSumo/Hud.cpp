@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Hud.h"
 #include "RenderList.h"
+#include "GameData.h"
 #include <Common\error.h>
 #include <ResourceManager\RHandle.h>
 #include <ResourceManager\Playable.h>
@@ -40,15 +41,15 @@ void Hud::update(GameData& data, int time, int delta)
 	updateClock(time);
 
 	std::vector<Playable*> mRequestedSounds;
-	switch(mNPlayers)
+	switch(data.controlList.getNActivePlayers())
 	{
-	case 3:
+	case 4:
 		mHead3.update(data, delta, mRequestedSounds);
-	case 2:
+	case 3:
 		mHead2.update(data, delta, mRequestedSounds);
-	case 1:
+	case 2:
 		mHead1.update(data, delta, mRequestedSounds);
-	case 0:
+	case 1:
 		mHead0.update(data, delta, mRequestedSounds);
 		break;
 	default:

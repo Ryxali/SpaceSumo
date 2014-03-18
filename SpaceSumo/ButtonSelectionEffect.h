@@ -9,7 +9,7 @@ class ButtonSelectionEffect :
 	public ButtonObserver
 {
 public:
-	ButtonSelectionEffect(ControlList::Player playerNumber, Button* button, std::string effectRef);
+	ButtonSelectionEffect(ControlList::Player playerNumber, Button* button, std::string effectRef, float z = 10.f);
 	~ButtonSelectionEffect();
 
 	virtual void draw(RenderList& list);
