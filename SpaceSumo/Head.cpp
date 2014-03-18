@@ -13,7 +13,7 @@
 Head::Head(Position pos, const STexture& texture) 
 	: mFace("res/img/UI/test"), 
 	mBar(texture, 10.f), 
-	mScore(10), 
+	mScore(20), 
 	mPos(pos),
 	mTens(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f),
 	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f)

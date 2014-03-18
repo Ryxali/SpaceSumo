@@ -37,7 +37,4 @@ private:
 
 	SumoWincon mSumoWincon;
 	
-	SpaceManImp* mSpacemen[4];
-
-	sf::Mouse mMouse;
-};
+	SpaceManImp* mSpacemen[4];};

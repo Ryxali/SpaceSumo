@@ -19,7 +19,7 @@ MiningColony::MiningColony() :
 
 void MiningColony::update(GameStateData &data, int delta)
 {
-	mSoundtrack->play();
+	//mSoundtrack->play();
 
 	if(mAsteroidTimer.isExpired())
 	{

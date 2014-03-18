@@ -54,8 +54,6 @@ void GameState::update(GameData &data, int delta)
 	}
 	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
-
-	std::cout <<mMouse.getPosition().x << " " << mMouse.getPosition().y << std::endl;
 }
 
 void GameState::draw(RenderList &list)

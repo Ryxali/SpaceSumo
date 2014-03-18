@@ -59,12 +59,12 @@ EffectImp* Exploded::clone()
 
 Flag Exploded::getFlag_CAN_ROTATE()
 {
-	return Flag(Flag::CAN_ROTATE, 5, false, 0);
+	return Flag(Flag::CAN_ROTATE, 5, true, 0);
 }
 
 Flag Exploded::getFlag_CAN_MOVE()
 {
-	return Flag(Flag::CAN_MOVE, 5, false, 0);
+	return Flag(Flag::CAN_MOVE, 5, true, 0);
 }
 
 Flag Exploded::getFlag_CAN_ACTIVATE()
