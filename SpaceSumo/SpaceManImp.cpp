@@ -12,6 +12,7 @@
 #include "Wincon.h"
 #include "Head.h"
 #include <iostream>
+#include "Character_status.h"
 
 /*
 SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
@@ -69,6 +70,8 @@ SpaceManImp::SpaceManImp(
 	std::string headTexRef) :
 	mControls(controls),
 	mAlive(true),
+	mSpawnX(pos.getX()),
+	mSpawnY(pos.getY()),
 	mSpaceman(data.world, bodyData, pos.getX(), pos.getY()),
 	mLeftArmJoint(0),
 	mLeftArm(0),
@@ -141,12 +144,9 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
 		{
-			//TODO Some kind of better spawn
-			mSpaceman.getBody()->SetTransform(b2Vec2((float32)(1920 / 2 /PPM), (float32)(1080 / 2 / PPM)), 0);
-			mLeftHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
-			mMiddleHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);			
-			mRightHand.getBody()->SetTransform(b2Vec2((float32)1920.f / 2.f /PPM, (float32)(1080 / 2.f / PPM)), 0);
-			mLeftHand.setLinearVelocity(b2Vec2(0,0));
+			mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), 0);
+			mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), 0);
+			mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), 0);
 			mMiddleHand.setLinearVelocity(b2Vec2(0,0));
 			mRightHand.setLinearVelocity(b2Vec2(0,0));
 			mSpaceman.setAngularVelocity(0);
@@ -155,7 +155,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			delete mAbility;
 			mAbility = 0;
 			mEffects.clear();
-
+			
 			mRespawning = true;
 		}
 		else
@@ -339,6 +339,7 @@ bool SpaceManImp::isAbilityFree()
 
 void SpaceManImp::slowDeath()
 {
+	mHead.getFace().trigger(status::DEATH);
 	mSlowDeath = true;
 	mRespawnTimer.reset();
 	mJet.setCurrentRow(0);

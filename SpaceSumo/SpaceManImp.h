@@ -129,5 +129,10 @@ private:
 	
 	//sounds
 	Playable* mJetpack;
+
+	
+	//test skit
+	float32 mSpawnX;
+	float32 mSpawnY;
 };
 
