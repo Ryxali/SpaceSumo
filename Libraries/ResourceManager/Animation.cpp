@@ -148,6 +148,12 @@ void Animation::setSprite(std::string ref)
 {
 	mSTex = &res::getTexture(ref);
 	mTexVersion = 0;
+	if(mTexVersion != mSTex->getVersion())
+	{
+		mSprite.setTexture(getTexture());
+		reevaluateSizeValues();
+		mTexVersion = mSTex->getVersion();
+	}
 }
 
 void Animation::reevaluateSizeValues()

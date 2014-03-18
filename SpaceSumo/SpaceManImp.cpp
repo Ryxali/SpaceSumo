@@ -141,6 +141,8 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(mSlowDeath)
 	{
+		if(!mHead.getScore() > 0)
+			mHead.close();
 
 		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
 		{
@@ -277,6 +279,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(mAbility != 0)
 		{
+			mHead.getFace().trigger(status::POWERUP_USE);
 			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, SVector(mSpaceman.getLinearVelocity().x * PPM, mSpaceman.getLinearVelocity().y * PPM), gData, data.world);
 
 			delete mAbility;
@@ -314,6 +317,7 @@ void SpaceManImp::addEffect(EffectImp* effect)
 
 void SpaceManImp::addAbility(Ability* ability)
 {
+	mHead.getFace().trigger(status::POWERUP_PICKUP);
 	mAbility = ability;
 }
 

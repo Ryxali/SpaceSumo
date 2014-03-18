@@ -19,6 +19,7 @@ class VoiceLines
 public:
 	VoiceLines(std::vector<std::string> &lines);
 	Playable* get(int line);
+	Playable* getRandom();
 private:
 	Playable** mLines;
 	int mSize;
@@ -36,7 +37,7 @@ public:
 	//static const unsigned char ANGRY;
 	//static const unsigned char ASHAMED;
 
-	Face(std::string faceImg);
+	Face(std::string faceImg, Position pos);
 	~Face();
 
 	void changeMood(Mood mood);
@@ -49,8 +50,11 @@ private:
 	Face(const Face& face);
 	Face& operator=(const Face& face);
 	Animation mFaces;
+	Animation mVoiceFreq;
 	sf::Vector2f mOrigin;
 	VoiceLines** mVoiceLines;
 	Playable* mCurrentClip;
+	Playable* mVoiceCandidate;
+	sf::Clock mExpressionTimer;
 };
 

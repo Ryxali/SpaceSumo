@@ -7,8 +7,8 @@
 #include <string>
 #include "ButtonList.h"
 
-ButtonSelectionEffect::ButtonSelectionEffect(ControlList::Player playerNumber, Button* button, std::string effectRef):
-	mAnim(res::getTexture(effectRef+".png"), effectRef+".cfg", 10.f),
+ButtonSelectionEffect::ButtonSelectionEffect(ControlList::Player playerNumber, Button* button, std::string effectRef, float z):
+	mAnim(res::getTexture(effectRef+".png"), effectRef+".cfg", z),
 	mPlayerNumber(playerNumber),
 	mButton(button)
 {

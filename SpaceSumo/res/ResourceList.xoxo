@@ -40,9 +40,12 @@ res/img/UI/hud/face_coleen.png
 res/img/UI/hud/face_bob.png
 res/img/UI/hud/face_bishamon.png
 res/img/UI/hud/face_akila.png
+res/img/UI/hud/voice_freq.png
 res/img/UI/hud/test.png
+res/img/UI/hud/base.png
 res/img/UI/hud/numbers.png
 res/img/UI/menu/main/play.png
+res/img/UI/menu/main/selection.png
 res/img/UI/menu/weightSelection/weight_class_0.png
 res/img/UI/menu/weightSelection/weight_class_1.png
 res/img/UI/menu/weightSelection/weight_class_2.png
@@ -75,9 +78,8 @@ res/sound/energy_torpedo/blast.ogg
 res/sound/energy_torpedo/launch.ogg
 res/sound/energy_torpedo/travelling.ogg
 res/sound/EMP/launch.ogg
-res/sound/voice/Akila/Akila_Taunt-001.ogg
-res/sound/voice/Akila/Akila_Taunt-002.ogg
-res/sound/voice/Akila/Akila_Taunt-003.ogg
-res/sound/voice/Akila/Akila_Taunt-004.ogg
-res/sound/voice/Akila/Akila_Taunt-005.ogg
-res/sound/voice/Akila/Akila_Taunt-006.ogg
+res/sound/voice/Akila/voice_list.xoxo
+res/sound/voice/Alien/voice_list.xoxo
+res/sound/voice/Bob/voice_list.xoxo
+res/sound/voice/Bishamon/voice_list.xoxo
+res/sound/voice/Konrad/voice_list.xoxo
