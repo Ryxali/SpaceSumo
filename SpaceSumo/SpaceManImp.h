@@ -28,15 +28,6 @@ class SpaceManImp :
 	public EntityImp
 {
 public:
-	/*SpaceManImp(sf::Keyboard::Key up,
-		sf::Keyboard::Key right,
-		sf::Keyboard::Key left,
-		sf::Keyboard::Key push,
-		sf::Keyboard::Key activate,
-		GameData& data, 
-		std::string bodyData,
-		std::string handData,
-		float x, float y, float32 rotation);*/
 	SpaceManImp(
 		Controller& controls,
 		SVector pos,
@@ -111,6 +102,7 @@ private:
 	bool mPushed;
 	
 	Timer mRespawnTimer;
+	float mRespawnAngle;
 	
 	Effects mEffects;
 	Ability* mAbility;

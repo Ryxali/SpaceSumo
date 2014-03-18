@@ -21,6 +21,11 @@ Asteroid::~Asteroid()
 
 void Asteroid::update(GameData &data, GameStateData &gData, int delta)
 {
+	if( (mBody.getPosition().x*PPM < -1800 || mBody.getPosition().x*PPM > WINDOW_SIZE.x + 1800) || 
+		(mBody.getPosition().y*PPM < -1800 || mBody.getPosition().y*PPM > WINDOW_SIZE.y + 1800))
+	{
+		mAlive = false;
+	}
 }
 
 void Asteroid::draw(RenderList &renderList)

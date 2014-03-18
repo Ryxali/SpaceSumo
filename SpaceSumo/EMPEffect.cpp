@@ -8,7 +8,7 @@ EMPEffect::EMPEffect(int timer)
 	: mTimer(timer),
 	mAnim(res::getTexture("res/img/PowerUp/EMP/EMPEffect.png"), "res/img/PowerUp/EMP/EMPEffect.cfg", 10.f)
 {
-	mAnim.getSprite().setOrigin( 64 , 64 );
+	mAnim.getSprite().setOrigin( 64 , 48 );
 }
 
 

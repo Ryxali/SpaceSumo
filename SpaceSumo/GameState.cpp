@@ -23,6 +23,7 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	mPowerUpSpawnTimer(8000),
 	mSpacemen()
 {
+
 	Config c("res/conf/mode/sumo/zone.cfg");
 	mPSpawnMaxX = c.getValue<int>("ZoneWidth");
 	mPSpawnMaxY = c.getValue<int>("ZoneHeight");
@@ -35,7 +36,7 @@ GameState::GameState(StateList &owner, GameData& gameData)
 		mSpacemen[i] = 0;
 	}
 
-
+	mSumoWincon.timerStart();
 }
 GameState::~GameState()
 {
@@ -44,6 +45,7 @@ GameState::~GameState()
 }
 void GameState::update(GameData &data, int delta)
 {
+
 	mData.mEntityImpList.update(data, mData, delta);
 	mSumoWincon.update(data, mData, mSpacemen);
 	if(mPowerUpSpawnTimer.isExpired())
@@ -52,7 +54,7 @@ void GameState::update(GameData &data, int delta)
 			data.world, rand()% (mPSpawnMaxX - 128) + (float)WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + (float)WINDOW_SIZE.y - mPSpawnMaxY)));
 		mPowerUpSpawnTimer.reset();
 	}
-	mHud.update(data, delta);
+	mHud.update(data, mSumoWincon.getTimeLeft(), delta);
 	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
 }
@@ -114,6 +116,7 @@ void GameState::spacemanCreation(GameData& gameData)
 
 void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 {
+	Config spawnpoint("res/conf/characters/spaceman/starting_positions.cfg");
 	EntityImp* spaceman4 = 0;
 	EntityImp* spaceman3 = 0;
 	EntityImp* spaceman2 = 0;
@@ -121,19 +124,19 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 	switch(gData.controlList.getNActivePlayers())
 	{
 	case 4:
-		spaceman4 = entFac::createSpaceMan(sData[3], gData, mHud.getHead(3), ControlList::PLAYER_4, SVector(500, 400), 30);
+		spaceman4 = entFac::createSpaceMan(sData[3], gData, mHud.getHead(3), ControlList::PLAYER_4, SVector(spawnpoint.getValue<int>("Player4_X"), spawnpoint.getValue<int>("Player4_Y")), spawnpoint.getValue<int>("Player4_Rotation"));
 		mData.mEntityImpList.add(spaceman4);
 		mSpacemen[3] = (SpaceManImp*)(spaceman4);
 	case 3:
-		spaceman3 = entFac::createSpaceMan(sData[2], gData, mHud.getHead(2), ControlList::PLAYER_3, SVector(400, 400), 30);
+		spaceman3 = entFac::createSpaceMan(sData[2], gData, mHud.getHead(2), ControlList::PLAYER_3, SVector(spawnpoint.getValue<int>("Player3_X"), spawnpoint.getValue<int>("Player3_Y")), spawnpoint.getValue<int>("Player3_Rotation"));
 		mData.mEntityImpList.add(spaceman3);
 		mSpacemen[2] = (SpaceManImp*)(spaceman3);
 	case 2:
-		spaceman2 = entFac::createSpaceMan(sData[1], gData, mHud.getHead(1), ControlList::PLAYER_2, SVector(300, 400), 30);
+		spaceman2 = entFac::createSpaceMan(sData[1], gData, mHud.getHead(1), ControlList::PLAYER_2, SVector(spawnpoint.getValue<int>("Player2_X"), spawnpoint.getValue<int>("Player2_Y")), spawnpoint.getValue<int>("Player2_Rotation"));
 		mData.mEntityImpList.add(spaceman2);
 		mSpacemen[1] = (SpaceManImp*)(spaceman2);
 	case 1:
-		spaceman1 = entFac::createSpaceMan(sData[0], gData, mHud.getHead(0), ControlList::PLAYER_1, SVector(200, 400), 30);
+		spaceman1 = entFac::createSpaceMan(sData[0], gData, mHud.getHead(0), ControlList::PLAYER_1, SVector( spawnpoint.getValue<int>("Player1_X"), spawnpoint.getValue<int>("Player1_Y") ), spawnpoint.getValue<int>("Player1_Rotation"));
 		mData.mEntityImpList.add(spaceman1);
 		mSpacemen[0] = (SpaceManImp*)(spaceman1);
 		break;
