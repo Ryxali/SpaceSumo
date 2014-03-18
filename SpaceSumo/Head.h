@@ -23,7 +23,7 @@ public:
 	void draw(RenderList &list);
 	Face& getFace();
 	void changeMood(Face::Mood mood);
-	
+	void close();
 	void setScore(int score);
 	int getScore() const;
 	void decreaseLives();
@@ -32,6 +32,7 @@ private:
 	Head(const Head& head);
 	Head& operator=(const Head& head);
 	Face mFace;
+	bool mOpen;
 	bool mFlipped;
 	SSprite mBar;
 	Position mPos;

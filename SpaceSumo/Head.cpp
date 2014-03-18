@@ -12,12 +12,13 @@
 #include <iostream>
 
 Head::Head(Position pos, const STexture& texture) 
-	: mFace("res/img/UI/test"), 
+	: mFace("res/img/UI/hud/base", pos), 
 	mBar(texture, 10.f), 
 	mScore(20), 
 	mPos(pos),
 	mTens(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f),
-	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f)
+	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f),
+	mOpen(true)
 {
 	mTens.getSprite().setScale(0.5,0.5);
 	mSingulars.getSprite().setScale(0.5,0.5);
@@ -30,7 +31,8 @@ Head::~Head()
 
 void Head::update(GameData& data, int delta, std::vector<Playable*>& voiceList)
 {
-	mFace.update(data, delta, voiceList);
+	if(mOpen)
+		mFace.update(data, delta, voiceList);
 }
 
 void Head::draw(RenderList &list)
@@ -84,15 +86,13 @@ void Head::draw(RenderList &list)
 	list.addSprite(mBar);
 	list.addSprite(mTens);
 	list.addSprite(mSingulars);
-	mFace.draw(list, mPos, mFlipped);
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::C))
-	{
-		changeMood(Face::Mood::PLEASED);
-	}
-	else
-	{
-		changeMood(Face::Mood::IDLE);
-	}
+	if(mOpen)
+		mFace.draw(list, mPos, mFlipped);
+}
+
+void Head::close()
+{
+	mOpen = false;
 }
 
 void Head::changeMood(Face::Mood mood)
