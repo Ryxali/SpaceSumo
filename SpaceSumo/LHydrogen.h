@@ -20,5 +20,6 @@ public:
 private:
 	B2Body mBody;
 	Animation mAnim;
+	Animation mSnurrAnim;
 
 };

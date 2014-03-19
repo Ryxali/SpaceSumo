@@ -219,6 +219,46 @@ sf::Keyboard::Key str::toKey(std::string keyName)
 	{
 		return sf::Keyboard::BackSpace;
 	}
+	if(keyName == "NUMPAD0")
+	{
+		return sf::Keyboard::Numpad0;
+	}
+	if(keyName == "NUMPAD1")
+	{
+		return sf::Keyboard::Numpad1;
+	}
+	if(keyName == "NUMPAD2")
+	{
+		return sf::Keyboard::Numpad2;
+	}
+	if(keyName == "NUMPAD3")
+	{
+		return sf::Keyboard::Numpad3;
+	}
+	if(keyName == "NUMPAD4")
+	{
+		return sf::Keyboard::Numpad4;
+	}
+	if(keyName == "NUMPAD5")
+	{
+		return sf::Keyboard::Numpad5;
+	}
+	if(keyName == "NUMPAD6")
+	{
+		return sf::Keyboard::Numpad6;
+	}
+	if(keyName == "NUMPAD7")
+	{
+		return sf::Keyboard::Numpad7;
+	}
+	if(keyName == "NUMPAD8")
+	{
+		return sf::Keyboard::Numpad8;
+	}
+	if(keyName == "NUMPAD9")
+	{
+		return sf::Keyboard::Numpad9;
+	}
 	SError("Unknown Key", "Couldn't find char value for key: " + keyName);
 }
 

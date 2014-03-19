@@ -17,7 +17,7 @@ public:
 	virtual Ability* getAbility();
 
 private:
-
 	Animation mAnim;
+	Animation mSnurrAnim;
 	B2Body mBody;
 };

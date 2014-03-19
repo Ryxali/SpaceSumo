@@ -30,4 +30,5 @@ protected:
 	Timer mBlink2;
 	bool mAlive;
 	bool mBlinking;
+	int mRotate;
 };
