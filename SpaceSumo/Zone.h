@@ -19,7 +19,9 @@ public:
 	virtual void update(GameData &data, GameStateData &gData, int delta);
 	virtual void draw(RenderList& renderList);
 	virtual bool isAlive();
-	virtual EntityType getType();
+	virtual void onCollide(Collideable* other);
+	virtual void onLeave(Collideable* other);
+	virtual enttype::EntityType getType();
 private:
 	SVector mTopLeftPos;
 	SVector mSize;

@@ -113,6 +113,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			mHead.close();
 		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
 		{
+<<<<<<< HEAD
 			if( !mRespawnAnimSet )
 			{
 				mRespawn.restart();
@@ -120,6 +121,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 				mRespawnAnimSet = true;
 			}
 			mRespawnAnimDraw = true;
+=======
 			mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
 			mHand.setTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
 			mHand.setLinearVelocity(b2Vec2(0, 0));
@@ -135,6 +137,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 			delete mAbility;
 			mAbility = 0;
 			mEffects.clear();
+>>>>>>> dev_NL
 			
 
 			if( mRespawnAnimTimer.isExpired() )

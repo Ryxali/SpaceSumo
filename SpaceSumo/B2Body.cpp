@@ -113,6 +113,20 @@ void B2Body::initBody(b2World& world, Config &config, float scale)
 		static_cast<b2PolygonShape*>(bodyShape)->SetAsBox(config.getValue<int>("sizeX") * scale / PPM, config.getValue<int>("sizeY") * scale / PPM);
 		mBodyFix.shape = bodyShape;
 	}
+	else if(config.getValue<std::string>("shape") == "polygon")
+	{
+		b2PolygonShape* shp = new b2PolygonShape();
+		int nPoints = config.getValue<int>("pointCount");
+		b2Vec2* points = new b2Vec2[nPoints];
+		for(int i = 0; i < nPoints; ++i)
+		{
+			points[i].x = config.getValue<float>("pointX_"+std::to_string(i))/PPM * scale;
+			points[i].y = config.getValue<float>("pointY_"+std::to_string(i))/PPM * scale;
+		}
+		shp->Set(points, nPoints);
+		bodyShape = shp;
+		mBodyFix.shape = shp;
+	}
 	else
 	{
 		bodyShape = new b2CircleShape();

@@ -22,10 +22,19 @@ PowerUp::PowerUp()  :
 PowerUp::~PowerUp()
 {
 }
-
-EntityType PowerUp::getType()
+void PowerUp::onCollide(Collideable* other)
 {
-	return EntityType::POWER_UP;
+
+}
+
+void PowerUp::onLeave(Collideable* other)
+{
+
+}
+
+enttype::EntityType PowerUp::getType()
+{
+	return enttype::POWER_UP;
 }
 
 bool PowerUp::isAlive()

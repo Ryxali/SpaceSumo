@@ -1,11 +1,18 @@
 #pragma once
+
+namespace enttype
+{
+	enum EntityType;
+}
+struct GameStateData;
+
+
+#include "Collideable.h"
 #include "RenderList.h"
 #include "GameData.h"
 
-enum EntityType;
-struct GameStateData;
 
-class EntityImp
+class EntityImp : public Collideable
 {
 public:
 	EntityImp() {}
@@ -14,7 +21,9 @@ public:
 	virtual void update(GameData &data, GameStateData &gData, int delta) = 0;
 	virtual void draw(RenderList& renderList) = 0;
 	virtual bool isAlive() = 0;
-	virtual EntityType getType() = 0;
+	virtual void onCollide(Collideable* other) = 0;
+	virtual void onLeave(Collideable* other) = 0;
+	virtual enttype::EntityType getType() = 0;
 	virtual void clean(GameData& data);
 private:
 	EntityImp(const EntityImp& eImp);

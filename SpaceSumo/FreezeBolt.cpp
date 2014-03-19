@@ -5,6 +5,7 @@
 #include <ResourceManager\soundFac.h>
 #include <ResourceManager\RHandle.h>
 #include "consts.h"
+#include "SpaceManImp.h"
 
 FreezeBolt::FreezeBolt(SVector pos, SVector dir, SVector userSpeed, b2World& world, int projSpeed) 
 	: mDirection(dir),

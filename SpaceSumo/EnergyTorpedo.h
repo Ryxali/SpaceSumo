@@ -17,7 +17,9 @@ public:
 
 	virtual void update(GameData &data, GameStateData &gData,int delta);
 	virtual void draw(RenderList& renderList);
-	virtual EntityType getType();
+	virtual void onCollide(Collideable* other);
+	virtual void onLeave(Collideable* other);
+	virtual enttype::EntityType getType();
 	virtual bool isAlive();
 	virtual void kill();
 
