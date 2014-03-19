@@ -20,8 +20,4 @@ private:
 
 	Animation mAnim;
 	B2Body mBody;
-	Timer mDuration;
-	Timer mBlink1;
-	Timer mBlink2;
-	bool mDraw;
 };

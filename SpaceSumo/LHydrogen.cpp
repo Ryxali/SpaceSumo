@@ -11,6 +11,7 @@ LHydrogen::LHydrogen(b2World &world, std::string bodyData, float x, float y) :
 {
 	mBody.getBody()->SetUserData(this);
 	mAnim.getSprite().setOrigin(32, 32);
+	mBlinkStart.reset();
 }
 
 LHydrogen::~LHydrogen()
@@ -22,11 +23,28 @@ void LHydrogen::update(GameData &data, GameStateData &gData, int delta)
 {
 	mAnim.getSprite().setRotation( mBody.getAngle() * RADIAN_TO_DEGREES );
 	mAnim.getSprite().setPosition( mBody.getWorldCenter().x*PPM, mBody.getWorldCenter().y*PPM);
+
+	if(mBlinkStart.isExpired())
+	{
+		if(mBlink1.isExpired())
+		{
+			mBlink1.reset();
+			mBlink2.reset();
+			mBlinking = true;
+		}
+		else if(mBlink2.isExpired())
+		{
+			mBlinking = false;
+		}
+	}
 }
 
 void LHydrogen::draw(RenderList& renderList)
 {
-	renderList.addSprite(mAnim);
+	if(!mBlinking)
+	{
+		renderList.addSprite(mAnim);
+	}
 }
 
 Ability* LHydrogen::getAbility()

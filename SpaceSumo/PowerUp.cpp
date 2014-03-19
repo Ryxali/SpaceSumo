@@ -4,7 +4,11 @@
 
 PowerUp::PowerUp()  :
 	mAlive(true),
-	mTimer(30000)
+	mBlinking(false),
+	mTimer(30000),
+	mBlinkStart(24701),
+	mBlink1(800),
+	mBlink2(400)
 {
 
 }

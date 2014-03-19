@@ -25,5 +25,9 @@ protected:
 	PowerUp();
 	Ability* mAbility;
 	Timer mTimer;
+	Timer mBlinkStart;
+	Timer mBlink1;
+	Timer mBlink2;
 	bool mAlive;
+	bool mBlinking;
 };
