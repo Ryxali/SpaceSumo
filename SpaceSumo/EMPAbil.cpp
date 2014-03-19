@@ -22,7 +22,7 @@ void EMPAbil::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 {
 	for (auto it = data.mEntityImpList.mImpList.begin(); it != data.mEntityImpList.mImpList.end(); it++)
 	{
-		if((*it)->getType() == PLAYER)
+		if((*it)->getType() == enttype::PLAYER)
 		{
 			if(static_cast<SpaceManImp*>(*it)->getAbility() != this)
 			{
@@ -31,7 +31,7 @@ void EMPAbil::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 			static_cast<SpaceManImp*>(*it)->addEffect( new EMPEffect(mTimer) );
 		}
 
-		if((*it)->getType() == POWER_UP)
+		if((*it)->getType() == enttype::POWER_UP)
 		{
 			static_cast<PowerUp*>(*it)->kill();
 		}

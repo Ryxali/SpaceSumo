@@ -64,9 +64,19 @@ bool Zone::isAlive()
 	return true;
 }
 
-EntityType Zone::getType()
+void Zone::onCollide(Collideable* other)
 {
-	return ARENA;
+
+}
+
+void Zone::onLeave(Collideable* other)
+{
+
+}
+
+enttype::EntityType Zone::getType()
+{
+	return enttype::ARENA;
 }
 
 Zone::Pulse::Pulse() : mImg(res::getTexture("res/img/Map_Barrier/Laser_Thick.png"), 2.f), mPercPos(0.f)

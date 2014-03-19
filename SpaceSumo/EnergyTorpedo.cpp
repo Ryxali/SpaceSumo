@@ -85,10 +85,23 @@ void EnergyTorpedo::draw(RenderList& list)
 
 	list.addSprite(mAnim);
 }
-
-EntityType EnergyTorpedo::getType()
+void EnergyTorpedo::onCollide(Collideable* other)
 {
-	return EntityType::PROJECTILE;
+	switch(other->getType())
+	{
+	case enttype::PLAYER:
+		kill();
+	}
+}
+
+void EnergyTorpedo::onLeave(Collideable* other)
+{
+
+}
+
+enttype::EntityType EnergyTorpedo::getType()
+{
+	return enttype::PROJECTILE;
 }
 
 bool EnergyTorpedo::isAlive()

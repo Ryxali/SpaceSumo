@@ -44,13 +44,15 @@ void ContactListener::EndContact(b2Contact* contact)
 
 void ContactListener::beginCase(void* userDataA, void* userDataB)
 {
-
+	static_cast<Collideable*>( userDataA )->onCollide(static_cast<Collideable*>( userDataB ));
+	static_cast<Collideable*>( userDataB )->onCollide(static_cast<Collideable*>( userDataA ));
+	/*return;
 	switch(static_cast<EntityImp*>( userDataA )->getType())
 	{
-	case POWER_UP :
+	case enttype::POWER_UP :
 		switch(static_cast<EntityImp*>( userDataB )->getType())
 		{
-		case PLAYER:
+		case enttype::PLAYER:
 			if(static_cast<SpaceManImp*>( userDataB )->isAbilityFree())
 			{
 				static_cast<SpaceManImp*>( userDataB )->addAbility(
@@ -62,10 +64,10 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 		}
 		break;
 
-	case EFFECTING:
+	case enttype::EFFECTING:
 		switch(static_cast<EntityImp*>( userDataB )->getType())
 		{
-		case PLAYER:
+		case enttype::PLAYER:
 			static_cast<SpaceManImp*>( userDataB )->addEffect(
 				static_cast<Effecting*>( userDataA )->getEffect());
 			static_cast<Effecting*>( userDataA )->kill();
@@ -75,10 +77,10 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 		}
 		break;
 
-	case PROJECTILE:
+	case enttype::PROJECTILE:
 		switch(static_cast<EntityImp*>( userDataB )->getType())
 		{
-		case PLAYER:
+		case enttype::PLAYER:
 
 			static_cast<EnergyTorpedo*>(userDataA)->kill();
 
@@ -89,7 +91,7 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 		break;
 
 
-	case PLAYER :
+	case enttype::PLAYER :
 		switch(static_cast<EntityImp*>( userDataB )->getType())
 		{
 		default:
@@ -99,17 +101,20 @@ void ContactListener::beginCase(void* userDataA, void* userDataB)
 
 	default:
 		break;
-	}
+	}*/
 }
 
 void ContactListener::endCase(void* userDataA, void* userDataB)
 {
+	static_cast<Collideable*>( userDataA )->onLeave(static_cast<Collideable*>( userDataB ));
+	static_cast<Collideable*>( userDataB )->onLeave(static_cast<Collideable*>( userDataA ));
+	/*
 	switch(static_cast<EntityImp*>( userDataA )->getType())
 	{
-	case ARENA:
+	case enttype::ARENA:
 		switch(static_cast<EntityImp*>( userDataB )->getType())
 		{
-		case PLAYER:
+		case enttype::PLAYER:
 			static_cast<SpaceManImp*>( userDataB )->slowDeath();
 			break;
 
@@ -121,5 +126,5 @@ void ContactListener::endCase(void* userDataA, void* userDataB)
 
 	default:
 		break;
-	}
+	}*/
 }

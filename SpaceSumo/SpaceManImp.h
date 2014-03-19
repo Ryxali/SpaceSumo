@@ -1,6 +1,8 @@
 #pragma once
-
-enum EntityType;
+namespace enttype
+{
+	enum EntityType;
+}
 struct GameStateData;
 class Ability;
 class Config;
@@ -21,7 +23,7 @@ class Controller;
 #include <Common\Timer.h>
 #include <ResourceManager\Animation.h>
 #include <ResourceManager\Playable.h>
-
+#include "Hand.h"
 
 
 class SpaceManImp :
@@ -47,7 +49,10 @@ public:
 	virtual void addEffect(EffectImp* effect);
 	void addAbility(Ability*);
 	virtual bool isAlive();
-	virtual EntityType getType();
+
+	virtual void onCollide(Collideable* other);
+	virtual void onLeave(Collideable* other);
+	virtual enttype::EntityType getType();
 	bool isAbilityFree();
 	void slowDeath();
 	B2Body& getBody();
@@ -63,6 +68,7 @@ public:
 	
 	
 private:
+	friend class Hand;
 	Controller& mControls;
 
 	//helpfunctions
@@ -77,8 +83,8 @@ private:
 
 	//Spaceman stuff
 	B2Body mSpaceman;
-
-	b2PrismaticJoint* mLeftArmJoint;
+	Hand mHand;
+	/*b2PrismaticJoint* mLeftArmJoint;
 	b2PrismaticJoint* mLeftArm;
 	B2Body mLeftHand;
 	b2PrismaticJointDef mLeftArmDef;
@@ -91,7 +97,7 @@ private:
 	b2PrismaticJoint* mRightArmJoint;
 	b2PrismaticJoint* mRightArm;
 	B2Body mRightHand;
-	b2PrismaticJointDef mRightArmDef;
+	b2PrismaticJointDef mRightArmDef;*/
 
 	float mSpeedLimit, mRotationSpeed, mPunchForce;
 	bool mFixedRotation;

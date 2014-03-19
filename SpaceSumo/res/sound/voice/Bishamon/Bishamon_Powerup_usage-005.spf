@@ -9,4 +9,4 @@
 # QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
 
 
-Sound("res/sound/voice/Bishamon/Bishamon_Powerup_usage-005.ogg")
+Sound("res/sound/voice/Bishamon/Bishamon_Powerup_Usage-005.ogg")

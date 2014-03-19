@@ -111,6 +111,7 @@
     <ClCompile Include="ETorpedoPickup.cpp" />
     <ClCompile Include="Exploded.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="Hand.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="EMP.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
@@ -177,7 +178,9 @@
     <ClInclude Include="Characters.h" />
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterSetupState.h" />
+    <ClInclude Include="Collideable.h" />
     <ClInclude Include="EMPEffect.h" />
+    <ClInclude Include="Hand.h" />
     <ClInclude Include="MiningColony.h" />
     <ClInclude Include="PlayerReadyToggleCommand.h" />
     <ClInclude Include="SpaceJunk.h" />

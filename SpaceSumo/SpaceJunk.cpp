@@ -5,11 +5,22 @@
 
 SpaceJunk::~SpaceJunk()
 {
+
 }
 
-EntityType SpaceJunk::getType()
+void SpaceJunk::onCollide(Collideable* other)
 {
-	return SPACE_JUNK;
+
+}
+
+void SpaceJunk::onLeave(Collideable* other)
+{
+
+}
+
+enttype::EntityType SpaceJunk::getType()
+{
+	return enttype::SPACE_JUNK;
 }
 
 void SpaceJunk::crashSound()

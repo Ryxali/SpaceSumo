@@ -53,6 +53,19 @@ bool Explosion::isAlive()
 	return mAlive;
 }
 
+void Explosion::onCollide(Collideable* other)
+{
+	switch(other->getType())
+	{
+
+	}
+}
+
+void Explosion::onLeave(Collideable* other)
+{
+
+}
+
 EffectImp* Explosion::getEffect()
 {
 	return new Exploded();

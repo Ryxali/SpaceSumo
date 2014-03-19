@@ -19,6 +19,8 @@ public:
 	virtual void update(GameData& data, GameStateData& gsData, int delta);
 	virtual void draw(RenderList& list);
 	virtual bool isAlive();
+	virtual void onCollide(Collideable* other);
+	virtual void onLeave(Collideable* other);
 	virtual EffectImp* getEffect();
 	virtual void kill();
 
