@@ -14,50 +14,6 @@
 #include <iostream>
 #include "Character_status.h"
 
-/*
-SpaceManImp::SpaceManImp(sf::Keyboard::Key up,
-	sf::Keyboard::Key right,
-	sf::Keyboard::Key left,
-	sf::Keyboard::Key push,
-	sf::Keyboard::Key activate,
-	GameData& data, 
-	std::string bodyData,
-	std::string handData,
-	float x, float y, float32 rotation)
-	: mUp(up),
-	mRight(right),
-	mLeft(left),
-	mPush(push),
-	mActivate(activate),
-	mSpaceman(data.world , bodyData, x , y ),
-	mLeftHand(data.world, handData, x , y ),
-	mRightHand(data.world, handData, x , y ),
-	mDirection( 0.0f , -1.0f ),
-	mSpeed(mConfig.getValue<float>("speed")),
-	mAngle(0.0f),
-	mJetOffset(-37.f),
-	mPushDuration(mConfig.getValue<int>("pushDuration")),
-	mPushCooldown(mConfig.getValue<int>("pushCooldown")),
-	mRespawnTimer(mConfig.getValue<int>("respawnTimer")),
-	mAnim(res::getTexture("res/img/Anim.png"), "res/conf/anim_ex.cfg", 5.f),
-	mTurn(res::getTexture("res/img/smokesprite.png"), "res/conf/anim_turn.cfg", 6.f),
-	mJet(res::getTexture("res/img/blue_jet.png"), "res/conf/anim_jet.cfg", 7.f),
-	mAbility(0),
-	mPushed(false),
-	mSlowDeath(false),
-	mAlive(true),
-	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf", data.soundlist)),
-	mTurning(soundFac::createSound("res/sound/jetpack/turn.spf", data.soundlist))
-{
-	//mAnim.getSprite().setOrigin( 64 , 64 );
-	//mTurn.getSprite().setOrigin( 64 , 64 );
-	//mJet.getSprite().setOrigin( 32 , -37 );
-
-	mSpaceman.setRotation(rotation);
-	initializeArms(data.world);
-	mSpaceman.getBody()->SetUserData(this);
-}*/
-
 SpaceManImp::SpaceManImp(
 	Controller& controls,
 	SVector pos,
@@ -105,7 +61,8 @@ SpaceManImp::SpaceManImp(
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
 	mHead(head),                       
-	mRespawning(false)
+	mRespawning(false),
+	mRespawnAngle(startRotation)
 {
 	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
@@ -128,8 +85,6 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mJetpack = soundFac::createSound("res/sound/jetpack/jet.spf");
 		mJetpack->setRelativeToListener(false);
 		mJetpack->setAttenuation(ATTENUATION);
-
-
 	}
 
 	mJetpack->setPosition (mSpaceman.getPosition().x*PPM , mSpaceman.getPosition().y*PPM , 0 );
@@ -141,12 +96,16 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 
 	if(mSlowDeath)
 	{
+		if(!mHead.getScore() > 0)
+			mHead.close();
 
 		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
 		{
-			mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), 0);
-			mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), 0);
-			mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), 0);
+			mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+			mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+			mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+			mMiddleHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+			mLeftHand.setLinearVelocity(b2Vec2(0,0));
 			mMiddleHand.setLinearVelocity(b2Vec2(0,0));
 			mRightHand.setLinearVelocity(b2Vec2(0,0));
 			mSpaceman.setAngularVelocity(0);
@@ -277,6 +236,7 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(mAbility != 0)
 		{
+			mHead.getFace().trigger(status::POWERUP_USE);
 			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, SVector(mSpaceman.getLinearVelocity().x * PPM, mSpaceman.getLinearVelocity().y * PPM), gData, data.world);
 
 			delete mAbility;
@@ -314,6 +274,7 @@ void SpaceManImp::addEffect(EffectImp* effect)
 
 void SpaceManImp::addAbility(Ability* ability)
 {
+	mHead.getFace().trigger(status::POWERUP_PICKUP);
 	mAbility = ability;
 }
 

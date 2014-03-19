@@ -20,8 +20,8 @@ MenuState::MenuState(StateList &owner) :
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		"res/img/UI/menu/main/play",
-		"res/img/UI/menu/gamesetup/map_highlight"));
-	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst(), "res/img/UI/menu/gamesetup/mode_highlight"));
+		"res/img/UI/menu/main/selection"));
+	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst(), "res/img/UI/menu/main/selection", 2.f));
 }
 
 

@@ -1,0 +1,12 @@
+# Sound("ref") -- A regular Sound
+# LoopSound(AnyOtherSound) -- A looping sound
+# FinishingSound(AnyOtherSound) -- A sound that will always finish on stop
+# QueueSound(AnyOtherSound0, AnyOtherSound1, ...) -- A sequence of sounds
+
+# <-- A comment
+# Examples:
+# Sound("res/sounds/foo.ogg")
+# QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
+
+
+Sound("res/sound/voice/Bishamon/Bishamon_Disabled-002.ogg")

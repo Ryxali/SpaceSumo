@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ModeSelectState.h"
-
 #include "ButtonSingle.h"
 #include "Button.h"
 #include "DualCommand.h"

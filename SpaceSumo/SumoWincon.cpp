@@ -2,9 +2,13 @@
 #include "SumoWincon.h"
 #include "SpaceManImp.h"
 #include "EntityImp.h"
+#include <iostream>
 
 SumoWincon::SumoWincon()
+	: mGameTime(60000),
+	mStartedTimer(false)
 {
+
 }
 
 SumoWincon::~SumoWincon()
@@ -28,4 +32,33 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 void SumoWincon::draw(RenderList &list)
 {
 
+}
+
+void SumoWincon::timerStart()
+{
+	mGameClock.restart();
+	mStartedTimer = true;
+}
+
+bool SumoWincon::getTimerStarted()
+{
+	return mStartedTimer;
+}
+
+bool SumoWincon::getTimerExpired()
+{
+	if( mGameClock.getElapsedTime().asMilliseconds() == mGameTime )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+int SumoWincon::getTimeLeft()
+{
+	return mGameTime - mGameClock.getElapsedTime().asMilliseconds();
 }
