@@ -2,6 +2,7 @@
 #include "effectimp.h"
 #include <ResourceManager\Animation.h>
 #include <Common\Timer.h>
+#include <Box2D\Box2D.h>
 
 
 class SpaceManImp;
@@ -10,7 +11,7 @@ class Exploded :
 	public EffectImp
 {
 public:
-	Exploded();
+	Exploded(float x, float y);
 	virtual ~Exploded();
 
 	virtual void update(Controller& controller, GameData& data);
@@ -24,7 +25,7 @@ public:
 	virtual Flag getFlag_CAN_PUSH();
 
 private:
-
+	b2Vec2 mPosition;
 	Exploded(Exploded const &);
 	Timer mEffectTimer;
 	SpaceManImp* mOwner;

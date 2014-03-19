@@ -107,7 +107,6 @@ Head& Hud::getHead(int index)
 
 void Hud::updateClock(int time)
 {
-	std::cout << time << std::endl;
 	
 	mMinutes.setCurrentRow(time/60000);
 

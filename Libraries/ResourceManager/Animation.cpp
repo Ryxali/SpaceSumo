@@ -192,3 +192,8 @@ unsigned short Animation::getSliceHeight()
 {
 	return mSliceHeight;
 }
+
+void Animation::restart()
+{
+	mAnimationTimer.restart();
+}

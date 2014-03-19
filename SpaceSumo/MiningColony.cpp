@@ -34,19 +34,18 @@ void MiningColony::update(GameStateData &data, int delta)
 		{
 		case 0:
 			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % mConfig.getValue<int>("sideSpeed") - 20, rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed")), b2Vec2(rand() % 1920, - 800), data.gameData, r3, mConfig.getValue<float>("speedMultiplier") ));
-			std::cout << "Above!" << std::endl;
 			break;
 		case 1:
 			data.mEntityImpList.add(new Asteroid(b2Vec2(-(rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed")), rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20), b2Vec2(1920 + 800, rand() % 1080), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));
-			std::cout << "Right!" << std::endl;
+			
 			break;
 		case 2:			
 			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20, -(rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed"))), b2Vec2(rand() % 1920, 1080 + 800), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));
-			std::cout << "Below!" << std::endl;
+			
 			break;
 		case 3:			
 			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed"), rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20), b2Vec2(0 - 800, rand() % 1080), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));
-			std::cout << "Left!" << std::endl;
+			
 			break;
 
 		default:

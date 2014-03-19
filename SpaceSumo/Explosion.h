@@ -26,6 +26,7 @@ private:
 	B2Body mBody;
 	bool mAlive;
 	bool mDying;
+	SVector mPosition;
 	Animation mAnim;
 	Timer mDuration;
 	Playable* mBlast;

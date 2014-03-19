@@ -10,6 +10,7 @@ Explosion::Explosion(b2World& world, float x, float y):
 	mBody(world, "res/img/PowerUp/EnergyTorpedo/explosion_body.cfg", x, y ),
 	mAlive(true),
 	mDying(false),
+	mPosition(x,y),
 	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/explosion.png"), "res/img/PowerUp/EnergyTorpedo/explosion.cfg", 10.f),
 	mDuration(600),
 	mBlast(0)
@@ -55,7 +56,7 @@ bool Explosion::isAlive()
 
 EffectImp* Explosion::getEffect()
 {
-	return new Exploded();
+	return new Exploded(mBody.getWorldCenter().x, mBody.getWorldCenter().y );
 }
 
 void Explosion::kill()

@@ -5,8 +5,9 @@
 #include <cstdlib>
 #include <Box2D\Box2D.h>
 
-Exploded::Exploded():
+Exploded::Exploded(float x, float y):
 	mPrevKeyState(false),
+	mPosition(x, y),
 	mEffectTimer(1000),
 	mOwner(0),
 	mBlown(false)
@@ -22,7 +23,7 @@ Exploded::Exploded(Exploded const& f):
 
 Exploded::~Exploded()
 {
-	
+
 }
 
 void Exploded::update(Controller& controller, GameData& data)
@@ -31,8 +32,13 @@ void Exploded::update(Controller& controller, GameData& data)
 	{
 		if( mBlown == false) 
 		{
-			mOwner->getBody().applyLinearImpulse((b2Vec2(rand()%60-30, rand()%60-30)),mOwner->getBody().getWorldCenter(),true);
-			mOwner->getBody().applyAngularImpulse(50, true);
+			b2Vec2 impulse	((mOwner->getBody().getPosition().x - mPosition.x),
+							(mOwner->getBody().getPosition().y - mPosition.y));
+			impulse.Normalize();
+			int stronkness = rand()%30+20;
+			impulse.Set(impulse.x*stronkness, impulse.y*stronkness);
+			mOwner->getBody().applyLinearImpulse(impulse, mOwner->getBody().getWorldCenter(), true);
+			mOwner->getBody().applyAngularImpulse(20, true);
 			mBlown = true;
 		}
 	}
@@ -54,7 +60,7 @@ void Exploded::draw(RenderList& list, SpaceManImp* owner)
 
 EffectImp* Exploded::clone()
 {
-	return new Exploded();
+	return new Exploded(mPosition.x,mPosition.y);
 }
 
 Flag Exploded::getFlag_CAN_ROTATE()

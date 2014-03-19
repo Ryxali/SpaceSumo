@@ -46,6 +46,7 @@ res/img/UI/hud/voice_freq.png
 res/img/UI/hud/test.png
 res/img/UI/hud/base.png
 res/img/UI/hud/numbers.png
+res/img/UI/hud/321brawl.png
 res/img/UI/menu/main/play.png
 res/img/UI/menu/main/selection.png
 res/img/UI/menu/weightSelection/weight_class_0.png
@@ -57,15 +58,19 @@ res/img/UI/menu/next.png
 res/img/entity/spaceman/p1/Smoke.png
 res/img/entity/spaceman/p1/Jet.png
 res/img/entity/spaceman/p1/Body.png
+res/img/entity/spaceman/p1/Spawn.png
 res/img/entity/spaceman/p2/Smoke.png
 res/img/entity/spaceman/p2/Jet.png
 res/img/entity/spaceman/p2/Body.png
+res/img/entity/spaceman/p2/Spawn.png
 res/img/entity/spaceman/p3/Smoke.png
 res/img/entity/spaceman/p3/Jet.png
 res/img/entity/spaceman/p3/Body.png
+res/img/entity/spaceman/p3/Spawn.png
 res/img/entity/spaceman/p4/Smoke.png
 res/img/entity/spaceman/p4/Jet.png
 res/img/entity/spaceman/p4/Body.png
+res/img/entity/spaceman/p4/Spawn.png
 res/sound/jetpack/End.ogg
 res/sound/jetpack/Main.ogg
 res/sound/jetpack/Start.ogg
