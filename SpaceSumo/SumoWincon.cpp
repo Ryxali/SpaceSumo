@@ -5,7 +5,7 @@
 #include <iostream>
 
 SumoWincon::SumoWincon()
-	: mGameTime(60000),
+	: mGameTime(125000),
 	mStartedTimer(false)
 {
 
