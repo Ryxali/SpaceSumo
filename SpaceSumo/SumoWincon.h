@@ -1,6 +1,7 @@
 #pragma once
 #include "Wincon.h"
 #include <SFML\System\Clock.hpp>
+#include <ResourceManager\Animation.h>
 
 class SumoWincon : public Wincon
 {
@@ -16,7 +17,19 @@ public:
 	int getTimeLeft();
 
 private:
+	// start game
+	Animation mBrawl;
+	void countdown();
+	bool mGameHasStarted;
+	bool mCountdownStarted;
+	bool mCountdownDone;
 	bool mStartedTimer;
+	
+	int mPregameDuration;
+	sf::Clock mPregameClock;
+
+	int mCountdownDuration;
+	sf::Clock mCountdownClock;
 
 	int mGameTime;
 	sf::Clock mGameClock;

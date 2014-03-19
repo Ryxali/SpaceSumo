@@ -30,6 +30,7 @@ public:
 	unsigned short getSliceHeight();
 	int getCurrentFrame();
 	void setSprite(std::string ref);
+	void restart();
 private:
 	Animation& operator=(const Animation& anim);
 	Animation(const Animation &anim);

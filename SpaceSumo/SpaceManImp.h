@@ -57,6 +57,8 @@ public:
 	bool isSlowlyDying() const;
 	bool respawning();
 
+	bool disable(bool);
+
 	// poitsystem
 
 	void decreaseLives();
@@ -116,13 +118,18 @@ private:
 	Animation mAnim;
 	Animation mTurn;
 	Animation mJet;
+	Animation mRespawn;
 	
 	Head& mHead;
 	
 	//sounds
 	Playable* mJetpack;
 
-	
+	//respawn
+	Timer mRespawnAnimTimer;
+	bool mRespawnAnimDraw;
+	bool mRespawnAnimSet;
+
 	//test skit
 	float32 mSpawnX;
 	float32 mSpawnY;

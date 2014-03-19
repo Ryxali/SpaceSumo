@@ -38,8 +38,7 @@ void Exploded::update(Controller& controller, GameData& data)
 			int stronkness = rand()%30+20;
 			impulse.Set(impulse.x*stronkness, impulse.y*stronkness);
 			mOwner->getBody().applyLinearImpulse(impulse, mOwner->getBody().getWorldCenter(), true);
-
-
+			mOwner->getBody().applyAngularImpulse(20, true);
 			mBlown = true;
 		}
 	}

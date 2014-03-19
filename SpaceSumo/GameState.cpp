@@ -61,6 +61,7 @@ void GameState::update(GameData &data, int delta)
 
 void GameState::draw(RenderList &list)
 {
+	mSumoWincon.draw(list);
 	mGameMode->draw(list);
 	mGameMap->draw(list);
 	mData.mEntityImpList.draw(list);

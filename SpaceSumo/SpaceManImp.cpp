@@ -59,10 +59,14 @@ SpaceManImp::SpaceManImp(
 	mAnim(res::getTexture(visualData.getValue<std::string>("Body")+".png"), visualData.getValue<std::string>("Body")+".cfg", 5.f),
 	mTurn(res::getTexture(visualData.getValue<std::string>("Smoke")+".png"), visualData.getValue<std::string>("Smoke")+".cfg", 6.f),
 	mJet(res::getTexture(visualData.getValue<std::string>("Jet")+".png"), visualData.getValue<std::string>("Jet")+".cfg", 7.f),
+	mRespawn(res::getTexture(visualData.getValue<std::string>("Spawn")+".png"), visualData.getValue<std::string>("Spawn")+".cfg", 8.f),
 	mJetpack(soundFac::createSound("res/sound/jetpack/jet.spf")),
 	mHead(head),                       
 	mRespawning(false),
-	mRespawnAngle(startRotation)
+	mRespawnAngle(startRotation),
+	mRespawnAnimTimer(1000),
+	mRespawnAnimDraw(false),
+	mRespawnAnimSet(false)
 {
 	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
@@ -70,6 +74,10 @@ SpaceManImp::SpaceManImp(
 	mSpaceman.getBody()->SetUserData(this);
 	mSpaceman.setAngularVelocity(0);
 	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
+
+	mRespawn.getSprite().setPosition(mSpawnX,mSpawnY);
+	mRespawn.getSprite().setRotation(mRespawnAngle);
+	mRespawn.getSprite().setOrigin(mRespawn.getSprite().getTextureRect().width/2, mRespawn.getSprite().getTextureRect().height/2-10);
 }
 
 
@@ -98,24 +106,37 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(!mHead.getScore() > 0)
 			mHead.close();
-
 		if( mRespawnTimer.isExpired() && mHead.getScore() > 0)
 		{
-			mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			mMiddleHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			mLeftHand.setLinearVelocity(b2Vec2(0,0));
-			mMiddleHand.setLinearVelocity(b2Vec2(0,0));
-			mRightHand.setLinearVelocity(b2Vec2(0,0));
-			mSpaceman.setAngularVelocity(0);
-			mSpaceman.setLinearVelocity(b2Vec2(0,0));
-			mSlowDeath = false;
-			delete mAbility;
-			mAbility = 0;
-			mEffects.clear();
+			if( !mRespawnAnimSet )
+			{
+				mRespawn.restart();
+				mRespawnAnimTimer.reset();
+				mRespawnAnimSet = true;
+			}
+			mRespawnAnimDraw = true;
 			
-			mRespawning = true;
+
+			if( mRespawnAnimTimer.isExpired() )
+			{
+				mRespawnAnimSet = false;
+				mRespawnAnimDraw = false;
+				mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+				mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+				mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+				mMiddleHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+				mLeftHand.setLinearVelocity(b2Vec2(0,0));
+				mMiddleHand.setLinearVelocity(b2Vec2(0,0));
+				mRightHand.setLinearVelocity(b2Vec2(0,0));
+				mSpaceman.setAngularVelocity(0);
+				mSpaceman.setLinearVelocity(b2Vec2(0,0));
+				mSlowDeath = false;
+				delete mAbility;
+				mAbility = 0;
+				mEffects.clear();
+			
+				mRespawning = true;
+			}
 		}
 		else
 		{
@@ -262,6 +283,11 @@ void SpaceManImp::draw(RenderList& renderList)
 	mJet.getSprite().setPosition( mSpaceman.getWorldCenter().x*PPM, mSpaceman.getWorldCenter().y*PPM);
 
 	mEffects.draw(renderList, this);
+	if( mRespawnAnimDraw )
+	{
+		renderList.addSprite(mRespawn);
+	}
+
 	renderList.addSprite(mAnim);
 	renderList.addSprite(mTurn);
 	renderList.addSprite(mJet);
@@ -414,4 +440,10 @@ void SpaceManImp::retractArms()
 void SpaceManImp::decreaseLives()
 {
 	mHead.decreaseLives();
+}
+
+bool SpaceManImp::disable(bool status)
+{
+	
+	return true;
 }
