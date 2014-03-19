@@ -13,7 +13,7 @@ Timer::~Timer()
 
 bool Timer::isExpired()
 {
-	if(mClock.getElapsedTime().asMilliseconds() - mStartTime > mDuration)
+	if((mClock.getElapsedTime().asMilliseconds() - mStartTime) > mDuration)
 	{
 		return true;
 	}
