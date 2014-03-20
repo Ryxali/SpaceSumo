@@ -10,8 +10,9 @@
 #include "StateList_CSelect.h"
 #include "GameState.h"
 #include <Common\error.h>
-CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameState &gameState) 
-	: State(owner), StateList(), mSpacemenData(), mGameState(gameState), mGData(data), mChars()
+
+CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameState &gameState, Playable* soundtrack) 
+	: State(owner), StateList(), mSpacemenData(), mGameState(gameState), mGData(data), mChars(), mSoundtrack(soundtrack)
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -70,6 +71,7 @@ void CharacterSetupState::changeState(st::State_Type index)
 	case st::FINISHED_STATE:
 		mGameState.setup(mSpacemenData, mGData);
 		mOwner.changeState((st::State_Type)1);
+		mSoundtrack->stop();
 		break;
 	default:
 		SError("Unkown State", "State not in switch");

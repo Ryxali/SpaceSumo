@@ -8,20 +8,22 @@
 #include "ChangeStateCommand.h"
 #include "StateList_Main.h"
 #include "ButtonSelectionEffect.h"
-
-MenuState::MenuState(StateList &owner) : 
+#include <ResourceManager\soundFac.h>
+MenuState::MenuState(StateList &owner, Playable* soundtrack) : 
 	State(owner),
 	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
-	mButtonList()
+	mButtonList(), mSoundtrack(soundtrack)//soundFac::createSound("res/music/menu/menu.spf"))
 {
 	mOwner = owner;
+	Config cfg("res/img/UI/menu/main/positioning.cfg");
 	mButtonList.add(new ButtonSingle(
-		SVector(200,400), 
+		SVector(cfg.getValue<int>("StartX"), cfg.getValue<int>("StartY")), 
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		"res/img/UI/menu/main/play",
-		"res/img/UI/menu/main/selection"));
-	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst(), "res/img/UI/menu/main/selection", 2.f));
+		"res/img/UI/menu/main/selection",
+		1.f));
+	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst(), "res/img/UI/menu/main/selection", 1.f));
 }
 
 
@@ -40,5 +42,10 @@ void MenuState::draw(RenderList &list)
 
 void MenuState::update(GameData &data, int delta)
 {
+	mSoundtrack->play();
 	mButtonList.update(data, delta);
+}
+void MenuState::close()
+{
+
 }

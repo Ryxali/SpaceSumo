@@ -6,14 +6,16 @@
 #include "SetupState.h"
 #include "CharacterSetupState.h"
 #include "StateList_Main.h"
+#include <ResourceManager\soundFac.h>
 
 GameStateList::GameStateList(GameData &data) : StateList()
 {
-	add(new MenuState(*this));
+	Playable* p = soundFac::createSound("res/music/menu/menu.spf");
+	add(new MenuState(*this, p));
 	GameState* gS = new GameState(*this, data);
 	add(gS);
-	add(new SetupState(*this, data, *gS));
-	add(new CharacterSetupState(*this, data, *gS));
+	add(new SetupState(*this, data, *gS, p));
+	add(new CharacterSetupState(*this, data, *gS, p));
 	StateList::changeState(0);
 	sync();
 }

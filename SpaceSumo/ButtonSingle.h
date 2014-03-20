@@ -15,7 +15,7 @@ struct GameData;
 class ButtonSingle : public Rectangle, public Button
 {
 public:
-	ButtonSingle(SVector position, int mapX, int mapY, Command *command, std::string imageFile, std::string hoverImgFile);
+	ButtonSingle(SVector position, int mapX, int mapY, Command *command, std::string imageFile, std::string hoverImgFile, float hoverZ = 3.f);
 	~ButtonSingle();
 	void update(GameData &data);
 	void draw(RenderList &renderList);

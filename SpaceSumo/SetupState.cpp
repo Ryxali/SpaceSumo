@@ -7,9 +7,9 @@
 #include "MapSelectState.h"
 #include "GameState.h"
 
-SetupState::SetupState(StateList &owner, GameData &data, GameState &gState) :
+SetupState::SetupState(StateList &owner, GameData &data, GameState &gState, Playable* soundtrack) :
 	State(owner), StateList(), mBackground(res::getTexture("res/img/UI/menu/gamesetup/background.png"), 0),
-	mGState(gState)
+	mGState(gState), mSoundtrack(soundtrack)
 {
 	add(new ModeSelectState(*this, mMode, data.world));
 	add(new MapSelectState(*this, mMap, data.world));

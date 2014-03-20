@@ -486,6 +486,7 @@ void SpaceManImp::initializeArms(b2World& world)
 void SpaceManImp::extendArms()
 {
 	mAnim.setCurrentRow(1);
+	mAnim.restart();
 	mHand.setMotorSpeed(mPunchForce);
 	//mLeftArmJoint->SetMotorSpeed(mPunchForce);
 	//mRightArmJoint->SetMotorSpeed(mPunchForce);

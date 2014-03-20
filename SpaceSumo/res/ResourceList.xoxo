@@ -23,6 +23,13 @@ res/img/maps/miningcolony/MiningColony_BG.png
 res/img/maps/miningcolony/asteroid.png
 res/img/test_sparkle.png
 res/img/UI/menu/tmp_menu.png
+res/img/UI/menu/controlAdding/confirmation.png
+res/img/UI/menu/controlAdding/keyboard_1.png
+res/img/UI/menu/controlAdding/keyboard_2.png
+res/img/UI/menu/controlAdding/keyboard_3.png
+res/img/UI/menu/controlAdding/keyboard_4.png
+res/img/UI/menu/controlAdding/xbox.png
+res/img/UI/menu/controlAdding/background.png
 res/img/UI/menu/gamesetup/map_highlight.png
 res/img/UI/menu/gamesetup/mode_highlight.png
 res/img/UI/menu/gamesetup/background.png
@@ -53,7 +60,6 @@ res/img/UI/menu/weightSelection/weight_class_0.png
 res/img/UI/menu/weightSelection/weight_class_1.png
 res/img/UI/menu/weightSelection/weight_class_2.png
 res/img/UI/menu/weightSelection/weight_class_3.png
-res/img/UI/menu/controlAdding/confirmation.png
 res/img/UI/menu/next.png
 res/img/entity/spaceman/p1/Smoke.png
 res/img/entity/spaceman/p1/Jet.png
@@ -90,3 +96,4 @@ res/sound/voice/Alien/voice_list.xoxo
 res/sound/voice/Bob/voice_list.xoxo
 res/sound/voice/Bishamon/voice_list.xoxo
 res/sound/voice/Konrad/voice_list.xoxo
+res/sound/voice/Coleen/voice_list.xoxo
