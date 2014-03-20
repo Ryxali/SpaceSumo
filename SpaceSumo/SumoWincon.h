@@ -2,6 +2,11 @@
 #include "Wincon.h"
 #include <SFML\System\Clock.hpp>
 #include <ResourceManager\Animation.h>
+#include <ResourceManager\Playable.h>
+#include <SFML\Window\Keyboard.hpp>
+#include <vector>
+
+
 
 class SumoWincon : public Wincon
 {
@@ -16,22 +21,29 @@ public:
 	bool getTimerExpired();
 	int getTimeLeft();
 
+	void resetClocks();
+
 private:
+	bool mLoadedSpacemen;
 	// start game
 	Animation mBrawl;
-	void countdown();
-	bool mGameHasStarted;
-	bool mCountdownStarted;
+	void countdown(bool run);
+	bool mRunCountdown;
 	bool mCountdownDone;
+	bool mGameHasStarted;
 	bool mStartedTimer;
-	
-	int mPregameDuration;
-	sf::Clock mPregameClock;
-
-	int mCountdownDuration;
-	sf::Clock mCountdownClock;
 
 	int mGameTime;
 	sf::Clock mGameClock;
+
+	int mCountDown;
+	sf::Clock mCountDownClock;
+	Playable* m321brawl;
+	bool mHasPlayed;
+
+	// stop game
+	void endgame(bool);
+
+	std::vector<SpaceManImp*> mSpacemenVec;
 };
 

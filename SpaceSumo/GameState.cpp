@@ -84,6 +84,7 @@ void GameState::open()
 	mGameMode = new Sumo(mGameData.world);
 	mGameMap = new Terra();*/
 	mHud.setNPlayers(3);
+	mSumoWincon.resetClocks();
 }
 
 void GameState::close()

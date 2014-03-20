@@ -34,18 +34,6 @@ SpaceManImp::SpaceManImp(
 	mSpawnY(pos.getY()),
 	mHand(*this, handData, data, pos),
 	mSpaceman(data.world, bodyData, pos.getX(), pos.getY()),
-	/*mLeftArmJoint(0),
-	mLeftArm(0),
-	mLeftHand(data.world, handData, pos.getX(), pos.getY()),
-	mLeftArmDef(),
-	mMiddleArmJoint(0),
-	mMiddleArm(0),
-	mMiddleHand(data.world, handData, pos.getX(), pos.getY()),
-	mMiddleArmDef(),
-	mRightArmJoint(0),
-	mRightArm(0),
-	mRightHand(data.world, handData, pos.getX(), pos.getY()),
-	mRightArmDef(),*/
 	mSpeedLimit(bodyData.getValue<float>("speedLimit")),
 	mRotationSpeed(bodyData.getValue<float>("rotationSpeed")),
 	mFixedRotation(bodyData.getValue<bool>("fixedRotation")),
@@ -75,7 +63,6 @@ SpaceManImp::SpaceManImp(
 {
 	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
-	//initializeArms(data.world);
 	mSpaceman.getBody()->SetUserData(this);
 	mSpaceman.setAngularVelocity(0);
 	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
@@ -120,35 +107,14 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 				mRespawnAnimSet = true;
 			}
 			mRespawnAnimDraw = true;
-			mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			mHand.setTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			mHand.setLinearVelocity(b2Vec2(0, 0));
-			//mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			//mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			//mMiddleHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-			//mLeftHand.setLinearVelocity(b2Vec2(0,0));
-			//mMiddleHand.setLinearVelocity(b2Vec2(0,0));
-			//mRightHand.setLinearVelocity(b2Vec2(0,0));
-			mSpaceman.setAngularVelocity(0);
-			mSpaceman.setLinearVelocity(b2Vec2(0,0));
-			mSlowDeath = false;
-			delete mAbility;
-			mAbility = 0;
-			mEffects.clear();
-			
 
 			if( mRespawnAnimTimer.isExpired() )
 			{
+				// reset position n'stuff
 				mRespawnAnimSet = false;
 				mRespawnAnimDraw = false;
 				mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
 				mHand.setTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-				//mLeftHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-				//mRightHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-				//mMiddleHand.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
-				//mLeftHand.setLinearVelocity(b2Vec2(0,0));
-				//mMiddleHand.setLinearVelocity(b2Vec2(0,0));
-				//mRightHand.setLinearVelocity(b2Vec2(0,0));
 				mSpaceman.setAngularVelocity(0);
 				mSpaceman.setLinearVelocity(b2Vec2(0,0));
 				mHand.setLinearVelocity(b2Vec2(0,0));
@@ -424,73 +390,16 @@ Ability* SpaceManImp::getAbility() const
 	return mAbility;
 }
 
-void SpaceManImp::initializeArms(b2World& world)
-{
-	// Left arm
-	/*mLeftArmDef.bodyA = mLeftHand.getBody();
-	mLeftArmDef.bodyB = mSpaceman.getBody();
-	mLeftArmDef.collideConnected = false;
-	mLeftArmDef.localAxisA.Set( 0 , 1 );
-	mLeftArmDef.localAxisA.Normalize();
-	mLeftArmDef.localAnchorA.Set( 0 , 0 );
-	mLeftArmDef.localAnchorB.Set( -49.f/PPM , 0 );
-	mLeftArmDef.enableLimit = true;
-	mLeftArmDef.lowerTranslation = 0;
-	mLeftArmDef.upperTranslation = 2;
-	mLeftArmDef.enableMotor = true;
-	mLeftArmDef.maxMotorForce = 300;
-	mLeftArmDef.motorSpeed = 0;
-	mLeftArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mLeftArmDef);
-
-	// Middle arm
-	mMiddleArmDef.bodyA = mMiddleHand.getBody();
-	mMiddleArmDef.bodyB = mSpaceman.getBody();
-	mMiddleArmDef.collideConnected = false;
-	mMiddleArmDef.localAxisA.Set( 0 , 1 );
-	mMiddleArmDef.localAxisA.Normalize();
-	mMiddleArmDef.localAnchorA.Set( 0 , 0 );
-	mMiddleArmDef.localAnchorB.Set( 0, 0 );
-	mMiddleArmDef.enableLimit = true;
-	mMiddleArmDef.lowerTranslation = 0;
-	mMiddleArmDef.upperTranslation = 2;
-	mMiddleArmDef.enableMotor = true;
-	mMiddleArmDef.maxMotorForce = 300;
-	mMiddleArmDef.motorSpeed = 0;
-	mMiddleArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mMiddleArmDef);
-	
-	// right hand
-	mRightArmDef.bodyA = mRightHand.getBody();
-	mRightArmDef.bodyB = mSpaceman.getBody();
-	mRightArmDef.collideConnected = false;
-	mRightArmDef.localAxisA.Set( 0 , 1 );
-	mRightArmDef.localAxisA.Normalize();
-	mRightArmDef.localAnchorA.Set( 0 , 0 );
-	mRightArmDef.localAnchorB.Set( 49.f/PPM , 0 );
-	mRightArmDef.enableLimit = true;
-	mRightArmDef.lowerTranslation = 0;
-	mRightArmDef.upperTranslation = 2;
-	mRightArmDef.enableMotor = true;
-	mRightArmDef.maxMotorForce = 300;
-	mRightArmDef.motorSpeed = 0;
-	mRightArmJoint = (b2PrismaticJoint*)world.CreateJoint(&mRightArmDef);*/
-}
-
 void SpaceManImp::extendArms()
 {
 	mAnim.setCurrentRow(1);
 	mHand.setMotorSpeed(mPunchForce);
-	//mLeftArmJoint->SetMotorSpeed(mPunchForce);
-	//mRightArmJoint->SetMotorSpeed(mPunchForce);
-	//mMiddleArmJoint->SetMotorSpeed(mPunchForce);
 }
 
 void SpaceManImp::retractArms()
 {
 	mAnim.setCurrentRow(0);
 	mHand.setMotorSpeed(-mPunchForce);
-	//mLeftArmJoint->SetMotorSpeed(-mPunchForce);
-	//mRightArmJoint->SetMotorSpeed(-mPunchForce);
-	//mMiddleArmJoint->SetMotorSpeed(-mPunchForce);
 }
 
 void SpaceManImp::decreaseLives()
@@ -500,6 +409,10 @@ void SpaceManImp::decreaseLives()
 
 bool SpaceManImp::disable(bool status)
 {
-	
 	return true;
+}
+
+Head& SpaceManImp::getHead()
+{
+	return mHead;
 }
