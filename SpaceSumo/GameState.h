@@ -34,7 +34,7 @@ private:
 	Timer mPowerUpSpawnTimer;
 	sf::Music mMusic;
 	int mPSpawnMaxX, mPSpawnMaxY;
-
+	int mMinSpawnTime, mMaxSpawnTime;
 	SumoWincon mSumoWincon;
 	
 	SpaceManImp* mSpacemen[4];};

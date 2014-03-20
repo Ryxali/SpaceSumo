@@ -14,7 +14,7 @@ EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b
 	mAngle(0),
 	mBody(world, "res/conf/energyTorpedo.cfg", position.getX(), position.getY()),
 	mWorld(world),
-	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/energytorpedo.png"), "res/img/PowerUp/EnergyTorpedo/energytorpedo.cfg", 5.f),
+	mAnim(res::getTexture("res/img/powerup/energytorpedo/missile.png"), "res/img/powerup/energytorpedo/missile.cfg", 5.f),
 	mShoot(0),
 	mTravelling(0)
 {

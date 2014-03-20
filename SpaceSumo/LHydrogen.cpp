@@ -7,7 +7,7 @@
 LHydrogen::LHydrogen(b2World &world, std::string bodyData, float x, float y) : 
 	PowerUp(),
 	mBody(world, bodyData, x, y),
-	mAnim(res::getTexture("res/img/powerup/FreezeBolt/LHydrogen.png"), "res/img/powerup/FreezeBolt/LHydrogen.cfg", 3.f),
+	mAnim(res::getTexture("res/img/powerup/freezebolt/powerup.png"), "res/img/powerup/freezebolt/powerup.cfg", 3.f),
 	mSnurrAnim(res::getTexture("res/img/powerup/Ring.png"), "res/img/PowerUp/Snurr.cfg", 6.f)
 {
 	mBody.getBody()->SetUserData(this);

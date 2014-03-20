@@ -71,7 +71,8 @@ SpaceManImp::SpaceManImp(
 	mRespawnAngle(startRotation),
 	mRespawnAnimTimer(1000),
 	mRespawnAnimDraw(false),
-	mRespawnAnimSet(false)
+	mRespawnAnimSet(false),
+	mUseCooldown(bodyData.getValue<int>("useCooldown"))
 {
 	mHead.getFace().setPersona(headTexRef);
 	mSpaceman.setRotation(startRotation);
@@ -279,11 +280,16 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 	{
 		if(mAbility != 0)
 		{
-			mHead.getFace().trigger(status::POWERUP_USE);
-			mAbility->activate(mAnim.getSprite().getPosition(), mDirection, SVector(mSpaceman.getLinearVelocity().x * PPM, mSpaceman.getLinearVelocity().y * PPM), gData, data.world);
+			if(mUseCooldown.isExpired())
+			{
+				mHead.getFace().trigger(status::POWERUP_USE);
+				mAbility->activate(mAnim.getSprite().getPosition(), mDirection, SVector(mSpaceman.getLinearVelocity().x * PPM, mSpaceman.getLinearVelocity().y * PPM), gData, data.world);
 
-			delete mAbility;
-			mAbility = 0;
+				delete mAbility;
+				mAbility = 0;
+				mHead.setPowerup(0);
+				mUseCooldown.reset();
+			}
 		}
 	}
 
@@ -324,6 +330,7 @@ void SpaceManImp::addAbility(Ability* ability)
 {
 	mHead.getFace().trigger(status::POWERUP_PICKUP);
 	mAbility = ability;
+	mHead.setPowerup(&mAbility->getImage());
 }
 
 bool SpaceManImp::isAlive()
@@ -417,6 +424,7 @@ void SpaceManImp::clean(GameData& data)
 {
 	delete mAbility;
 	mAbility = 0;
+	mHead.setPowerup(0);
 }
 
 Ability* SpaceManImp::getAbility() const

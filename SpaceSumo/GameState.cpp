@@ -13,6 +13,7 @@
 #include <Common\error.h>
 #include "SpacemanData.h"
 #include <iostream>
+#include <random>
 
 GameState::GameState(StateList &owner, GameData& gameData) 
 	: State(owner), mData(gameData),
@@ -25,12 +26,14 @@ GameState::GameState(StateList &owner, GameData& gameData)
 {
 
 	Config c("res/conf/mode/sumo/zone.cfg");
-	mPSpawnMaxX = c.getValue<int>("ZoneWidth");
-	mPSpawnMaxY = c.getValue<int>("ZoneHeight");
+	mPSpawnMaxX = c.getValue<int>("pupAreaWidth");
+	mPSpawnMaxY = c.getValue<int>("pupAreaHeight");
 	mMusic.openFromFile("res/music/terra/terra.ogg");
 	mMusic.setLoop(true);
 	//mMusic.play();
-
+	Config pSp("res/conf/powerup/spawnRates.cfg");
+	mMinSpawnTime = pSp.getValue<int>("minSpawnTime");
+	mMaxSpawnTime = pSp.getValue<int>("maxSpawnTime");
 	for(int i = 0; i < 4 ; i++ )
 	{
 		mSpacemen[i] = 0;
@@ -51,7 +54,8 @@ void GameState::update(GameData &data, int delta)
 	if(mPowerUpSpawnTimer.isExpired())
 	{
 		mData.mEntityImpList.add((entFac::createPowerUpRandom(
-			data.world, rand()% (mPSpawnMaxX - 128) + (float)WINDOW_SIZE.x-mPSpawnMaxX, rand()% (mPSpawnMaxY - 128) + (float)WINDOW_SIZE.y - mPSpawnMaxY)));
+			data.world, rand()% (mPSpawnMaxX) - mPSpawnMaxX/2 + (float)WINDOW_SIZE.x/2, (rand()% (mPSpawnMaxY) -mPSpawnMaxY/2) + (float)WINDOW_SIZE.y/2)));
+		mPowerUpSpawnTimer.setDuration((std::rand()%(mMaxSpawnTime-mMinSpawnTime)) + mMinSpawnTime);
 		mPowerUpSpawnTimer.reset();
 	}
 	mHud.update(data, mSumoWincon.getTimeLeft(), delta);

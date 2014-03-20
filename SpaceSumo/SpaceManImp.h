@@ -139,5 +139,7 @@ private:
 	//test skit
 	float32 mSpawnX;
 	float32 mSpawnY;
+
+	Timer mUseCooldown;
 };
 

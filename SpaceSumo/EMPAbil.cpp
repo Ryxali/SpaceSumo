@@ -7,8 +7,8 @@
 #include <ResourceManager\Playable.h>
 #include <ResourceManager\soundFac.h>
 #include "PowerUp.h"
-
-EMPAbil::EMPAbil(int miliseconds) : mTimer(miliseconds)
+#include <ResourceManager\RHandle.h>
+EMPAbil::EMPAbil(int miliseconds) : mTimer(miliseconds), mImg(res::getTexture("res/img/powerup/EMP/powerup.png"), 8.f)
 {
 
 }
@@ -41,3 +41,7 @@ void EMPAbil::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 	launch->play();
 }
 
+SSprite& EMPAbil::getImage()
+{
+	return mImg;
+}
