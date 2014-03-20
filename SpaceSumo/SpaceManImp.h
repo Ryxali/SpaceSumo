@@ -31,6 +31,7 @@ class SpaceManImp :
 {
 public:
 	SpaceManImp(
+		int index,
 		Controller& controls,
 		SVector pos,
 		float startRotation,
@@ -69,8 +70,10 @@ public:
 
 	void decreaseLives();
 	
-	
+	int getIndex();
 private:
+	int mSpacemanIndex;
+
 	friend class Hand;
 	Controller& mControls;
 

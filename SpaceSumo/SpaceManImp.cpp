@@ -19,6 +19,7 @@
 #include "Effecting.h"
 
 SpaceManImp::SpaceManImp(
+	int index,
 	Controller& controls,
 	SVector pos,
 	float startRotation,
@@ -28,6 +29,7 @@ SpaceManImp::SpaceManImp(
 	GameData& data,
 	Head& head,
 	std::string headTexRef) :
+	mSpacemanIndex(index),
 	mControls(controls),
 	mAlive(true),
 	mSpawnX(pos.getX()),
@@ -415,4 +417,9 @@ bool SpaceManImp::disable(bool status)
 Head& SpaceManImp::getHead()
 {
 	return mHead;
+}
+
+int SpaceManImp::getIndex()
+{
+	return mSpacemanIndex;
 }

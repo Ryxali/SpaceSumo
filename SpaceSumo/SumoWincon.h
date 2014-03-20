@@ -4,7 +4,6 @@
 #include <ResourceManager\Animation.h>
 #include <ResourceManager\Playable.h>
 #include <SFML\Window\Keyboard.hpp>
-#include <vector>
 
 
 
@@ -44,6 +43,8 @@ private:
 	// stop game
 	void endgame(bool);
 
-	std::vector<SpaceManImp*> mSpacemenVec;
+	SpaceManImp* mSpacemenArray[4];
+	SpaceManImp* mLead[4];
+	int mPoints[4];
 };
 

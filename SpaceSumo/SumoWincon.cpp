@@ -9,7 +9,7 @@
 #include <iostream>
 
 SumoWincon::SumoWincon()
-	: mGameTime(120000),
+	: mGameTime(15000),
 	mLoadedSpacemen(false),
 	mStartedTimer(false),
 	mBrawl(res::getTexture("res/img/UI/hud/321brawl.png"), "res/img/UI/hud/321brawl.cfg", 10.f),
@@ -34,7 +34,8 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 	{
 		for( int i = 0; i < 4; i++ )
 		{
-			mSpacemenVec.push_back(mSpacemen[i]);
+			mSpacemenArray[i] = mSpacemen[i];
+			mLead[i] = mSpacemen[i];
 		}
 		mLoadedSpacemen = true;
 	}
@@ -49,6 +50,7 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 
 	countdown(mRunCountdown);
 
+
 	for( int i = 0; i < 4; i++)
 	{
 		if( mSpacemen[i] != 0 )
@@ -59,6 +61,7 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 			}
 		}
 	}
+	endgame(true);
 }
 
 void SumoWincon::draw(RenderList &list)
@@ -139,9 +142,51 @@ void SumoWincon::resetClocks()
 
 void SumoWincon::endgame(bool status)
 {
-	for( auto it = mSpacemenVec.begin(); it != mSpacemenVec.end(); it++ )
+	std::cout<< mGameClock.getElapsedTime().asMilliseconds() << std::endl;
+	if(mGameClock.getElapsedTime().asMilliseconds() > mGameTime )
 	{
-		(*it)->getHead().getScore();
-	}
+		// TODO mSpacemen.disable(true);
+		int players = 4;
+		for(int i = 0; i < 4; i++ )
+		{
+			if( mSpacemenArray[i] == 0 )
+			{
+				players--;
+			}
 
+		}
+
+
+
+		SpaceManImp* temp;
+		for( int i = 0; i < players; i++)
+		{
+			for(int y = 0; y < players; y++)
+			{
+				if(mLead[i]->getHead().getScore() > mLead[y]->getHead().getScore())
+				{
+					temp = mLead[y];
+					mLead[y] = mLead[i];
+					mLead[i] = temp;
+				}
+			}
+		}
+
+		if(mLead[0]->getIndex() == 1 )
+		{
+			std::cout << "blue wins" <<std::endl;
+		}
+		else if(mLead[0]->getIndex() == 2 )
+		{
+			std::cout << "red wins" <<std::endl;
+		}
+		else if(mLead[0]->getIndex() == 3 )
+		{
+			std::cout << "green wins" <<std::endl;
+		}
+		else if(mLead[0]->getIndex() == 4 )
+		{
+			std::cout << "yellow wins" <<std::endl;
+		}
+	}
 }
