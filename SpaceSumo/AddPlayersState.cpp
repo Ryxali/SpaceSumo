@@ -16,8 +16,11 @@ ControlImages::ControlImages()
 	keyboard_2(res::getTexture("res/img/UI/menu/controlAdding/keyboard_2.png"), 10.f),
 	keyboard_3(res::getTexture("res/img/UI/menu/controlAdding/keyboard_3.png"), 10.f),
 	keyboard_4(res::getTexture("res/img/UI/menu/controlAdding/keyboard_4.png"), 10.f),
-	joystick(res::getTexture("res/img/UI/menu/controlAdding/xbox.png"), 10.f),
-	nKeyboards(0)
+	joystick_1(res::getTexture("res/img/UI/menu/controlAdding/xbox.png"), 10.f),
+	joystick_2(res::getTexture("res/img/UI/menu/controlAdding/xbox.png"), 10.f),
+	joystick_3(res::getTexture("res/img/UI/menu/controlAdding/xbox.png"), 10.f),
+	joystick_4(res::getTexture("res/img/UI/menu/controlAdding/xbox.png"), 10.f),
+	nKeyboards(0), nJoysticks(0)
 {
 
 }
@@ -25,7 +28,18 @@ ControlImages::ControlImages()
 SSprite* ControlImages::getSprite(ControlList::Control_Type type)
 {
 	if(type == ControlList::JOYSTICK)
-		return &joystick;
+		++nJoysticks;
+		switch(nJoysticks)
+		{
+		case 1:
+			return &joystick_1;
+		case 2:
+			return &joystick_2;
+		case 3:
+			return &joystick_3;
+		case 4:
+			return &joystick_4;
+		}
 	if(type == ControlList::KEYBOARD)
 	{
 		++nKeyboards;
