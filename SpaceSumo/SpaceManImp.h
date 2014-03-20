@@ -31,6 +31,7 @@ class SpaceManImp :
 {
 public:
 	SpaceManImp(
+		int index,
 		Controller& controls,
 		SVector pos,
 		float startRotation,
@@ -59,6 +60,7 @@ public:
 	virtual void clean(GameData& data);
 	virtual Ability* getAbility() const;
 
+	Head& getHead();
 	bool isSlowlyDying() const;
 	bool respawning();
 
@@ -68,13 +70,14 @@ public:
 
 	void decreaseLives();
 	
-	
+	int getIndex();
 private:
+	int mSpacemanIndex;
+
 	friend class Hand;
 	Controller& mControls;
 
 	//helpfunctions
-	void initializeArms(b2World& world);
 	void extendArms();
 	void retractArms();
 
@@ -86,20 +89,6 @@ private:
 	//Spaceman stuff
 	B2Body mSpaceman;
 	Hand mHand;
-	/*b2PrismaticJoint* mLeftArmJoint;
-	b2PrismaticJoint* mLeftArm;
-	B2Body mLeftHand;
-	b2PrismaticJointDef mLeftArmDef;
-
-	b2PrismaticJoint* mMiddleArmJoint;
-	b2PrismaticJoint* mMiddleArm;
-	B2Body mMiddleHand;
-	b2PrismaticJointDef mMiddleArmDef;
-
-	b2PrismaticJoint* mRightArmJoint;
-	b2PrismaticJoint* mRightArm;
-	B2Body mRightHand;
-	b2PrismaticJointDef mRightArmDef;*/
 
 	float mSpeedLimit, mRotationSpeed, mPunchForce;
 	bool mFixedRotation;

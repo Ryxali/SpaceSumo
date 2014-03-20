@@ -15,6 +15,7 @@
 static Config spawnRates("res/conf/powerup/spawnRates.cfg");
 
 EntityImp* entFac::createSpaceMan(
+	int index,
 	std::string conf, GameData& data,
 	std::string bodyData, std::string handData,
 	float x, float y, float32 rotation)
@@ -31,7 +32,7 @@ EntityImp* entFac::createSpaceMan(
 		data, bodyData, handData,  x, y, rotation);*/
 }
 
-EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, Head& head, int playerIndex, SVector pos, float startRotation)
+EntityImp* entFac::createSpaceMan(int index, SpacemanData& sData, GameData& gData, Head& head, int playerIndex, SVector pos, float startRotation)
 {
 	
 	/*return new SpaceManImp(
@@ -50,6 +51,7 @@ EntityImp* entFac::createSpaceMan(SpacemanData& sData, GameData& gData, Head& he
 		
 		
 	return new SpaceManImp(
+		index, 
 		gData.controlList.get(playerIndex),
 		pos, startRotation,
 		Config("res/conf/characters/spaceman/visual_data_"+std::to_string(playerIndex+1)+".cfg"),
