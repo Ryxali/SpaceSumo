@@ -70,6 +70,7 @@ public:
 
 	void decreaseLives();
 	
+	void resetPosition();
 	int getIndex();
 private:
 	int mSpacemanIndex;

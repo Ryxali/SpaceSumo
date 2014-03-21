@@ -1,6 +1,7 @@
 #pragma once
 #include "Wincon.h"
 #include <SFML\System\Clock.hpp>
+#include <ResourceManager\SSprite.h>
 #include <ResourceManager\Animation.h>
 #include <ResourceManager\Playable.h>
 #include <SFML\Window\Keyboard.hpp>
@@ -26,6 +27,7 @@ private:
 	bool mLoadedSpacemen;
 	// start game
 	Animation mBrawl;
+
 	void countdown(bool run);
 	bool mRunCountdown;
 	bool mCountdownDone;
@@ -46,5 +48,19 @@ private:
 	SpaceManImp* mSpacemenArray[4];
 	SpaceManImp* mLead[4];
 	int mPoints[4];
+
+	SSprite mBlueWin;
+	SSprite mRedWin;
+	SSprite mGreenWin;
+	SSprite mYellowWin;
+
+	bool mShowBlueWin;
+	bool mShowRedWin;
+	bool mShowGreenWin;
+	bool mShowYellowWin;
+
+	bool mRunEndgame;
+
+
 };
 
