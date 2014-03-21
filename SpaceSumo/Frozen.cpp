@@ -63,9 +63,9 @@ void Frozen::update(Controller& controls, GameData& data)
 		mIntensity--;
 		mPrevKeyState = true;
 		
-		if( mIntensity > 1 )
+		if( mIntensity > 1 ) //otherwise it will sound shitty
 		{
-			mPunch->play(); //otherwise it will sound shitty
+			mPunch->play(); 
 		}
 
 	}

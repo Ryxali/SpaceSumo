@@ -9,7 +9,7 @@
 #include <iostream>
 
 SumoWincon::SumoWincon()
-	: mGameTime(15000),
+	: mGameTime(120000),
 	mLoadedSpacemen(false),
 	mStartedTimer(false),
 	mBrawl(res::getTexture("res/img/UI/hud/321brawl.png"), "res/img/UI/hud/321brawl.cfg", 10.f),
@@ -18,10 +18,21 @@ SumoWincon::SumoWincon()
 	mGameHasStarted(false),
 	mHasPlayed(false),
 	mCountDown(4000),
-	m321brawl(soundFac::createSound("res/sound/voice/Announcer/Announcer_Matchstart-003.spf"))
+	m321brawl(soundFac::createSound("res/sound/voice/Announcer/Announcer_Matchstart-003.spf")),
+	mBlueWin(res::getTexture("res/img/UI/hud/win_blue_still.png"), 11.f),
+	mRedWin(res::getTexture("res/img/UI/hud/win_red_still.png"), 12.f),
+	mGreenWin(res::getTexture("res/img/UI/hud/win_green_still.png"), 13.f),
+	mYellowWin(res::getTexture("res/img/UI/hud/win_yellow_still.png"),  14.f),
+	mShowBlueWin(false),
+	mShowRedWin(false),
+	mShowGreenWin(false),
+	mShowYellowWin(false),
+	mRunEndgame(true)
 {
 	mBrawl.getSprite().setPosition(WINDOW_SIZE.x/2,WINDOW_SIZE.y/2);
 	mBrawl.getSprite().setOrigin(mBrawl.getSprite().getLocalBounds().width/2, mBrawl.getSprite().getLocalBounds().height/2);
+
+
 }
 
 SumoWincon::~SumoWincon()
@@ -61,15 +72,48 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 			}
 		}
 	}
-	endgame(true);
+	endgame(mRunEndgame);
 }
 
 void SumoWincon::draw(RenderList &list)
 {
-	if( mRunCountdown )
+
+	mBlueWin.getSprite().setPosition(WINDOW_SIZE.x/2, WINDOW_SIZE.y/2);
+	mBlueWin.getSprite().setOrigin(mBlueWin.getSprite().getLocalBounds().width/2, mBlueWin.getSprite().getLocalBounds().height/2);
+
+	mRedWin.getSprite().setPosition(WINDOW_SIZE.x/2, WINDOW_SIZE.y/2);
+	mRedWin.getSprite().setOrigin(mRedWin.getSprite().getLocalBounds().width/2, mRedWin.getSprite().getLocalBounds().height/2);
+
+	mGreenWin.getSprite().setPosition(WINDOW_SIZE.x/2, WINDOW_SIZE.y/2);
+	mGreenWin.getSprite().setOrigin(mGreenWin.getSprite().getLocalBounds().width/2, mGreenWin.getSprite().getLocalBounds().height/2);
+
+	mYellowWin.getSprite().setPosition(WINDOW_SIZE.x/2, WINDOW_SIZE.y/2);
+	mYellowWin.getSprite().setOrigin(mYellowWin.getSprite().getLocalBounds().width/2, mYellowWin.getSprite().getLocalBounds().height/2);
+
+
+	if( mRunCountdown)
 	{
 		list.addSprite(mBrawl);
 	}
+
+	if(mShowBlueWin) // blue win animation
+	{
+		list.addSprite(mBlueWin);
+	}
+	if(mShowRedWin)  // red win animation
+	{
+		list.addSprite(mRedWin);
+	}
+	if(mShowGreenWin) // green win animation
+	{
+		list.addSprite(mGreenWin);
+	}
+	if(mShowYellowWin) // yellow win animation
+	{
+		list.addSprite(mYellowWin);
+	}
+
+
 }
 
 void SumoWincon::timerStart()
@@ -105,6 +149,19 @@ void SumoWincon::countdown(bool run)
 {
 	if(run)
 	{
+		if( !mCountdownDone )
+		{
+			for(int i = 0; i < 4; i++ )
+			{
+				if(mSpacemenArray[i] != 0 )
+				{
+					mSpacemenArray[i]->resetPosition();
+				}
+
+			}
+		}
+
+
 		if(!m321brawl->isPlaying() && !mHasPlayed )
 		{
 			m321brawl->play();
@@ -122,7 +179,8 @@ void SumoWincon::countdown(bool run)
 		{
 			//pauses the clock so it doesnt count before the game has started
 			mGameClock.restart();
-			// TODO mSpacemen.disable(true);
+
+
 		}
 
 	}
@@ -142,51 +200,61 @@ void SumoWincon::resetClocks()
 
 void SumoWincon::endgame(bool status)
 {
-	std::cout<< mGameClock.getElapsedTime().asMilliseconds() << std::endl;
-	if(mGameClock.getElapsedTime().asMilliseconds() > mGameTime )
+
+	if( status )
 	{
-		// TODO mSpacemen.disable(true);
-		int players = 4;
-		for(int i = 0; i < 4; i++ )
+		if(mGameClock.getElapsedTime().asMilliseconds() > mGameTime )
 		{
-			if( mSpacemenArray[i] == 0 )
+			// TODO mSpacemen.disable(true);
+			int players = 4;
+			for(int i = 0; i < 4; i++ )
 			{
-				players--;
+				if( mSpacemenArray[i] == 0 )
+				{
+					players--;
+				}
+
 			}
 
-		}
-
-
-
-		SpaceManImp* temp;
-		for( int i = 0; i < players; i++)
-		{
-			for(int y = 0; y < players; y++)
+			SpaceManImp* temp;
+			for( int i = 0; i < players; i++)
 			{
-				if(mLead[i]->getHead().getScore() > mLead[y]->getHead().getScore())
+				for(int y = 0; y < players; y++)
 				{
-					temp = mLead[y];
-					mLead[y] = mLead[i];
-					mLead[i] = temp;
+					if(mLead[i]->getHead().getScore() > mLead[y]->getHead().getScore())
+					{
+						temp = mLead[y];
+						mLead[y] = mLead[i];
+						mLead[i] = temp;
+					}
 				}
 			}
-		}
 
-		if(mLead[0]->getIndex() == 1 )
-		{
-			std::cout << "blue wins" <<std::endl;
-		}
-		else if(mLead[0]->getIndex() == 2 )
-		{
-			std::cout << "red wins" <<std::endl;
-		}
-		else if(mLead[0]->getIndex() == 3 )
-		{
-			std::cout << "green wins" <<std::endl;
-		}
-		else if(mLead[0]->getIndex() == 4 )
-		{
-			std::cout << "yellow wins" <<std::endl;
+			if(mLead[0]->getIndex() == 1 )
+			{
+				std::cout << "blue wins" <<std::endl;
+				mShowBlueWin = true;
+				mRunEndgame = false;
+			}
+			else if(mLead[0]->getIndex() == 2 )
+			{
+				std::cout << "red wins" <<std::endl;
+				mShowRedWin = true;
+				mRunEndgame = false;
+			}
+			else if(mLead[0]->getIndex() == 3 )
+			{
+				std::cout << "green wins" <<std::endl;
+				mShowGreenWin = true;
+				mRunEndgame = false;
+			}
+			else if(mLead[0]->getIndex() == 4 )
+			{
+				std::cout << "yellow wins" <<std::endl;
+				mShowYellowWin = true;
+				mRunEndgame = false;
+			}
+
 		}
 	}
 }
