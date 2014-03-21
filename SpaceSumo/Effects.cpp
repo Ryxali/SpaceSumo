@@ -62,11 +62,10 @@ void Effects::clear()
 	{
 		delete mEffectList[i];
 		mEffectList[i] = 0;
-		floatDown(i);
-
-		mSummary = EffectStatus();
-		evaluate();
 	}
+	mSummary = EffectStatus();
+	evaluate();
+
 }
 
 EffectStatus& Effects::getStatus()

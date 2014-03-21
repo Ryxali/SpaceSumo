@@ -55,22 +55,22 @@ Face::Face(std::string faceImg, Position pos)
 	switch(pos)
 	{
 	case TOP_LEFT:
-		mFaces.getSprite().setPosition(75, 75);
+		mFaces.getSprite().setPosition(cfg::TOP_LEFT_CFG.getValue<int>("voice_freqX"), cfg::TOP_LEFT_CFG.getValue<int>("voice_freqY"));
 		mVoiceFreq.getSprite().setPosition(200, 100);
 		mFaces.getSprite().setScale(-1, 1);
 		break;
 	case TOP_RIGHT:
-		mFaces.getSprite().setPosition((float)WINDOW_SIZE.x - 75, 75);
+		mFaces.getSprite().setPosition(cfg::TOP_RIGHT_CFG.getValue<int>("voice_freqX"), cfg::TOP_RIGHT_CFG.getValue<int>("voice_freqY"));
 		mVoiceFreq.getSprite().setPosition(WINDOW_SIZE.x - 100, 100);
 		mFaces.getSprite().setScale(1, 1);
 		break;
 	case BOTTOM_LEFT:
-		mFaces.getSprite().setPosition(75, (float)WINDOW_SIZE.y - 75);
+		mFaces.getSprite().setPosition(cfg::BOTTOM_LEFT_CFG.getValue<int>("voice_freqX"), cfg::BOTTOM_LEFT_CFG.getValue<int>("voice_freqY"));
 		mVoiceFreq.getSprite().setPosition(100, WINDOW_SIZE.y - 100);
 		mFaces.getSprite().setScale(-1, 1);
 		break;
 	case BOTTOM_RIGHT:
-		mFaces.getSprite().setPosition((float)WINDOW_SIZE.x - 75, (float)WINDOW_SIZE.y - 75);
+		mFaces.getSprite().setPosition(cfg::BOTTOM_RIGHT_CFG.getValue<int>("voice_freqX"), cfg::BOTTOM_RIGHT_CFG.getValue<int>("voice_freqY"));
 		mVoiceFreq.getSprite().setPosition(WINDOW_SIZE.x - 100, WINDOW_SIZE.y - 100);
 		mFaces.getSprite().setScale(1, 1);
 		break;

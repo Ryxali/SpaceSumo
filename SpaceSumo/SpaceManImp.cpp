@@ -357,6 +357,7 @@ void SpaceManImp::slowDeath()
 {
 	mHead.getFace().trigger(status::DEATH);
 	mSlowDeath = true;
+	mHead.setPowerup(0);
 	mRespawnTimer.reset();
 	mJet.setCurrentRow(0);
 	mTurn.setCurrentRow(0);

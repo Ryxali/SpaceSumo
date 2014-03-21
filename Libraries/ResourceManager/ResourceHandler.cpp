@@ -109,6 +109,7 @@ void ResourceHandler::loadCleanse(std::string ref)
 void ResourceHandler::addResources(std::string fileRef)
 {
 	std::ifstream stream(fileRef);
+	SAssert(!stream.bad(), "Stream went bad! - " + fileRef);
 	std::string nextLine;
 	while(!stream.eof())
 	{

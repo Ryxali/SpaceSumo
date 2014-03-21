@@ -7,6 +7,10 @@
 #ifndef SPACESUMO_RESOURCEMANAGER_SSOUNDBUFFER_INCLUDED
 #include "SSoundBuffer.h"
 #endif
+#include <Common\Config.h>
+
+static Config CFG("res/conf/main.cfg");
+
 SSound::SSound(const SSoundBuffer &sb) : mSound(), mSBuf(sb), mSoundBufVersion(0), mDestroy(false)
 {
 	
@@ -53,6 +57,7 @@ void SSound::play()
 	}
 	SAssert(mSBuf.isLoaded(), "The sound buffer isn't loaded");
 	mSound.play();
+	mSound.setVolume(CFG.getValue<int>("sound_volume"));
 }
 
 void SSound::stop()
