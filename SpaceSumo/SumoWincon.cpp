@@ -9,7 +9,8 @@
 #include <iostream>
 
 SumoWincon::SumoWincon()
-	: mGameTime(120000),
+	: mLockPlayers(true),
+	mGameTime(120000),
 	mLoadedSpacemen(false),
 	mStartedTimer(false),
 	mBrawl(res::getTexture("res/img/UI/hud/321brawl.png"), "res/img/UI/hud/321brawl.cfg", 10.f),
@@ -32,7 +33,6 @@ SumoWincon::SumoWincon()
 	mBrawl.getSprite().setPosition(WINDOW_SIZE.x/2,WINDOW_SIZE.y/2);
 	mBrawl.getSprite().setOrigin(mBrawl.getSprite().getLocalBounds().width/2, mBrawl.getSprite().getLocalBounds().height/2);
 
-
 }
 
 SumoWincon::~SumoWincon()
@@ -51,6 +51,17 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 		mLoadedSpacemen = true;
 	}
 
+	if( mLockPlayers )
+	{
+		for(int i = 0; i < 4; i++ )
+		{
+			if(mSpacemenArray[i] != 0 )
+			{
+				mSpacemenArray[i]->resetPosition();
+			}
+
+		}
+	}
 
 	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !mGameHasStarted )
 	{
@@ -58,9 +69,6 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 		mGameHasStarted = true;
 		mCountDownClock.restart();
 	}
-
-	countdown(mRunCountdown);
-
 
 	for( int i = 0; i < 4; i++)
 	{
@@ -72,6 +80,8 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 			}
 		}
 	}
+	
+	countdown(mRunCountdown);
 	endgame(mRunEndgame);
 }
 
@@ -149,19 +159,6 @@ void SumoWincon::countdown(bool run)
 {
 	if(run)
 	{
-		if( !mCountdownDone )
-		{
-			for(int i = 0; i < 4; i++ )
-			{
-				if(mSpacemenArray[i] != 0 )
-				{
-					mSpacemenArray[i]->resetPosition();
-				}
-
-			}
-		}
-
-
 		if(!m321brawl->isPlaying() && !mHasPlayed )
 		{
 			m321brawl->play();
@@ -171,16 +168,14 @@ void SumoWincon::countdown(bool run)
 		if( mCountDownClock.getElapsedTime().asMilliseconds() > mCountDown )
 		{
 			//game starts
-			// TODO mSpacemen.disable(false);
 			mRunCountdown = false;
 			mCountdownDone = true;
+			mLockPlayers = false;
 		}
 		else
 		{
 			//pauses the clock so it doesnt count before the game has started
 			mGameClock.restart();
-
-
 		}
 
 	}
@@ -188,7 +183,6 @@ void SumoWincon::countdown(bool run)
 	{
 		//pauses the clock so it doesnt count before the game has started
 		mGameClock.restart();
-		// TODO mSpacemen.disable(true);
 	}
 }
 
@@ -205,7 +199,6 @@ void SumoWincon::endgame(bool status)
 	{
 		if(mGameClock.getElapsedTime().asMilliseconds() > mGameTime )
 		{
-			// TODO mSpacemen.disable(true);
 			int players = 4;
 			for(int i = 0; i < 4; i++ )
 			{
@@ -235,24 +228,28 @@ void SumoWincon::endgame(bool status)
 				std::cout << "blue wins" <<std::endl;
 				mShowBlueWin = true;
 				mRunEndgame = false;
+				mLockPlayers = true;
 			}
 			else if(mLead[0]->getIndex() == 2 )
 			{
 				std::cout << "red wins" <<std::endl;
 				mShowRedWin = true;
 				mRunEndgame = false;
+				mLockPlayers = true;
 			}
 			else if(mLead[0]->getIndex() == 3 )
 			{
 				std::cout << "green wins" <<std::endl;
 				mShowGreenWin = true;
 				mRunEndgame = false;
+				mLockPlayers = true;
 			}
 			else if(mLead[0]->getIndex() == 4 )
 			{
 				std::cout << "yellow wins" <<std::endl;
 				mShowYellowWin = true;
 				mRunEndgame = false;
+				mLockPlayers = true;
 			}
 
 		}
