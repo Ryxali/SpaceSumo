@@ -3,7 +3,7 @@
 #include <ResourceManager\RHandle.h>
 #include "EntityType.h"
 
-Asteroid::Asteroid(b2Vec2 speed, b2Vec2 pos, GameData &data, float scale, float speedMulti) :
+Asteroid::Asteroid(b2Vec2 speed, b2Vec2 pos, GameData &data, float scale, float speedMulti, float rotation) :
 	mBody(data.world, "res/conf/maps/miningcolony/asteroid.cfg", pos.x, pos.y, scale),
 	mSprite(res::getTexture("res/img/maps/miningcolony/asteroid.png"), 9.f),
 	mSpeed(speed),
@@ -11,7 +11,7 @@ Asteroid::Asteroid(b2Vec2 speed, b2Vec2 pos, GameData &data, float scale, float 
 	mScale(scale)
 {
 	mBody.applyLinearImpulse(b2Vec2(mSpeed.x * speedMulti, mSpeed.y * speedMulti), mBody.getWorldCenter(), true);
-	mBody.setAngularVelocity(5);
+	mBody.applyAngularImpulse(rotation, true);//setAngularVelocity(5);
 }
 
 
