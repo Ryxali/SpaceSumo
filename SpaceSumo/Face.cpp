@@ -12,6 +12,7 @@
 #include <ResourceManager\Playable.h>
 #include <random>
 #include "Position.h"
+#include "hud_positioning.h"
 //const unsigned char Face::IDLE = 0;
 //const unsigned char Face::PLEASED = 1;
 //const unsigned char Face::ANGRY = 2;

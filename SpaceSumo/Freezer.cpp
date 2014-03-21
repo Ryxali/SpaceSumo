@@ -2,12 +2,13 @@
 #include "Freezer.h"
 #include "FreezeBolt.h"
 #include "GameStateData.h"
-
+#include <ResourceManager\RHandle.h>
 Config Freezer::mConfig("res/conf/powerup/freezer.cfg", true);
 
 Freezer::Freezer() 
 	: mIntensity(mConfig.getValue<int>("intensity")), 
-	mSpeed(mConfig.getValue<int>("speed"))
+	mSpeed(mConfig.getValue<int>("speed")),
+	mImg(res::getTexture("res/img/powerup/freezebolt/powerup.png"), 8.f)
 {
 }
 
@@ -22,4 +23,9 @@ void Freezer::activate(SVector pos, SVector dir, SVector userSpeed, GameStateDat
 		userSpeed,
 		world,
 		(int)mSpeed));
+}
+
+SSprite& Freezer::getImage()
+{
+	return mImg;
 }

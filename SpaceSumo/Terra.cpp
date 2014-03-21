@@ -7,13 +7,13 @@
 
 Terra::Terra():
 	mBackground(res::getTexture("res/img/maps/terra/Terra_BG.png"), -1.f),
-	mSoundtrack(0)
+	mSoundtrack(soundFac::createSound("res/music/terra/terra.spf"))
 {
 }
 
 void Terra::update(GameStateData &gData, int delta)
 {
-	//mSoundtrack->play();
+	mSoundtrack->play();
 }
 
 void Terra::draw(RenderList &list)
@@ -28,5 +28,5 @@ void Terra::init(GameData &data)
 
 void Terra::close()
 {
-	//mSoundtrack->stop();
+	mSoundtrack->stop();
 }

@@ -3,6 +3,7 @@
 class Mode;
 class Map;
 class GameState;
+class Playable;
 
 #include "StateList.h"
 #include "State.h"
@@ -11,7 +12,7 @@ class GameState;
 class SetupState : public State, public StateList
 {
 public:
-	SetupState(StateList &owner, GameData &data, GameState &gState);
+	SetupState(StateList &owner, GameData &data, GameState &gState, Playable*);
 	~SetupState();
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
@@ -21,4 +22,5 @@ private:
 	Mode *mMode;
 	Map *mMap;
 	GameState &mGState;
+	Playable* mSoundtrack;
 };

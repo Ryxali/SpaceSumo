@@ -7,11 +7,11 @@
 
 
 Explosion::Explosion(b2World& world, float x, float y):
-	mBody(world, "res/img/PowerUp/EnergyTorpedo/explosion_body.cfg", x, y ),
+	mBody(world, "res/img/powerup/energytorpedo/explosion_body.cfg", x, y ),
 	mAlive(true),
 	mDying(false),
 	mPosition(x,y),
-	mAnim(res::getTexture("res/img/PowerUp/EnergyTorpedo/explosion.png"), "res/img/PowerUp/EnergyTorpedo/explosion.cfg", 10.f),
+	mAnim(res::getTexture("res/img/powerup/energytorpedo/explosion.png"), "res/img/powerup/energytorpedo/explosion.cfg", 10.f),
 	mDuration(600),
 	mBlast(0)
 {

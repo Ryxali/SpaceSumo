@@ -2,9 +2,9 @@
 #include "ETorpedoAbility.h"
 #include "GameStateData.h"
 #include "EnergyTorpedo.h"
+#include <ResourceManager\RHandle.h>
 
-
-ETorpedoAbility::ETorpedoAbility()
+ETorpedoAbility::ETorpedoAbility() : mImg(res::getTexture("res/img/powerup/energytorpedo/powerup.png"), 8.f)
 {
 	Config config("res/conf/powerup/ETorpedo.cfg");
 	mSpeed = config.getValue<float>("speed");
@@ -22,5 +22,9 @@ void ETorpedoAbility::activate(SVector pos, SVector dir, SVector userSpeed, Game
 		userSpeed,
 		world,
 		(int)mSpeed));
+}
+SSprite& ETorpedoAbility::getImage()
+{
+	return mImg;
 }
 

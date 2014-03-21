@@ -27,7 +27,7 @@ public:
 	void setScore(int score);
 	int getScore() const;
 	void decreaseLives();
-
+	void setPowerup(SSprite*);
 private:
 	Head(const Head& head);
 	Head& operator=(const Head& head);
@@ -40,5 +40,7 @@ private:
 
 	Animation mTens;
 	Animation mSingulars;
+
+	SSprite* mCurPowerup;
 };
 

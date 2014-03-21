@@ -6,8 +6,8 @@
 EMP::EMP(b2World &world, std::string bodyData, float x, float y) :
 	PowerUp(),
 	mBody(world,bodyData, x, y),
-	mAnim(res::getTexture("res/img/PowerUp/EMP/EMP.png"), "res/img/PowerUp/EMP/EMP.cfg", 3.f),
-	mSnurrAnim(res::getTexture("res/img/powerup/Ring.png"), "res/img/PowerUp/Snurr.cfg", 6.f)
+	mAnim(res::getTexture("res/img/powerup/EMP/powerup.png"), "res/img/powerup/EMP/powerup.cfg", 3.f),
+	mSnurrAnim(res::getTexture("res/img/powerup/Ring.png"), "res/img/PowerUp/Snurr.cfg", 3.1f)
 {
 	mBody.getBody()->SetUserData(this);
 	mAnim.getSprite().setOrigin(32, 32);

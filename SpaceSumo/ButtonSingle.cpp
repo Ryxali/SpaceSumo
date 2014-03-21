@@ -5,9 +5,9 @@
 #include "GameData.h"
 #include "ButtonSingle.h"
 
-ButtonSingle::ButtonSingle(SVector position, int mapX, int mapY, Command *command, std::string imageFile, std::string hoverImgFile):
+ButtonSingle::ButtonSingle(SVector position, int mapX, int mapY, Command *command, std::string imageFile, std::string hoverImgFile, float hoverZ):
 	mAnimation(res::getTexture(imageFile+".png"), imageFile+".cfg" , 2.f),
-	mHover(res::getTexture(hoverImgFile+".png"), 3.f),
+	mHover(res::getTexture(hoverImgFile+".png"), hoverZ),
 	Rectangle( 1 , 1 ),
 	mPosition(position),
 	mCommand(command),

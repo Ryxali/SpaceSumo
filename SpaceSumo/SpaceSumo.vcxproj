@@ -181,6 +181,7 @@
     <ClInclude Include="Collideable.h" />
     <ClInclude Include="EMPEffect.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="hud_positioning.h" />
     <ClInclude Include="MiningColony.h" />
     <ClInclude Include="PlayerReadyToggleCommand.h" />
     <ClInclude Include="SpaceJunk.h" />

@@ -13,10 +13,10 @@ class Head;
 
 namespace entFac
 {
-	EntityImp* createSpaceMan(std::string keyConf, GameData& data,
+	EntityImp* createSpaceMan(int index, std::string keyConf, GameData& data,
 		std::string bodyData, std::string handData,
 		float x, float y, float32 rotation);
-	EntityImp* createSpaceMan(SpacemanData& sData, GameData& gData, Head& head, int playerIndex, SVector pos, float startRotation);
+	EntityImp* createSpaceMan(int index, SpacemanData& sData, GameData& gData, Head& head, int playerIndex, SVector pos, float startRotation);
 
 	EntityImp* createPowerUpLHydrogen(b2World& world, float x, float y);
 

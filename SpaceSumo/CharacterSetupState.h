@@ -1,4 +1,5 @@
 #pragma once
+class Playable;
 class GameState;
 class StateList;
 struct GameData;
@@ -11,7 +12,7 @@ struct GameData;
 class CharacterSetupState : public State , public StateList
 {
 public:
-	CharacterSetupState(StateList &owner, GameData &data, GameState &gameState);
+	CharacterSetupState(StateList &owner, GameData &data, GameState &gameState, Playable*);
 	~CharacterSetupState();
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
@@ -21,6 +22,6 @@ private:
 	SpacemanData mSpacemenData[4];
 	GameState &mGameState;
 	GameData &mGData;
-
+	Playable* mSoundtrack;
 };
 
