@@ -1,9 +1,12 @@
 #include "Music.h"
+#include <Common\Config.h>
 
+static Config CFG("res/conf/main.cfg");
 
 Music::Music(std::string ref) : mMusic(), mDestroy(false)
 {
 	mMusic.openFromFile(ref);
+	mMusic.setVolume(CFG.getValue<int>("music_volume"));
 }
 
 

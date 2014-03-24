@@ -7,7 +7,7 @@ class Asteroid :
 	public SpaceJunk
 {
 public:
-	Asteroid(b2Vec2 speed, b2Vec2 pos, GameData &data, float scale, float speedMulti);
+	Asteroid(b2Vec2 speed, b2Vec2 pos, GameData &data, float scale, float speedMulti, float rotation);
 	~Asteroid();
 
 	virtual void update(GameData &data, GameStateData &gData, int delta);
