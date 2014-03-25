@@ -18,12 +18,12 @@ Hud::Hud() : mNPlayers(0),
 	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 10.f),
 	mClock(res::getTexture("res/img/UI/hud/clock.png"), 9.f)
 {
-	mClock.getSprite().setOrigin(233, 0);
+	
 	mClock.getSprite().setPosition( WINDOW_SIZE.x/2, 0 );
 
-	mMinutes.getSprite().setPosition(	(WINDOW_SIZE.x/2) - 50 , 15 );
-	mTens.getSprite().setPosition(		(WINDOW_SIZE.x/2) , 15);
-	mSingulars.getSprite().setPosition(	(WINDOW_SIZE.x/2) + 40 , 15);
+	mMinutes.getSprite().setPosition(	(WINDOW_SIZE.x/2) - 60 , 15 );
+	mTens.getSprite().setPosition(		(WINDOW_SIZE.x/2)-15 , 15);
+	mSingulars.getSprite().setPosition(	(WINDOW_SIZE.x/2) + 30 , 15);
 }
 
 
@@ -84,6 +84,7 @@ void Hud::draw(RenderList &list)
 		SError("Unknown error", "Nondescript");
 	};
 
+	mClock.getSprite().setOrigin(mClock.getSprite().getLocalBounds().width/2, 0);
 
 	list.addSprite(mClock);
 	list.addSprite(mMinutes);
