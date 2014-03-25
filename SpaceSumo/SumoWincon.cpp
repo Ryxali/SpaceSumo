@@ -10,7 +10,7 @@
 
 SumoWincon::SumoWincon()
 	: mLockPlayers(true),
-	mGameTime(120000),
+	mGameTime(240000),
 	mLoadedSpacemen(false),
 	mStartedTimer(false),
 	mBrawl(res::getTexture("res/img/UI/hud/321brawl.png"), "res/img/UI/hud/321brawl.cfg", 10.f),

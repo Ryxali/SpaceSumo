@@ -35,7 +35,7 @@ void Exploded::update(Controller& controller, GameData& data)
 			b2Vec2 impulse	((mOwner->getBody().getPosition().x - mPosition.x),
 							(mOwner->getBody().getPosition().y - mPosition.y));
 			impulse.Normalize();
-			int stronkness = rand()%30+20;
+			int stronkness = rand()%60+20;
 			impulse.Set(impulse.x*stronkness, impulse.y*stronkness);
 			mOwner->getBody().applyLinearImpulse(impulse, mOwner->getBody().getWorldCenter(), true);
 			mOwner->getBody().applyAngularImpulse(20, true);
