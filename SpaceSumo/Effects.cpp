@@ -64,6 +64,7 @@ void Effects::clear()
 		mEffectList[i] = 0;
 	}
 	mSummary = EffectStatus();
+	mCurSize = 0;
 	evaluate();
 
 }

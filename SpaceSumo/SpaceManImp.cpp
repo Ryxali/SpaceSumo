@@ -422,6 +422,12 @@ void SpaceManImp::decreaseLives()
 bool SpaceManImp::disable(bool status)
 {
 	return true;
+	if(status)
+	{
+		
+			//Flag(Flag::CAN_MOVE, 10, false, 1));
+	}
+
 }
 
 Head& SpaceManImp::getHead()
@@ -432,4 +438,13 @@ Head& SpaceManImp::getHead()
 int SpaceManImp::getIndex()
 {
 	return mSpacemanIndex;
+}
+
+void SpaceManImp::resetPosition()
+{
+	mSpaceman.getBody()->SetTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+	mHand.setTransform(b2Vec2((float32)mSpawnX/PPM, (float32)mSpawnY/PPM), mRespawnAngle*DEGREES_TO_RADIANS);
+	mSpaceman.setAngularVelocity(0);
+	mSpaceman.setLinearVelocity(b2Vec2(0,0));
+	mHand.setLinearVelocity(b2Vec2(0,0));
 }
