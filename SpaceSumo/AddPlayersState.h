@@ -8,7 +8,7 @@ class ControlImages
 public:
 	ControlImages();
 	SSprite* getSprite(ControlList::Control_Type type);
-
+	SSprite inactive_1, inactive_2, inactive_3, inactive_4;
 private:
 	SSprite keyboard_1, keyboard_2, keyboard_3, keyboard_4, joystick_1, joystick_2, joystick_3, joystick_4;
 	int nKeyboards, nJoysticks;
