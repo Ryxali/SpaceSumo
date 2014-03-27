@@ -63,6 +63,24 @@ SSprite* ControlImages::getSprite(ControlList::Control_Type type)
 	SError("Invalid data", "Control_Type or playerIndex invalid!");
 }
 
+void ControlImages::setSprite(sf::Keyboard::Key key, SSprite** img)
+{
+	switch(key)
+	{
+	case sf::Keyboard::W:
+		*img = &keyboard_1;
+		break;
+	case sf::Keyboard::Up:
+		*img = &keyboard_2;
+		break;
+	case sf::Keyboard::I:
+		*img = &keyboard_3;
+		break;
+	case sf::Keyboard::Num8:
+		*img = &keyboard_4;
+		break;
+	}
+}
 
 AddPlayersState::AddPlayersState(StateList &owner) : State(owner), mButtons(),
 	mBg(res::getTexture("res/img/UI/menu/controlAdding/background.png"), 9.f),
@@ -99,12 +117,9 @@ void AddPlayersState::update(GameData &data, int delta)
 		switch(evt.type)
 		{
 		case sf::Event::KeyPressed:
-			if(evt.key.code == sf::Keyboard::Return)
-			{
-				mImgs[mN] = mPool.getSprite(ControlList::KEYBOARD);
-				data.controlList.add(ControlList::KEYBOARD);
-				break;
-			}
+			mPool.setSprite(evt.key.code, &mImgs[mN]);
+			data.controlList.add(evt.key.code);
+			break;
 
 		case sf::Event::JoystickButtonPressed:
 			if(evt.joystickButton.button == sf::Xbox::START)

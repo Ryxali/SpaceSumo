@@ -1,5 +1,6 @@
 #pragma once
 #include "State.h"
+#include <SFML\Window\Keyboard.hpp>
 #include "ButtonList.h"
 #include <ResourceManager\SSprite.h>
 
@@ -8,6 +9,7 @@ class ControlImages
 public:
 	ControlImages();
 	SSprite* getSprite(ControlList::Control_Type type);
+	void setSprite(sf::Keyboard::Key key, SSprite** img);
 	SSprite inactive_1, inactive_2, inactive_3, inactive_4;
 private:
 	SSprite keyboard_1, keyboard_2, keyboard_3, keyboard_4, joystick_1, joystick_2, joystick_3, joystick_4;
