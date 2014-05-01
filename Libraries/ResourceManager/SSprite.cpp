@@ -13,7 +13,7 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-SSprite::SSprite(const STexture &tex, float z) : mSprite(), mSTex(tex), mTexVersion(0), mZ(z)
+SSprite::SSprite(const STexture &tex, float z) : mSprite(), mSTex(&tex), mTexVersion(0), mZ(z)
 {
 	
 }
@@ -29,24 +29,34 @@ SSprite::~SSprite()
 
 const sf::Texture& SSprite::getTexture() const
 {
-	SAssert(mSTex.isLoaded(), "You need to load the texture before using. " + mSTex.getRef());
-	return mSTex.getTexture();
+	SAssert(mSTex->isLoaded(), "You need to load the texture before using. " + mSTex->getRef());
+	return mSTex->getTexture();
+}
+const STexture& SSprite::getSTexture() const
+{
+	return *mSTex;
+}
+void SSprite::setTexture(const STexture& tex)
+{
+	mSTex = &tex;
+	mTexVersion = 0;
+	sync();
 }
 
 void SSprite::draw(sf::RenderWindow &win)
 {
 
 	sync();
-	SAssert(mSTex.isLoaded(), "The texture isn't loaded. " + mSTex.getRef());
+	SAssert(mSTex->isLoaded(), "The texture isn't loaded. " + mSTex->getRef());
 	win.draw(mSprite);
 }
 
 void SSprite::sync()
 {
-	if(mTexVersion != mSTex.getVersion())
+	if(mTexVersion != mSTex->getVersion())
 	{
 		mSprite.setTexture(getTexture());
-		mTexVersion = mSTex.getVersion();
+		mTexVersion = mSTex->getVersion();
 	}
 }
 

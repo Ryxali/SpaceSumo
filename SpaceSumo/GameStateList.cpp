@@ -11,11 +11,13 @@
 GameStateList::GameStateList(GameData &data) : StateList()
 {
 	Playable* p = soundFac::createSound("res/music/menu/menu.spf");
-	add(new MenuState(*this, p));
+	MenuState * mS = new MenuState(*this, p);
+	add(mS);
 	GameState* gS = new GameState(*this, data);
 	add(gS);
-	add(new SetupState(*this, data, *gS, p));
-	add(new CharacterSetupState(*this, data, *gS, p));
+	SetupState* sS = new SetupState(*this, data, *gS, p);
+	add(sS);
+	add(new CharacterSetupState(*this, *sS, data, *gS, p));
 	StateList::changeState(0);
 	sync();
 }

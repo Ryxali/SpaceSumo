@@ -27,7 +27,8 @@ VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
 	for(auto it = lines.begin(); it != lines.end(); ++it, ++i)
 	{
 		mLines[i] = soundFac::createSound(*it);
-		mLines[i]->setPosition(600, 600);
+		mLines[i]->setRelativeToListener(true);
+		mLines[i]->setPosition(0, 0);
 		mLines[i]->setAttenuation(0.f);
 	}
 }

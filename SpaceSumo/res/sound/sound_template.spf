@@ -5,12 +5,10 @@
 # QueueSound(AnyOtherSound0, AnyOtherSound1, ...) -- A sequence of sounds
 # RandomSound(AnyOtherSound0, AnyOtherSound1, ...) -- Plays a sound randomly selected from the pool
 # Pause(aNumberInMillis) -- A pause for a set number of milliseconds
+# UnyieldingSound(AnyOtherSound) -- A sound that won't restart on play if already playing
+
 # <-- A comment
 # Examples:
 # Sound("res/sounds/foo.ogg")
 # QueueSound(LoopSound(Sound("foo.ogg")), Sound("foo_end.ogg"))
-
-
-
-
-UninterruptableSound(LoopSound(UninterruptableSound(Music("res/music/miningColony/miningColony.ogg"))))
+# UnyieldingSound(QueueSound(LoopSound(RandomSound(Sound("foo.ogg"), Sound("foo2.ogg"), FinishingSound(Sound("foo_fade.ogg")), Pause(1000))))

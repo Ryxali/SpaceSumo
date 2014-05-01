@@ -4,6 +4,7 @@
 #include "FinishingSound.h"
 #include "UnyieldingSound.h"
 #include "SoundQuene.h"
+#include "RandomSound.h"
 #include "SoundList.h"
 #include "Music.h"
 #include "Pause.h"
@@ -161,7 +162,52 @@ Playable* resolveType(std::string line)
 				}
 				return list;
 			}
+			else if(line.substr(0, t) == "RandomSound")
+			{
+				++it;
+				RandomSound* list = new RandomSound();
+				int dpth = 0;
+				std::string::size_type t2 = t+1;
+				while(dpth != 0 || *it != ')')
+				{
+					if(*it == '(')
+					{
+						++dpth;
+						list->add(resolveType(line.substr(t2)));
+						int itemDpth = 0;
+						while(true)
+						{
+							if(*it == '(')
+								++itemDpth;
+							if(*it == ')')
+								--itemDpth;
+							if(itemDpth == 0 || *(it-1) == ')')
+								break;
+							++it;
+							++t;
+						}
+					}
+					if(*it == ')')
+					{
+						--dpth;
+					}
+					if(*it == ',')
+					{
+						++it;
+						++t;
+						while(*it == ' ')
+						{
+							++it;
+							++t;
+						}
+						t2 = t+1;
+					}
+					++it;
+					++t;
 
+				}
+				return list;
+			}
 		}
 		++t;
 		++it;

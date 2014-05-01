@@ -17,12 +17,12 @@ LoopSound::~LoopSound()
 
 bool LoopSound::isPlaying()
 {
-	return mIsPlaying;
+	return mIsPlaying && mSound->isPlaying();
 }
 
 bool LoopSound::hasEnded()
 {
-	return !mIsPlaying || mSound->hasEnded();
+	return !mIsPlaying && mSound->hasEnded();
 }
 
 void LoopSound::play()
@@ -54,6 +54,7 @@ bool LoopSound::getDestroy()
 
 void LoopSound::update()
 {
+	mSound->update();
 	if(mSound->hasEnded() && mIsPlaying)
 	{
 		mSound->play();

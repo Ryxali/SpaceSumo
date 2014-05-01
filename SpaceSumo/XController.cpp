@@ -28,7 +28,10 @@ XController::XController(int controllerIndex, int playerIndex, Config& conf):
 XController::~XController()
 {
 }
-
+bool XController::hasCode(sf::Keyboard::Key key)
+{
+	return false;
+}
 bool XController::isActiveReset(Control ctrl)
 {
 	if(mStatus.at(ctrl))

@@ -24,8 +24,9 @@ ControlList::~ControlList()
 	//delete mControlPool;
 }
 
-void ControlList::add(Control_Type controlType)
+bool ControlList::add(Control_Type controlType)
 {
+	if(mNPlayers >= 4) return false;
 	switch(controlType)
 	{
 	case KEYBOARD:
@@ -44,31 +45,52 @@ void ControlList::add(Control_Type controlType)
 	default:
 		SError("No such Device type", "Control_Type unknown!");
 	};
+	return true;
 }
-void ControlList::add(sf::Keyboard::Key controlKey)
+
+bool ControlList::toggle(Control_Type controlType)
 {
-	switch(controlKey)
+	if(mNPlayers >= 4) return false;
+	switch(controlType)
 	{
-	case sf::Keyboard::W:
-		mControls[mNPlayers] = mControlPool[0];
+	case KEYBOARD:
+		mControls[mNPlayers] = mControlPool[mNKeyboards];
+		mControls[mNPlayers]->setPlayer(mNPlayers+1);
 		++mNPlayers;
+		++mNKeyboards;
 		break;
-	case sf::Keyboard::Up:
-		mControls[mNPlayers] = mControlPool[1];
+	case JOYSTICK:
+
+
+		mControls[mNPlayers] = mControlPool[mNJoysticks + 4];
+		mControls[mNPlayers]->setPlayer(mNPlayers+1);
 		++mNPlayers;
-		break;
-	case sf::Keyboard::I:
-		mControls[mNPlayers] = mControlPool[2];
-		++mNPlayers;
-		break;
-	case sf::Keyboard::Num8:
-		mControls[mNPlayers] = mControlPool[3];
-		++mNPlayers;
+		++mNJoysticks;
 		break;
 	default:
-		break; //SError("No such control key", "value not in switch! - " + std::to_string(controlKey));
-	}
+		SError("No such Device type", "Control_Type unknown!");
+	};
+	return true;
+}
 
+bool ControlList::add(sf::Keyboard::Key controlKey)
+{
+	if(mNPlayers >= 4) return false;
+	for(int i = 0; i < 4; ++i)
+	{
+		if(mControlPool[i]->codeEquals(controlKey, Controller::UP))
+		{
+			for(int j = 0; j < 4; ++j)
+			{
+				if(mControls[j] == mControlPool[i])
+					return false;
+			}
+			mControls[mNPlayers] = mControlPool[i];
+			++mNPlayers;
+			return true;
+		}
+	}
+	return false;
 }
 void ControlList::update(GameData& data)
 {
@@ -91,6 +113,7 @@ bool ControlList::isActive(Controller::Control ctrl, Player playerNumber) const
 				return true;;
 		}
 		return false;
+
 	default:
 		break;
 	}

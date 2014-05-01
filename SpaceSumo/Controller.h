@@ -1,8 +1,7 @@
 #pragma once
 #include <bitset>
-
 struct GameData;
-
+#include <SFML\Window\Keyboard.hpp>
 class Controller
 {
 public:
@@ -21,7 +20,8 @@ public:
 
 	Controller();
 	~Controller(){}
-
+	virtual bool hasCode(sf::Keyboard::Key key) = 0;
+	virtual bool codeEquals(sf::Keyboard::Key key, Control ctrl);
 	bool isActive(Control ctrl) const;
 	virtual bool isActiveReset(Control ctrl) = 0;
 	virtual void update(GameData& data) = 0;
