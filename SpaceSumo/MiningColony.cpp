@@ -33,7 +33,18 @@ void MiningColony::update(GameStateData &data, int delta)
 		switch (direction)
 		{
 		case 0:
-			data.mEntityImpList.add(new Asteroid(b2Vec2(rand() % mConfig.getValue<int>("sideSpeed") - 20, rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed")), b2Vec2(rand() % 1920, - 800), data.gameData, r3, mConfig.getValue<float>("speedMultiplier") ));
+			data.mEntityImpList.add(
+				new Asteroid(
+					b2Vec2(
+						rand() % WINDOW_SIZE.x /5 ,
+						rand() % WINDOW_SIZE.y /5 
+					),
+					b2Vec2(rand() % 1920 / PPM, - 800 / PPM), 
+					data.gameData,
+					r3,
+					mConfig.getValue<float>("speedMultiplier")
+				)
+			);
 			break;
 		case 1:
 			data.mEntityImpList.add(new Asteroid(b2Vec2(-(rand() % mConfig.getValue<int>("forwardSpeed") + mConfig.getValue<int>("forwardSpeed")), rand() % rand() % mConfig.getValue<int>("sideSpeed") - 20), b2Vec2(1920 + 800, rand() % 1080), data.gameData, r3, mConfig.getValue<float>("speedMultiplier")));

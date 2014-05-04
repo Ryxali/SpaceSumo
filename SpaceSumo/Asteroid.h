@@ -15,9 +15,12 @@ public:
 	virtual bool isAlive();
 
 private:
+	bool isInScreen;
 	B2Body mBody;
 	SSprite mSprite;
-	b2Vec2	mSpeed;
+	SSprite mAsteroidIndicator;
+	b2Vec2	mTarget;
+	b2Vec2 mBaseSpeed;
 	bool mAlive;
 	float mScale;
 };
