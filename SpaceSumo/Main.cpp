@@ -16,8 +16,9 @@ void init()
 	srand((unsigned int)time(NULL));
 	res::addResource("res/ResourceList.xoxo");
 	std::cout << "50%" << std::endl;
-	res::loadResource("res/ResourceList.xoxo");
+	res::loadResource("res/init_load.xoxo");
 	std::cout << "100%" << std::endl;
+	
 }
 
 void run()

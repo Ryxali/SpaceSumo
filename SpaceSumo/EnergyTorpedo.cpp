@@ -34,7 +34,17 @@ EnergyTorpedo::EnergyTorpedo(SVector position, SVector dir, SVector userSpeed, b
 
 	mBody.setLinearVelocity( mSpeed );
 
+	mShoot = soundFac::createSound("res/sound/energy_torpedo/torpedo_launch.spf");
+	mShoot->setRelativeToListener(false);
+	mShoot->setAttenuation(ATTENUATION);
 	
+	mTravelling = soundFac::createSound("res/sound/energy_torpedo/torpedo_travelling.spf");
+	mTravelling->setRelativeToListener(false);
+	mTravelling->setAttenuation(ATTENUATION);
+	mShoot->setPosition(mPosition.getX(), mPosition.getY(), 0 );
+	mTravelling->setPosition(mPosition.getX(), mPosition.getY(), 0 );
+	mShoot->play();
+	mTravelling->play();
 }
 
 
@@ -44,21 +54,8 @@ EnergyTorpedo::~EnergyTorpedo()
 
 void EnergyTorpedo::update(GameData& data, GameStateData& gsData, int delta)
 {
-	if( mShoot == 0 && mTravelling == 0)
-	{
-		mTravelling = soundFac::createSound("res/sound/energy_torpedo/torpedo_travelling.spf");
-		mShoot = soundFac::createSound("res/sound/energy_torpedo/torpedo_launch.spf");
-
-		mShoot->setRelativeToListener(false);
-		mShoot->setAttenuation(ATTENUATION);
-		mShoot->setPosition(mPosition.getX(), mPosition.getY(), 0 );
-
-		mTravelling->setRelativeToListener(false);
-		mTravelling->setAttenuation(ATTENUATION);
-
-		mShoot->play();
-		mTravelling->play();
-	}
+	
+	
 
 	mTravelling->setPosition(mBody.getPosition().x*PPM, mBody.getPosition().y*PPM, 0 );
 

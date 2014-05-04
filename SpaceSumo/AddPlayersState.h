@@ -33,5 +33,6 @@ private:
 	SSprite mCtrl_3;
 	int mN;
 	ControlImages mPool;
+	bool mReady;
 };
 

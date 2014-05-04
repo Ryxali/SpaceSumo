@@ -99,6 +99,7 @@
     <ClCompile Include="Characters.cpp" />
     <ClCompile Include="CharacterSelectionState.cpp" />
     <ClCompile Include="CharacterSetupState.cpp" />
+    <ClCompile Include="ConditionalCommand.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="ControlList.cpp" />
     <ClCompile Include="CreateMapCommand.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="CharacterSelectionState.h" />
     <ClInclude Include="CharacterSetupState.h" />
     <ClInclude Include="Collideable.h" />
+    <ClInclude Include="ConditionalCommand.h" />
     <ClInclude Include="EMPEffect.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="hud_positioning.h" />

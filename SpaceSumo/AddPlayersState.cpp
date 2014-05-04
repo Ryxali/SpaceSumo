@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AddPlayersState.h"
 #include "ChangeStateCommand.h"
+#include "ConditionalCommand.h"
 #include "StateList_CSelect.h"
 #include "ButtonSingle.h"
 #include "ButtonSelectionEffect.h"
@@ -90,7 +91,7 @@ AddPlayersState::AddPlayersState(StateList &owner) : State(owner), mButtons(),
 		new ButtonSingle(
 		SVector(conf.getValue<int>("button_nextX"), conf.getValue<int>("button_nextY")),
 		1, 1,
-		new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner),
+		new ConditionalCommand(*new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner), mReady),
 		"res/img/UI/menu/next",
 		"res/img/UI/menu/gamesetup/map_highlight"));
 	mButtons.add(
@@ -170,6 +171,7 @@ void AddPlayersState::update(GameData &data, int delta)
 			break;
 		}
 	}
+	mReady = data.controlList.getNActivePlayers() >= 2;
 }
 
 void AddPlayersState::draw(RenderList &list)

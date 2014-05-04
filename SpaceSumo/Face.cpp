@@ -18,7 +18,13 @@
 //const unsigned char Face::ANGRY = 2;
 //const unsigned char Face::ASHAMED = 3;
 
+static int getChance()
+{
+	Config cfg("res/sound/voice/trigger_chance.cfg");
+	return cfg.getValue<int>("VoiceTriggerChance");
+}
 
+static const int TRIGGER_CHANCE = getChance();
 
 VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
 {
@@ -105,6 +111,8 @@ void Face::changeMood(Mood mood)
 
 void Face::trigger(status::Event evt)
 {
+	if(std::rand() % 100 > TRIGGER_CHANCE)
+		return;
 	switch(evt)
 	{
 	case status::POWERUP_PICKUP:
@@ -161,10 +169,11 @@ void Face::setOrigin(int x, int y)
 
 void readVoiceFiles(std::vector<std::string> &mLines, std::string xoxoRef)
 {
+	
 	std::ifstream stream(xoxoRef);
 	std::string line;
 	while(std::getline(stream, line))
-		mLines.push_back(line);
+	mLines.push_back(line);
 }
 
 void Face::setPersona(std::string ref)
@@ -178,6 +187,7 @@ void Face::setPersona(std::string ref)
 		switch(i)
 		{
 		case 0:
+			
 			readVoiceFiles(mLines, cfg.getValue<std::string>("taunts"));
 			break;
 		case 1:
