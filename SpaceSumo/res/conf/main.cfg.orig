@@ -6,11 +6,14 @@
 # 8 = Fullscreen
 # 7 = Windowed
 # 0 = Borderless window
+<<<<<<< HEAD
 fullscreen = 8
 screenWidth = 1920
 screenHeight = 1080
+=======
+fullscreen = 7
+screenWidth = 800
+screenHeight = 640
+>>>>>>> dev_TR
 vsync = false
-fpscap = 300
-
-music_volume = 5
-sound_volume = 100
+fpscap = 60
