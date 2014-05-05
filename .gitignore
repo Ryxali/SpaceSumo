@@ -53,7 +53,7 @@ local.properties
 
 [Dd]ebug/
 [Rr]elease/
-SpaceSumo/res/
+res/
 x64/
 build/
 [Bb]in/
