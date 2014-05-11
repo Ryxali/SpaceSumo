@@ -35,7 +35,7 @@ Asteroid::Asteroid(b2Vec2 target, b2Vec2 pos, GameData &data, float scale, float
 	b2Vec2 vel = mTarget - pos;
 	vel.Normalize();
 	mBody.applyLinearImpulse( b2Vec2(vel.x * speedMulti, vel.y * speedMulti), mBody.getWorldCenter(), true);
-	mBody.setAngularVelocity(5);
+	mBody.setAngularVelocity(1);
 
 	
 	mAsteroidIndicator.getSprite().setColor(sf::Color(255, 255, 255, 100));

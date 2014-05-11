@@ -30,6 +30,7 @@ res/img/UI/menu/controlAdding/keyboard_2.png
 res/img/UI/menu/controlAdding/keyboard_3.png
 res/img/UI/menu/controlAdding/keyboard_4.png
 res/img/UI/menu/controlAdding/xbox.png
+res/img/UI/menu/controlAdding/press_start.png
 res/img/UI/menu/controlAdding/background.png
 res/img/UI/menu/gamesetup/map_highlight.png
 res/img/UI/menu/gamesetup/mode_highlight.png
@@ -62,6 +63,7 @@ res/img/UI/menu/weightSelection/weight_class_1.png
 res/img/UI/menu/weightSelection/weight_class_2.png
 res/img/UI/menu/weightSelection/weight_class_3.png
 res/img/UI/menu/next.png
+res/img/UI/menu/prev.png
 res/img/UI/hud/win_blue.png
 res/img/UI/hud/win_red.png
 res/img/UI/hud/win_green.png
@@ -107,3 +109,4 @@ res/sound/voice/Bob/voice_list.xoxo
 res/sound/voice/Bishamon/voice_list.xoxo
 res/sound/voice/Konrad/voice_list.xoxo
 res/sound/voice/Coleen/voice_list.xoxo
+res/sound/voice/Sanjiv/voice_list.xoxo

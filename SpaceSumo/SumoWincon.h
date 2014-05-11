@@ -35,10 +35,13 @@ private:
 	bool mGameHasStarted;
 	bool mStartedTimer;
 
-	int mGameTime;
+	int mGameTime;			// the time of the whole game
 	sf::Clock mGameClock;
 
-	int mCountDown;
+	int mStartTimeout;			// timeout before the countdown starts
+	sf::Clock mStartGame;
+
+	int mCountDown;			// the "three two one go time"
 	sf::Clock mCountDownClock;
 	Playable* m321brawl;
 	bool mHasPlayed;

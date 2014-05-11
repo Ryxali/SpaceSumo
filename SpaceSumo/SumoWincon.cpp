@@ -19,6 +19,7 @@ SumoWincon::SumoWincon()
 	mGameHasStarted(false),
 	mHasPlayed(false),
 	mCountDown(4000),
+	mStartTimeout(10000),
 	m321brawl(soundFac::createSound("res/sound/voice/Announcer/Announcer_Matchstart-003.spf")),
 	mBlueWin(res::getTexture("res/img/UI/hud/win_blue_still.png"), 11.f),
 	mRedWin(res::getTexture("res/img/UI/hud/win_red_still.png"), 12.f),
@@ -63,7 +64,7 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 		}
 	}
 
-	if( sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && !mGameHasStarted )
+	if( mStartGame.getElapsedTime().asMilliseconds() > mStartTimeout && !mGameHasStarted )
 	{
 		mRunCountdown = true;
 		mGameHasStarted = true;
