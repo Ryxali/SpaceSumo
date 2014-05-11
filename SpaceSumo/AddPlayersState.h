@@ -3,7 +3,7 @@
 #include <SFML\Window\Keyboard.hpp>
 #include "ButtonList.h"
 #include <ResourceManager\SSprite.h>
-
+class Command;
 class ControlImages
 {
 public:
@@ -25,6 +25,7 @@ public:
 	virtual void update(GameData &data, int delta);
 	virtual void draw(RenderList &list);
 private:
+	Command* mStart;
 	ButtonList mButtons;
 	SSprite mBg;
 	SSprite mCtrl_0;

@@ -104,6 +104,7 @@
     <ClCompile Include="ControlList.cpp" />
     <ClCompile Include="CreateMapCommand.cpp" />
     <ClCompile Include="CreateModeCommand.cpp" />
+    <ClCompile Include="DescriptedButton.cpp" />
     <ClCompile Include="DualCommand.cpp" />
     <ClCompile Include="EMPAbil.cpp" />
     <ClCompile Include="EMPEffect.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Exploded.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="HowToPlayState.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="EMP.cpp" />
     <ClCompile Include="LockButtonCommand.cpp" />
@@ -181,8 +183,10 @@
     <ClInclude Include="CharacterSetupState.h" />
     <ClInclude Include="Collideable.h" />
     <ClInclude Include="ConditionalCommand.h" />
+    <ClInclude Include="DescriptedButton.h" />
     <ClInclude Include="EMPEffect.h" />
     <ClInclude Include="Hand.h" />
+    <ClInclude Include="HowToPlayState.h" />
     <ClInclude Include="hud_positioning.h" />
     <ClInclude Include="MiningColony.h" />
     <ClInclude Include="PlayerReadyToggleCommand.h" />

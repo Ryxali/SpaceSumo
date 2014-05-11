@@ -22,7 +22,7 @@ private:
 	int mControllerIndex;
 	std::vector<sf::Clock> mTimers;
 	std::bitset<MAX_SIZE> mActiveR;
-	int mUp, mDown, mRight, mLeft, mEnter, mForward, mPush, mActivate;
+	int mUp, mDown, mRight, mLeft, mEnter, mForward, mPush, mActivate, mStart;
 	int mRepeatTime;
 };
 

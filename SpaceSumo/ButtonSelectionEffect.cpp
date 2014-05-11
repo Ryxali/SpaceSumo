@@ -32,22 +32,30 @@ void ButtonSelectionEffect::update(GameData& data, int delta, ButtonList& owner)
 
 	if(data.controlList.isActiveReset(Controller::Control::UP, mPlayerNumber))
 	{
+		mButton->alert(false);
 		mButton = owner.getUp(mButton->getMapX(), mButton->getMapY());
+		mButton->alert(true);
 	}
 
 	if(data.controlList.isActiveReset(Controller::Control::LEFT, mPlayerNumber))
 	{
+		mButton->alert(false);
 		mButton = owner.getLeft(mButton->getMapX(), mButton->getMapY());
+		mButton->alert(true);
 	}
 
 	if(data.controlList.isActiveReset(Controller::Control::DOWN, mPlayerNumber))
 	{
+		mButton->alert(false);
 		mButton = owner.getDown(mButton->getMapX(), mButton->getMapY());
+		mButton->alert(true);
 	}
 
 	if(data.controlList.isActiveReset(Controller::Control::RIGHT, mPlayerNumber))
 	{
+		mButton->alert(false);
 		mButton = owner.getRight(mButton->getMapX(), mButton->getMapY());
+		mButton->alert(true);
 	}
 
 	if(data.controlList.isActiveReset(Controller::Control::ENTER, mPlayerNumber))
