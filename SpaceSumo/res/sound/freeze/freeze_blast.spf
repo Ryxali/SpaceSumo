@@ -1,6 +1,0 @@
-# Sound("ref") -- A regular Sound
-# LoopSound(AnyOtherSound) -- A looping sound
-# FinishingSound(AnyOtherSound) -- A sound that will always finish on stop
-# QueueSound(AnyOtherSound0, AnyOtherSound1, ...) -- A sequence of sounds
-
-Sound("res/sound/freeze/freeze_blast.ogg")

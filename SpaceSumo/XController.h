@@ -11,6 +11,7 @@ class XController : public Controller
 public:
 	XController(int controllerIndex, int playerIndex, Config& conf);
 	~XController();
+	virtual bool hasCode(sf::Keyboard::Key key);
 	virtual bool isActiveReset(Control ctrl);
 	bool isConnected(int controllerIndex);
 	virtual void update(GameData& data);

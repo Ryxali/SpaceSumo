@@ -11,10 +11,12 @@
 #include <Common\Config.h>
 #include "hud_positioning.h"
 
+Config life_cfg("res/conf/mode/sumo/max_lives.cfg");
+
 Head::Head(Position pos, const STexture& texture) 
 	: mFace("res/img/UI/hud/base", pos), 
 	mBar(texture, 10.f), 
-	mScore(20), 
+	mScore(life_cfg.getValue<int>("MaxLives")), 
 	mPos(pos),
 	mTens(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f),
 	mSingulars(res::getTexture("res/img/UI/hud/numbers.png"), "res/img/UI/hud/ui_numbers.cfg", 11.f),

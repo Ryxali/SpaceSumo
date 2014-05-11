@@ -15,13 +15,15 @@ CharacterSelectionState::CharacterSelectionState(StateList &owner, SpacemanData 
 		mPlayerReadyStatus[i] = false;
 	Config posCfg("res/conf/characters/face_positioning.cfg");
 	SVector startPos(posCfg.getValue<int>("StartX"), posCfg.getValue<int>("StartY"));
-	SVector offset(posCfg.getValue<int>("OffsetX"), posCfg.getValue<int>("OffsetY"));
+	SVector offsetX(posCfg.getValue<int>("OffsetX"), 0);
+	SVector offsetY(0, posCfg.getValue<int>("OffsetY"));
+	int faceRow = posCfg.getValue<int>("facesPerRow");
 	int iterations(0);
 	for(auto it = chars::Character::characters.list.begin(); it != chars::Character::characters.list.end(); ++it)
 	{
 		Config cfg((*it).charDataRef);
 		cfg.getValue<std::string>("bodyData");
-		mCharacters.add(new ButtonMulti(startPos + offset*iterations, iterations, 0,
+		mCharacters.add(new ButtonMulti(startPos + offsetX*(iterations%faceRow) + offsetY*(iterations/faceRow), iterations%faceRow, iterations/faceRow,
 			new DualCommand(
 			new SelectCharacterCommand(mSpacemenData[0], (*it)),
 			new PlayerReadyToggleCommand(mPlayerReadyStatus[0])),

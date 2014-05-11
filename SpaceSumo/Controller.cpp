@@ -5,7 +5,10 @@ Controller::Controller() : mPlayerIndex(0)
 {
 
 }
-
+bool Controller::codeEquals(sf::Keyboard::Key key, Control ctrl)
+{
+	return false;
+}
 bool Controller::isActive(Control ctrl) const
 {
 	return mStatus.at(ctrl);

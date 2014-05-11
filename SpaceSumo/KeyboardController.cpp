@@ -22,7 +22,36 @@ KeyboardController::KeyboardController(int playerindex, Config& config):
 KeyboardController::~KeyboardController()
 {
 }
+bool KeyboardController::hasCode(sf::Keyboard::Key key)
+{
+	return key == mUp || key == mDown || key == mLeft || 
+		key == mRight || key == mEnter || key == mForward || 
+		key == mPush || key == mActivate;
 
+}
+bool KeyboardController::codeEquals(sf::Keyboard::Key key, Control ctrl)
+{
+	switch(ctrl)
+	{
+	case UP:
+		return key == mUp;
+	case DOWN:
+		return key == mDown;
+	case LEFT:
+		return key == mLeft;
+	case RIGHT:
+		return key == mRight;
+	case ENTER:
+		return key == mEnter;
+	case FORWARD:
+		return key == mForward;
+	case PUSH:
+		return key == mPush;
+	case ACTIVATE:
+		return key == mActivate;
+	}
+	return false;
+}
 bool KeyboardController::isActiveReset(Control ctrl)
 {
 	bool stat(mRStatus.at(ctrl));

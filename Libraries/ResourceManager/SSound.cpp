@@ -67,8 +67,9 @@ void SSound::stop()
 		mSound.setBuffer(getSoundBuffer());
 		mSoundBufVersion = mSBuf.getVersion();
 	}
-	SAssert(mSBuf.isLoaded(), "The sound buffer isn't loaded");
-	mSound.stop();
+	//SAssert(mSBuf.isLoaded(), "The sound buffer isn't loaded");
+	if(mSBuf.isLoaded())
+		mSound.stop();
 }
 
 void SSound::forceStop()
