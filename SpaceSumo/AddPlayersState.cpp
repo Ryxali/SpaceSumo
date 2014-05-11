@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AddPlayersState.h"
 #include "ChangeStateCommand.h"
+#include "ConditionalCommand.h"
 #include "StateList_CSelect.h"
 #include "ButtonSingle.h"
 #include "ButtonSelectionEffect.h"
@@ -8,11 +9,17 @@
 #include <Common\error.h>
 #include <Common\XboxButtons.h>
 #include <Common\Config.h>
-
+#include <ResourceManager\RHandle.h>
+#include <ResourceManager\STexture.h>
 static Config conf("res/img/UI/menu/controlAdding/positioning.cfg");
 
 ControlImages::ControlImages()
-	: keyboard_1(res::getTexture("res/img/UI/menu/controlAdding/keyboard_1.png"), 10.f),
+	: 
+	inactive_1(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 10.f),
+	inactive_2(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 10.f),
+	inactive_3(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 10.f),
+	inactive_4(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 10.f),
+	keyboard_1(res::getTexture("res/img/UI/menu/controlAdding/keyboard_1.png"), 10.f),
 	keyboard_2(res::getTexture("res/img/UI/menu/controlAdding/keyboard_2.png"), 10.f),
 	keyboard_3(res::getTexture("res/img/UI/menu/controlAdding/keyboard_3.png"), 10.f),
 	keyboard_4(res::getTexture("res/img/UI/menu/controlAdding/keyboard_4.png"), 10.f),
@@ -25,53 +32,74 @@ ControlImages::ControlImages()
 
 }
 
-SSprite* ControlImages::getSprite(ControlList::Control_Type type)
+const STexture& ControlImages::getSprite(ControlList::Control_Type type)
 {
 	if(type == ControlList::JOYSTICK)
-		++nJoysticks;
-		switch(nJoysticks)
-		{
-		case 1:
-			return &joystick_1;
-		case 2:
-			return &joystick_2;
-		case 3:
-			return &joystick_3;
-		case 4:
-			return &joystick_4;
-		}
+		res::getTexture("res/img/UI/menu/controlAdding/xbox.png").getTexture();
+	
 	if(type == ControlList::KEYBOARD)
 	{
 		++nKeyboards;
 		switch(nKeyboards)
 		{
 		case 1:
-			return &keyboard_1;
+			return res::getTexture("res/img/UI/menu/controlAdding/keyboard_1.png");
 		case 2:
-			return &keyboard_2;
+			return res::getTexture("res/img/UI/menu/controlAdding/keyboard_2.png");
 		case 3:
-			return &keyboard_3;
+			return res::getTexture("res/img/UI/menu/controlAdding/keyboard_3.png");
 		case 4:
-			return &keyboard_4;
+			return res::getTexture("res/img/UI/menu/controlAdding/keyboard_4.png");
 		}
 	}
 	SError("Invalid data", "Control_Type or playerIndex invalid!");
 }
 
+void ControlImages::setSprite(sf::Keyboard::Key key, SSprite& img)
+{
+	switch(key)
+	{
+	case sf::Keyboard::W:
+		img.setTexture(res::getTexture("res/img/UI/menu/controlAdding/keyboard_1.png"));
+		break;
+	case sf::Keyboard::Up:
+		img.setTexture(res::getTexture("res/img/UI/menu/controlAdding/keyboard_2.png"));
+		break;
+	case sf::Keyboard::I:
+		img.setTexture(res::getTexture("res/img/UI/menu/controlAdding/keyboard_3.png"));
+		break;
+	case sf::Keyboard::Numpad8:
+		img.setTexture(res::getTexture("res/img/UI/menu/controlAdding/keyboard_4.png"));
+		break;
+	}
+}
 
 AddPlayersState::AddPlayersState(StateList &owner) : State(owner), mButtons(),
-	mBg(res::getTexture("res/img/UI/menu/controlAdding/background.png"), 9.f),
+	mBg(res::getTexture("res/img/UI/menu/controlAdding/background.png"), 0.f),
 	mN(0),
+	mCtrl_0(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
+	mCtrl_1(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
+	mCtrl_2(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
+	mCtrl_3(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
 	mPool()
 {
-	for(int i = 0; i < 4; ++i)
-		mImgs[i] = 0;
+	mCtrl_3.getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*3, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*3);
+	mCtrl_2.getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*2, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*2);
+	mCtrl_1.getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*1, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*1);
+	mCtrl_0.getSprite().setPosition(conf.getValue<int>("StartX"), conf.getValue<int>("StartY"));
 	mButtons.add(
 		new ButtonSingle(
-		SVector(WINDOW_SIZE.x-200, WINDOW_SIZE.y-300),
+		SVector(conf.getValue<int>("button_nextX"), conf.getValue<int>("button_nextY")),
 		1, 1,
-		new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner),
+		new ConditionalCommand(*new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner), mReady),
 		"res/img/UI/menu/next",
+		"res/img/UI/menu/gamesetup/map_highlight"));
+	mButtons.add(
+		new ButtonSingle(
+		SVector(conf.getValue<int>("button_prevX"), conf.getValue<int>("button_prevY")),
+		0, 1,
+		new ChangeStateCommand(st::BACK, owner),
+		"res/img/UI/menu/prev",
 		"res/img/UI/menu/gamesetup/map_highlight"));
 	mButtons.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtons.getFirst(), "res/img/UI/menu/gamesetup/mode_highlight"));
 }
@@ -92,18 +120,50 @@ void AddPlayersState::update(GameData &data, int delta)
 		switch(evt.type)
 		{
 		case sf::Event::KeyPressed:
-			if(evt.key.code == sf::Keyboard::Return)
+			if(data.controlList.add(evt.key.code))
 			{
-				mImgs[mN] = mPool.getSprite(ControlList::KEYBOARD);
-				data.controlList.add(ControlList::KEYBOARD);
-				break;
+				switch(data.controlList.getNActivePlayers())
+				{
+				case 4:
+					mPool.setSprite(evt.key.code, mCtrl_3);
+					break;
+				case 3:
+					mPool.setSprite(evt.key.code, mCtrl_2);
+					break;
+				case 2:
+					mPool.setSprite(evt.key.code, mCtrl_1);
+					break;
+				case 1:
+					mPool.setSprite(evt.key.code, mCtrl_0);
+					break;
+				default:
+					SError("bad", "very bad");
+				}
 			}
 			
+			break;
+
 		case sf::Event::JoystickButtonPressed:
-			if(evt.joystickButton.button == sf::Xbox::START)
+			if(evt.joystickButton.button == sf::Xbox::START && data.controlList.add(ControlList::JOYSTICK))
 			{
-				mImgs[mN] = mPool.getSprite(ControlList::JOYSTICK);
-				data.controlList.add(ControlList::JOYSTICK);
+				switch(data.controlList.getNActivePlayers())
+				{
+				case 4:
+					mCtrl_3.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					break;
+				case 3:
+					mCtrl_2.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					break;
+				case 2:
+					mCtrl_1.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					break;
+				case 1:
+					mCtrl_0.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					break;
+				default:
+					SError("bad", "very bad");
+				}
+				
 				break;
 			}
 		default:
@@ -111,34 +171,15 @@ void AddPlayersState::update(GameData &data, int delta)
 			break;
 		}
 	}
+	mReady = data.controlList.getNActivePlayers() >= 2;
 }
 
 void AddPlayersState::draw(RenderList &list)
 {
 	list.addSprite(mBg);
 	mButtons.draw(list);
-	int i = mN;
-	switch(i)
-	{
-	case 4:
-		mImgs[3]->getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*3, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*3);
-		list.addSprite(*mImgs[3]);
-		--i;
-	case 3:
-		mImgs[2]->getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*2, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*2);
-		list.addSprite(*mImgs[2]);
-		--i;
-	case 2:
-		mImgs[1]->getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*1, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*1);
-		list.addSprite(*mImgs[1]);
-		--i;
-	case 1:
-		mImgs[0]->getSprite().setPosition(conf.getValue<int>("StartX"), conf.getValue<int>("StartY"));
-		list.addSprite(*mImgs[0]);
-		--i;
-	case 0:
-		break;
-	default:
-		SError("Something wierd", "Strange number of players");
-	}
+	list.addSprite(mCtrl_0);
+	list.addSprite(mCtrl_1);
+	list.addSprite(mCtrl_2);
+	list.addSprite(mCtrl_3);
 }

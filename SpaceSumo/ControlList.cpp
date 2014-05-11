@@ -24,8 +24,9 @@ ControlList::~ControlList()
 	//delete mControlPool;
 }
 
-void ControlList::add(Control_Type controlType)
+bool ControlList::add(Control_Type controlType)
 {
+	if(mNPlayers >= 4) return false;
 	switch(controlType)
 	{
 	case KEYBOARD:
@@ -35,7 +36,7 @@ void ControlList::add(Control_Type controlType)
 		++mNKeyboards;
 		break;
 	case JOYSTICK:
-		
+
 		mControls[mNPlayers] = mControlPool[mNJoysticks + 4];
 		mControls[mNPlayers]->setPlayer(mNPlayers+1);
 		++mNPlayers;
@@ -44,8 +45,53 @@ void ControlList::add(Control_Type controlType)
 	default:
 		SError("No such Device type", "Control_Type unknown!");
 	};
+	return true;
 }
 
+bool ControlList::toggle(Control_Type controlType)
+{
+	if(mNPlayers >= 4) return false;
+	switch(controlType)
+	{
+	case KEYBOARD:
+		mControls[mNPlayers] = mControlPool[mNKeyboards];
+		mControls[mNPlayers]->setPlayer(mNPlayers+1);
+		++mNPlayers;
+		++mNKeyboards;
+		break;
+	case JOYSTICK:
+
+
+		mControls[mNPlayers] = mControlPool[mNJoysticks + 4];
+		mControls[mNPlayers]->setPlayer(mNPlayers+1);
+		++mNPlayers;
+		++mNJoysticks;
+		break;
+	default:
+		SError("No such Device type", "Control_Type unknown!");
+	};
+	return true;
+}
+
+bool ControlList::add(sf::Keyboard::Key controlKey)
+{
+	if(mNPlayers >= 4) return false;
+	for(int i = 0; i < 4; ++i)
+	{
+		if(mControlPool[i]->codeEquals(controlKey, Controller::UP))
+		{
+			for(int j = 0; j < 4; ++j)
+			{
+				if(mControls[j] == mControlPool[i])
+					return false;
+			}
+			mControls[mNPlayers] = mControlPool[i];
+			++mNPlayers;
+			return true;
+		}
+	}
+	return false;
+}
 void ControlList::update(GameData& data)
 {
 	for (int i = 0; i < 8; ++i)
@@ -67,6 +113,7 @@ bool ControlList::isActive(Controller::Control ctrl, Player playerNumber) const
 				return true;;
 		}
 		return false;
+
 	default:
 		break;
 	}

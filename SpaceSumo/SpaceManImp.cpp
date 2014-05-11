@@ -69,7 +69,7 @@ SpaceManImp::SpaceManImp(
 	mSpaceman.getBody()->SetUserData(this);
 	mSpaceman.setAngularVelocity(0);
 	mSpaceman.setLinearVelocity(b2Vec2(0.f, 0.f));
-
+	mJetpack->setAttenuation(ATTENUATION);
 	mRespawn.getSprite().setPosition(mSpawnX,mSpawnY);
 	mRespawn.getSprite().setRotation(mRespawnAngle);
 	mRespawn.getSprite().setOrigin(mRespawn.getSprite().getTextureRect().width/2, mRespawn.getSprite().getTextureRect().height/2-10);
@@ -83,12 +83,6 @@ SpaceManImp::~SpaceManImp()
 
 void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 {
-	if( mJetpack == 0)
-	{
-		mJetpack = soundFac::createSound("res/sound/jetpack/jet.spf");
-		mJetpack->setRelativeToListener(false);
-		mJetpack->setAttenuation(ATTENUATION);
-	}
 
 	mJetpack->setPosition (mSpaceman.getPosition().x*PPM , mSpaceman.getPosition().y*PPM , 0 );
 
@@ -157,11 +151,8 @@ void SpaceManImp::update(GameData &data, GameStateData &gData, int delta)
 		mDirection.getY() * ( mSpeed * fDelta )), 
 		mSpaceman.getWorldCenter(), true);
 		
-		if(mJetpack->hasEnded() )
-		{
-			mJetpack->play();
-		}
-
+		mJetpack->play();
+	
 		//Speed limit
 		if(mSpaceman.getLinearVelocity().x < -mSpeedLimit)
 		{
@@ -357,6 +348,7 @@ void SpaceManImp::slowDeath()
 {
 	mHead.getFace().trigger(status::DEATH);
 	mSlowDeath = true;
+	mHead.setPowerup(0);
 	mRespawnTimer.reset();
 	mJet.setCurrentRow(0);
 	mTurn.setCurrentRow(0);

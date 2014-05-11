@@ -91,6 +91,7 @@
     <ClInclude Include="Pause.h" />
     <ClInclude Include="Playable.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="RandomSound.h" />
     <ClInclude Include="SDrawable.h" />
     <ClInclude Include="Loadable.h" />
     <ClInclude Include="LoadableBundle.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="LoadableBundle.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="Pause.cpp" />
+    <ClCompile Include="RandomSound.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceHandler.cpp" />
     <ClCompile Include="RHandle.cpp" />

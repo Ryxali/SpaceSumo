@@ -3,6 +3,7 @@
 class RenderList;
 class EffectStatus;
 class Controller;
+class Link;
 #include <vector>
 #include "EffectStatus.h"
 
@@ -21,6 +22,7 @@ public:
 	EffectStatus& getStatus();
 
 private:
+	Link *mFirstEffect;
 	EffectImp** mEffectList;
 	EffectStatus mSummary;
 	static const int MAX_SIZE;

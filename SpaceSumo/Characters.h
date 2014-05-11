@@ -7,7 +7,7 @@ namespace chars
 	struct Character
 	{
 		friend struct CList;
-		std::string charDataRef;
+		std::string charDataRef, voiceRef;
 		struct CList
 		{
 			CList();
@@ -16,7 +16,7 @@ namespace chars
 		static CList characters;
 	private:
 		
-		Character(std::string charDataRef);
+		Character(std::string charDataRef, std::string voiceRef);
 	};
 	void configure(SpacemanData &data, const Character &chr);
 	

@@ -4,5 +4,5 @@
 class Face;
 struct SpacemanData
 {
-	std::string spaceData, bodyData, handData, headRef;
+	std::string spaceData, bodyData, handData, headRef, voiceRef;
 };

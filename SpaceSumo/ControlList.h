@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML\Window\Keyboard.hpp>
 #include <list>
 #include "Controller.h"
 
@@ -18,7 +19,9 @@ public:
 	ControlList();
 	~ControlList();
 
-	void add(Control_Type controlType);
+	bool add(Control_Type controlType);
+	bool toggle(Control_Type controlType);
+	bool add(sf::Keyboard::Key controlKey);
 	void update(GameData& data);
 	bool isActive(Player playerNumber);
 	bool isActive(Controller::Control ctrl, Player playerNumber) const;

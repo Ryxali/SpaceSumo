@@ -10,13 +10,14 @@ class KeyboardController :
 public:
 	KeyboardController(int playerindex, Config& conf);
 	~KeyboardController();
-
+	virtual bool hasCode(sf::Keyboard::Key key);
+	virtual bool codeEquals(sf::Keyboard::Key key, Control ctrl);
 	virtual void update(GameData& data);
 	virtual bool isActiveReset(Control ctrl);
 protected:
 	virtual void set(Control ctrl, bool status);
 private:
-	sf::Keyboard::Key mUp, mDown, mLeft, mRight, mEnter, mForward, mPush, mActivate;
+	const sf::Keyboard::Key mUp, mDown, mLeft, mRight, mEnter, mForward, mPush, mActivate;
 	std::bitset<MAX_SIZE> mRStatus;
 };
 

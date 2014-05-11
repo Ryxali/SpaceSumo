@@ -52,6 +52,7 @@ void SetupState::changeState(st::State_Type index)
 		mGState.setup(mMap, mMode);
 		mOwner.changeState((st::State_Type)3);
 		break;
+	
 	default:
 		SError("Unknown index", "Index not in switch!");
 		break;

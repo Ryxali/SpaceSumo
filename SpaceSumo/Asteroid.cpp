@@ -4,6 +4,7 @@
 #include "EntityType.h"
 #include "consts.h"
 
+
 float clamp(float min, float max, float val)
 {
 	if( min > val )
@@ -43,6 +44,7 @@ Asteroid::Asteroid(b2Vec2 target, b2Vec2 pos, GameData &data, float scale, float
 	mAsteroidIndicator.getSprite().setRotation(-std::atan2f(mBody.getLinearVelocity().x, mBody.getLinearVelocity().y) * 180/PI);
 	mAsteroidIndicator.getSprite().rotate(270);
 	mAsteroidIndicator.getSprite().setOrigin(mAsteroidIndicator.getSprite().getGlobalBounds().width , mAsteroidIndicator.getSprite().getGlobalBounds().height/2);
+
 }
 
 

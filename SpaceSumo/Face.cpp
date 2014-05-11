@@ -18,7 +18,13 @@
 //const unsigned char Face::ANGRY = 2;
 //const unsigned char Face::ASHAMED = 3;
 
+static int getChance()
+{
+	Config cfg("res/sound/voice/trigger_chance.cfg");
+	return cfg.getValue<int>("VoiceTriggerChance");
+}
 
+static const int TRIGGER_CHANCE = getChance();
 
 VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
 {
@@ -27,7 +33,8 @@ VoiceLines::VoiceLines(std::vector<std::string> &lines) : mSize(lines.size())
 	for(auto it = lines.begin(); it != lines.end(); ++it, ++i)
 	{
 		mLines[i] = soundFac::createSound(*it);
-		mLines[i]->setPosition(600, 600);
+		mLines[i]->setRelativeToListener(true);
+		mLines[i]->setPosition(0, 0);
 		mLines[i]->setAttenuation(0.f);
 	}
 }
@@ -55,23 +62,23 @@ Face::Face(std::string faceImg, Position pos)
 	switch(pos)
 	{
 	case TOP_LEFT:
-		mFaces.getSprite().setPosition(75, 75);
-		mVoiceFreq.getSprite().setPosition(200, 100);
+		mFaces.getSprite().setPosition(cfg::TOP_LEFT_CFG.getValue<int>("faceX"), cfg::TOP_LEFT_CFG.getValue<int>("faceY"));
+		mVoiceFreq.getSprite().setPosition(cfg::TOP_LEFT_CFG.getValue<int>("voice_freqX"), cfg::TOP_LEFT_CFG.getValue<int>("voice_freqY"));
 		mFaces.getSprite().setScale(-1, 1);
 		break;
 	case TOP_RIGHT:
-		mFaces.getSprite().setPosition((float)WINDOW_SIZE.x - 75, 75);
-		mVoiceFreq.getSprite().setPosition(WINDOW_SIZE.x - 100, 100);
+		mFaces.getSprite().setPosition(cfg::TOP_RIGHT_CFG.getValue<int>("faceX"), cfg::TOP_RIGHT_CFG.getValue<int>("faceY"));
+		mVoiceFreq.getSprite().setPosition(cfg::TOP_RIGHT_CFG.getValue<int>("voice_freqX"), cfg::TOP_RIGHT_CFG.getValue<int>("voice_freqY"));
 		mFaces.getSprite().setScale(1, 1);
 		break;
 	case BOTTOM_LEFT:
-		mFaces.getSprite().setPosition(75, (float)WINDOW_SIZE.y - 75);
-		mVoiceFreq.getSprite().setPosition(100, WINDOW_SIZE.y - 100);
+		mFaces.getSprite().setPosition(cfg::BOTTOM_LEFT_CFG.getValue<int>("faceX"), cfg::BOTTOM_LEFT_CFG.getValue<int>("faceY"));
+		mVoiceFreq.getSprite().setPosition(cfg::BOTTOM_LEFT_CFG.getValue<int>("voice_freqX"), cfg::BOTTOM_LEFT_CFG.getValue<int>("voice_freqY"));
 		mFaces.getSprite().setScale(-1, 1);
 		break;
 	case BOTTOM_RIGHT:
-		mFaces.getSprite().setPosition((float)WINDOW_SIZE.x - 75, (float)WINDOW_SIZE.y - 75);
-		mVoiceFreq.getSprite().setPosition(WINDOW_SIZE.x - 100, WINDOW_SIZE.y - 100);
+		mFaces.getSprite().setPosition(cfg::BOTTOM_RIGHT_CFG.getValue<int>("faceX"), cfg::BOTTOM_RIGHT_CFG.getValue<int>("faceY"));
+		mVoiceFreq.getSprite().setPosition(cfg::BOTTOM_RIGHT_CFG.getValue<int>("voice_freqX"), cfg::BOTTOM_RIGHT_CFG.getValue<int>("voice_freqY"));
 		mFaces.getSprite().setScale(1, 1);
 		break;
 	}
@@ -104,6 +111,8 @@ void Face::changeMood(Mood mood)
 
 void Face::trigger(status::Event evt)
 {
+	if(std::rand() % 100 > TRIGGER_CHANCE)
+		return;
 	switch(evt)
 	{
 	case status::POWERUP_PICKUP:
@@ -160,10 +169,11 @@ void Face::setOrigin(int x, int y)
 
 void readVoiceFiles(std::vector<std::string> &mLines, std::string xoxoRef)
 {
+	
 	std::ifstream stream(xoxoRef);
 	std::string line;
 	while(std::getline(stream, line))
-		mLines.push_back(line);
+	mLines.push_back(line);
 }
 
 void Face::setPersona(std::string ref)
@@ -177,6 +187,7 @@ void Face::setPersona(std::string ref)
 		switch(i)
 		{
 		case 0:
+			
 			readVoiceFiles(mLines, cfg.getValue<std::string>("taunts"));
 			break;
 		case 1:

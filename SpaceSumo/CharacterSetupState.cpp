@@ -11,13 +11,14 @@
 #include "GameState.h"
 #include <Common\error.h>
 
-CharacterSetupState::CharacterSetupState(StateList &owner, GameData &data, GameState &gameState, Playable* soundtrack) 
-	: State(owner), StateList(), mSpacemenData(), mGameState(gameState), mGData(data), mChars(), mSoundtrack(soundtrack)
+CharacterSetupState::CharacterSetupState(StateList &owner, StateList &menu, GameData &data, GameState &gameState, Playable* soundtrack) 
+	: State(owner), StateList(), mMenuState(menu), mSpacemenData(), mGameState(gameState), mGData(data), mChars(), mSoundtrack(soundtrack)
 {
 	for(int i = 0; i < 4; i++)
 	{
 		mSpacemenData[i].spaceData = "res/conf/characters/spaceman/data_player_" + std::to_string(i+1) + ".cfg";
-
+		mSpacemenData[i].bodyData = "res/conf/characters/spaceman/M_Body.cfg";
+		mSpacemenData[i].handData = "res/conf/characters/spaceman/M_Hands.cfg";
 	}
 	add(new AddPlayersState(*this));
 	add(new WeightSelectionState(*this, mSpacemenData, data));
@@ -63,7 +64,7 @@ void CharacterSetupState::changeState(st::State_Type index)
 		StateList::changeState(0);
 		break;
 	case st::WEIGHT_SELECT_STATE:
-		StateList::changeState(1);
+		StateList::changeState(2);
 		break;
 	case st::CHARACTER_SELECT_STATE:
 		StateList::changeState(2);
@@ -72,6 +73,11 @@ void CharacterSetupState::changeState(st::State_Type index)
 		mGameState.setup(mSpacemenData, mGData);
 		mOwner.changeState((st::State_Type)1);
 		mSoundtrack->stop();
+		break;
+	case st::BACK:
+		mOwner.changeState((st::State_Type)2);
+		mMenuState.changeState((st::State_Type)1);
+		mMenuState.sync();
 		break;
 	default:
 		SError("Unkown State", "State not in switch");

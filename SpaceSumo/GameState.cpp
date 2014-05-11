@@ -130,18 +130,22 @@ void GameState::setup(SpacemanData (&sData)[4], GameData &gData)
 	switch(gData.controlList.getNActivePlayers())
 	{
 	case 4:
+		res::loadResource(sData[3].voiceRef);
 		spaceman4 = entFac::createSpaceMan(4, sData[3], gData, mHud.getHead(3), ControlList::PLAYER_4, SVector(spawnpoint.getValue<int>("Player4_X"), spawnpoint.getValue<int>("Player4_Y")), spawnpoint.getValue<int>("Player4_Rotation"));
 		mData.mEntityImpList.add(spaceman4);
 		mSpacemen[3] = (SpaceManImp*)(spaceman4);
 	case 3:
+		res::loadResource(sData[2].voiceRef);
 		spaceman3 = entFac::createSpaceMan(3, sData[2], gData, mHud.getHead(2), ControlList::PLAYER_3, SVector(spawnpoint.getValue<int>("Player3_X"), spawnpoint.getValue<int>("Player3_Y")), spawnpoint.getValue<int>("Player3_Rotation"));
 		mData.mEntityImpList.add(spaceman3);
 		mSpacemen[2] = (SpaceManImp*)(spaceman3);
 	case 2:
+		res::loadResource(sData[1].voiceRef);
 		spaceman2 = entFac::createSpaceMan(2, sData[1], gData, mHud.getHead(1), ControlList::PLAYER_2, SVector(spawnpoint.getValue<int>("Player2_X"), spawnpoint.getValue<int>("Player2_Y")), spawnpoint.getValue<int>("Player2_Rotation"));
 		mData.mEntityImpList.add(spaceman2);
 		mSpacemen[1] = (SpaceManImp*)(spaceman2);
 	case 1:
+		res::loadResource(sData[0].voiceRef);
 		spaceman1 = entFac::createSpaceMan(1, sData[0], gData, mHud.getHead(0), ControlList::PLAYER_1, SVector( spawnpoint.getValue<int>("Player1_X"), spawnpoint.getValue<int>("Player1_Y") ), spawnpoint.getValue<int>("Player1_Rotation"));
 		mData.mEntityImpList.add(spaceman1);
 		mSpacemen[0] = (SpaceManImp*)(spaceman1);

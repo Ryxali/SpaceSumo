@@ -25,6 +25,7 @@ public:
 
 private:
 	bool mLoadedSpacemen;
+	bool mLockPlayers;
 	// start game
 	Animation mBrawl;
 

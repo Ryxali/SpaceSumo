@@ -33,6 +33,8 @@ public:
 	~SSprite();
 	
 	const sf::Texture& getTexture() const;
+	const STexture& getSTexture() const;
+	void setTexture(const STexture&);
 	/* 
 		Draws this sprite onto a window
 		Causes an error should the Texture not be loaded
@@ -47,7 +49,7 @@ public:
 private:
 
 	SSprite& operator=(const SSprite &sp);
-	const STexture &mSTex;
+	const STexture *mSTex;
 	sf::Sprite mSprite;
 	// The version of this instance's texture
 	unsigned short mTexVersion;
