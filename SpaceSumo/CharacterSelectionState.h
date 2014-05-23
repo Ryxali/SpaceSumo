@@ -5,6 +5,7 @@ class Command;
 #include "State.h"
 #include "ButtonList.h"
 #include "SpacemanData.h"
+#include <ResourceManager\SSprite.h>
 
 class CharacterSelectionState : public State
 {
@@ -18,5 +19,6 @@ private:
 	bool mPlayerReadyStatus[4];
 	bool mIsSetup;
 	Command* mOnFinish;
+	SSprite mBackground;
 };
 

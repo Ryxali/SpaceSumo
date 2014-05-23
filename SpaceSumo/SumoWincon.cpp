@@ -81,7 +81,7 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 			}
 		}
 	}
-	
+
 	countdown(mRunCountdown);
 	endgame(mRunEndgame);
 }
@@ -198,17 +198,25 @@ void SumoWincon::endgame(bool status)
 
 	if( status )
 	{
-		if(mGameClock.getElapsedTime().asMilliseconds() > mGameTime )
+		int pLeft = 0;
+		int players = 4;
+		for(int i = 0; i < 4; i++ )
 		{
-			int players = 4;
-			for(int i = 0; i < 4; i++ )
+			if( mSpacemenArray[i] == 0 )
 			{
-				if( mSpacemenArray[i] == 0 )
-				{
-					players--;
-				}
-
+				players--;
+				
 			}
+			else
+			{
+				if(mSpacemenArray[i]->getHead().getScore() > 0)
+					++pLeft;
+			}
+		}
+
+		if(mGameClock.getElapsedTime().asMilliseconds() > mGameTime || pLeft <= 1)
+		{
+
 
 			SpaceManImp* temp;
 			for( int i = 0; i < players; i++)

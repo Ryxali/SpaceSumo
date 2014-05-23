@@ -17,6 +17,7 @@ public:
 	virtual void draw(RenderList &list);
 	virtual void update(GameData &data, int delta);
 	virtual void changeState(st::State_Type index);
+	virtual void open();
 private:
 	SSprite mBackground;
 	Mode *mMode;

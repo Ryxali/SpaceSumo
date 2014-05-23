@@ -106,8 +106,6 @@ void GameState::close()
 
 void GameState::setup(Map *newMap, Mode *newMode)
 {
-	if(mGameMode != 0)
-		delete mGameMode;
 	if(mGameMap != 0)
 		delete mGameMap;
 	mGameMap = newMap;

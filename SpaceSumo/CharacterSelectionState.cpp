@@ -8,8 +8,9 @@
 #include "StateList_CSelect.h"
 #include "DualCommand.h"
 #include "PlayerReadyToggleCommand.h"
+#include <ResourceManager\RHandle.h>
 CharacterSelectionState::CharacterSelectionState(StateList &owner, SpacemanData (&mSpacemenData)[4]) : State(owner), mCharacters(),
-	mOnFinish(new ChangeStateCommand(st::FINISHED_STATE, owner)), mIsSetup(false)
+	mOnFinish(new ChangeStateCommand(st::FINISHED_STATE, owner)), mIsSetup(false), mBackground(res::getTexture("res/img/UI/menu/charSelection/background.png"), 0.0f)
 {
 	for(int i = 0; i < 4; ++i)
 		mPlayerReadyStatus[i] = false;
@@ -79,4 +80,5 @@ void CharacterSelectionState::update(GameData& data, int delta)
 void CharacterSelectionState::draw(RenderList& list)
 {
 	mCharacters.draw(list);
+	list.addSprite(mBackground);
 }

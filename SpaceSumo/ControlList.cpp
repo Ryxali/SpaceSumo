@@ -73,6 +73,30 @@ bool ControlList::toggle(Control_Type controlType)
 	return true;
 }
 
+int ControlList::toggle(sf::Keyboard::Key controlKey)
+{
+	if(mNPlayers >= 4) return 0;
+	for(int i = 0; i < 4; ++i)
+	{
+		if(mControlPool[i]->codeEquals(controlKey, Controller::UP))
+		{
+			for(int j = 0; j < 4; ++j)
+			{
+				if(mControls[j] == mControlPool[i])
+				{
+					mControls[j] = 0;
+					--mNPlayers;
+					return -1;
+				}
+			}
+			mControls[mNPlayers] = mControlPool[i];
+			++mNPlayers;
+			return 1;
+		}
+	}
+	return 0;
+}
+
 bool ControlList::add(sf::Keyboard::Key controlKey)
 {
 	if(mNPlayers >= 4) return false;

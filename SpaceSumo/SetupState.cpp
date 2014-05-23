@@ -6,14 +6,18 @@
 #include "ModeSelectState.h"
 #include "MapSelectState.h"
 #include "GameState.h"
+#include "Mode.h"
+#include "Sumo.h"
+#include "Map.h"
 
 SetupState::SetupState(StateList &owner, GameData &data, GameState &gState, Playable* soundtrack) :
 	State(owner), StateList(), mBackground(res::getTexture("res/img/UI/menu/gamesetup/background.png"), 0),
-	mGState(gState), mSoundtrack(soundtrack)
+	mGState(gState), mSoundtrack(soundtrack), mMode(0), mMap(0)
 {
 	add(new ModeSelectState(*this, mMode, data.world));
+	mMode = new Sumo(data.world);
 	add(new MapSelectState(*this, mMap, data.world));
-	changeState(st::MODE_SELECTION_STATE);
+	changeState(st::WORLD_SELECTION_STATE);
 	sync();
 }
 
@@ -22,6 +26,13 @@ SetupState::~SetupState()
 {
 }
 
+void SetupState::open()
+{
+	if(mMap != 0)
+		delete mMap;
+	changeState(st::WORLD_SELECTION_STATE);
+	sync();
+}
 
 void SetupState::draw(RenderList &list)
 {
@@ -50,6 +61,7 @@ void SetupState::changeState(st::State_Type index)
 		break;
 	case st::FINISHED_STATE:
 		mGState.setup(mMap, mMode);
+		mMap = 0;
 		mOwner.changeState((st::State_Type)3);
 		break;
 	

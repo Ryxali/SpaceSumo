@@ -21,6 +21,7 @@ public:
 
 	bool add(Control_Type controlType);
 	bool toggle(Control_Type controlType);
+	int toggle(sf::Keyboard::Key controlKey);
 	bool add(sf::Keyboard::Key controlKey);
 	void update(GameData& data);
 	bool isActive(Player playerNumber);

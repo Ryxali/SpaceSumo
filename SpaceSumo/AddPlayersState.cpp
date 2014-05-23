@@ -96,6 +96,7 @@ AddPlayersState::AddPlayersState(StateList &owner) : State(owner),
 		mStart,
 		"res/img/UI/menu/next",
 		"res/img/UI/menu/gamesetup/map_highlight"));
+	
 	mButtons.add(
 		new ButtonSingle(
 		SVector(conf.getValue<int>("button_prevX"), conf.getValue<int>("button_prevY")),
