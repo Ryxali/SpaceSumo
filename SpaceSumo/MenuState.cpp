@@ -9,6 +9,7 @@
 #include "StateList_Main.h"
 #include "ButtonSelectionEffect.h"
 #include <ResourceManager\soundFac.h>
+
 MenuState::MenuState(StateList &owner, Playable* soundtrack) : 
 	State(owner),
 	mBackground(res::getTexture("res/img/MenuBackground.png"), -1.f),
@@ -16,11 +17,22 @@ MenuState::MenuState(StateList &owner, Playable* soundtrack) :
 {
 	mOwner = owner;
 	Config cfg("res/img/UI/menu/main/positioning.cfg");
+	int startX = cfg.getValue<int>("StartX");
+	int startY = cfg.getValue<int>("StartY");
+	int offsetX = cfg.getValue<int>("OffsetX");
+	int offsetY = cfg.getValue<int>("OffsetY");
 	mButtonList.add(new ButtonSingle(
-		SVector(cfg.getValue<int>("StartX"), cfg.getValue<int>("StartY")), 
+		SVector(startX, startY), 
 		0, 1,
 		new ChangeStateCommand(st::PLAY_STATE, mOwner),
 		"res/img/UI/menu/main/play",
+		"res/img/UI/menu/main/selection",
+		1.f));
+	mButtonList.add(new ButtonSingle(
+		SVector(startX+offsetX, startY+offsetY), 
+		0, 2,
+		new ChangeStateCommand(st::HOW_TO_PLAY_STATE, mOwner),
+		"res/img/UI/menu/main/how_to_play",
 		"res/img/UI/menu/main/selection",
 		1.f));
 	mButtonList.addObserver(new ButtonSelectionEffect(ControlList::ANY, mButtonList.getFirst(), "res/img/UI/menu/main/selection", 1.f));

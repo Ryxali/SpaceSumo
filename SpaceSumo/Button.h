@@ -18,7 +18,10 @@ public:
 	virtual float getCenterX() const = 0;
 	virtual float getCenterY() const = 0;
 	virtual void execute(int playerNumber) = 0;
-
+	/*
+		Notifies whether the button is being watched
+	*/
+	virtual void alert(bool status = true);
 protected:
 	int mMapX;
 	int mMapY;

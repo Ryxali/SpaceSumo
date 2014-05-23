@@ -85,6 +85,7 @@ void ButtonList::clear()
 Button* ButtonList::getFirst()
 {
 	SAssert(mButtons[0] != NULL, "No buttons to start on");
+	mButtons[0]->alert();
 	return mButtons[0];
 }
 

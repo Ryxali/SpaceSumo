@@ -14,6 +14,7 @@ public:
 		FORWARD,
 		PUSH,
 		ACTIVATE,
+		START,
 		MAX_SIZE
 	};
 	

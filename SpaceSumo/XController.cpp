@@ -16,6 +16,7 @@ XController::XController(int controllerIndex, int playerIndex, Config& conf):
 	mForward(str::toXboxKey(conf.getValue<std::string>("forward"))),
 	mActivate(str::toXboxKey(conf.getValue<std::string>("activate"))),
 	mPush(str::toXboxKey(conf.getValue<std::string>("push"))),
+	mStart(str::toXboxKey(conf.getValue<std::string>("start"))),
 	mRepeatTime(conf.getValue<int>("repeatTime"))
 {
 	for(int i = 0; i < MAX_SIZE; ++i)
@@ -99,6 +100,12 @@ void XController::update(GameData& data)
 					set(FORWARD, true);
 					breakmaybe = true;
 				}
+
+				if(evt.joystickButton.button == mStart) // B
+				{
+					set(START, true);
+					breakmaybe = true;
+				}
 				if(breakmaybe)break;
 			}
 
@@ -171,6 +178,11 @@ void XController::update(GameData& data)
 				if(evt.joystickButton.button == mForward) // B
 				{
 					set(FORWARD, false);
+					breakmaybe = true;
+				}
+				if(evt.joystickButton.button == mStart) // B
+				{
+					set(START, false);
 					breakmaybe = true;
 				}
 				if(breakmaybe)break;

@@ -31,3 +31,8 @@ void Button::setMapY(int x)
 {
 	mMapX = x;
 }
+
+void Button::alert(bool status)
+{
+
+}

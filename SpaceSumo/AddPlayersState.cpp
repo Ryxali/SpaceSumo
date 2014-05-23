@@ -74,7 +74,9 @@ void ControlImages::setSprite(sf::Keyboard::Key key, SSprite& img)
 	}
 }
 
-AddPlayersState::AddPlayersState(StateList &owner) : State(owner), mButtons(),
+AddPlayersState::AddPlayersState(StateList &owner) : State(owner),
+	mStart(new ConditionalCommand(*new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner), mReady)),
+	mButtons(),
 	mBg(res::getTexture("res/img/UI/menu/controlAdding/background.png"), 0.f),
 	mN(0),
 	mCtrl_0(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
@@ -91,7 +93,7 @@ AddPlayersState::AddPlayersState(StateList &owner) : State(owner), mButtons(),
 		new ButtonSingle(
 		SVector(conf.getValue<int>("button_nextX"), conf.getValue<int>("button_nextY")),
 		1, 1,
-		new ConditionalCommand(*new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner), mReady),
+		mStart,
 		"res/img/UI/menu/next",
 		"res/img/UI/menu/gamesetup/map_highlight"));
 	mButtons.add(
@@ -172,6 +174,8 @@ void AddPlayersState::update(GameData &data, int delta)
 		}
 	}
 	mReady = data.controlList.getNActivePlayers() >= 2;
+	//if(data.controlList.isActive(Controller::START, ControlList::Player::ANY))
+		//mStart->Execute();
 }
 
 void AddPlayersState::draw(RenderList &list)
