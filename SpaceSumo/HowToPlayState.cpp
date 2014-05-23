@@ -4,7 +4,7 @@
 #include "ChangeStateCommand.h"
 #include "StateList_Main.h"
 #include "ButtonSingle.h"
-#include <math>
+#include <math.h>
 #include "ButtonSelectionEffect.h"
 
 static Config conf("res/img/UI/menu/controlAdding/positioning.cfg");

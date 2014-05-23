@@ -21,7 +21,6 @@ res/img/powerup/EMP/effect.png
 res/img/MenuBackground.png
 res/img/maps/miningcolony/MiningColony_BG.png
 res/img/maps/miningcolony/asteroid.png
-res/img/maps/miningcolony/asteroidIndicator.png
 res/img/test_sparkle.png
 res/img/UI/menu/tmp_menu.png
 res/img/UI/menu/controlAdding/confirmation.png
@@ -36,8 +35,12 @@ res/img/UI/menu/gamesetup/map_highlight.png
 res/img/UI/menu/gamesetup/mode_highlight.png
 res/img/UI/menu/gamesetup/background.png
 res/img/UI/menu/gamesetup/mode_sumo.png
+res/img/UI/menu/gamesetup/mode_sumo_desc.png
 res/img/UI/menu/gamesetup/map_terra.png
+res/img/UI/menu/gamesetup/map_terra_desc.png
 res/img/UI/menu/gamesetup/map_miningcolony.png
+res/img/UI/menu/gamesetup/map_miningcolony_desc.png
+res/img/UI/menu/how_to_play/bg.png
 res/img/UI/hud/clock.png
 res/img/UI/hud/cornerblue.png
 res/img/UI/hud/cornerred.png
@@ -57,6 +60,7 @@ res/img/UI/hud/base.png
 res/img/UI/hud/numbers.png
 res/img/UI/hud/321brawl.png
 res/img/UI/menu/main/play.png
+res/img/UI/menu/main/how_to_play.png
 res/img/UI/menu/main/selection.png
 res/img/UI/menu/weightSelection/weight_class_0.png
 res/img/UI/menu/weightSelection/weight_class_1.png
@@ -64,6 +68,7 @@ res/img/UI/menu/weightSelection/weight_class_2.png
 res/img/UI/menu/weightSelection/weight_class_3.png
 res/img/UI/menu/next.png
 res/img/UI/menu/prev.png
+res/img/UI/menu/next_prev_hover.png
 res/img/UI/hud/win_blue.png
 res/img/UI/hud/win_red.png
 res/img/UI/hud/win_green.png
