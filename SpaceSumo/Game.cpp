@@ -83,6 +83,12 @@ void Game::loop()
 				return;
 				break;
 			}
+		case sf::Event::JoystickButtonPressed:
+			if(true) {
+				int i = 0;
+				i += 5;
+			}
+
 		default:
 			mGameData.input.add(evt);
 			break;
@@ -119,6 +125,7 @@ void Game::cleanUp()
 {
 	mStates.getCurrent().cleanUp();
 	mStates.sync();
+	mGameData.input.clear();
 }
 
 void Game::close()

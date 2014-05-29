@@ -180,6 +180,8 @@ void Face::setPersona(std::string ref)
 {
 	//TODO add soundstuff
 	Config cfg(ref+".cfg");
+	if(mVoiceLines != 0)
+		delete mVoiceLines;
 	mVoiceLines = new VoiceLines*[8];
 	for(int i = 0; i < 8; ++i)
 	{

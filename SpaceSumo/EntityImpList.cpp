@@ -29,6 +29,7 @@ void EntityImpList::update(GameData &data, GameStateData &gsData, int delta)
 	{
 		(*it)->update(data, gsData, delta);
 	}
+	
 } 
 
 void EntityImpList::draw(RenderList &renderList)
@@ -39,6 +40,19 @@ void EntityImpList::draw(RenderList &renderList)
 	}
 } 
 void EntityImpList::clear()
+{
+	for (std::list<EntityImp*>::iterator it = mImpList.begin(); it != mImpList.end();)
+	{
+		if(*it != 0)
+		{
+			delete *it;
+			it = mImpList.erase(it);
+		}
+
+	}
+}
+
+void EntityImpList::clean()
 {
 	for (std::list<EntityImp*>::iterator it = mImpList.begin(); it != mImpList.end();)
 	{

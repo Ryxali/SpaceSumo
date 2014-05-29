@@ -11,6 +11,7 @@ public:
 	void update(GameData &data, GameStateData &gsData, int delta);
 	void draw(RenderList &renderList);
 	void clear(); 
+	void clean();
 
 	std::list<EntityImp*> mImpList;
 };

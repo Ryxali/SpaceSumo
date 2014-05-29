@@ -19,7 +19,7 @@ GameStateList::GameStateList(GameData &data) : StateList()
 	SetupState* sS = new SetupState(*this, data, *gS, p);
 	add(sS);
 	add(new CharacterSetupState(*this, *sS, data, *gS, p));
-	add(new HowToPlayState(*this)),
+	add(new HowToPlayState(*this, *p)),
 	StateList::changeState(0);
 	sync();
 }

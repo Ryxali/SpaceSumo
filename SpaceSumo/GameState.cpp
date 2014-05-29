@@ -14,6 +14,8 @@
 #include "SpacemanData.h"
 #include <iostream>
 #include <random>
+#include "StateList_Main.h"
+#include "StateList.h"
 
 GameState::GameState(StateList &owner, GameData& gameData) 
 	: State(owner), mData(gameData),
@@ -22,7 +24,8 @@ GameState::GameState(StateList &owner, GameData& gameData)
 	mGameMap(0),
 	mHud(), 
 	mPowerUpSpawnTimer(8000),
-	mSpacemen()
+	mSpacemen(),
+	mSumoWincon()
 {
 
 	Config c("res/conf/mode/sumo/zone.cfg");
@@ -61,6 +64,14 @@ void GameState::update(GameData &data, int delta)
 	mHud.update(data, mSumoWincon.getTimeLeft(), delta);
 	mGameMap->update(mData, delta);
 	mGameMode->update(data, mData, delta);
+	
+	if(mSumoWincon.gameOver())
+	{
+		if(data.controlList.isActive(Controller::ENTER, ControlList::ANY))
+		{
+			mOwner.changeState(st::MENU_STATE);
+		}
+	}
 }
 
 void GameState::draw(RenderList &list)
@@ -72,9 +83,11 @@ void GameState::draw(RenderList &list)
 	mHud.draw(list);
 }
 
+
+
 void GameState::cleanUp()
 {
-	mData.mEntityImpList.clear();
+	mData.mEntityImpList.clean();
 }
 
 void GameState::open()
@@ -94,6 +107,8 @@ void GameState::open()
 void GameState::close()
 {
 	mData.mEntityImpList.clear();
+	mSumoWincon.reset();
+	mSumoWincon.timerStart();
 	/*delete mGameMode;
 	delete mGameMap; */
 

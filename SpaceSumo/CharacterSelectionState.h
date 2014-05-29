@@ -14,6 +14,7 @@ public:
 	~CharacterSelectionState();
 	virtual void update(GameData&, int);
 	virtual void draw(RenderList&);
+	virtual void open();
 private:
 	ButtonList mCharacters;
 	bool mPlayerReadyStatus[4];

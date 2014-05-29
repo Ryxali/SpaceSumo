@@ -82,6 +82,11 @@ void ButtonList::clear()
 	mObserverList.clear();
 }
 
+void ButtonList::clearObservers()
+{
+	mObserverList.clear();
+}
+
 Button* ButtonList::getFirst()
 {
 	SAssert(mButtons[0] != NULL, "No buttons to start on");

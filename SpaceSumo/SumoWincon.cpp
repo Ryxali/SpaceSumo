@@ -85,6 +85,29 @@ void SumoWincon::update(GameData& data, GameStateData& gData, SpaceManImp*(&mSpa
 	countdown(mRunCountdown);
 	endgame(mRunEndgame);
 }
+bool SumoWincon::gameOver()
+{
+	return mShowYellowWin || mShowRedWin || mShowBlueWin || mShowGreenWin;
+}
+
+void SumoWincon::reset()
+{
+	mLockPlayers  =true;
+	mGameTime = 240000;
+	mLoadedSpacemen = false;
+	mStartedTimer = false;
+	mRunCountdown = false;
+	mCountdownDone = false;
+	mGameHasStarted = false;
+	mHasPlayed = false;
+	mCountDown = 4000;
+	mStartTimeout = 10000;
+	mShowBlueWin = false;
+	mShowRedWin = false;
+	mShowGreenWin = false;
+	mShowYellowWin = false;
+	mRunEndgame = true;
+}
 
 void SumoWincon::draw(RenderList &list)
 {

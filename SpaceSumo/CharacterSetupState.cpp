@@ -24,7 +24,7 @@ CharacterSetupState::CharacterSetupState(StateList &owner, StateList &menu, Game
 	add(new WeightSelectionState(*this, mSpacemenData, data));
 	add(new CharacterSelectionState(*this, mSpacemenData));
 	StateList::changeState(0);
-	sync();
+	//sync();
 
 	/*for(auto it = chars::Character::characters.list.begin(); it != chars::Character::characters.list.end(); ++it)
 	{
@@ -82,4 +82,10 @@ void CharacterSetupState::changeState(st::State_Type index)
 	default:
 		SError("Unkown State", "State not in switch");
 	}
+}
+
+void CharacterSetupState::open()
+{
+	StateList::changeState(0);
+	mStates[0]->open();
 }

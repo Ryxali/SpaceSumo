@@ -16,6 +16,7 @@ public:
 	void update(GameData& data, int delta);
 	void draw(RenderList& list);
 	void clear();
+	void clearObservers();
 	Button* getFirst();
 	Button* getUp(int x, int y);
 	Button* getLeft(int x, int y);

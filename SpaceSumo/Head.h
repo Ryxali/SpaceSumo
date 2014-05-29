@@ -28,6 +28,7 @@ public:
 	int getScore() const;
 	void decreaseLives();
 	void setPowerup(SSprite*);
+	void resetScore();
 private:
 	Head(const Head& head);
 	Head& operator=(const Head& head);

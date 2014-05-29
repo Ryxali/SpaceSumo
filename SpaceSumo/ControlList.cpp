@@ -47,7 +47,20 @@ bool ControlList::add(Control_Type controlType)
 	};
 	return true;
 }
-
+bool ControlList::add(int joystickIndex)
+{
+	if(mNPlayers >= 4) return false;
+	for(int i = 0; i < 3; ++i)
+	{
+		if(mControls[i] == mControlPool[i+4])
+			return false;
+	}
+	mControls[mNPlayers] = mControlPool[joystickIndex + 4];
+	mControls[mNPlayers]->setPlayer(mNPlayers+1);
+	++mNPlayers;
+	++mNJoysticks;
+	return true;
+}
 bool ControlList::toggle(Control_Type controlType)
 {
 	if(mNPlayers >= 4) return false;
@@ -182,4 +195,15 @@ Controller& ControlList::get(int index)
 {
 	SAssert(mControls[index] != 0, "No controller for that index");
 	return *mControls[index];
+}
+
+void ControlList::clear()
+{
+	for(int i = 0; i < 3; ++i)
+	{
+		mControls[i] = 0;
+	}
+	mNPlayers = 0;
+	mNJoysticks = 0;
+	mNKeyboards = 0;
 }

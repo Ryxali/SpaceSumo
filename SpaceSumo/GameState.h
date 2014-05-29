@@ -37,4 +37,5 @@ private:
 	int mMinSpawnTime, mMaxSpawnTime;
 	SumoWincon mSumoWincon;
 	
-	SpaceManImp* mSpacemen[4];};
+	SpaceManImp* mSpacemen[4];
+};

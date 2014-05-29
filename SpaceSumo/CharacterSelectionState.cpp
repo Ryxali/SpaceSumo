@@ -52,6 +52,7 @@ void CharacterSelectionState::update(GameData& data, int delta)
 {
 	if(!mIsSetup)
 	{
+		mCharacters.clearObservers();
 		switch(data.controlList.getNActivePlayers())
 		{
 		case 4:
@@ -81,4 +82,11 @@ void CharacterSelectionState::draw(RenderList& list)
 {
 	mCharacters.draw(list);
 	list.addSprite(mBackground);
+}
+
+void CharacterSelectionState::open()
+{
+	for(int i = 0; i < 3; ++i)
+		mPlayerReadyStatus[i] = false;
+	mIsSetup = false;
 }

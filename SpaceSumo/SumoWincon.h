@@ -15,11 +15,13 @@ public:
 	~SumoWincon();
 	virtual void update(GameData&, GameStateData&, SpaceManImp*(&mSpacemen)[4]);
 	virtual void draw(RenderList &list);
-
+	bool gameOver();
 	void timerStart();
 	bool getTimerStarted();
 	bool getTimerExpired();
 	int getTimeLeft();
+
+	void reset();
 
 	void resetClocks();
 

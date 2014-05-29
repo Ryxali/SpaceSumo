@@ -65,6 +65,7 @@ SpaceManImp::SpaceManImp(
 	mUseCooldown(bodyData.getValue<int>("useCooldown"))
 {
 	mHead.getFace().setPersona(headTexRef);
+	mHead.resetScore();
 	mSpaceman.setRotation(startRotation);
 	mSpaceman.getBody()->SetUserData(this);
 	mSpaceman.setAngularVelocity(0);

@@ -19,7 +19,7 @@ MiningColony::MiningColony() :
 
 void MiningColony::update(GameStateData &data, int delta)
 {
-	//mSoundtrack->play();
+	mSoundtrack->play();
 
 	if(mAsteroidTimer.isExpired())
 	{
@@ -29,17 +29,20 @@ void MiningColony::update(GameStateData &data, int delta)
 	
 		
 		float ySin = (((float)(std::rand()%10)) - 5.f)/10.f;
-
+		b2Vec2 pos =b2Vec2(((std::rand() % (int)WINDOW_SIZE.x)-(int)WINDOW_SIZE.x/2) , ((std::rand() % (int)WINDOW_SIZE.y)- (int)WINDOW_SIZE.y/2)); // - WINDOW_SIZE.x/2  - WINDOW_SIZE.y/2
+		pos.x += pos.x < 0 ? 0 : (int)WINDOW_SIZE.x;
+		pos.y += pos.y < 0 ? 0 : (int)WINDOW_SIZE.y;
+		b2Vec2 tar = b2Vec2((std::rand() % WINDOW_SIZE.x * 0.8), (std::rand() % WINDOW_SIZE.y * 0.8));
+		//float len = dir.Length();
+		//dir.x /= len;
+		//dir.y /= len;
 		data.mEntityImpList.add(
 			new Asteroid(
-				b2Vec2(
-					(std::rand() % WINDOW_SIZE.x),
-					(std::rand() % WINDOW_SIZE.y)
-				),
-				b2Vec2(800 ,800) , 
+				tar,
+				pos, 
 				data.gameData,
 				r3,
-				mConfig.getValue<float>("speedMultiplier")
+				mConfig.getValue<float>("speedMultiplier")*5
 			)
 		);
 	
@@ -60,5 +63,5 @@ void MiningColony::init(GameData &data)
 
 void MiningColony::close()
 {
-	//mSoundtrack->stop();
+	mSoundtrack->stop();
 }

@@ -74,6 +74,11 @@ void ControlImages::setSprite(sf::Keyboard::Key key, SSprite& img)
 	}
 }
 
+void ControlImages::setSprite(SSprite &img)
+{
+	img.setTexture(res::getTexture("res/img/UI/menu/controlAdding/xbox.png"));
+}
+
 AddPlayersState::AddPlayersState(StateList &owner) : State(owner),
 	mStart(new ConditionalCommand(*new ChangeStateCommand(st::WEIGHT_SELECT_STATE, owner), mReady)),
 	mButtons(),
@@ -83,7 +88,8 @@ AddPlayersState::AddPlayersState(StateList &owner) : State(owner),
 	mCtrl_1(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
 	mCtrl_2(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
 	mCtrl_3(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"), 1.f),
-	mPool()
+	mPool(),
+	mList(0)
 {
 	mCtrl_3.getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*3, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*3);
 	mCtrl_2.getSprite().setPosition(conf.getValue<int>("StartX") + conf.getValue<int>("OffsetX")*2, conf.getValue<int>("StartY") + conf.getValue<int>("OffsetY")*2);
@@ -115,7 +121,8 @@ AddPlayersState::~AddPlayersState()
 
 void AddPlayersState::update(GameData &data, int delta)
 {
-	mButtons.update(data, delta);
+	if(mList == 0)
+		mList = &data.controlList;
 	mN = data.controlList.getNActivePlayers();
 	sf::Event evt;
 	while(data.input.pop_front(evt))
@@ -147,21 +154,22 @@ void AddPlayersState::update(GameData &data, int delta)
 			break;
 
 		case sf::Event::JoystickButtonPressed:
-			if(evt.joystickButton.button == sf::Xbox::START && data.controlList.add(ControlList::JOYSTICK))
+			if(false) {}
+			if(evt.joystickButton.button == sf::Xbox::START && data.controlList.add(evt.joystickButton.joystickId))
 			{
 				switch(data.controlList.getNActivePlayers())
 				{
 				case 4:
-					mCtrl_3.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					mPool.setSprite(mCtrl_3);
 					break;
 				case 3:
-					mCtrl_2.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					mPool.setSprite(mCtrl_2);
 					break;
 				case 2:
-					mCtrl_1.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					mPool.setSprite(mCtrl_1);
 					break;
 				case 1:
-					mCtrl_0.setTexture(mPool.getSprite(ControlList::JOYSTICK));
+					mPool.setSprite(mCtrl_0);
 					break;
 				default:
 					SError("bad", "very bad");
@@ -174,7 +182,9 @@ void AddPlayersState::update(GameData &data, int delta)
 			break;
 		}
 	}
+
 	mReady = data.controlList.getNActivePlayers() >= 2;
+	mButtons.update(data, delta);
 	//if(data.controlList.isActive(Controller::START, ControlList::Player::ANY))
 		//mStart->Execute();
 }
@@ -187,4 +197,16 @@ void AddPlayersState::draw(RenderList &list)
 	list.addSprite(mCtrl_1);
 	list.addSprite(mCtrl_2);
 	list.addSprite(mCtrl_3);
+}
+
+void AddPlayersState::open()
+{
+	if(mList != 0)
+	{
+		mList->clear();
+		mCtrl_0.setTexture(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"));
+		mCtrl_1.setTexture(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"));
+		mCtrl_2.setTexture(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"));
+		mCtrl_3.setTexture(res::getTexture("res/img/UI/menu/controlAdding/press_start.png"));
+	}
 }

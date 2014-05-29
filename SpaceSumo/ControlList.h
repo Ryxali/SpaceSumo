@@ -23,11 +23,13 @@ public:
 	bool toggle(Control_Type controlType);
 	int toggle(sf::Keyboard::Key controlKey);
 	bool add(sf::Keyboard::Key controlKey);
+	bool add(int joystickIndex);
 	void update(GameData& data);
 	bool isActive(Player playerNumber);
 	bool isActive(Controller::Control ctrl, Player playerNumber) const;
 	bool isActiveReset(Controller::Control ctrl, Player playerNumber);
 	int getNActivePlayers() const;
+	void clear();
 	Controller& get(int index);
 private:
 	Controller* mControls[4];

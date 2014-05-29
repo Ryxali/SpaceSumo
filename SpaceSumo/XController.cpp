@@ -106,7 +106,11 @@ void XController::update(GameData& data)
 					set(START, true);
 					breakmaybe = true;
 				}
-				if(breakmaybe)break;
+				if(breakmaybe)
+				{
+					data.input.add(evt);
+					break;
+				}
 			}
 
 			/*if(evt.joystickMove.axis == sf::Joystick::Y) // left stick horizontal
@@ -185,7 +189,11 @@ void XController::update(GameData& data)
 					set(START, false);
 					breakmaybe = true;
 				}
-				if(breakmaybe)break;
+				if(breakmaybe)
+				{
+					data.input.add(evt);
+					break;
+				}
 			}
 		default:
 			data.input.add(evt);
